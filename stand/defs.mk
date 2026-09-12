@@ -130,14 +130,6 @@ CFLAGS+= -DLOADER_DISK_SUPPORT
 
 # Machine specific flags for all builds here
 
-# Ensure PowerPC64 and PowerPC64LE boot loaders are compiled as 32 bit.
-# PowerPC64LE boot loaders are 32-bit little-endian.
-.if ${MACHINE_ARCH} == "powerpc64"
-CFLAGS+=	-m32 -mcpu=powerpc -mbig-endian
-.elif ${MACHINE_ARCH} == "powerpc64le"
-CFLAGS+=	-m32 -mcpu=powerpc -mlittle-endian
-.endif
-
 .if ${MACHINE_ARCH} == "amd64" && ${DO32:U0} == 1
 CFLAGS+=	-m32
 # LD_FLAGS is passed directly to ${LD}, not via ${CC}:
@@ -156,11 +148,6 @@ CFLAGS.clang+=	-mcmodel=medium
 CFLAGS.gcc+=	-mcmodel=medany
 .else
 CFLAGS+=	-msoft-float
-.endif
-
-# -msoft-float seems to be insufficient for powerpcspe
-.if ${MACHINE_ARCH} == "powerpcspe"
-CFLAGS+=	-mno-spe
 .endif
 
 .if ${MACHINE_CPUARCH} == "i386" || (${MACHINE_CPUARCH} == "amd64" && ${DO32:U0} == 1)

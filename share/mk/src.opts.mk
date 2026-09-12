@@ -180,7 +180,6 @@ __DEFAULT_YES_OPTIONS = \
     SYSTEM_LINKER \
     TALK \
     TCP_WRAPPERS \
-    TELNET \
     TEXTPROC \
     TFTP \
     UNBOUND \

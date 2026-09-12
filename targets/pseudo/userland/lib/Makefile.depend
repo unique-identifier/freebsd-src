@@ -166,7 +166,6 @@ DIRDEPS = \
 	lib/libstdthreads \
 	lib/libsysdecode \
 	lib/libtacplus \
-	lib/libtelnet \
 	lib/libthr \
 	lib/libthread_db \
 	lib/libucl \

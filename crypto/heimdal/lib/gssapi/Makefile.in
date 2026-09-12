@@ -94,7 +94,7 @@ am__aclocal_m4_deps = $(top_srcdir)/cf/aix.m4 \
 	$(top_srcdir)/cf/resolv.m4 $(top_srcdir)/cf/retsigtype.m4 \
 	$(top_srcdir)/cf/roken-frag.m4 \
 	$(top_srcdir)/cf/socket-wrapper.m4 $(top_srcdir)/cf/sunos.m4 \
-	$(top_srcdir)/cf/telnet.m4 $(top_srcdir)/cf/test-package.m4 \
+	$(top_srcdir)/cf/test-package.m4 \
 	$(top_srcdir)/cf/version-script.m4 $(top_srcdir)/cf/wflags.m4 \
 	$(top_srcdir)/cf/win32.m4 $(top_srcdir)/cf/with-all.m4 \
 	$(top_srcdir)/acinclude.m4 $(top_srcdir)/configure.ac

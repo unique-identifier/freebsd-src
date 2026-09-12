@@ -51,6 +51,10 @@
 #   xargs -n1 | sort | uniq -d;
 # done
 
+# 20260912: Remove the telnet client
+OLD_FILES+=usr/bin/telnet
+OLD_FILES+=usr/share/man/man1/telnet.1.gz
+
 # 20260912: Remove the C shell
 OLD_DIRS+=usr/share/doc/usd/04.csh
 OLD_DIRS+=usr/share/examples/csh

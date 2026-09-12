@@ -28558,7 +28558,7 @@ else
 fi
 
 
-ac_config_files="$ac_config_files Makefile etc/Makefile include/Makefile include/gssapi/Makefile include/hcrypto/Makefile include/kadm5/Makefile lib/Makefile base/Makefile lib/asn1/Makefile lib/com_err/Makefile lib/hcrypto/Makefile lib/hx509/Makefile lib/gssapi/Makefile lib/ntlm/Makefile lib/hdb/Makefile lib/ipc/Makefile lib/kadm5/Makefile lib/kafs/Makefile lib/kdfs/Makefile lib/krb5/Makefile lib/otp/Makefile lib/roken/Makefile lib/sl/Makefile lib/sqlite/Makefile lib/vers/Makefile lib/wind/Makefile po/Makefile kuser/Makefile kpasswd/Makefile kadmin/Makefile admin/Makefile kcm/Makefile kdc/Makefile appl/Makefile appl/afsutil/Makefile appl/ftp/Makefile appl/ftp/common/Makefile appl/ftp/ftp/Makefile appl/ftp/ftpd/Makefile appl/gssmask/Makefile appl/kx/Makefile appl/login/Makefile appl/otp/Makefile appl/popper/Makefile appl/push/Makefile appl/rsh/Makefile appl/rcp/Makefile appl/su/Makefile appl/xnlock/Makefile appl/telnet/Makefile appl/telnet/libtelnet/Makefile appl/telnet/telnet/Makefile appl/telnet/telnetd/Makefile appl/test/Makefile appl/kf/Makefile appl/dceutils/Makefile tests/Makefile tests/bin/Makefile tests/can/Makefile tests/db/Makefile tests/kdc/Makefile tests/ldap/Makefile tests/gss/Makefile tests/java/Makefile tests/plugin/Makefile packages/Makefile packages/mac/Makefile doc/Makefile tools/Makefile"
+ac_config_files="$ac_config_files Makefile etc/Makefile include/Makefile include/gssapi/Makefile include/hcrypto/Makefile include/kadm5/Makefile lib/Makefile base/Makefile lib/asn1/Makefile lib/com_err/Makefile lib/hcrypto/Makefile lib/hx509/Makefile lib/gssapi/Makefile lib/ntlm/Makefile lib/hdb/Makefile lib/ipc/Makefile lib/kadm5/Makefile lib/kafs/Makefile lib/kdfs/Makefile lib/krb5/Makefile lib/otp/Makefile lib/roken/Makefile lib/sl/Makefile lib/sqlite/Makefile lib/vers/Makefile lib/wind/Makefile po/Makefile kuser/Makefile kpasswd/Makefile kadmin/Makefile admin/Makefile kcm/Makefile kdc/Makefile appl/Makefile appl/afsutil/Makefile appl/ftp/Makefile appl/ftp/common/Makefile appl/ftp/ftp/Makefile appl/ftp/ftpd/Makefile appl/gssmask/Makefile appl/kx/Makefile appl/login/Makefile appl/otp/Makefile appl/popper/Makefile appl/push/Makefile appl/rsh/Makefile appl/rcp/Makefile appl/su/Makefile appl/xnlock/Makefile appl/test/Makefile appl/kf/Makefile appl/dceutils/Makefile tests/Makefile tests/bin/Makefile tests/can/Makefile tests/db/Makefile tests/kdc/Makefile tests/ldap/Makefile tests/gss/Makefile tests/java/Makefile tests/plugin/Makefile packages/Makefile packages/mac/Makefile doc/Makefile tools/Makefile"
 
 
 cat >confcache <<\_ACEOF
@@ -29764,10 +29764,6 @@ do
     "appl/rcp/Makefile") CONFIG_FILES="$CONFIG_FILES appl/rcp/Makefile" ;;
     "appl/su/Makefile") CONFIG_FILES="$CONFIG_FILES appl/su/Makefile" ;;
     "appl/xnlock/Makefile") CONFIG_FILES="$CONFIG_FILES appl/xnlock/Makefile" ;;
-    "appl/telnet/Makefile") CONFIG_FILES="$CONFIG_FILES appl/telnet/Makefile" ;;
-    "appl/telnet/libtelnet/Makefile") CONFIG_FILES="$CONFIG_FILES appl/telnet/libtelnet/Makefile" ;;
-    "appl/telnet/telnet/Makefile") CONFIG_FILES="$CONFIG_FILES appl/telnet/telnet/Makefile" ;;
-    "appl/telnet/telnetd/Makefile") CONFIG_FILES="$CONFIG_FILES appl/telnet/telnetd/Makefile" ;;
     "appl/test/Makefile") CONFIG_FILES="$CONFIG_FILES appl/test/Makefile" ;;
     "appl/kf/Makefile") CONFIG_FILES="$CONFIG_FILES appl/kf/Makefile" ;;
     "appl/dceutils/Makefile") CONFIG_FILES="$CONFIG_FILES appl/dceutils/Makefile" ;;

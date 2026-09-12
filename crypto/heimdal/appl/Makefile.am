@@ -20,7 +20,6 @@ SUBDIRS = 					\
 	  rcp					\
 	  su					\
 	  xnlock				\
-	  telnet				\
 	  test					\
 	  kx					\
 	  kf					\

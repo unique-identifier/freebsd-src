@@ -319,7 +319,7 @@ add 01012 allow udp from 10.0.1.0/8 to 10.0.1.1 137,138
 
 # GENERAL SERVICES ALLOWED TO CROSS INTERNAL AND EXPOSED LANS
 #
-# We allow specific UDP services through: DNS lookups, ntalk, and ntp.
+# We allow specific UDP services through: DNS lookups and ntp.
 # Note that internal services are protected by virtue of having
 # spoof-proof internal IP addresses (10. net), so these rules
 # really only apply to services bound to exposed IPs.  We have
@@ -332,7 +332,7 @@ add 01012 allow udp from 10.0.1.0/8 to 10.0.1.1 137,138
 # on all exposed machines to make sure they bind temporary ports
 # to the exposed port range (see rc.conf example above)
 #
-add 02000 allow udp from any to any 4000-65535,domain,ntalk,ntp
+add 02000 allow udp from any to any 4000-65535,domain,ntp
 add 02500 allow udp from any to any frag
 
 # Allow similar services for TCP.  Again, these only apply to
@@ -348,7 +348,7 @@ add 02500 allow udp from any to any frag
 # should be no TCP fragments.
 #
 add 03000 allow tcp from any to any http,https
-add 03000 allow tcp from any to any 4000-65535,ssh,smtp,domain,ntalk
+add 03000 allow tcp from any to any 4000-65535,ssh,smtp,domain
 add 03000 allow tcp from any to any auth,pop3,ftp,ftp-data
 
 # It is important to allow certain ICMP types through, here is a list

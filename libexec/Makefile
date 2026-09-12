@@ -98,10 +98,6 @@ _smrsh=		smrsh
 _makewhatis.local=	makewhatis.local
 .endif
 
-.if ${MK_TALK} != "no"
-SUBDIR+=	talkd
-.endif
-
 .if ${MK_TCP_WRAPPERS} != "no"
 SUBDIR+=	tcpd
 .endif

@@ -37,8 +37,6 @@ block in on ppp0 proto udp from any to any
 block in log on ppp0 proto udp from any to any port = sunrpc
 block in log on ppp0 proto udp from any to any port = 2049
 pass in on ppp0 proto udp from any to any port = domain
-pass in on ppp0 proto udp from any to any port = talk
-pass in on ppp0 proto udp from any to any port = ntalk
 #
 #  Block all incoming TCP traffic connections to known services,
 #  returning a connection reset so things like ident don't take

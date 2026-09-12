@@ -46,8 +46,8 @@
 #include "ttymsg.h"
 
 /*
- * Display the contents of a uio structure on a terminal.  Used by wall(1),
- * syslogd(8), and talkd(8).  Forks and finishes in child if write would block,
+ * Display the contents of a uio structure on a terminal.  Used by wall(1)
+ * and syslogd(8).  Forks and finishes in child if write would block,
  * waiting up to tmout seconds.  Returns pointer to error string on unexpected
  * error; string is not newline-terminated.  Various "normal" errors are
  * ignored (exclusive-use, lack of permission, etc.).

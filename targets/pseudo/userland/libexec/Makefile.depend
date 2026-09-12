@@ -30,7 +30,6 @@ DIRDEPS = \
 	libexec/rtld-elf \
 	libexec/save-entropy \
 	libexec/smrsh \
-	libexec/talkd \
 	libexec/tcpd \
 	libexec/tftp-proxy \
 	libexec/tftpd \

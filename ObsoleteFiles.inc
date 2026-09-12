@@ -51,6 +51,13 @@
 #   xargs -n1 | sort | uniq -d;
 # done
 
+# 20260912: Remove talk and its daemon
+OLD_FILES+=usr/bin/talk
+OLD_FILES+=usr/libexec/ntalkd
+OLD_FILES+=usr/share/man/man1/talk.1.gz
+OLD_FILES+=usr/share/man/man8/talkd.8.gz
+OLD_FILES+=usr/include/protocols/talkd.h
+
 # 20260912: Remove the telnet client
 OLD_FILES+=usr/bin/telnet
 OLD_FILES+=usr/share/man/man1/telnet.1.gz

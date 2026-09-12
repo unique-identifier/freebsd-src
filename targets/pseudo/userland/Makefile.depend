@@ -331,7 +331,6 @@ DIRDEPS+= \
 	usr.bin/systat \
 	usr.bin/tabs \
 	usr.bin/tail \
-	usr.bin/talk \
 	usr.bin/tar \
 	usr.bin/tcopy \
 	usr.bin/tee \

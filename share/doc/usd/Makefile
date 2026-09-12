@@ -3,7 +3,6 @@
 
 SUBDIR=	title \
 	contents \
-	04.csh \
 	05.dc \
 	06.bc \
 	07.mail \

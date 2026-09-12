@@ -138,7 +138,7 @@ A partial example:
 		chpass -p "\$1\$IgMjWs2L\$Nu12OCsjfiwHHj0I7TmUN1" root
 
 		pw useradd phk -u 488 -d /home/phk -c "Poul-Henning Kamp" \
-		    -G "wheel,operator,dialer" -s /bin/csh -w none
+		    -G "wheel,operator,dialer" -s /bin/sh -w none
 
 		chpass -p "\$1\$VcM.9Ow8\$IcXHs0h9jsk27b8N64lOm/" phk
 

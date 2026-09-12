@@ -41,7 +41,6 @@ SUBDIR= cat \
 	uuidgen
 
 SUBDIR.${MK_SENDMAIL}+=	rmail
-SUBDIR.${MK_TCSH}+=	csh
 SUBDIR.${MK_TESTS}+=	tests
 
 .include <bsd.arch.inc.mk>

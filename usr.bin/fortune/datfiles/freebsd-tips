@@ -67,19 +67,6 @@ If you need to ask a question on the FreeBSD-questions mailing list then
 
 contains lots of useful advice to help you get the best results.
 %
-If you write part of a filename in tcsh,
-pressing TAB will show you the available choices when there
-is more than one, or complete the filename if there's only one match.
-%
-If you `set watch = (0 any any)' in tcsh, you will be notified when
-someone logs in or out of your system.
-%
-If you use the C shell, add the following line to the .cshrc file in your
-home directory to prevent core files from being written to disk:
-
-	limit coredumpsize 0
-		-- Dru <genesis@istar.ca>
-%
 If you want df(1) and other commands to display disk sizes in
 kilobytes instead of 512-byte blocks, set BLOCKSIZE in your
 environment to 'K'.  You can also use 'M' for Megabytes or 'G' for
@@ -184,8 +171,6 @@ sh (the default POSIX shell in FreeBSD) supports command-line editing.  Just
 ``set -o emacs'' or ``set -o vi'' to enable it. Use "<TAB>" key to complete
 paths.
 %
-Simple tcsh prompt: set prompt = '%# '
-%
 The default editor in FreeBSD is vi, which is efficient to use when you have
 learned it, but somewhat user-unfriendly.  To use ee (an easier but less
 powerful editor) instead, set the environment variable EDITOR to /usr/bin/ee
@@ -197,9 +182,6 @@ To change an environment variable in /bin/sh use:
 
 	$ VARIABLE="value"
 	$ export VARIABLE
-%
-To change an environment variable in tcsh you use: setenv NAME "value"
-where NAME is the name of the variable and "value" its new value.
 %
 To clear the screen, use "clear". To re-display your screen buffer, press
 the scroll lock key and use your page up button. When you're finished,
@@ -359,8 +341,6 @@ You can use "vidcontrol -i mode | grep T" for a list of supported text
 modes.
 		-- Konstantinos Konstantinidis <kkonstan@duth.gr>
 %
-You can disable tcsh's terminal beep if you `set nobeep'.
-%
 You can install extra packages for FreeBSD by using the ports system.
 If you have installed it, you can download, compile, and install software by
 just typing
@@ -395,8 +375,7 @@ use ^w to switch between the two.
 %
 You can permanently set environment variables for your shell by putting them
 in a startup file for the shell.  The name of the startup file varies
-depending on the shell - csh and tcsh uses .login, bash, sh, ksh and zsh use
-.profile.  When using bash, sh, ksh or zsh, don't forget to export the
+depending on the shell.  For sh, use .profile and remember to export the
 variable.
 %
 You can press Ctrl-D to quickly exit from a shell, or logout from a
@@ -404,14 +383,11 @@ login shell.
 		-- Konstantinos Konstantinidis <kkonstan@duth.gr>
 %
 You can press up-arrow or down-arrow to walk through a list of
-previous commands in tcsh.
+previous commands in sh.
 %
 You can search for documentation on a keyword by typing
 
 	apropos keyword
-%
-You can `set autologout = 30' to have tcsh log you off automatically
-if you leave the shell idle for more than 30 minutes.
 %
 You can use aliases to decrease the amount of typing you need to do to get
 commands you commonly use.  Examples of fairly popular aliases include (in
@@ -420,12 +396,6 @@ POSIX shell style, as in /bin/sh, bash, ksh, and zsh):
 	alias lf="ls -FA"
 	alias ll="ls -lA"
 	alias su="su -m"
-
-In csh or tcsh, these would be
-
-	alias lf ls -FA
-	alias ll ls -lA
-	alias su su -m
 
 To remove an alias, you can usually use 'unalias aliasname'.  To list all
 aliases, you can usually type just 'alias'.
@@ -452,7 +422,7 @@ Try "whereis firefox" and "whereis whereis".
 		-- Konstantinos Konstantinidis <kkonstan@duth.gr>
 %
 Want to run the same command again?
-In many shells (e.g., tcsh, zsh, bash) you can type "!!".
+In many shells (e.g., zsh, bash) you can type "!!".
 %
 Want to go the directory you were just in?
 Type "cd -"

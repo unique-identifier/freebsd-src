@@ -2972,9 +2972,6 @@ _share=	share/syscons/scrnmaps
 _rescue=rescue/rescue
 .endif
 
-.if ${MK_TCSH} != "no"
-_tcsh=bin/csh
-.endif
 .if ${MK_FILE} != "no"
 _libmagic=lib/libmagic
 .endif
@@ -2990,7 +2987,6 @@ _bt_clean=	${CLEANDIR}
 .endif
 
 .for _tool in \
-    ${_tcsh} \
     bin/sh \
     ${LOCAL_TOOL_DIRS} \
     ${_jevents} \
@@ -3112,7 +3108,6 @@ NXBDIRS+= \
     bin/cat \
     bin/chmod \
     bin/cp \
-    ${_tcsh} \
     bin/echo \
     bin/expr \
     bin/hostname \

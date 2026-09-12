@@ -9,7 +9,6 @@ DIRDEPS+= \
 	bin/chio \
 	bin/chmod \
 	bin/cp \
-	bin/csh \
 	bin/date \
 	bin/dd \
 	bin/df \

@@ -236,17 +236,10 @@ shell:
 .endif
 
 .if make(shell_1)
-# Test if setting the shell by name only works. Because we have no ksh
-# in the base system we test that we can set sh and csh. We try only exact
-# matching names and do not exercise the rather strange matching algorithm.
+# Test if setting the shell by name only works with the base system sh.
+# Use an exact matching name.
 shell_1:
-	@${SMAKE} shell_1_csh
 	@${SMAKE} shell_1_sh
-.endif
-.if make(shell_1_csh)
-.SHELL: name="csh"
-shell_1_csh:
-	@ps -ax -opid,command | awk '$$1=="'$$$$'" { print $$2 }' | grep -E -q '^(/bin/)?csh$$'
 .endif
 .if make(shell_1_sh)
 .SHELL: name="sh"

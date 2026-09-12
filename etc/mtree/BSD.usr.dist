@@ -280,8 +280,6 @@
             ..
             bsdconfig
             ..
-            csh
-            ..
             diskless
             ..
             dma
@@ -381,8 +379,6 @@
                 ..
                 sort
                 ..
-            ..
-            tcsh
             ..
             uefisign
             ..

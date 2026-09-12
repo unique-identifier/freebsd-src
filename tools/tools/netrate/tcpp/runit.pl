@@ -43,7 +43,7 @@ sub test {
 	system("ssh root\@hydra2 ifconfig cxgb0 $tso $lro mtu $mtu");
 
 	print "Running $prefix\n";
-	system("ssh root\@hydra1 '(cd $tcpp_dir ; csh parallelism.csh ".
+	system("ssh root\@hydra1 '(cd $tcpp_dir ; sh parallelism.sh ".
 	    "$outfile $prefix)'");
 }
 

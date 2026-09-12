@@ -77,19 +77,6 @@ Steve Bourne's introduction to the capabilities of
 a command interpreter especially popular for writing shell scripts.
 .ND
 .IP
-.tl 'An Introduction to the C shell''USD:4'
-.if \n(.U \{\
-.br
-.>> <a href="04.csh/paper.html">04.csh/paper.html</a>
-.\}
-.QP
-This introduction to
-.I csh,
-(a command interpreter popular for interactive work)  describes many 
-commonly used UNIX commands, assumes little prior knowledge of UNIX,
-and has a glossary useful for beginners.
-.ND
-.IP
 .tl 'DC \- An Interactive Desk Calculator''USD:5'
 .QP
 A super HP calculator, if you do not need floating point.

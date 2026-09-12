@@ -49,7 +49,6 @@
 #define	_PATH_CAPABILITY_DB	"/etc/capability.db"
 #define	_PATH_CONSOLE	"/dev/console"
 #define	_PATH_CP	"/bin/cp"
-#define	_PATH_CSHELL	"/bin/csh"
 #define	_PATH_CSMAPPER	"/usr/share/i18n/csmapper"
 #define	_PATH_DEFTAPE	"/dev/sa0"
 #define	_PATH_DEVGPIOC	"/dev/gpioc"
@@ -122,8 +121,6 @@ __END_DECLS
 #define	_PATH_BSHELL	"/rescue/sh"
 #undef	_PATH_CP
 #define	_PATH_CP	"/rescue/cp"
-#undef	_PATH_CSHELL
-#define	_PATH_CSHELL	"/rescue/csh"
 #undef	_PATH_HALT
 #define	_PATH_HALT	"/rescue/halt"
 #undef	_PATH_IFCONFIG

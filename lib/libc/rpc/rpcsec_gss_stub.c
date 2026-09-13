@@ -27,7 +27,7 @@
  */
 
 #include <rpc/rpc.h>
-#include <rpc/rpcsec_gss.h>
+#include "rpc_com.h"
 
 bool_t
 __rpc_gss_wrap_stub(AUTH *auth, void *header, size_t headerlen, XDR* xdrs,

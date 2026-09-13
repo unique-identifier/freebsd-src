@@ -8,8 +8,7 @@ SRCS=	sshd-auth.c \
 	serverloop.c auth.c auth2.c auth-options.c session.c auth2-chall.c \
 	groupaccess.c auth-bsdauth.c auth2-hostbased.c auth2-kbdint.c \
 	auth2-none.c auth2-passwd.c auth2-pubkey.c auth2-pubkeyfile.c \
-	auth2-gss.c gss-serv.c gss-serv-krb5.c \
-	monitor_wrap.c auth-krb5.c \
+	monitor_wrap.c \
 	audit.c audit-bsm.c audit-linux.c platform.c \
 	loginrec.c auth-pam.c auth-shadow.c auth-sia.c \
 	sandbox-null.c sandbox-rlimit.c sandbox-darwin.c \
@@ -18,8 +17,6 @@ SRCS=	sshd-auth.c \
 	uidswap.c $(SKSRCS)
 PACKAGE=	ssh
 
-# gss-genr.c really belongs in libssh; see src/secure/lib/libssh/Makefile
-SRCS+=	gss-genr.c
 
 MAN=
 
@@ -38,13 +35,6 @@ LIBADD+= blocklist
 LDFLAGS+=-L${LIBBLOCKLISTDIR}
 .endif
 
-.if ${MK_KERBEROS_SUPPORT} != "no"
-LIBADD+=	gssapi_krb5 krb5
-.include "../../krb5/Makefile.inc"
-CFLAGS+=	-I${KRB5_DIR}/include \
-		-I${KRB5_SRCTOP}/include \
-		-I${KRB5_OBJTOP}/lib
-.endif
 
 LIBADD+=	crypto
 

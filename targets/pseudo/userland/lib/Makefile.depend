@@ -121,8 +121,6 @@ DIRDEPS = \
 	lib/libpam/modules/pam_ftpusers \
 	lib/libpam/modules/pam_group \
 	lib/libpam/modules/pam_guest \
-	lib/libpam/modules/pam_krb5 \
-	lib/libpam/modules/pam_ksu \
 	lib/libpam/modules/pam_lastlog \
 	lib/libpam/modules/pam_login_access \
 	lib/libpam/modules/pam_nologin \
@@ -145,7 +143,6 @@ DIRDEPS = \
 	lib/libprocstat \
 	lib/libradius \
 	lib/libregex \
-	lib/librpcsec_gss \
 	lib/librpcsvc \
 	lib/librss \
 	lib/librt \

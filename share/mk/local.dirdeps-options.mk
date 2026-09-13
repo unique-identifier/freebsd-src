@@ -5,13 +5,6 @@ DIRDEPS.BLACKLIST_SUPPORT.yes+= lib/libblacklist
 DIRDEPS.BLOCKLIST_SUPPORT.yes+= lib/libblocklist
 DIRDEPS.CASPER.yes+= lib/libcasper/libcasper
 DIRDEPS.JAIL.yes+= lib/libjail
-DIRDEPS.KERBEROS_SUPPORT.yes+= \
-	krb5/lib/gssapi \
-	krb5/lib/krb5 \
-	krb5/lib/crypto \
-	krb5/util/et \
-	krb5/util/support
-
 DIRDEPS.NIS.yes+= \
 	include/rpc \
 	include/rpcsvc \

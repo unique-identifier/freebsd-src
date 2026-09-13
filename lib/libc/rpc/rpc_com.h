@@ -85,6 +85,10 @@ void __xprt_unregister_unlocked(SVCXPRT *);
 extern SVCXPRT **__svc_xports;
 extern int __svc_maxrec;
 
+/* Internal RPCSEC_GSS compatibility hooks; the default stubs reject it. */
+bool_t __rpc_gss_wrap(AUTH *, void *, size_t, XDR *, xdrproc_t, void *);
+bool_t __rpc_gss_unwrap(AUTH *, XDR *, xdrproc_t, void *);
+
 __END_DECLS
 
 #endif /* _RPC_RPCCOM_H */

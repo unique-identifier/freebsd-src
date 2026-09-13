@@ -45,8 +45,6 @@
         ..
         ipf             mode=0700 tags=package=ipf
         ..
-        krb5kdc		mode=0700 tags=package=kerberos-kdc
-        ..
         mtree
         ..
         ntp             uname=ntpd gname=ntpd

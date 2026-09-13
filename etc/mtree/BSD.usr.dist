@@ -85,18 +85,6 @@
         ..
         i18n
         ..
-        krb5                    tags=package=kerberos-kdc
-            kdb                 tags=package=kerberos-kdc
-            ..
-            plugins             tags=package=kerberos-kdc
-                kdb             tags=package=kerberos-kdc
-                ..
-                preauth         tags=package=kerberos-kdc
-                ..
-                tls             tags=package=kerberos-kdc
-                ..
-            ..
-        ..
         libxo
             encoder
             ..
@@ -266,8 +254,6 @@
             ..
         ..
         dtrace
-        ..
-        et        tags=package=kerberos-dev
         ..
         examples
             BSD_daemon

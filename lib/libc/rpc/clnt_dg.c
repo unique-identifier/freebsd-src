@@ -47,7 +47,6 @@
 #include <sys/tree.h>
 #include <arpa/inet.h>
 #include <rpc/rpc.h>
-#include <rpc/rpcsec_gss.h>
 #include <assert.h>
 #include <errno.h>
 #include <pthread.h>

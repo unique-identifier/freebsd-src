@@ -209,8 +209,6 @@ SUBDIR=	\
 	${_ixl} \
 	jme \
 	kbdmux \
-	kgssapi \
-	kgssapi_krb5 \
 	khelp \
 	krpc \
 	ksyms \

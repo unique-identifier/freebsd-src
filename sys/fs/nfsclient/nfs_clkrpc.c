@@ -34,7 +34,6 @@
  */
 
 #include <sys/cdefs.h>
-#include "opt_kgssapi.h"
 #include "opt_kern_tls.h"
 
 #include <fs/nfs/nfsport.h>

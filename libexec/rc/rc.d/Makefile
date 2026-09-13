@@ -165,9 +165,6 @@ CONFGROUPS+=			GGATED
 GGATEDPACKAGE=			ggate
 GGATED=		ggated
 
-CONFGROUPS.${MK_KERBEROS_SUPPORT}+=GSSD
-GSSDPACKAGE=			gssd
-GSSD=		gssd
 
 CONFGROUPS.${MK_HAST}+=		HAST
 HASTPACKAGE=			hast
@@ -326,15 +323,6 @@ SYSCONS=	moused \
 		msconvd \
 		syscons
 
-.if ${MK_KERBEROS} != "no"
-
-# MIT KRB5 rc scripts
-CONFGROUPS+=	KRB5
-KRB5=		kadmind \
-		kdc
-KRB5PACKAGE=	kerberos-kdc
-
-.endif	# ${MK_KERBEROS}
 
 .if ${MK_OPENSSL} != "no" && ${MK_OPENSSL_KTLS} != "no"
 CONFGROUPS+=			KTLS

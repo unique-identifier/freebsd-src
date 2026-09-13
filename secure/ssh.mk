@@ -9,9 +9,6 @@ SKSRCS=	ssh-sk-client.c
 
 CFLAGS+= -I${SSHDIR} -include ssh_namespace.h
 
-.if ${MK_KERBEROS_SUPPORT} != "no"
-CFLAGS+= -include krb5_config.h
-.endif
 
 CFLAGS+= -DXAUTH_PATH=\"${LOCALBASE:U/usr/local}/bin/xauth\"
 

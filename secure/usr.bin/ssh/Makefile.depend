@@ -3,7 +3,6 @@
 DIRDEPS = \
 	include \
 	include/arpa \
-	krb5/lib/gssapi \
 	include/xlocale \
 	lib/${CSU_DIR} \
 	lib/libc \

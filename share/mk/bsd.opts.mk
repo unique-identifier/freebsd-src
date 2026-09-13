@@ -42,10 +42,10 @@ __<bsd.opts.mk>__:	.NOTMAIN
 # that haven't been converted over.
 #
 
-# Only these options are used by bsd.*.mk. KERBEROS and OPENSSH are
+# Only these options are used by bsd.*.mk. OPENSSH is
 # unfortunately needed to support statically linking the entire
 # tree. su(1) wouldn't link since it depends on PAM which depends on
-# ssh libraries when building with OPENSSH, and likewise for KERBEROS.
+# ssh libraries when building with OPENSSH.
 
 # All other variables used to build /usr/src live in src.opts.mk
 # and variables from both files are documented in src.conf(5).
@@ -56,7 +56,6 @@ __DEFAULT_YES_OPTIONS = \
     DOCCOMPRESS \
     INCLUDES \
     INSTALLLIB \
-    KERBEROS \
     MAKE_CHECK_USE_SANDBOX \
     MAN \
     MANCOMPRESS \

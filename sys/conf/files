@@ -4035,54 +4035,6 @@ kern/vfs_mountroot.c		standard
 kern/vfs_subr.c			standard
 kern/vfs_syscalls.c		standard
 kern/vfs_vnops.c		standard
-#
-# Kernel GSS-API
-#
-gssd.h				optional kgssapi			\
-	dependency		"$S/kgssapi/gssd.x"			\
-	compile-with		"RPCGEN_CPP='${CPP}' rpcgen -hM $S/kgssapi/gssd.x | grep -v pthread.h > gssd.h" \
-	no-obj no-implicit-rule before-depend local			\
-	clean			"gssd.h"
-gssd_xdr.c			optional kgssapi			\
-	dependency		"$S/kgssapi/gssd.x gssd.h"		\
-	compile-with		"RPCGEN_CPP='${CPP}' rpcgen -c $S/kgssapi/gssd.x -o gssd_xdr.c" \
-	no-ctfconvert no-implicit-rule before-depend local		\
-	clean			"gssd_xdr.c"
-gssd_clnt.c			optional kgssapi			\
-	dependency		"$S/kgssapi/gssd.x gssd.h"		\
-	compile-with		"RPCGEN_CPP='${CPP}' rpcgen -lM $S/kgssapi/gssd.x | grep -v string.h > gssd_clnt.c" \
-	no-ctfconvert no-implicit-rule before-depend local		\
-	clean			"gssd_clnt.c"
-kgssapi/gss_accept_sec_context.c optional kgssapi
-kgssapi/gss_add_oid_set_member.c optional kgssapi
-kgssapi/gss_acquire_cred.c	optional kgssapi
-kgssapi/gss_canonicalize_name.c	optional kgssapi
-kgssapi/gss_create_empty_oid_set.c optional kgssapi
-kgssapi/gss_delete_sec_context.c optional kgssapi
-kgssapi/gss_display_status.c	optional kgssapi
-kgssapi/gss_export_name.c	optional kgssapi
-kgssapi/gss_get_mic.c		optional kgssapi
-kgssapi/gss_init_sec_context.c	optional kgssapi
-kgssapi/gss_impl.c		optional kgssapi
-kgssapi/gss_import_name.c	optional kgssapi
-kgssapi/gss_ip_to_dns.c		optional kgssapi
-kgssapi/gss_names.c		optional kgssapi
-kgssapi/gss_pname_to_uid.c	optional kgssapi
-kgssapi/gss_release_buffer.c	optional kgssapi
-kgssapi/gss_release_cred.c	optional kgssapi
-kgssapi/gss_release_name.c	optional kgssapi
-kgssapi/gss_release_oid_set.c	optional kgssapi
-kgssapi/gss_set_cred_option.c	optional kgssapi
-kgssapi/gss_test_oid_set_member.c optional kgssapi
-kgssapi/gss_unwrap.c		optional kgssapi
-kgssapi/gss_verify_mic.c	optional kgssapi
-kgssapi/gss_wrap.c		optional kgssapi
-kgssapi/gss_wrap_size_limit.c	optional kgssapi
-kgssapi/gssd_prot.c		optional kgssapi
-kgssapi/krb5/krb5_mech.c	optional kgssapi
-kgssapi/krb5/kcrypto.c		optional kgssapi
-kgssapi/krb5/kcrypto_aes.c	optional kgssapi
-kgssapi/kgss_if.m		optional kgssapi
 # These files in libkern/ are those needed by all architectures.  Some
 # of the files in libkern/ are only needed on some architectures, e.g.,
 # libkern/divdi3.c is needed by i386 but not alpha.  Also, some of these
@@ -5225,11 +5177,6 @@ rpctlssd_clnt.c			optional krpc | nfslockd | nfscl | nfsd	\
 	clean			"rpctlssd_clnt.c"
 rpc/rpcsec_tls/rpctls_impl.c	optional krpc | nfslockd | nfscl | nfsd
 rpc/rpcsec_tls/auth_tls.c	optional krpc | nfslockd | nfscl | nfsd
-rpc/rpcsec_gss/rpcsec_gss.c	optional krpc kgssapi | nfslockd kgssapi | nfscl kgssapi | nfsd kgssapi
-rpc/rpcsec_gss/rpcsec_gss_conf.c optional krpc kgssapi | nfslockd kgssapi | nfscl kgssapi | nfsd kgssapi
-rpc/rpcsec_gss/rpcsec_gss_misc.c optional krpc kgssapi | nfslockd kgssapi | nfscl kgssapi | nfsd kgssapi
-rpc/rpcsec_gss/rpcsec_gss_prot.c optional krpc kgssapi | nfslockd kgssapi | nfscl kgssapi | nfsd kgssapi
-rpc/rpcsec_gss/svc_rpcsec_gss.c	optional krpc kgssapi | nfslockd kgssapi | nfscl kgssapi | nfsd kgssapi
 security/audit/audit.c		optional audit
 security/audit/audit_arg.c	optional audit
 security/audit/audit_bsm.c	optional audit

@@ -13,6 +13,12 @@ Items affecting the ports and packages system can be found in
 and/or ports.
 
 20260913:
+	MIT Kerberos, its PAM modules, and kernel Kerberos/GSSAPI support
+	have been removed.  Kerberos authentication in SSH and NFS is no
+	longer available.  The KERBEROS, KERBEROS_SUPPORT, and MITKRB5 build
+	options have been removed.
+
+20260913:
 	The legacy Heimdal Kerberos implementation has been removed.
 	MIT Kerberos remains the default.  WITHOUT_KERBEROS continues to
 	disable Kerberos; WITHOUT_MITKRB5 now also disables Kerberos instead

@@ -252,10 +252,6 @@
         virstor
         ..
     ..
-    gssapi              tags=package=kerberos-dev
-    ..
-    gssrpc              tags=package=kerberos-dev
-    ..
     infiniband          tags=package=utilities-dev
         complib         tags=package=utilities-dev
         ..
@@ -269,10 +265,6 @@
     isofs
         cd9660
         ..
-    ..
-    kadm5               tags=package=kerberos-dev
-    ..
-    krb5                tags=package=kerberos-dev
     ..
     lib80211            tags=package=runtime-dev
     ..

@@ -3,7 +3,7 @@
 #
 
 # PROVIDE: nfsd
-# REQUIRE: mountcritremote mountd hostname gssd nfsuserd
+# REQUIRE: mountcritremote mountd hostname nfsuserd
 # KEYWORD: nojailvnet shutdown
 
 . /etc/rc.subr

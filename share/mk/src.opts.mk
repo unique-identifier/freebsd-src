@@ -144,7 +144,6 @@ __DEFAULT_YES_OPTIONS = \
     MAILWRAPPER \
     MAKE \
     MALLOC_PRODUCTION \
-    MITKRB5 \
     MLX5TOOL \
     NETCAT \
     NETGRAPH \
@@ -246,7 +245,6 @@ __LIBC_MALLOC_DEFAULT=	jemalloc
     BZIP2 \
     INET \
     INET6 \
-    KERBEROS \
     KVM \
     NETGRAPH \
     PAM \
@@ -422,9 +420,6 @@ MK_ZFS:=	no
 .if ${MK_CRYPT} == "no"
 MK_OPENSSL:=	no
 MK_OPENSSH:=	no
-MK_KERBEROS:=	no
-MK_KERBEROS_SUPPORT:=	no
-MK_MITKRB5:=	no
 .endif
 
 .if ${MK_DTRACE} == "no"
@@ -448,9 +443,6 @@ MK_NLS_CATALOGS:= no
 MK_DMAGENT:=	no
 MK_OPENSSH:=	no
 MK_OPENSSL_KTLS:=	no
-MK_KERBEROS:=	no
-MK_KERBEROS_SUPPORT:=	no
-MK_MITKRB5:=	no
 MK_LDNS:=	no
 MK_PKGBOOTSTRAP:=	no
 MK_LOADER_ZFS:=	no
@@ -531,7 +523,6 @@ MK_DEPEND_CLEANUP:=	no
 # MK_* options whose default value depends on another option.
 #
 .for vv in \
-    KERBEROS_SUPPORT/KERBEROS \
     MAN_UTILS/MAN
 .if defined(WITH_${vv:H})
 MK_${vv:H}:=	yes
@@ -541,11 +532,5 @@ MK_${vv:H}:=	no
 MK_${vv:H}:=	${MK_${vv:T}}
 .endif
 .endfor
-
-# Heimdal has been removed; disabling MIT disables Kerberos entirely.
-.if ${MK_MITKRB5} == "no"
-MK_KERBEROS:=	no
-MK_KERBEROS_SUPPORT:=	no
-.endif
 
 .endif #  !target(__<src.opts.mk>__)

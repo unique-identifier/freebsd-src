@@ -16,8 +16,6 @@ LIBOPENSSH_SRCS=\
 	krl.c \
 	bitmap.c
 
-# gss-genr.c should be in $SRCS but causes linking problems, so it is
-# compiled directly into sshd instead.
 SRCS=	${LIBOPENSSH_SRCS} \
 	authfd.c authfile.c \
 	canohost.c channels.c cipher.c cipher-aes.c cipher-aesctr.c \

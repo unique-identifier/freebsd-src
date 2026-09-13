@@ -38,7 +38,6 @@
  * Socket operations for use by nfs
  */
 
-#include "opt_kgssapi.h"
 #include "opt_nfs.h"
 
 #include <sys/param.h>
@@ -60,7 +59,6 @@
 #include <rpc/rpc.h>
 #include <rpc/krpc.h>
 
-#include <kgssapi/krb5/kcrypto.h>
 
 #include <fs/nfs/nfsport.h>
 

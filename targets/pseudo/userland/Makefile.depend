@@ -542,7 +542,6 @@ DIRDEPS+= \
 	usr.sbin/getfmac \
 	usr.sbin/getpmac \
 	usr.sbin/gpioctl \
-	usr.sbin/gssd \
 	usr.sbin/gstat \
 	usr.sbin/i2c \
 	usr.sbin/ifmcstat \

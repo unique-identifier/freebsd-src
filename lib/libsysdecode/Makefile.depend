@@ -13,13 +13,10 @@ DIRDEPS = \
 	gnu/lib/libdialog \
 	include \
 	include/arpa \
-	krb5/lib/gssapi \
 	include/protocols \
 	include/rpc \
 	include/rpcsvc \
 	include/xlocale \
-	krb5/lib/kadm5clnt \
-	krb5/lib/krb5 \
 	lib/${CSU_DIR} \
 	lib/atf/libatf-c \
 	lib/lib80211 \
@@ -50,7 +47,6 @@ DIRDEPS = \
 	lib/libcasper/services/cap_pwd \
 	lib/libcasper/services/cap_sysctl \
 	lib/libcasper/services/cap_syslog \
-	krb5/util/et \
 	lib/libcompiler_rt \
 	lib/libcuse \
 	lib/libdevctl \

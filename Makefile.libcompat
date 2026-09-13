@@ -92,12 +92,6 @@ _LC_LIBDIRS.yes=		lib
 _LC_LIBDIRS.yes+=		gnu/lib
 _LC_LIBDIRS.${MK_CDDL:tl}+=	cddl/lib
 _LC_LIBDIRS.${MK_CRYPT:tl}+=	secure/lib
-_LC_LIBDIRS.${MK_KERBEROS:tl}+=	krb5/lib
-# Only include the parts of krb5/util that build libraries, not executables.
-_LC_LIBDIRS.${MK_KERBEROS:tl}+=	krb5/util/et
-_LC_LIBDIRS.${MK_KERBEROS:tl}+=	krb5/util/profile
-_LC_LIBDIRS.${MK_KERBEROS:tl}+=	krb5/util/support
-_LC_LIBDIRS.${MK_KERBEROS:tl}+=	krb5/util/verto
 
 .if ${MK_FILE} != "no"
 _libmagic=	lib/libmagic

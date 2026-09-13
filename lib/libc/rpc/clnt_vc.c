@@ -73,7 +73,6 @@
 #include <signal.h>
 
 #include <rpc/rpc.h>
-#include <rpc/rpcsec_gss.h>
 #include "un-namespace.h"
 #include "rpc_com.h"
 #include "mt_misc.h"

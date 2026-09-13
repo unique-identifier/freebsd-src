@@ -76,9 +76,6 @@ _INTERNALLIBS=	\
 		pkgecc \
 		pmcstat \
 		sl \
-		sm \
-		smdb \
-		smutil \
 		util++ \
 		vers \
 		wpaap \
@@ -216,7 +213,6 @@ _LIBRARIES=	\
 		rtld_db \
 		sbuf \
 		sdp \
-		sm \
 		smb \
 		spl \
 		ssl \
@@ -633,15 +629,6 @@ LIBPE?=		${LIBPEDIR}/libpe${PIE_SUFFIX}.a
 
 LIBOPENBSDDIR=	${_LIB_OBJTOP}/lib/libopenbsd
 LIBOPENBSD?=	${LIBOPENBSDDIR}/libopenbsd${PIE_SUFFIX}.a
-
-LIBSMDIR=	${_LIB_OBJTOP}/lib/libsm
-LIBSM?=		${LIBSMDIR}/libsm${PIE_SUFFIX}.a
-
-LIBSMDBDIR=	${_LIB_OBJTOP}/lib/libsmdb
-LIBSMDB?=	${LIBSMDBDIR}/libsmdb${PIE_SUFFIX}.a
-
-LIBSMUTILDIR=	${_LIB_OBJTOP}/lib/libsmutil
-LIBSMUTIL?=	${LIBSMUTILDIR}/libsmutil${PIE_SUFFIX}.a
 
 LIBSYSDIR=	${_LIB_OBJTOP}/lib/libsys
 LIBSYS?=	${LIBSYSDIR}/libsys${PIE_SUFFIX}.a

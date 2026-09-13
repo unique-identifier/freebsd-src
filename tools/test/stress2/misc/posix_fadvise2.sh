@@ -31,7 +31,7 @@
 # Fixed by r292326.
 
 . ../default.cfg
-[ -f /usr/libexec/sendmail/sendmail ] || exit 0
+[ -f /bin/sh ] || exit 0
 
 here=`pwd`
 cd /tmp
@@ -53,7 +53,7 @@ EOF
 #include <unistd.h>
 
 char *file[2] = {
-	"/usr/libexec/sendmail/sendmail",
+	"/bin/sh",
 	"/tmp/posix_fadvise2"};
 
 int

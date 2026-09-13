@@ -280,8 +280,6 @@
     ..
     libipt              tags=package=libipt-dev
     ..
-    libmilter           tags=package=libmilter-dev
-    ..
     libxo               tags=package=runtime-dev
     ..
     lzma                tags=package=xz-dev

@@ -40,7 +40,6 @@ SUBDIR= cat \
 	timeout \
 	uuidgen
 
-SUBDIR.${MK_SENDMAIL}+=	rmail
 SUBDIR.${MK_TESTS}+=	tests
 
 .include <bsd.arch.inc.mk>

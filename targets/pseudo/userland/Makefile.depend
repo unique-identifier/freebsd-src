@@ -33,7 +33,6 @@ DIRDEPS+= \
 	bin/rcp \
 	bin/realpath \
 	bin/rm \
-	bin/rmail \
 	bin/rmdir \
 	bin/setfacl \
 	bin/sh \
@@ -359,7 +358,6 @@ DIRDEPS+= \
 	usr.bin/usbhidaction \
 	usr.bin/usbhidctl \
 	usr.bin/users \
-	usr.bin/vacation \
 	usr.bin/vgrind \
 	usr.bin/vi \
 	usr.bin/vi/catalog \
@@ -523,7 +521,6 @@ DIRDEPS+= \
 	usr.sbin/dnssec-settime \
 	usr.sbin/dnssec-signzone \
 	usr.sbin/dumpcis \
-	usr.sbin/editmap \
 	usr.sbin/edquota \
 	usr.sbin/etcupdate \
 	usr.sbin/extattr \
@@ -579,10 +576,8 @@ DIRDEPS+= \
 	usr.sbin/lpr/lprm \
 	usr.sbin/lpr/lptest \
 	usr.sbin/lpr/pac \
-	usr.sbin/mailstats \
 	usr.sbin/mailwrapper \
 	usr.sbin/makefs \
-	usr.sbin/makemap \
 	usr.sbin/manctl \
 	usr.sbin/memcontrol \
 	usr.sbin/mfiutil \
@@ -640,7 +635,6 @@ DIRDEPS+= \
 	usr.sbin/powerd \
 	usr.sbin/ppp \
 	usr.sbin/pppctl \
-	usr.sbin/praliases \
 	usr.sbin/praudit \
 	usr.sbin/prometheus_sysctl_exporter \
 	usr.sbin/pstat \
@@ -669,7 +663,6 @@ DIRDEPS+= \
 	usr.sbin/rtsold \
 	usr.sbin/rwhod \
 	usr.sbin/sa \
-	usr.sbin/sendmail \
 	usr.sbin/service \
 	usr.sbin/services_mkdb \
 	usr.sbin/sesutil \

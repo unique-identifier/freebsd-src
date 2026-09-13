@@ -18,7 +18,6 @@ SUBDIR=	${_colldef} \
 	${_monetdef} \
 	${_msgdef} \
 	${_numericdef} \
-	${_sendmail} \
 	skel \
 	${_snmp} \
 	${_syscons} \
@@ -68,10 +67,6 @@ _mk=		mk
 
 .if ${MK_MAN} != "no"
 _man=		man
-.endif
-
-.if ${MK_SENDMAIL} != "no"
-_sendmail=	 sendmail
 .endif
 
 .if ${MK_SHAREDOCS} != "no"

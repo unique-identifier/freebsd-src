@@ -45,13 +45,6 @@ var_svcj="NO"
 populate_var()
 {
 	/usr/sbin/mtree -deiU -f /etc/mtree/BSD.var.dist -p /var > /dev/null
-	case ${sendmail_enable} in
-	[Nn][Oo][Nn][Ee])
-		;;
-	*)
-		/usr/sbin/mtree -deiU -f /etc/mtree/BSD.sendmail.dist -p / > /dev/null
-		;;
-	esac
 }
 
 # If we do not have a writable /var, create a memory filesystem for /var

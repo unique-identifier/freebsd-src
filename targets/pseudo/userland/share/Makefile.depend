@@ -75,7 +75,6 @@ DIRDEPS = \
 	share/monetdef \
 	share/msgdef \
 	share/numericdef \
-	share/sendmail \
 	share/skel \
 	share/snmp/mibs \
 	share/syscons/fonts \

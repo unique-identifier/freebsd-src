@@ -166,7 +166,6 @@ __DEFAULT_YES_OPTIONS = \
     RBOOTD \
     RESCUE \
     ROUTED \
-    SENDMAIL \
     SERVICESDB \
     SETUID_LOGIN \
     SHAREDOCS \
@@ -434,7 +433,6 @@ MK_CTF:=	no
 
 .if ${MK_MAIL} == "no"
 MK_MAILWRAPPER:= no
-MK_SENDMAIL:=	no
 MK_DMAGENT:=	no
 .endif
 

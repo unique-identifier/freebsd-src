@@ -10,7 +10,6 @@ FILES=	\
 	BSD.include.dist \
 	BSD.root.dist \
 	${_BSD.libcompats.dist} \
-	${_BSD.sendmail.dist} \
 	${_BSD.tests.dist} \
 	BSD.usr.dist \
 	BSD.var.dist
@@ -20,9 +19,6 @@ FILES=	\
 _BSD.libcompats.dist+=	BSD.lib${libcompat}.dist
 .endif
 .endfor
-.if ${MK_SENDMAIL} != "no"
-_BSD.sendmail.dist=	BSD.sendmail.dist
-.endif
 .if ${MK_TESTS} != "no"
 _BSD.tests.dist=	BSD.tests.dist
 .endif

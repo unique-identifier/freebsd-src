@@ -117,15 +117,6 @@ This document describes the structure and installation procedure
 for the line printer spooling system.  
 
 .IP
-.tl 'Sendmail Installation and Operation Guide''SMM:8'
-.if \n(.U \{\
-.br
-.>> <a href="08.sendmailop/paper.html">08.sendmailop/paper.html</a>
-.\}
-.QP
-The last word in installing and operating the \fIsendmail\fP program.
-
-.IP
 .tl 'Timed Installation and Operation Guide''SMM:11'
 .if \n(.U \{\
 .br

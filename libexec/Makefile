@@ -10,7 +10,6 @@ SUBDIR=	${_atf} \
 	flua \
 	getty \
 	${_hyperv} \
-	${_mail.local} \
 	${_makewhatis.local} \
 	${_mknetid} \
 	${_phttpget} \
@@ -27,7 +26,6 @@ SUBDIR=	${_atf} \
 	${_rtld-elf} \
 	save-entropy \
 	${_nuageinit} \
-	${_smrsh} \
 	${_tests} \
 	${_tftp-proxy} \
 	ulog-helper \
@@ -87,11 +85,6 @@ SUBDIR.${MK_LIB${LIBCOMPAT}}+=	rtld-elf${libcompat}
 
 .if ${MK_RBOOTD} != "no"
 SUBDIR+=	rbootd
-.endif
-
-.if ${MK_SENDMAIL} != "no"
-_mail.local=	mail.local
-_smrsh=		smrsh
 .endif
 
 .if ${MK_MAN_UTILS} != "no"

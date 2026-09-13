@@ -237,7 +237,6 @@ SUBDIR.${MK_NIS}+=	ypmatch
 SUBDIR.${MK_NIS}+=	ypwhich
 SUBDIR.${MK_OPENSSH}+=	ssh-copy-id
 SUBDIR.${MK_QUOTAS}+=	quota
-SUBDIR.${MK_SENDMAIL}+=	vacation
 SUBDIR.${MK_SOUND}+=	beep
 SUBDIR.${MK_SOUND}+=	mididump
 SUBDIR.${MK_TESTS_SUPPORT}+=	kyua

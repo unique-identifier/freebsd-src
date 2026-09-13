@@ -17,7 +17,6 @@ _sys_boot_zfs= stand/zfs
 DIRDEPS = \
 	etc \
 	etc/newsyslog.conf.d \
-	etc/sendmail \
 	rescue/librescue \
 	rescue/rescue \
 

@@ -86,7 +86,6 @@ DIRDEPS = \
 	lib/libmagic \
 	lib/libmd \
 	lib/libmemstat \
-	lib/libmilter \
 	lib/libmixer \
 	lib/libmp \
 	lib/libmt \

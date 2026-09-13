@@ -96,8 +96,6 @@ __DEFAULT_YES_OPTIONS = \
     FILE \
     FORTH \
     FREEBSD_UPDATE \
-    FTP \
-    GNU_DIFF \
     GOOGLETEST \
     GPIO \
     HAST \

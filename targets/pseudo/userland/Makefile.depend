@@ -175,6 +175,7 @@ DIRDEPS+= \
 	usr.bin/ctlstat \
 	usr.bin/cut \
 	usr.bin/dc \
+	usr.bin/diff3 \
 	usr.bin/dig \
 	usr.bin/dirname \
 	usr.bin/dpv \
@@ -196,7 +197,6 @@ DIRDEPS+= \
 	usr.bin/from \
 	usr.bin/fstat \
 	usr.bin/fsync \
-	usr.bin/ftp \
 	usr.bin/gcore \
 	usr.bin/gencat \
 	usr.bin/getaddrinfo \

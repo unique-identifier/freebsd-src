@@ -1489,15 +1489,6 @@ OLD_FILES+=usr/share/examples/etc/freebsd-update.conf
 OLD_FILES+=usr/libexec/phttpget
 .endif
 
-.if ${MK_FTP} == no
-OLD_FILES+=etc/pam.d/ftp
-OLD_FILES+=etc/pam.d/ftpd
-OLD_FILES+=usr/bin/ftp
-OLD_FILES+=usr/bin/gate-ftp
-OLD_FILES+=usr/bin/pftp
-.endif
-
-
 .if ${MK_GOOGLETEST} == no
 OLD_FILES+=usr/include/private/gmock/gmock-actions.h
 OLD_FILES+=usr/include/private/gmock/gmock-cardinalities.h

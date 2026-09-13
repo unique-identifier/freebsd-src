@@ -33,7 +33,7 @@ ftp_head()
 {
 	atf_set descr 'Test ftp-proxy'
 	atf_set require.user root
-	atf_set require.progs twistd
+	atf_set require.progs "twistd ftp"
 }
 
 ftp_body()

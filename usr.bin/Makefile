@@ -28,6 +28,7 @@ SUBDIR=	alias \
 	ctlstat \
 	cut \
 	diff \
+	diff3 \
 	dirname \
 	dtc \
 	du \
@@ -191,11 +192,7 @@ SUBDIR+=	clang
 .endif
 SUBDIR.${MK_DIALOG}+=	dpv
 SUBDIR.${MK_FILE}+=	file
-SUBDIR.${MK_FTP}+=	ftp
 SUBDIR+=		gh-bc
-.if ${MK_GNU_DIFF} == "no"
-SUBDIR+=		diff3
-.endif
 SUBDIR.${MK_HESIOD}+=	hesinfo
 SUBDIR.${MK_ICONV}+=	iconv
 SUBDIR.${MK_ICONV}+=	mkcsmapper

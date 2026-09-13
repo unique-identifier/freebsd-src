@@ -51,6 +51,11 @@
 #   xargs -n1 | sort | uniq -d;
 # done
 
+# 20260913: Remove the FTP client.
+OLD_FILES+=usr/bin/ftp
+OLD_FILES+=usr/bin/gate-ftp
+OLD_FILES+=usr/bin/pftp
+
 # 20260913: Remove all installed system manual pages and databases.
 .include "tools/build/mk/ObsoleteManFiles.inc"
 

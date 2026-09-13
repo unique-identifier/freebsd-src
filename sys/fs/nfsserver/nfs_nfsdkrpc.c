@@ -269,8 +269,7 @@ nfssvc_program(struct svc_req *rqst, SVCXPRT *xprt)
 			 * - principal name
 			 * A call to gss_import_name() would be an
 			 * upcall to the gssd, so parse it here.
-			 * See lib/libgssapi/gss_import_name.c for the
-			 * above format.
+			 * See RFC 2743, section 3.2, for the above format.
 			 */
 			if (rcredp != NULL &&
 			    rcredp->client_principal->len > 4 &&

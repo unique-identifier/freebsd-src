@@ -13,23 +13,13 @@ DIRDEPS = \
 	gnu/lib/libdialog \
 	include \
 	include/arpa \
-	include/gssapi \
+	krb5/lib/gssapi \
 	include/protocols \
 	include/rpc \
 	include/rpcsvc \
 	include/xlocale \
-	kerberos5/lib/libasn1 \
-	kerberos5/lib/libgssapi_krb5 \
-	kerberos5/lib/libhdb \
-	kerberos5/lib/libheimbase \
-	kerberos5/lib/libheimntlm \
-	kerberos5/lib/libhx509 \
-	kerberos5/lib/libkadm5clnt \
-	kerberos5/lib/libkafs5 \
-	kerberos5/lib/libkdc \
-	kerberos5/lib/libkrb5 \
-	kerberos5/lib/libroken \
-	kerberos5/lib/libwind \
+	krb5/lib/kadm5clnt \
+	krb5/lib/krb5 \
 	lib/${CSU_DIR} \
 	lib/atf/libatf-c \
 	lib/lib80211 \
@@ -60,7 +50,7 @@ DIRDEPS = \
 	lib/libcasper/services/cap_pwd \
 	lib/libcasper/services/cap_sysctl \
 	lib/libcasper/services/cap_syslog \
-	lib/libcom_err \
+	krb5/util/et \
 	lib/libcompiler_rt \
 	lib/libcuse \
 	lib/libdevctl \

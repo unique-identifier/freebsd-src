@@ -37,7 +37,6 @@ USRSRC=${1:-/usr/src}		# source root
 LIBS="
 	lib
 	gnu/lib
-	kerberos5/lib
 	secure/lib
 	usr.bin/lex/lib
 	cddl/lib

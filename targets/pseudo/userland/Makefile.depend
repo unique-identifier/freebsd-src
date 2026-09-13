@@ -168,7 +168,6 @@ DIRDEPS+= \
 	usr.bin/colrm \
 	usr.bin/column \
 	usr.bin/comm \
-	usr.bin/compile_et \
 	usr.bin/compress \
 	usr.bin/cpio \
 	usr.bin/cpuset \
@@ -720,7 +719,6 @@ DIRDEPS+= \
 	${DEP_RELDIR}/cddl \
 	${DEP_RELDIR}/gnu \
 	${DEP_RELDIR}/include \
-	${DEP_RELDIR}/kerberos5 \
 	${DEP_RELDIR}/lib \
 	${DEP_RELDIR}/libexec \
 	${DEP_RELDIR}/misc \

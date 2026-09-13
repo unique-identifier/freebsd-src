@@ -28,7 +28,6 @@ Source Roadmap:
 | etc | Template files for /etc. |
 | gnu | Source code for third-party software under the GNU General Public License (GPL) or Lesser General Public License (LGPL). Please see [gnu/COPYING](gnu/COPYING) and [gnu/COPYING.LIB](gnu/COPYING.LIB) for more information. |
 | include | System include files. |
-| kerberos5 | Build system for Kerberos 5 (Heimdal). |
 | krb5 | Build system for Kerberos 5 (MIT). |
 | lib | System libraries. |
 | libexec | System commands intended to be executed by other commands or daemons. |

@@ -51,9 +51,7 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <gssapi/gssapi.h>
-#ifdef MK_MITKRB5
 #include <gssapi/gssapi_krb5.h>
-#endif
 #include <rpc/rpc.h>
 #include <rpc/rpc_com.h>
 
@@ -322,208 +320,6 @@ gssd_null_1_svc(void *argp, void *result, struct svc_req *rqstp)
 	return (TRUE);
 }
 
-#ifndef MK_MITKRB5
-bool_t
-gssd_init_sec_context_1_svc(init_sec_context_args *argp, init_sec_context_res *result, struct svc_req *rqstp)
-{
-	gss_cred_id_t cred = GSS_C_NO_CREDENTIAL;
-	gss_ctx_id_t ctx = GSS_C_NO_CONTEXT;
-	gss_name_t name = GSS_C_NO_NAME;
-	char ccname[PATH_MAX + 5 + 1], *cp, *cp2;
-	int gotone, gotcred;
-	OM_uint32 min_stat;
-	gss_buffer_desc principal_desc;
-	char enctype[sizeof(uint32_t)];
-	int key_enctype;
-	OM_uint32 maj_stat;
-
-	memset(result, 0, sizeof(*result));
-	if (hostbased_initiator_cred != 0 && argp->cred != 0 &&
-	    argp->uid == 0) {
-		/*
-		 * These credentials are for a host based initiator name
-		 * in a keytab file, which should now have credentials
-		 * in /tmp/krb5cc_gssd, because gss_acquire_cred() did
-		 * the equivalent of "kinit -k".
-		 */
-		snprintf(ccname, sizeof(ccname), "FILE:%s",
-		    GSSD_CREDENTIAL_CACHE_FILE);
-	} else if (ccfile_dirlist[0] != '\0' && argp->cred == 0) {
-		/*
-		 * For the "-s" case and no credentials provided as an
-		 * argument, search the directory list for an appropriate
-		 * credential cache file. If the search fails, return failure.
-		 */
-		gotone = 0;
-		cp = ccfile_dirlist;
-		do {
-			cp2 = strchr(cp, ':');
-			if (cp2 != NULL)
-				*cp2 = '\0';
-			gotone = find_ccache_file(cp, argp->uid, ccname);
-			if (gotone != 0)
-				break;
-			if (cp2 != NULL)
-				*cp2++ = ':';
-			cp = cp2;
-		} while (cp != NULL && *cp != '\0');
-		if (gotone == 0) {
-			result->major_status = GSS_S_CREDENTIALS_EXPIRED;
-			gssd_verbose_out("gssd_init_sec_context: -s no"
-			    " credential cache file found for uid=%d\n",
-			    (int)argp->uid);
-			return (TRUE);
-		}
-	} else {
-		/*
-		 * If there wasn't a "-s" option or the credentials have
-		 * been provided as an argument, do it the old way.
-		 * When credentials are provided, the uid should be root.
-		 */
-		if (argp->cred != 0 && argp->uid != 0) {
-			if (debug_level == 0)
-				syslog(LOG_ERR, "gss_init_sec_context:"
-				    " cred for non-root");
-			else
-				fprintf(stderr, "gss_init_sec_context:"
-				    " cred for non-root\n");
-		}
-		snprintf(ccname, sizeof(ccname), "FILE:/tmp/krb5cc_%d",
-		    (int) argp->uid);
-	}
-	setenv("KRB5CCNAME", ccname, TRUE);
-
-	if (argp->cred) {
-		cred = gssd_find_resource(argp->cred);
-		if (!cred) {
-			result->major_status = GSS_S_CREDENTIALS_EXPIRED;
-			gssd_verbose_out("gssd_init_sec_context: cred"
-			    " resource not found\n");
-			return (TRUE);
-		}
-	}
-	if (argp->ctx) {
-		ctx = gssd_find_resource(argp->ctx);
-		if (!ctx) {
-			result->major_status = GSS_S_CONTEXT_EXPIRED;
-			gssd_verbose_out("gssd_init_sec_context: context"
-			    " resource not found\n");
-			return (TRUE);
-		}
-	}
-	if (argp->name) {
-		name = gssd_find_resource(argp->name);
-		if (!name) {
-			result->major_status = GSS_S_BAD_NAME;
-			gssd_verbose_out("gssd_init_sec_context: name"
-			    " resource not found\n");
-			return (TRUE);
-		}
-	}
-	gotcred = 0;
-
-	result->major_status = gss_init_sec_context(&result->minor_status,
-	    cred, &ctx, name, argp->mech_type,
-	    argp->req_flags, argp->time_req, argp->input_chan_bindings,
-	    &argp->input_token, &result->actual_mech_type,
-	    &result->output_token, &result->ret_flags, &result->time_rec);
-	gssd_verbose_out("gssd_init_sec_context: done major=0x%x minor=%d"
-	    " uid=%d\n", (unsigned int)result->major_status,
-	    (int)result->minor_status, (int)argp->uid);
-	if (gotcred != 0)
-		gss_release_cred(&min_stat, &cred);
-
-	if (result->major_status == GSS_S_COMPLETE
-	    || result->major_status == GSS_S_CONTINUE_NEEDED) {
-		if (argp->ctx)
-			result->ctx = argp->ctx;
-		else
-			result->ctx = gssd_make_resource(ctx);
-	}
-
-	return (TRUE);
-}
-
-bool_t
-gssd_supports_lucid_1_svc(void *argp, supports_lucid_res *result, struct svc_req *rqstp)
-{
-
-	gssd_verbose_out("gssd_lucid: done\n");
-	result->major_status = GSS_S_UNAVAILABLE;
-	return (TRUE);
-}
-
-bool_t
-gssd_init_sec_context_lucid_v1_1_svc(init_sec_context_lucid_v1_args *argp,
-    init_sec_context_lucid_v1_res *result, struct svc_req *rqstp)
-{
-
-	gssd_verbose_out("gssd_init_sec_context_lucid_v1: Heimdal\n");
-	result->major_status = GSS_S_UNAVAILABLE;
-	return (TRUE);
-}
-
-bool_t
-gssd_accept_sec_context_lucid_v1_1_svc(accept_sec_context_lucid_v1_args *argp,
-    accept_sec_context_lucid_v1_res *result, struct svc_req *rqstp)
-{
-
-	gssd_verbose_out("gssd_accept_sec_context_lucid_v1: Heimdal\n");
-	result->major_status = GSS_S_UNAVAILABLE;
-	return (TRUE);
-}
-
-bool_t
-gssd_accept_sec_context_1_svc(accept_sec_context_args *argp, accept_sec_context_res *result, struct svc_req *rqstp)
-{
-	gss_ctx_id_t ctx = GSS_C_NO_CONTEXT;
-	gss_cred_id_t cred = GSS_C_NO_CREDENTIAL;
-	gss_name_t src_name;
-	gss_cred_id_t delegated_cred_handle;
-
-	memset(result, 0, sizeof(*result));
-	if (argp->ctx) {
-		ctx = gssd_find_resource(argp->ctx);
-		if (!ctx) {
-			result->major_status = GSS_S_CONTEXT_EXPIRED;
-			gssd_verbose_out("gssd_accept_sec_context: ctx"
-			    " resource not found\n");
-			return (TRUE);
-		}
-	}
-	if (argp->cred) {
-		cred = gssd_find_resource(argp->cred);
-		if (!cred) {
-			result->major_status = GSS_S_CREDENTIALS_EXPIRED;
-			gssd_verbose_out("gssd_accept_sec_context: cred"
-			    " resource not found\n");
-			return (TRUE);
-		}
-	}
-
-	memset(result, 0, sizeof(*result));
-	result->major_status = gss_accept_sec_context(&result->minor_status,
-	    &ctx, cred, &argp->input_token, argp->input_chan_bindings,
-	    &src_name, &result->mech_type, &result->output_token,
-	    &result->ret_flags, &result->time_rec,
-	    &delegated_cred_handle);
-	gssd_verbose_out("gssd_accept_sec_context: done major=0x%x minor=%d\n",
-	    (unsigned int)result->major_status, (int)result->minor_status);
-
-	if (result->major_status == GSS_S_COMPLETE
-	    || result->major_status == GSS_S_CONTINUE_NEEDED) {
-		if (argp->ctx)
-			result->ctx = argp->ctx;
-		else
-			result->ctx = gssd_make_resource(ctx);
-		result->src_name = gssd_make_resource(src_name);
-		result->delegated_cred_handle =
-			gssd_make_resource(delegated_cred_handle);
-	}
-
-	return (TRUE);
-}
-#else	/* MK_MITKRB5 */
 bool_t
 gssd_supports_lucid_1_svc(void *argp, supports_lucid_res *result, struct svc_req *rqstp)
 {
@@ -962,7 +758,6 @@ gssd_accept_sec_context_lucid_v1_1_svc(accept_sec_context_lucid_v1_args *argp,
 	}
 	return (TRUE);
 }
-#endif	/* !MK_MITKRB5 */
 
 bool_t
 gssd_delete_sec_context_1_svc(delete_sec_context_args *argp, delete_sec_context_res *result, struct svc_req *rqstp)
@@ -1634,11 +1429,6 @@ gssd_get_cc_from_keytab(const char *name)
 	if (ret == 0)
 		ret = krb5_cc_initialize(context, ccache, principal);
 	if (ret == 0) {
-#ifndef MK_MITKRB5
-		/* For Heimdal only */
-		krb5_get_init_creds_opt_set_default_flags(context, "gssd",
-		    krb5_principal_get_realm(context, principal), opt);
-#endif
 		kt_ret = ret = krb5_kt_default(context, &kt);
 	}
 	if (ret == 0)

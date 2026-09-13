@@ -25,7 +25,6 @@
 
 .include <src.opts.mk>
 
-.if ${MK_MITKRB5} != "no"
 SRCDIR= ${SRCTOP}/contrib/pam-krb5
 .PATH:	${SRCDIR}/module \
 	${SRCDIR}/portable \
@@ -82,20 +81,6 @@ module_options.c:	.PHONY
 pam-krb5.8: pam_krb5.pod
 	sed -e 's/pam(7)/pam.conf(5)/' <${.ALLSRC} | \
 	    pod2mdoc -n pam_krb5 -s 8 >${.CURDIR}/${.TARGET}
-.endif
-.else
-PACKAGE=	kerberos
-
-LIB=		pam_krb5
-SRCS=		pam_krb5.c
-MANNODEV=	pam_krb5.8
-.if defined(_FREEFALL_CONFIG)
-CFLAGS+=-D_FREEFALL_CONFIG
-WARNS?=	3
-.endif
-
-LIBADD+=	krb5
-
 .endif
 
 .include <bsd.lib.mk>

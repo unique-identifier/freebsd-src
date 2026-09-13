@@ -25,8 +25,6 @@ _PRIVATELIBS=	\
 		gtest \
 		gmock_main \
 		gtest_main \
-		heimipcc \
-		heimipcs \
 		kldelf \
 		ldns \
 		opencsd \
@@ -75,9 +73,7 @@ _INTERNALLIBS=	\
 		pfctl \
 		pkgecc \
 		pmcstat \
-		sl \
 		util++ \
-		vers \
 		wpaap \
 		wpacommon \
 		wpacrypto \
@@ -107,7 +103,6 @@ _LIBRARIES=	\
 		9p \
 		alias \
 		archive \
-		asn1 \
 		avl \
 		BlocksRuntime \
 		be \
@@ -155,14 +150,8 @@ _LIBRARIES=	\
 		formw \
 		geom \
 		gpio \
-		gssapi \
 		gssapi_krb5 \
 		gssrpc \
-		hdb \
-		heimbase \
-		heimntlm \
-		heimsqlite \
-		hx509 \
 		icp \
 		ipsec \
 		ipt \
@@ -170,9 +159,7 @@ _LIBRARIES=	\
 		k5crypto \
 		kadm5 \
 		kadmin_common \
-		kafs5 \
 		kdb5 \
-		kdc \
 		kiconv \
 		krad \
 		krb5 \
@@ -206,7 +193,6 @@ _LIBRARIES=	\
 		pthread \
 		radius \
 		regex \
-		roken \
 		rpcsec_gss \
 		rpcsvc \
 		rt \
@@ -237,7 +223,6 @@ _LIBRARIES=	\
 		uutil \
 		verto \
 		vmmapi \
-		wind \
 		wrap \
 		xo \
 		y \
@@ -254,10 +239,6 @@ _LIBRARIES=	\
 _LIBRARIES+= \
 		kadm5clnt_mit \
 		kadm5srv_mit
-.else
-_LIBRARIES+= \
-		kadm5clnt \
-		kadm5srv
 .endif
 
 .if ${MK_BLACKLIST} != "no"
@@ -411,7 +392,6 @@ _DP_pam+=	ssh
 _DP_pam+=	ypclnt
 .endif
 .if ${MK_KERBEROS} != "no"
-.if ${MK_MITKRB5} != "no"
 # _DP_krb5support=	no dependencies except for libc
 # _DP_verto=		no dependencies except for libc
 # _DP_apputils=		no dependencies except for libc
@@ -424,23 +404,6 @@ _DP_kdb5=		gssrpc krb5 k5crypto com_err krb5support gssapi_krb5 krb5profile
 _DP_krad=		krb5 k5crypto com_err krb5profile krb5support verto
 _DP_krb5=		krb5profile k5crypto com_err krb5support
 _DP_gssrpc=		gssapi_krb5 krb5 k5crypto com_err krb5support
-.else
-_DP_roken=	crypt
-_DP_kadm5clnt=	com_err krb5 roken
-_DP_kadm5srv=	com_err hdb krb5 roken
-_DP_heimntlm=	crypto com_err krb5 roken
-_DP_hx509=	asn1 com_err crypto roken wind
-_DP_hdb=	asn1 com_err krb5 roken sqlite3 heimbase
-_DP_asn1=	com_err roken
-_DP_kdc=	roken hdb hx509 krb5 heimntlm asn1 crypto
-_DP_wind=	com_err roken
-_DP_heimbase=	pthread
-_DP_heimipcc=	heimbase roken pthread
-_DP_heimipcs=	heimbase roken pthread
-_DP_kafs5=	asn1 krb5 roken
-_DP_krb5=	asn1 com_err crypt crypto hx509 roken wind heimbase heimipcc
-_DP_gssapi_krb5=	gssapi krb5 crypto roken asn1 com_err
-.endif
 .endif
 _DP_lzma=	md pthread
 _DP_ucl=	m
@@ -477,11 +440,7 @@ _DP_ncursesw=	tinfow
 _DP_formw=	ncursesw
 _DP_nvpair=	spl
 _DP_panelw=	ncursesw
-.if ${MK_MITKRB5} == "no"
-_DP_rpcsec_gss=	gssapi
-.else
 _DP_rpcsec_gss=	gssapi_krb5
-.endif
 _DP_smb=	kiconv
 _DP_ulog=	md
 _DP_fifolog=	z
@@ -635,12 +594,6 @@ LIBSYS?=	${LIBSYSDIR}/libsys${PIE_SUFFIX}.a
 
 LIBNETBSDDIR?=	${_LIB_OBJTOP}/lib/libnetbsd
 LIBNETBSD?=	${LIBNETBSDDIR}/libnetbsd${PIE_SUFFIX}.a
-
-LIBVERSDIR?=	${_LIB_OBJTOP}/kerberos5/lib/libvers
-LIBVERS?=	${LIBVERSDIR}/libvers${PIE_SUFFIX}.a
-
-LIBSLDIR=	${_LIB_OBJTOP}/kerberos5/lib/libsl
-LIBSL?=		${LIBSLDIR}/libsl${PIE_SUFFIX}.a
 
 LIBIFCONFIGDIR=	${_LIB_OBJTOP}/lib/libifconfig
 LIBIFCONFIG?=	${LIBIFCONFIGDIR}/libifconfig${PIE_SUFFIX}.a
@@ -805,7 +758,6 @@ LIBOSMVENDORDIR=${_LIB_OBJTOP}/lib/ofed/libvendor
 LIBDIALOGDIR=	${_LIB_OBJTOP}/gnu/lib/libdialog
 LIBSSPDIR=	${_LIB_OBJTOP}/lib/libssp
 LIBSSP_NONSHAREDDIR=	${_LIB_OBJTOP}/lib/libssp_nonshared
-.if ${MK_MITKRB5} != "no"
 LIBAPPUTILSDIR=		${_LIB_OBJTOP}/krb5/lib/apputils
 LIBAPPUTILS?=		${LIBAPPUTILSDIR}/libapputils${PIE_SUFFIX}.a
 LIBGSSAPI_KRB5DIR=	${_LIB_OBJTOP}/krb5/lib/gssapi
@@ -838,25 +790,6 @@ LIBKRB5PROFILEDIR=	${_LIB_OBJTOP}/krb5/util/profile
 LIBKRB5PROFILE?=	${LIBPROFILEDIR}/libkrb5profile${PIE_SUFFIX}.a
 LIBVERTODIR=		${_LIB_OBJTOP}/krb5/util/verto
 LIBVERTO?=		${LIBVERTODIR}/libverto${PIE_SUFFIX}.a
-.else
-LIBASN1DIR=	${_LIB_OBJTOP}/kerberos5/lib/libasn1
-LIBGSSAPI_KRB5DIR=	${_LIB_OBJTOP}/kerberos5/lib/libgssapi_krb5
-LIBGSSAPI_NTLMDIR=	${_LIB_OBJTOP}/kerberos5/lib/libgssapi_ntlm
-LIBGSSAPI_SPNEGODIR=	${_LIB_OBJTOP}/kerberos5/lib/libgssapi_spnego
-LIBHDBDIR=	${_LIB_OBJTOP}/kerberos5/lib/libhdb
-LIBHEIMBASEDIR=	${_LIB_OBJTOP}/kerberos5/lib/libheimbase
-LIBHEIMIPCCDIR=	${_LIB_OBJTOP}/kerberos5/lib/libheimipcc
-LIBHEIMIPCSDIR=	${_LIB_OBJTOP}/kerberos5/lib/libheimipcs
-LIBHEIMNTLMDIR=	${_LIB_OBJTOP}/kerberos5/lib/libheimntlm
-LIBHX509DIR=	${_LIB_OBJTOP}/kerberos5/lib/libhx509
-LIBKADM5CLNTDIR=	${_LIB_OBJTOP}/kerberos5/lib/libkadm5clnt
-LIBKADM5SRVDIR=	${_LIB_OBJTOP}/kerberos5/lib/libkadm5srv
-LIBKAFS5DIR=	${_LIB_OBJTOP}/kerberos5/lib/libkafs5
-LIBKDCDIR=	${_LIB_OBJTOP}/kerberos5/lib/libkdc
-LIBKRB5DIR=	${_LIB_OBJTOP}/kerberos5/lib/libkrb5
-LIBROKENDIR=	${_LIB_OBJTOP}/kerberos5/lib/libroken
-LIBWINDDIR=	${_LIB_OBJTOP}/kerberos5/lib/libwind
-.endif
 LIBATF_CDIR=	${_LIB_OBJTOP}/lib/atf/libatf-c
 LIBATF_CXXDIR=	${_LIB_OBJTOP}/lib/atf/libatf-c++
 LIBGMOCKDIR=	${_LIB_OBJTOP}/lib/googletest/gmock

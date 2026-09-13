@@ -51,7 +51,6 @@ DIRDEPS = \
 	lib/libcalendar \
 	lib/libcam \
 	lib/libcapsicum \
-	lib/libcom_err/doc \
 	lib/libcompat \
 	lib/libcompiler_rt \
 	lib/libcrypt \
@@ -73,7 +72,6 @@ DIRDEPS = \
 	lib/libfetch \
 	lib/libfigpar \
 	lib/libgeom \
-	lib/libgssapi \
 	lib/libiconv_modules/BIG5 \
 	lib/libiconv_modules/DECHanyu \
 	lib/libiconv_modules/EUC \

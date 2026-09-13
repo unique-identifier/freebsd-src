@@ -293,11 +293,6 @@ LSUBSUBDIRS+=	netgraph/bluetooth/include
 LSUBDIRS+=	fs/cuse
 .endif
 
-.if ${MK_KERBEROS} != "no" && ${MK_MITKRB5} == "no"
-SUBDIR+=	gssapi
-INCS+=		gssapi.h
-.endif
-
 .if ${MK_HESIOD} != "no"
 INCS+=	hesiod.h
 .endif

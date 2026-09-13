@@ -3,9 +3,8 @@
 DIRDEPS = \
 	include \
 	include/arpa \
-	include/gssapi \
+	krb5/lib/gssapi \
 	include/xlocale \
-	kerberos5/lib/libgssapi_krb5 \
 	lib/${CSU_DIR} \
 	lib/libc \
 	lib/libcapsicum \

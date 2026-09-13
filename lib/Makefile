@@ -136,12 +136,9 @@ SUBDIR_DEPEND_libdevstat= libkvm
 SUBDIR_DEPEND_libdpv= libfigpar ncurses libutil
 SUBDIR_DEPEND_libedit= ncurses
 SUBDIR_DEPEND_libgeom= libexpat libsbuf
-.if ${MK_MITKRB5} == "no"
-SUBDIR_DEPEND_librpcsec_gss= libgssapi
-.endif
 SUBDIR_DEPEND_libmagic= libz
 SUBDIR_DEPEND_libmemstat= libkvm
-SUBDIR_DEPEND_libpam= libcrypt ${_libradius} librpcsvc libtacplus libutil ${_libypclnt} ${_libcom_err}
+SUBDIR_DEPEND_libpam= libcrypt ${_libradius} librpcsvc libtacplus libutil ${_libypclnt}
 SUBDIR_DEPEND_libpjdlog= libutil
 SUBDIR_DEPEND_libprocstat= libkvm libutil
 SUBDIR_DEPEND_libradius= libmd
@@ -179,14 +176,8 @@ SUBDIR.${MK_DIALOG}+=	libdpv libfigpar
 SUBDIR.${MK_FDT}+=	libfdt
 SUBDIR.${MK_FILE}+=	libmagic
 SUBDIR.${MK_GPIO}+=	libgpio
-.if ${MK_MITKRB5} == "no"
-SUBDIR.${MK_KERBEROS}+=	libgssapi
-.endif
 SUBDIR.${MK_KERBEROS}+=	librpcsec_gss
 SUBDIR.${MK_ICONV}+=	libiconv_modules
-.if ${MK_MITKRB5} == "no"
-SUBDIR.${MK_KERBEROS}+=	libcom_err
-.endif
 SUBDIR.${MK_LDNS}+=	libldns
 SUBDIR.${MK_STATS}+=	libstats
 

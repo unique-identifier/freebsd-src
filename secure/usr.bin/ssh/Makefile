@@ -18,11 +18,7 @@ SRCS+=	gss-genr.c
 LIBADD=	ssh
 
 .if ${MK_KERBEROS_SUPPORT} != "no"
-.if ${MK_MITKRB5} == "no"
-LIBADD+=	gssapi
-.else
 LIBADD+=	gssapi_krb5
-.endif
 .endif
 
 LIBADD+=	crypto

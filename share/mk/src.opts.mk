@@ -542,4 +542,10 @@ MK_${vv:H}:=	${MK_${vv:T}}
 .endif
 .endfor
 
+# Heimdal has been removed; disabling MIT disables Kerberos entirely.
+.if ${MK_MITKRB5} == "no"
+MK_KERBEROS:=	no
+MK_KERBEROS_SUPPORT:=	no
+.endif
+
 .endif #  !target(__<src.opts.mk>__)

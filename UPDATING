@@ -12,6 +12,12 @@ Items affecting the ports and packages system can be found in
 /usr/ports/UPDATING.  Please read that file before updating system packages
 and/or ports.
 
+20260913:
+	The legacy Heimdal Kerberos implementation has been removed.
+	MIT Kerberos remains the default.  WITHOUT_KERBEROS continues to
+	disable Kerberos; WITHOUT_MITKRB5 now also disables Kerberos instead
+	of selecting Heimdal.
+
 20260825:
 	15.1-RELEASE-p3	EN-26:20.microcode
 			SA-26:56.hwpmc

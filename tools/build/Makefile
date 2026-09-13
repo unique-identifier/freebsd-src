@@ -1,8 +1,6 @@
 .PATH: ${.CURDIR}/../../include
 
-# XXX We need to include this to avoid installing MIT KRB5 includes on
-# XXX Heimdal systems. Remove the following line when Heimdal is finally
-# XXX removed.
+# Select the Kerberos bootstrap headers according to the build options.
 .include <src.opts.mk>
 
 LIB=		egacy

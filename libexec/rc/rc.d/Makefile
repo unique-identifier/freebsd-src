@@ -327,23 +327,6 @@ SYSCONS=	moused \
 		syscons
 
 .if ${MK_KERBEROS} != "no"
-.if ${MK_MITKRB5} == "no"
-
-# Heimdal rc scripts
-CONFGROUPS+=	HEIMDAL
-HEIMDAL=	ipropd_master \
-		ipropd_slave \
-		kadmind \
-		kdc \
-		kfd \
-		kpasswdd
-HEIMDALPACKAGE=	kerberos
-
-DIRS+=		VAR_HEMIDAL
-VAR_HEMIDAL=	/var/heimdal
-VAR_HEMIDAL_MODE=	700
-
-.else	# ${MK_MITKRB5} != "no"
 
 # MIT KRB5 rc scripts
 CONFGROUPS+=	KRB5
@@ -351,7 +334,6 @@ KRB5=		kadmind \
 		kdc
 KRB5PACKAGE=	kerberos-kdc
 
-.endif	# ${MK_MITKRB5}
 .endif	# ${MK_KERBEROS}
 
 .if ${MK_OPENSSL} != "no" && ${MK_OPENSSL_KTLS} != "no"

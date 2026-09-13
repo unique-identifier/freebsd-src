@@ -64,8 +64,6 @@
     ..
     games           gname=games mode=0775
     ..
-    heimdal         mode=0700
-    ..
     log
     ..
     mail            gname=mail mode=0775

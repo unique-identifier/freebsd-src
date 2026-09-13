@@ -185,9 +185,6 @@ C_DIRDEPS= \
 
 # libgcc is needed as well but is added later.
 
-.if ${MK_KERBEROS} != "no" && ${MK_MITKRB5} == "no"
-C_DIRDEPS+=  include/gssapi
-.endif
 
 .if !empty(_SRCS:M*.c)
 DIRDEPS+= ${C_DIRDEPS}

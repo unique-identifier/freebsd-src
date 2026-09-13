@@ -3,13 +3,12 @@
 DIRDEPS = \
 	include \
 	include/arpa \
-	include/gssapi \
+	krb5/lib/gssapi \
 	include/rpc \
 	include/xlocale \
 	lib/${CSU_DIR} \
 	lib/libc \
 	lib/libcompiler_rt \
-	lib/libgssapi \
 
 
 .include <dirdeps.mk>

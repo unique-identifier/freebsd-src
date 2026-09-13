@@ -2,7 +2,6 @@
 
 DIRDEPS = \
 	include/arpa \
-	include/gssapi \
 	include/protocols \
 	include/rpcsvc \
 	include/rpc \

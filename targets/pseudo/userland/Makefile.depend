@@ -154,7 +154,6 @@ DIRDEPS+= \
 	usr.bin/bzip2recover \
 	usr.bin/c89 \
 	usr.bin/c99 \
-	usr.bin/calendar \
 	usr.bin/cap_mkdb \
 	usr.bin/chat \
 	usr.bin/checknr \
@@ -523,10 +522,6 @@ DIRDEPS+= \
 	usr.sbin/etcupdate \
 	usr.sbin/extattr \
 	usr.sbin/extattrctl \
-	usr.sbin/fdcontrol \
-	usr.sbin/fdformat \
-	usr.sbin/fdread \
-	usr.sbin/fdwrite \
 	usr.sbin/fifolog/fifolog_create \
 	usr.sbin/fifolog/fifolog_reader \
 	usr.sbin/fifolog/fifolog_writer \

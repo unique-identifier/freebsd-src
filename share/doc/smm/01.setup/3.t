@@ -324,7 +324,6 @@ The reorganized
 filesystem has the following directories:
 .TS
 lfC l.
-/usr/share/calendar	(various useful calendar files)
 /usr/share/dict	(dictionaries)
 /usr/share/doc	(\*(4B manual sources)
 /usr/share/games	(games text files)

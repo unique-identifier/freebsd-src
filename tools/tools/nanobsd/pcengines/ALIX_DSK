@@ -41,7 +41,6 @@ device		apic
 device		cpufreq
 device		acpi
 device		pci
-device		fdc
 device		ata
 options 	ATA_STATIC_ID
 device		scbus

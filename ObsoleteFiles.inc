@@ -51,6 +51,69 @@
 #   xargs -n1 | sort | uniq -d;
 # done
 
+# 20260913: Remove legacy floppy controller support and utilities.
+OLD_FILES+=usr/sbin/fdcontrol
+OLD_FILES+=usr/sbin/fdformat
+OLD_FILES+=usr/sbin/fdread
+OLD_FILES+=usr/sbin/fdwrite
+OLD_FILES+=usr/share/man/man1/fdformat.1.gz
+OLD_FILES+=usr/share/man/man1/fdread.1.gz
+OLD_FILES+=usr/share/man/man1/fdwrite.1.gz
+OLD_FILES+=usr/share/man/man8/fdcontrol.8.gz
+OLD_FILES+=usr/share/man/man8/fdformat.8.gz
+OLD_FILES+=usr/share/man/man4/fdc.4.gz
+OLD_FILES+=usr/include/sys/fdcio.h
+OLD_FILES+=boot/kernel/fdc.ko
+
+# 20260913: Remove the calendar reminder utility.
+OLD_FILES+=etc/periodic/daily/300.calendar
+OLD_FILES+=usr/bin/calendar
+OLD_FILES+=usr/share/calendar/calendar.freebsd
+OLD_FILES+=usr/share/man/man1/calendar.1.gz
+OLD_FILES+=usr/tests/usr.bin/calendar/Kyuafile
+OLD_FILES+=usr/tests/usr.bin/calendar/calendar.calibrate
+OLD_FILES+=usr/tests/usr.bin/calendar/calendar.comment
+OLD_FILES+=usr/tests/usr.bin/calendar/calendar.cond
+OLD_FILES+=usr/tests/usr.bin/calendar/comment.sh
+OLD_FILES+=usr/tests/usr.bin/calendar/comment_test
+OLD_FILES+=usr/tests/usr.bin/calendar/cond.sh
+OLD_FILES+=usr/tests/usr.bin/calendar/cond_test
+OLD_FILES+=usr/tests/usr.bin/calendar/legacy_test
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.a1.out
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.a2.out
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.a3.out
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.a4.out
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.a5.out
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.b1.out
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.b2.out
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.b3.out
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.b4.out
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.b5.out
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.comment.out
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.cond.out
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.s1.out
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.s2.out
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.s3.out
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.s4.out
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.s5.out
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.sh
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.w0-1.out
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.w0-2.out
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.w0-3.out
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.w0-4.out
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.w0-5.out
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.w0-6.out
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.w0-7.out
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.wn-1.out
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.wn-2.out
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.wn-3.out
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.wn-4.out
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.wn-5.out
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.wn-6.out
+OLD_FILES+=usr/tests/usr.bin/calendar/regress.wn-7.out
+OLD_DIRS+=usr/tests/usr.bin/calendar
+OLD_DIRS+=usr/share/calendar
+
 # 20260913: Remove the rescue system and its private ZFS library.
 .if exists(${DESTDIR}/rescue)
 _RESCUE_DIRS!=find ${DESTDIR}/rescue -depth -type d 2>/dev/null | sed -e 's,^${DESTDIR}/,,'; echo

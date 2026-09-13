@@ -75,7 +75,6 @@ __DEFAULT_YES_OPTIONS = \
     BSDINSTALL \
     BSNMP \
     BZIP2 \
-    CALENDAR \
     CAROOT \
     CCD \
     CDDL \
@@ -96,7 +95,6 @@ __DEFAULT_YES_OPTIONS = \
     ELFTOOLCHAIN_BOOTSTRAP \
     EXAMPLES \
     FILE \
-    FLOPPY \
     FORTH \
     FREEBSD_UPDATE \
     FTP \

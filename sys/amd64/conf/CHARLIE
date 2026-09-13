@@ -110,9 +110,6 @@ options 	COMPAT_LINUXKPI
 
 #options 	PPS_SYNC
 
-# Floppy drives
-#device		fdc
-
 # ATA controllers
 device		ahci			# AHCI-compatible SATA controllers
 #device		ata			# Legacy ATA/SATA controllers

@@ -114,9 +114,6 @@ device		pci
 options 	PCI_HP			# PCI-Express native HotPlug
 options 	PCI_IOV			# PCI SR-IOV support
 
-# Floppy drives
-device		fdc
-
 # ATA controllers
 device		ahci			# AHCI-compatible SATA controllers
 device		ata			# Legacy ATA/SATA controllers

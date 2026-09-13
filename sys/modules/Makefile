@@ -115,7 +115,6 @@ SUBDIR=	\
 	evdev \
 	${_exca} \
 	ext2fs \
-	fdc \
 	fdescfs \
 	${_felix} \
 	${_ffec} \

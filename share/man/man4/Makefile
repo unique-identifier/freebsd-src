@@ -165,7 +165,6 @@ MAN=	aac.4 \
 	e6000sw.4 \
 	e6060sw.4 \
 	fd.4 \
-	fdc.4 \
 	fdescfs.4 \
 	fdt.4 \
 	fdt_pinctrl.4 \

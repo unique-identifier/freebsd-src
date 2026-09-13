@@ -30,7 +30,6 @@
 /* In the makefs case we only want struct disklabel */
 #include <sys/disk/bsd.h>
 #else
-#include <sys/fdcio.h>
 #include <sys/disk.h>
 #include <sys/disklabel.h>
 #include <sys/mount.h>
@@ -927,7 +926,6 @@ getdiskinfo(int fd, const char *fname, const char *dtype, __unused int oflag,
     off_t hs = 0;
 #ifndef MAKEFS
     off_t ms;
-    struct fd_type type;
 
     lp = NULL;
 
@@ -936,17 +934,11 @@ getdiskinfo(int fd, const char *fname, const char *dtype, __unused int oflag,
 	lp = getdiskbyname(dtype);
     }
 
-    /* Maybe it's a floppy drive */
+    /* Fall back to file geometry when the device has no media size. */
     if (lp == NULL) {
 	if (ioctl(fd, DIOCGMEDIASIZE, &ms) == -1) {
 	    /* create a fake geometry for a file image */
 	    compute_geometry_from_file(fd, fname, &dlp);
-	    lp = &dlp;
-	} else if (ioctl(fd, FD_GTYPE, &type) != -1) {
-	    dlp.d_secsize = 128 << type.secsize;
-	    dlp.d_nsectors = type.sectrac;
-	    dlp.d_ntracks = type.heads;
-	    dlp.d_secperunit = ms / dlp.d_secsize;
 	    lp = &dlp;
 	}
     }

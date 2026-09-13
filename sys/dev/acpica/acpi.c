@@ -864,8 +864,7 @@ acpi_print_child(device_t bus, device_t child)
  * If this device is an ACPI child but no one claimed it, attempt
  * to power it off.  We'll power it back up when a driver is added.
  *
- * XXX Disabled for now since many necessary devices (like fdc and
- * ATA) don't claim the devices we created for them but still expect
+ * XXX Disabled for now since many necessary devices (like ATA) don't claim the devices we created for them but still expect
  * them to be powered up.
  */
 static void
@@ -1173,18 +1172,6 @@ acpi_hint_device_matches_resources(device_t child, const char *name,
 	 */
 	matches = false;
 	if (resource_long_value(name, unit, "port", &value) == 0) {
-		/*
-		 * Floppy drive controllers are notorious for having a
-		 * wide variety of resources not all of which include the
-		 * first port that is specified by the hint (typically
-		 * 0x3f0) (see the comment above fdc_isa_alloc_resources()
-		 * in fdc_isa.c).  However, they do all seem to include
-		 * port + 2 (e.g. 0x3f2) so for a floppy device, look for
-		 * 'value + 2' in the port resources instead of the hint
-		 * value.
-		 */
-		if (strcmp(name, "fdc") == 0)
-			value += 2;
 		if (acpi_match_resource_hint(child, SYS_RES_IOPORT, value))
 			matches = true;
 		else

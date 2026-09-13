@@ -168,10 +168,7 @@ main(int argc, char *argv[])
             o_flag = 1;
             break;
         case 's':
-	    if (strcasecmp(optarg, "pxe") == 0)
-		s_arg = 6;
-	    else
-		s_arg = argtoi(optarg, 1, 6, 's');
+	    s_arg = argtoi(optarg, 1, 5, 's');
             break;
         case 't':
             t_arg = argtoi(optarg, 1, 0xffff, 't');
@@ -472,7 +469,7 @@ display_mbr(u_int8_t *mbr)
     else if (mbr[OFF_OPT] == 4)
 	printf("Drive 1");
     else
-	printf("PXE");
+	printf("Unknown");
     printf(")\n");
 }
 

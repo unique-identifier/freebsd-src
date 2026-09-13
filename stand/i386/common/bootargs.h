@@ -17,7 +17,6 @@
 #define	_BOOT_I386_ARGS_H_
 
 #define	KARGS_FLAGS_CD		0x0001	/* .bootdev is a bios CD dev */
-#define	KARGS_FLAGS_PXE		0x0002	/* .pxeinfo is valid */
 #define	KARGS_FLAGS_ZFS		0x0004	/* .zfspool is valid, EXTARG is zfs_boot_args */
 #define	KARGS_FLAGS_EXTARG	0x0008	/* variably sized extended argument */
 #define	KARGS_FLAGS_GELI	0x0010	/* EXTARG is geli_boot_args */
@@ -65,13 +64,7 @@ struct bootargs
 	uint32_t			howto;
 	uint32_t			bootdev;
 	uint32_t			bootflags;
-	union {
-		struct {
-			uint32_t	pxeinfo;
-			uint32_t	reserved;
-		};
-		uint64_t		zfspool;
-	};
+	uint64_t			zfspool;
 	uint32_t			bootinfo;
 
 	/*

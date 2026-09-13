@@ -116,10 +116,6 @@ struct nfs_iodesc {
 	uint64_t cookie;
 };
 
-/*
- * XXX interactions with tftp? See nfswrapper.c for a confusing
- *     issue.
- */
 int		nfs_open(const char *path, struct open_file *f);
 static int	nfs_close(struct open_file *f);
 static int	nfs_read(struct open_file *f, void *buf, size_t size, size_t *resid);

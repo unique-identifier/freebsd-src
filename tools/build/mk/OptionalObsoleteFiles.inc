@@ -366,7 +366,6 @@ OLD_FILES+=boot/menu.rc
 OLD_FILES+=boot/menusets.4th
 OLD_FILES+=boot/pcibios.4th
 OLD_FILES+=boot/pmbr
-OLD_FILES+=boot/pxeboot
 OLD_FILES+=boot/screen.4th
 OLD_FILES+=boot/shortcuts.4th
 OLD_FILES+=boot/support.4th
@@ -386,7 +385,6 @@ OLD_FILES+=usr/share/man/man8/loader.4th.8.gz
 OLD_FILES+=usr/share/man/man8/loader.8.gz
 OLD_FILES+=usr/share/man/man8/menu.4th.8.gz
 OLD_FILES+=usr/share/man/man8/menusets.4th.8.gz
-OLD_FILES+=usr/share/man/man8/pxeboot.8.gz
 OLD_FILES+=usr/share/man/man8/version.4th.8.gz
 OLD_FILES+=usr/share/man/man8/zfsloader.8.gz
 .endif
@@ -5413,7 +5411,6 @@ OLD_FILES+=usr/include/netpfil/pf/pf_altq.h
 OLD_FILES+=usr/include/netpfil/pf/pf_mtag.h
 OLD_FILES+=usr/lib/snmp_pf.so
 OLD_LIBS+=usr/lib/snmp_pf.so.6
-OLD_FILES+=usr/libexec/tftp-proxy
 OLD_FILES+=usr/sbin/ftp-proxy
 OLD_FILES+=usr/share/examples/etc/pf.os
 OLD_FILES+=usr/share/examples/pf/ackpri
@@ -5435,7 +5432,6 @@ OLD_FILES+=usr/share/man/man5/pf.os.5.gz
 OLD_FILES+=usr/share/man/man8/ftp-proxy.8.gz
 OLD_FILES+=usr/share/man/man8/pfctl.8.gz
 OLD_FILES+=usr/share/man/man8/pflogd.8.gz
-OLD_FILES+=usr/share/man/man8/tftp-proxy.8.gz
 OLD_FILES+=usr/share/snmp/defs/pf_tree.def
 OLD_FILES+=usr/share/snmp/mibs/BEGEMOT-PF-MIB.txt
 .endif
@@ -6350,19 +6346,6 @@ OLD_FILES+=usr/bin/ul
 OLD_FILES+=usr/share/man/man1/checknr.1.gz
 OLD_FILES+=usr/share/man/man1/colcrt.1.gz
 OLD_FILES+=usr/share/man/man1/ul.1.gz
-.endif
-
-.if ${MK_TFTP} == no
-OLD_FILES+=usr/bin/tftp
-OLD_FILES+=usr/libexec/tftpd
-OLD_FILES+=usr/share/man/man1/tftp.1.gz
-OLD_FILES+=usr/share/man/man8/tftpd.8.gz
-OLD_FILES+=usr/tests/libexec/tftpd/functional
-OLD_FILES+=usr/tests/libexec/tftpd/Kyuafile
-OLD_FILES+=usr/tests/usr.bin/tftp/tftp_test
-OLD_FILES+=usr/tests/usr.bin/tftp/Kyuafile
-OLD_DIRS+=usr/tests/libexec/tftpd
-OLD_DIRS+=usr/tests/usr.bin/tftp
 .endif
 
 .if ${MK_TOOLCHAIN} == no

@@ -27,9 +27,8 @@
 #include "libi386.h"
 
 /*
- * The idea is borrowed from pxe.c and zfsimpl.c. The original buffer
- * space in pxe.c was 2x 0x2000. Allocating it from BSS will give us needed
- * memory below 1MB and usable for real mode calls.
+ * Allocating the buffer from BSS provides memory below 1MB,
+ * usable for real mode calls.
  *
  * Note the allocations and frees are to be done in reverse order (LIFO).
  */

@@ -13,6 +13,13 @@ Items affecting the ports and packages system can be found in
 and/or ports.
 
 20260913:
+	PXE boot and TFTP support have been removed, including pxeboot,
+	tftp, tftpd, the TFTP proxies, and loader TFTP access.  The
+	LOADER_PXEBOOT and TFTP build options are gone.  BIOS loaders no
+	longer support network boot; NFS access remains available in other
+	network-capable loaders.  Remove tftpd entries from inetd.conf.
+
+20260913:
 	The ee editor, its edit and ree aliases, and the EE build option have
 	been removed.  bsdconfig now defaults to vi when EDITOR is not set.
 

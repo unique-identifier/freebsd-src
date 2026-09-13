@@ -36,7 +36,7 @@
 marker task-shortcuts.4th
 
 \ This "shortcut" word will not be used directly, but is defined here to
-\ offer the user a quick way to get back into the interactive PXE menu
+\ offer the user a quick way to get back into the interactive boot menu
 \ after they have escaped to the shell (perhaps by accident).
 \ 
 : menu ( -- )

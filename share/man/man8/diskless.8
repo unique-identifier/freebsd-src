@@ -27,12 +27,12 @@
 .\" (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 .\" THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 .\"
-.Dd August 11, 2024
+.Dd September 13, 2026
 .Dt DISKLESS 8
 .Os
 .Sh NAME
 .Nm diskless
-.Nd booting a system over the network with PXE
+.Nd booting a system with an NFS root file system
 .Sh DESCRIPTION
 The ability to boot a machine over the network is useful for
 .Em diskless
@@ -43,97 +43,15 @@ re-installing file systems on a local disk.
 This file provides a general description of the interactions between
 a client and its server when a client is booting over the network.
 .Sh OPERATION
-When booting a system over the network, there are three
-phases of interaction between client and server:
-.Bl -enum
-.It
-The stage-1 bootstrap, typically PXE built into your Ethernet
-card, loads a second-stage boot program.
-.It
-The second-stage boot program, typically
-.Xr pxeboot 8 ,
-loads modules and
-the kernel, and boots the kernel.
-.It
-The kernel
-.Tn NFS
-mounts the root directory and continues from there.
-.El
+Load the kernel and any required modules using a supported boot loader,
+from local media or over NFS where the loader supports network access.
+BIOS PXE boot and TFTP are not supported.
+The kernel then mounts its root file system over NFS and continues booting.
 .Pp
-Each of these phases are described in further detail below.
-.Pp
-First, the stage-1 bootstrap loads the stage-2 boot program over
-the network.
-The stage-1 bootstrap typically uses
-.Tn BOOTP
-or
-.Tn DHCP
-to obtain the filename to load, then uses
-.Tn TFTP
-to load the file.
-This file is typically called
-.Pa pxeboot ,
-and should be copied from
-.Pa /boot/pxeboot
-into the
-.Tn TFTP
-directory on the server, which is typically
-.Pa /tftpdir .
-.Pp
-The stage-2 boot program then loads additional modules and the kernel.
-These files may not exist on the
-.Tn DHCP
-or
-.Tn BOOTP
-server.
-You can use the
-.Ic next-server
-option available in
-.Tn DHCP
-configurations to specify the server holding
-the second stage boot files and kernel.
-The stage-2 program uses
-.Tn NFS
-or
-.Tn TFTP
-to obtain these files.
-By default,
-.Tn NFS
-is used.
-If you are using
-.Xr pxeboot 8 ,
-you can install a version that uses
-.Tn TFTP
-by setting
-.Li LOADER_TFTP_SUPPORT=YES
-in your
-.Xr make.conf 5 ,
-then recompiling and reinstalling
-.Xr pxeboot 8
-via the command listed below.
-It is often necessary to use
-.Tn TFTP
-here so you can place a custom kernel
-in
-.Pa /tftpdir/ .
-If you use
-.Tn NFS
-and do not have a custom root file system for the
-.Nm
-client, the stage-2 boot will load your server's kernel as the kernel for
-the
-.Nm
-machine, which may not be what you want to have happen.
-.Bd -literal -offset indent
-cd /usr/src/stand
-make clean; make; make install
-cp /boot/pxeboot /tftpdir/
-.Ed
-.Pp
-In phase 3, the kernel acquires IP networking configuration in one
+The kernel acquires IP networking configuration in one
 of two ways, and then proceeds to mount the root file system and start
 operation.
-If the phase 2 loader supports passing network configuration to the
+If the loader supports passing network configuration to the
 kernel using the kernel environment, then the kernel will configure
 the network interface using that information.
 Otherwise, it must use
@@ -412,11 +330,7 @@ files.
 .It
 The kernel for the
 .Nm
-clients, which will be loaded using
-.Tn NFS
-or
-.Tn TFTP ,
-must include support for the NFS client:
+clients must include support for the NFS client:
 .Pp
 .D1 Cd "options NFSCL"
 .D1 Cd "options NFS_ROOT"
@@ -428,9 +342,6 @@ the following options:
 .D1 Cd "options BOOTP"
 .D1 Cd "options BOOTP_NFSROOT"
 .D1 Cd "options BOOTP_COMPAT"
-.Pp
-.Em Note :
-the PXE environment does not require these options.
 .Pp
 The
 .Nm
@@ -461,11 +372,7 @@ encryption keys.
 .Xr bootpd 8 ,
 .Xr mountd 8 ,
 .Xr nfsd 8 ,
-.Xr pxeboot 8 ,
-.Xr reboot 8 ,
-.Xr tftpd 8
-.Pp
-.Pa ports/net/etherboot
+.Xr reboot 8
 .Sh HISTORY
 The
 .Nm

@@ -47,8 +47,7 @@
 
 enum net_proto {
 	NET_NONE,
-	NET_NFS,
-	NET_TFTP
+	NET_NFS
 };
 
 /* Returns true if n_long's on the same net */

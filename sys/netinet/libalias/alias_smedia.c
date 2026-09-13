@@ -127,7 +127,6 @@
 
 #define RTSP_CONTROL_PORT_NUMBER_1 554
 #define RTSP_CONTROL_PORT_NUMBER_2 7070
-#define TFTP_PORT_NUMBER 69
 
 static void AliasHandleRtspOut(struct libalias *, struct ip *,
     struct alias_link *, size_t);
@@ -135,9 +134,6 @@ static void AliasHandleRtspOut(struct libalias *, struct ip *,
 static int
 fingerprint(struct libalias *la, struct alias_data *ah)
 {
-	if (ah->dport != NULL && ah->aport != NULL && ah->sport != NULL &&
-	    ntohs(*ah->dport) == TFTP_PORT_NUMBER)
-		return (0);
 	if (ah->dport == NULL || ah->sport == NULL || ah->lnk == NULL ||
 	    ah->maxpktsize == 0)
 		return (-1);
@@ -152,11 +148,7 @@ fingerprint(struct libalias *la, struct alias_data *ah)
 static int
 protohandler(struct libalias *la, struct ip *pip, struct alias_data *ah)
 {
-	if (ntohs(*ah->dport) == TFTP_PORT_NUMBER)
-		FindRtspOut(la, pip->ip_src, pip->ip_dst,
-		    *ah->sport, *ah->aport, IPPROTO_UDP);
-	else
-		AliasHandleRtspOut(la, pip, ah->lnk, ah->maxpktsize);
+	AliasHandleRtspOut(la, pip, ah->lnk, ah->maxpktsize);
 	return (0);
 }
 

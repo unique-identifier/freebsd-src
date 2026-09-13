@@ -329,7 +329,6 @@ DIRDEPS+= \
 	usr.bin/tar \
 	usr.bin/tcopy \
 	usr.bin/tee \
-	usr.bin/tftp \
 	usr.bin/time \
 	usr.bin/timeout \
 	usr.bin/tip/tip \

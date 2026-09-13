@@ -1264,7 +1264,7 @@ setsockopt(fd, SOL_SOCKET, opt, (char *)&on, sizeof (on))
 	if (turnon(sep->se_fd, SO_PRIVSTATE) < 0)
 		syslog(LOG_ERR, "setsockopt (SO_PRIVSTATE): %m");
 #endif
-	/* tftpd opens a new connection then needs more infos */
+	/* Datagram servers may need the destination address for replies. */
 #ifdef INET6
 	if ((sep->se_family == AF_INET6) &&
 	    (strcmp(sep->se_proto, "udp") == 0) &&

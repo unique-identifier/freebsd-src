@@ -79,7 +79,6 @@ typedef uint32_t   UINTN;
 #include "eficonsctl.h"
 #include "efiser.h"
 #include "efi_nii.h"
-#include "efipxebc.h"
 #include "efinet.h"
 #include "efiapi.h"
 #include "efifs.h"

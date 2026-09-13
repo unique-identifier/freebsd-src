@@ -1,8 +1,8 @@
 HAVE_ZFS=		${MK_LOADER_ZFS}
 
-LOADER_NET_SUPPORT?=	yes
-LOADER_NFS_SUPPORT?=	yes
-LOADER_TFTP_SUPPORT?=	yes
+# There are no BIOS network drivers.
+LOADER_NET_SUPPORT=	no
+LOADER_NFS_SUPPORT=	no
 LOADER_CD9660_SUPPORT?=	yes
 LOADER_EXT2FS_SUPPORT?=	no
 LOADER_MSDOS_SUPPORT?=	no
@@ -32,10 +32,7 @@ VERSION_FILE?=	${.CURDIR}/../loader/version
 #
 # will tell you how many kiB of lomem are available.
 #
-# We further reduce this to 500k, though, to give PXE an additional 64k of space
-# so pxeloader will fit. If you have special needs that do not include pxeboot,
-# you can safely set this as high as 560000 generally, or a bit higher if you
-# have tight control over the machines you are booting on.
+# Keep a conservative 500k limit for the BIOS low-memory environment.
 #
 LOADERSIZE?=	500000		# Largest known safe size for loader.bin
 
@@ -128,11 +125,7 @@ LINKS+=		${BINDIR}/${LOADER} ${BINDIR}/loader
 FILES+=	${LOADER}
 FILESMODE_${LOADER}= ${BINMODE} -b
 
-# Note: crt0.o needs to be first for pxeboot(8) to work. It assumes that the
-# startup code is located at the start of the loader and will jump
-# there. Although btx is more flexible than this, the emulated boot2 environment
-# that pxeldr provides has none of that flexibility and assumes the entry point
-# is 0. Finally, both pxeldr and cdboot assume they are loading an a.out file.
+# cdboot requires an a.out loader image. Keep the startup object first.
 #
 # We must add it to the LDFLAGS instead of the OBJS because the former won't try
 # to clean it. When it is in OBJS, this cleaning can lead to races where

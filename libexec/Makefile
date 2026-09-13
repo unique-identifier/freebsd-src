@@ -27,7 +27,6 @@ SUBDIR=	${_atf} \
 	save-entropy \
 	${_nuageinit} \
 	${_tests} \
-	${_tftp-proxy} \
 	ulog-helper \
 	${_ypxfr}
 
@@ -68,10 +67,6 @@ _ypxfr=		ypxfr
 _pppoed=	pppoed
 .endif
 
-.if ${MK_PF} != "no"
-_tftp-proxy=	tftp-proxy
-.endif
-
 .if !defined(NO_PIC) && !defined(NO_RTLD)
 _rtld-elf=	rtld-elf
 .for LIBCOMPAT libcompat in ${_ALL_LIBCOMPATS_libcompats}
@@ -89,10 +84,6 @@ _makewhatis.local=	makewhatis.local
 
 .if ${MK_TCP_WRAPPERS} != "no"
 SUBDIR+=	tcpd
-.endif
-
-.if ${MK_TFTP} != "no"
-SUBDIR+=	tftpd
 .endif
 
 .if ${MK_TESTS} != "no"

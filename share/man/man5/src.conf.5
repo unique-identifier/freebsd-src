@@ -167,19 +167,10 @@ Due to size constraints in the BIOS environment on x86, one may need to set
 larger than the
 default 500000, although often loader is under the 500k limit even with
 this option.
-Setting
-.Va LOADERSIZE
-larger than 500000 may cause
-.Xr pxeboot 8
-to be too large to work.
 Careful testing of the loader in the target environment when built with a larger
 limit to establish safe limits is critical because different BIOS environments
 reserve differing amounts of the low 640k space, making a precise limit for
 everybody impossible.
-.Pp
-See also
-.Va WITH_LOADER_PXEBOOT
-for other considerations.
 When set, these options are also in effect:
 .Pp
 .Bl -inset -compact
@@ -1136,17 +1127,6 @@ Build openfirmware bootloader components.
 .Pp
 This is a default setting on
 powerpc/powerpc64 and powerpc/powerpc64le.
-.It Va WITHOUT_LOADER_PXEBOOT
-Do not build pxeboot on i386/amd64.
-When the pxeboot is too large, or unneeded, it may be disabled with this option.
-See
-.Va WITH_LOADER_PXEBOOT
-for how to adjust the defaults when you need both a larger
-.Pa /boot/loader
-and
-.Pa /boot/pxeboot
-.Pp
-This option only has an effect on x86.
 .It Va WITHOUT_LOADER_UBOOT
 Disable building of ubldr.
 .Pp
@@ -1777,11 +1757,6 @@ When set, it enforces these options:
 .It Va WITHOUT_TEXTPROC
 Do not build
 programs used for text processing.
-.It Va WITHOUT_TFTP
-Do not build or install
-.Xr tftp 1
-and
-.Xr tftpd 8 .
 .It Va WITHOUT_TOOLCHAIN
 Do not install
 programs used for program development,

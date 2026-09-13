@@ -49,9 +49,6 @@ struct devsw *devsw[] = {
     &biosfd,
     &bioscd,
     &bioshd,
-#if defined(LOADER_NFS_SUPPORT) || defined(LOADER_TFTP_SUPPORT)
-    &pxedisk,
-#endif
     &vdisk_dev,
 #if defined(LOADER_ZFS_SUPPORT)
     &zfs_dev,
@@ -74,12 +71,6 @@ struct fs_ops *file_system[] = {
 #endif
 #if defined(LOADER_CD9660_SUPPORT)
     &cd9660_fsops,
-#endif
-#ifdef LOADER_NFS_SUPPORT 
-    &nfs_fsops,
-#endif
-#ifdef LOADER_TFTP_SUPPORT
-    &tftp_fsops,
 #endif
 #ifdef LOADER_GZIP_SUPPORT
     &gzipfs_fsops,

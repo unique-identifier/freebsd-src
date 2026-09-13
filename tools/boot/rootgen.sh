@@ -488,7 +488,6 @@ mk_geli_mbr_zfs_both() {
 }
 
 # iso
-# pxeldr
 # u-boot
 # powerpc
 

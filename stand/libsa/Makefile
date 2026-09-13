@@ -136,7 +136,7 @@ SRCS+=	arp.c ether.c ip.c inet_ntoa.c in_cksum.c net.c udp.c netif.c rpc.c
 SRCS+=	bootp.c rarp.c bootparam.c
 
 # boot filesystems
-SRCS+=	ufs.c nfs.c cd9660.c tftp.c gzipfs.c bzipfs.c
+SRCS+=	ufs.c nfs.c cd9660.c gzipfs.c bzipfs.c
 SRCS+=	dosfs.c ext2fs.c
 SRCS+=	splitfs.c
 SRCS+=	pkgfs.c
@@ -216,7 +216,6 @@ beforedepend:
 	ln -sf ${SYSDIR}/sys/stdarg.h stdarg.h; \
 	ln -sf ${SYSDIR}/sys/stdint.h stdint.h; \
 	ln -sf ${SRCTOP}/include/arpa/inet.h arpa/inet.h; \
-	ln -sf ${SRCTOP}/include/arpa/tftp.h arpa/tftp.h; \
 	ln -sf ${SRCTOP}/include/ssp/ssp.h ssp/ssp.h; \
 	for i in _time.h _strings.h _string.h; do \
 		[ -f xlocale/$$i ] || :> xlocale/$$i; \

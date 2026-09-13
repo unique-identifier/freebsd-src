@@ -481,8 +481,6 @@
             rtld_deepbind
             ..
         ..
-        tftpd
-        ..
     ..
     sbin
         bectl
@@ -1230,8 +1228,6 @@
         tar
         ..
         tee
-        ..
-        tftp
         ..
         touch
         ..

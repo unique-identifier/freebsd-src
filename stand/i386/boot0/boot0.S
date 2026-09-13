@@ -17,9 +17,6 @@
 
 /* build options: */
 
-#ifdef PXE		/* enable PXE/INT18 booting with F6 */
-#define SAVE_MORE_MEMORY
-#endif
 
 
 #ifdef VOLUME_SERIAL	/* support Volume serial number */
@@ -406,11 +403,6 @@ got_key:
 #endif /* SIO */
 check_selection:
 		cmpb $0x5,%al			# F1..F6 or 1..6 ?
-#ifdef PXE /* enable PXE/INT18 using F6 */
-		jne 1f;
-		int $0x18			# found F6, try INT18
-	1:
-#endif /* PXE */
 		jae beep			# Not in F1..F5, beep
 
 	/*
@@ -577,12 +569,8 @@ intx13:						# Prepare CHS parameters
 
 /*
  * Various menu strings. 'item' goes after 'prompt' to save space.
- * Also use shorter versions to make room for the PXE/INT18 code.
  */
 prompt:
-#ifdef PXE
-		.ascii "F6  PXE\r"
-#endif
 		.ascii "\nBoot:"
 item:		.ascii " ";	     .byte ' '|0x80
 crlf:		.ascii "\r";	     .byte '\n'|0x80

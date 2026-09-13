@@ -2004,7 +2004,7 @@ command_netserver(int argc, char *argv[])
 		return (CMD_ERROR);
 	}
 	if (argc < 2) {
-		proto = netproto == NET_TFTP ? "tftp://" : "nfs://";
+		proto = "nfs://";
 		printf("Netserver URI: %s%s%s\n", proto, intoa(rootip.s_addr),
 		    rootpath);
 		return (CMD_OK);

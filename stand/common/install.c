@@ -26,17 +26,11 @@
 
 #include <sys/param.h>
 #include <sys/socket.h>
-#include <net/if.h>
-#include <netinet/in.h>
-#include <netinet/in_systm.h>
 
 #include <stand.h>
-#include <net.h>
 #include <string.h>
 
 #include "bootstrap.h"
-
-extern struct in_addr servip;
 
 extern int pkgfs_init(const char *, struct fs_ops *);
 extern void pkgfs_cleanup(void);
@@ -183,8 +177,7 @@ cleanup(void)
 
 /*
  * usage: install URL
- * where: URL = tftp://[host]/<package>
- *	or	file://[devname[:fstype]]/<package>
+ * where: URL = file://[devname[:fstype]]/<package>
  */
 static int
 install(char *pkgname)
@@ -195,7 +188,7 @@ install(char *pkgname)
 	char *e, *s, *currdev;
 	char *devname;
 	size_t devnamelen;
-	int error, fd, i, local;
+	int error, fd, i;
 
 	s = strstr(pkgname, "://");
 	if (s == NULL)
@@ -209,16 +202,9 @@ install(char *pkgname)
 	devname = NULL;
 	devnamelen = 0;
 	proto = NULL;
-	local = 0;
 
-	if (i == 4 && !strncasecmp(pkgname, "tftp", i)) {
-		devname = "net0";
-		devnamelen = 4;
-		netproto = NET_TFTP;
-		proto = &tftp_fsops;
-	} else if (i == 4 && !strncasecmp(pkgname, "file", i)) {
+	if (i == 4 && !strncasecmp(pkgname, "file", i)) {
 		currdev = getenv("currdev");
-		local = 1;
 
 		if (*s == '/') {	/* file:/// */
 			if (devname == NULL)
@@ -271,24 +257,9 @@ install(char *pkgname)
 			devnamelen--;
 	}
 
-	if (*s != '/' ) {
-		if (local)
-			goto invalid_url;
-
-		pkgname = strchr(s, '/');
-		if (pkgname == NULL)
-			goto invalid_url;
-
-		*pkgname = '\0';
-		servip.s_addr = inet_addr(s);
-		if (servip.s_addr == htonl(INADDR_NONE))
-			goto invalid_url;
-
-		setenv("serverip", inet_ntoa(servip), 1);
-
-		*pkgname = '/';
-	} else
-		pkgname = s;
+	if (*s != '/')
+		goto invalid_url;
+	pkgname = s;
 
 	i = snprintf(buf, sizeof(buf), "%.*s:%s",
 	    (int) devnamelen, devname, pkgname);

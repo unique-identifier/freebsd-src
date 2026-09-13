@@ -228,7 +228,7 @@ function core.kernelList()
 	end
 
 	-- Do not attempt to autodetect if underlying filesystem
-	-- do not support directory listing (e.g. tftp, http)
+	-- do not support directory listing (e.g. http)
 	if not lfs.attributes("/boot", "mode") then
 		autodetect = "no"
 		loader.setenv("kernels_autodetect", "NO")

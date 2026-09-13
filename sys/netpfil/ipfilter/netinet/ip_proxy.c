@@ -86,7 +86,6 @@
 /* END OF INCLUDES */
 
 #include "netinet/ip_ftp_pxy.c"
-#include "netinet/ip_tftp_pxy.c"
 #include "netinet/ip_rcmd_pxy.c"
 #include "netinet/ip_pptp_pxy.c"
 #if defined(_KERNEL)
@@ -131,15 +130,6 @@ static	aproxy_t	ips_proxies[] = {
 	  ipf_p_ftp_soft_create, ipf_p_ftp_soft_destroy,
 	  NULL, NULL,
 	  ipf_p_ftp_new, ipf_p_ftp_del, ipf_p_ftp_in, ipf_p_ftp_out, NULL,
-	  NULL, NULL, NULL, NULL },
-#endif
-#ifdef	IPF_TFTP_PROXY
-	{ NULL, NULL, "tftp", (char)IPPROTO_UDP, 0, 0, 0,
-	  ipf_p_tftp_main_load, ipf_p_tftp_main_unload,
-	  ipf_p_tftp_soft_create, ipf_p_tftp_soft_destroy,
-	  NULL, NULL,
-	  ipf_p_tftp_new, ipf_p_tftp_del,
-	  ipf_p_tftp_in, ipf_p_tftp_out, NULL,
 	  NULL, NULL, NULL, NULL },
 #endif
 #ifdef	IPF_IRC_PROXY

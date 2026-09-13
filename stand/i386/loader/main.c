@@ -181,20 +181,9 @@ main(void)
 	 */
 	bcache_init(32768, 512);
 
-	/*
-	 * Special handling for PXE and CD booting.
-	 */
-	if (kargs->bootinfo == 0) {
-		/*
-		 * We only want the PXE disk to try to init itself in the below
-		 * walk through devsw if we actually booted off of PXE.
-		 */
-		if (kargs->bootflags & KARGS_FLAGS_PXE)
-			pxe_enable(kargs->pxeinfo ?
-			    PTOV(kargs->pxeinfo) : NULL);
-		else if (kargs->bootflags & KARGS_FLAGS_CD)
-			bc_add(initial_bootdev);
-	}
+	/* Special handling for CD booting. */
+	if (kargs->bootinfo == 0 && (kargs->bootflags & KARGS_FLAGS_CD))
+		bc_add(initial_bootdev);
 
 #ifdef LOADER_ZFS_SUPPORT
 	/*
@@ -292,16 +281,12 @@ extract_currdev(void)
 	/* Assume we are booting from a BIOS disk by default */
 	new_currdev.dd.d_dev = &bioshd;
 
-	/* new-style boot loaders such as pxeldr and cdldr */
+	/* new-style boot loaders such as cdboot */
 	if (kargs->bootinfo == 0) {
 		if ((kargs->bootflags & KARGS_FLAGS_CD) != 0) {
 			/* we are booting from a CD with cdboot */
 			new_currdev.dd.d_dev = &bioscd;
 			new_currdev.dd.d_unit = bd_bios2unit(initial_bootdev);
-		} else if ((kargs->bootflags & KARGS_FLAGS_PXE) != 0) {
-			/* we are booting from pxeldr */
-			new_currdev.dd.d_dev = &pxedisk;
-			new_currdev.dd.d_unit = 0;
 		} else {
 			/* we don't know what our boot device is */
 			new_currdev.disk.d_slice = -1;

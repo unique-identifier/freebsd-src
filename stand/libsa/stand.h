@@ -125,7 +125,6 @@ struct fs_ops {
  * libsa-supplied filesystems
  */
 extern struct fs_ops ufs_fsops;
-extern struct fs_ops tftp_fsops;
 extern struct fs_ops nfs_fsops;
 extern struct fs_ops cd9660_fsops;
 extern struct fs_ops gzipfs_fsops;
@@ -509,7 +508,6 @@ extern void *reallocf(void *, size_t);
 caddr_t ptov(uintptr_t);
 
 /* dev_net.c */
-bool is_tftp(void);
 
 /* features.c */
 typedef void (feature_iter_fn)(void *, const char *, const char *, bool);

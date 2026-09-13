@@ -45,7 +45,6 @@
 #define SUPPORT_DHCP
 
 #define	DHCP_ENV_NOVENDOR	1	/* do not parse vendor options */
-#define	DHCP_ENV_PXE		10	/* assume pxe vendor options */
 #define	DHCP_ENV_FREEBSD	11	/* assume freebsd vendor options */
 /* set DHCP_ENV to one of the values above to export dhcp options to kenv */
 #define DHCP_ENV		DHCP_ENV_NO_VENDOR
@@ -90,30 +89,22 @@ size_t bootp_response_size;
 static void
 bootp_fill_request(unsigned char *bp_vend)
 {
-	/*
-	 * We are booting from PXE, we want to send the string
-	 * 'PXEClient' to the DHCP server so you have the option of
-	 * only responding to PXE aware dhcp requests.
-	 */
-	bp_vend[0] = TAG_CLASSID;
-	bp_vend[1] = 9;
-	bcopy("PXEClient", &bp_vend[2], 9);
-	bp_vend[11] = TAG_USER_CLASS;
+	bp_vend[0] = TAG_USER_CLASS;
 	/* len of each user class + number of user class */
-	bp_vend[12] = 8;
+	bp_vend[1] = 8;
 	/* len of the first user class */
-	bp_vend[13] = 7;
-	bcopy("FreeBSD", &bp_vend[14], 7);
-	bp_vend[21] = TAG_PARAM_REQ;
-	bp_vend[22] = 7;
-	bp_vend[23] = TAG_ROOTPATH;
-	bp_vend[24] = TAG_HOSTNAME;
-	bp_vend[25] = TAG_SWAPSERVER;
-	bp_vend[26] = TAG_GATEWAY;
-	bp_vend[27] = TAG_SUBNET_MASK;
-	bp_vend[28] = TAG_INTF_MTU;
-	bp_vend[29] = TAG_SERVERID;
-	bp_vend[30] = TAG_END;
+	bp_vend[2] = 7;
+	bcopy("FreeBSD", &bp_vend[3], 7);
+	bp_vend[10] = TAG_PARAM_REQ;
+	bp_vend[11] = 7;
+	bp_vend[12] = TAG_ROOTPATH;
+	bp_vend[13] = TAG_HOSTNAME;
+	bp_vend[14] = TAG_SWAPSERVER;
+	bp_vend[15] = TAG_GATEWAY;
+	bp_vend[16] = TAG_SUBNET_MASK;
+	bp_vend[17] = TAG_INTF_MTU;
+	bp_vend[18] = TAG_SERVERID;
+	bp_vend[19] = TAG_END;
 }
 
 /* Fetch required bootp infomation */
@@ -478,11 +469,6 @@ static struct dhcp_opt vndr_opt[] = { /* Vendor Specific Options */
 	{253,	__INDIR, ""},
 	{254,	__INDIR, ""},
 
-#elif DHCP_ENV == DHCP_ENV_PXE		/* some pxe options, RFC4578 */
-	{0,	0,	"pxe"},		/* prefix */
-	{93,	__16,	"system-architecture"},
-	{94,	__BYTES,	"network-interface"},
-	{97,	__BYTES,	"machine-identifier"},
 #else					/* default (empty) table */
 	{0,	0,	"dhcp.vendor."},		/* prefix */
 #endif

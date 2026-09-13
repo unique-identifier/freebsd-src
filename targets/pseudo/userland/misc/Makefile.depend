@@ -44,7 +44,6 @@ DIRDEPS.x86sys= \
 	stand/i386/loader \
 	stand/i386/mbr \
 	stand/i386/pmbr \
-	stand/i386/pxeldr \
 	stand/libsa32 \
 	${_sys_boot_zfs} \
 

@@ -656,7 +656,7 @@ verify_pcr_export(void)
 }
 
 /*
- * For tftp and http we need to hash pathname
+ * For http we need to hash pathname
  * to be able to fake stat(2) data.
  */
 int

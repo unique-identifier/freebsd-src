@@ -99,7 +99,6 @@ static struct uri_scheme {
 	const char *scheme;
 	int proto;
 } uri_schemes[] = {
-	{ "tftp:/", NET_TFTP },
 	{ "nfs:/", NET_NFS },
 };
 
@@ -173,10 +172,7 @@ net_open(struct open_file *f, ...)
 		setenv("boot.netif.netmask", intoa(netmask), 1);
 		setenv("boot.netif.gateway", inet_ntoa(gateip), 1);
 		setenv("boot.netif.server", inet_ntoa(rootip), 1);
-		if (netproto == NET_TFTP) {
-			setenv("boot.tftproot.server", inet_ntoa(rootip), 1);
-			setenv("boot.tftproot.path", rootpath, 1);
-		} else if (netproto == NET_NFS) {
+		if (netproto == NET_NFS) {
 			setenv("boot.nfsroot.server", inet_ntoa(rootip), 1);
 			setenv("boot.nfsroot.path", rootpath, 1);
 		}
@@ -347,12 +343,6 @@ net_print(int verbose)
 		}
 	}
 	return (ret);
-}
-
-bool
-is_tftp(void)
-{
-    return (netproto == NET_TFTP);
 }
 
 /*

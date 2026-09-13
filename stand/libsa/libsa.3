@@ -22,7 +22,7 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.Dd September 9, 2022
+.Dd September 13, 2026
 .Dt LIBSA 3
 .Os
 .Sh NAME
@@ -446,8 +446,6 @@ functions only fill out the following fields in the
 .Fa sb
 structure: st_mode,st_nlink,st_uid,st_gid,st_size.
 The
-.Nm tftp
-file system cannot provide meaningful values for this call, and the
 .Nm cd9660
 file system always reports files having uid/gid of zero.
 .El
@@ -752,8 +750,6 @@ The
 UFS.
 .It Va ext2fs_fsops
 Linux ext2fs file system.
-.It Va tftp_fsops
-File access via TFTP.
 .It Va nfs_fsops
 File access via NFS.
 .It Va cd9660_fsops
@@ -782,7 +778,7 @@ but for
 .Xr bzip2 1 Ns -compressed
 files.
 .It Va pkgfs_fsops
-File access from a tar file typically streamed via TFTP.
+File access from a tar file.
 The order of files in the tar file must match the order they are
 to be consumed as rewind is not practical.
 .El

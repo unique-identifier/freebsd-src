@@ -229,7 +229,7 @@ vectx_read(struct vectx *ctx, void *buf, size_t nbytes)
 	do {
 		/*
 		 * Do this in reasonable chunks so
-		 * we don't timeout if doing tftp
+		 * network reads do not time out
 		 */
 		x = nbytes - off;
 		x = MIN(PAGE_SIZE, x);
@@ -336,16 +336,6 @@ vectx_lseek(struct vectx *ctx, off_t off, int whence)
 		return (-1);
 	}
 	if (off < ctx->vec_hashed) {
-#ifdef _STANDALONE
-		struct open_file *f = fd2open_file(ctx->vec_fd);
-
-		if (f != NULL &&
-		    strncmp(f->f_ops->fs_name, "tftp", 4) == 0) {
-			/* we cannot rewind if we've hashed much of the file */
-			if (ctx->vec_hashed > ctx->vec_size / 5)
-				return (-1);	/* refuse! */
-		}
-#endif
 		/* seeking backwards! just do it */
 		ctx->vec_off = lseek(ctx->vec_fd, off, whence);
 		return (ctx->vec_off);

@@ -90,8 +90,6 @@ extern struct devdesc	currdev;	/* our current device */
 extern struct devsw bioscd;
 extern struct devsw biosfd;
 extern struct devsw bioshd;
-extern struct devsw pxedisk;
-extern struct fs_ops pxe_fsops;
 
 int	bc_add(int biosdev);		/* Register CD booted from. */
 uint32_t bd_getbigeom(int bunit);	/* return geometry in bootinfo format */
@@ -148,6 +146,5 @@ int	bi_load32(char *args, int *howtop, int *bootdevp, vm_offset_t *bip,
 int	bi_load64(char *args, vm_offset_t *modulep,
 	    vm_offset_t *kernend, int add_smap);
 
-void	pxe_enable(void *pxeinfo);
 
 void	biosmemdisk_detect(void);

@@ -22,7 +22,7 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.Dd November 15, 2022
+.Dd September 13, 2026
 .Dt MAKE.CONF 5
 .Os
 .Sh NAME
@@ -326,27 +326,6 @@ been configured to use a serial console instead of the keyboard/video card.
 .Pq Vt int
 The baud rate to use for the console if the boot blocks have
 been configured to use a serial console instead of the keyboard/video card.
-.It Va BOOT_PXELDR_ALWAYS_SERIAL
-.Pq Vt bool
-Compile in the code into
-.Xr pxeboot 8
-that forces the use of a serial console.
-This is analogous to the
-.Fl h
-option in
-.Xr boot 8
-blocks.
-.It Va BOOT_PXELDR_PROBE_KEYBOARD
-.Pq Vt bool
-Compile in the code into
-.Xr pxeboot 8
-that probes the keyboard.
-If no keyboard is found, boot with the dual console configuration.
-This is analogous to the
-.Fl D
-option in
-.Xr boot 8
-blocks.
 .It Va ENABLE_SUID_K5SU
 .Pq Vt bool
 Set this if you wish to use the ksu utility.
@@ -360,20 +339,6 @@ with the set-user-ID bit set.
 Otherwise,
 .Xr newgrp 1
 will not be able to change users' groups.
-.It Va LOADER_TFTP_SUPPORT
-.Pq Vt bool
-By default the
-.Xr pxeboot 8
-loader retrieves the kernel via NFS.
-Defining this and recompiling
-.Pa /usr/src/stand
-will cause it to retrieve the kernel via TFTP.
-This allows
-.Xr pxeboot 8
-to load a custom BOOTP diskless kernel yet
-still mount the server's
-.Pa /
-rather than load the server's kernel.
 .It Va LOADER_FIREWIRE_SUPPORT
 .Pq Vt bool
 Defining this and recompiling

@@ -26,7 +26,5 @@ WARNS?=	2
 
 LINKS=	${BINDIR}/ftp ${BINDIR}/pftp \
 	${BINDIR}/ftp ${BINDIR}/gate-ftp
-MLINKS=	ftp.1 pftp.1 \
-	ftp.1 gate-ftp.1
 
 .include <bsd.prog.mk>

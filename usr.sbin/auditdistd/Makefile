@@ -21,7 +21,6 @@ SRCS+=	proto.c proto_common.c proto_socketpair.c proto_tcp.c proto_tls.c
 SRCS+=	receiver.c
 SRCS+=	sandbox.c sender.c subr.c
 SRCS+=	token.l trail.c
-MAN=	auditdistd.8 auditdistd.conf.5
 
 LIBADD+=	pthread util crypto ssl
 

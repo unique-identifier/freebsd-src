@@ -4,7 +4,6 @@ SRCS=		iscsictl.c periphs.c parse.y token.l y.tab.h
 CFLAGS+=	-I${.CURDIR}
 CFLAGS+=	-I${SRCTOP}/sys/dev/iscsi
 CFLAGS+=	-I${SRCTOP}/lib/libiscsiutil
-MAN=		iscsi.conf.5 iscsictl.8
 
 LIBADD=		iscsiutil util xo
 

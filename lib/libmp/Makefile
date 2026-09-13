@@ -3,7 +3,6 @@
 LIB=		mp
 SHLIB_MAJOR=	7
 LIBADD=		crypto
-MAN=		libmp.3
 INCS=		mp.h
 SRCS=		mpasbn.c
 

@@ -1,6 +1,5 @@
 PACKAGE=	runtime
 PROG=	kldxref
-MAN=	kldxref.8
 SRCS=	kldxref.c
 
 CFLAGS+=-I${SRCTOP}/lib/libkldelf

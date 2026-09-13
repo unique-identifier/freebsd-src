@@ -8,8 +8,6 @@ MOD=	target
 SRCS=	target_snmp.c
 XSYM=	snmpTargetMIB snmpNotificationMIB snmpUDPDomain
 
-MAN=	snmp_target.3
-
 CFLAGS+= -I${CONTRIB}/lib -I${CONTRIB}/snmpd
 CFLAGS+= -DHAVE_ERR_H -DHAVE_GETADDRINFO -DHAVE_STRLCPY -DHAVE_SYS_TREE_H
 

@@ -74,8 +74,6 @@ SRCS+=	ifconfig_netlink.c
 CFLAGS+=-DWITHOUT_NETLINK
 .endif
 
-MAN=	ifconfig.8
-
 CFLAGS+= -Wall -Wmissing-prototypes -Wcast-qual -Wwrite-strings -Wnested-externs
 
 HAS_TESTS=

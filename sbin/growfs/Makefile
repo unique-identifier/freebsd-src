@@ -6,7 +6,6 @@
 PACKAGE=ufs
 PROG=   growfs
 SRCS=   growfs.c
-MAN=	growfs.8
 
 .if defined(GFSDBG)
 SRCS+=	debug.c

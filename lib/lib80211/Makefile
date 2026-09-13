@@ -10,8 +10,6 @@ INCS=	lib80211_regdomain.h lib80211_ioctl.h
 
 LIBADD= sbuf bsdxml
 
-MAN=	lib80211.3
-
 CFLAGS+=-I${.CURDIR}
 
 .include <bsd.lib.mk>

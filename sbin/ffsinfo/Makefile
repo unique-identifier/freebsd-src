@@ -7,7 +7,6 @@ GROWFS= ${.CURDIR:H}/growfs
 PACKAGE=ufs
 PROG=	ffsinfo
 SRCS=	ffsinfo.c debug.c
-MAN=	ffsinfo.8
 
 WARNS?=	1
 CFLAGS+=-DFS_DEBUG -I${GROWFS}

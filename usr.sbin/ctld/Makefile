@@ -18,7 +18,6 @@ CFLAGS+=	-I${SRCTOP}/lib/libnvmf
 #CFLAGS+=	-DICL_KERNEL_PROXY
 NO_WCAST_ALIGN=
 CXXWARNFLAGS.gcc= -Wno-shadow
-MAN=		ctld.8 ctl.conf.5
 
 LIBADD=		bsdxml iscsiutil nvmf sbuf util ucl m nv util++
 

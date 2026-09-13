@@ -3,7 +3,6 @@ SRCDIR=	${SRCTOP}/contrib/pam_modules/pam_passwdqc
 
 LIB=		pam_passwdqc
 SRCS=		pam_passwdqc.c passwdqc_check.c passwdqc_random.c wordset_4k.c
-MANNODEV=	pam_passwdqc.8
 
 WARNS?=	2
 CFLAGS+= -I${SRCDIR}
@@ -11,4 +10,3 @@ CFLAGS+= -I${SRCDIR}
 LIBADD+=	crypt
 
 .include <bsd.lib.mk>
-

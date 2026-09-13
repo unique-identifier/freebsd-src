@@ -54,8 +54,6 @@ install: $(PROGS)
 		$(INSTALL) -c -s $$f $(DESTDIR)$(BINDIR) ;\
 	done
 
-MAN5= bootptab.5
-MAN8= bootpd.8 bootpef.8 bootptest.8
 install.man: $(MAN5) $(MAN8)
 	-for f in $(MAN5) ;\
 	do \

@@ -2,7 +2,6 @@
 
 .if ${MK_MAILWRAPPER} != "no"
 PROG=	mailwrapper
-MAN=	mailwrapper.8
 LIBADD=	util
 .endif
 

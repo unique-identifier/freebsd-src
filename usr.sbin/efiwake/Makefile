@@ -1,7 +1,6 @@
 PACKAGE=	efi-tools
 
 PROG=	efiwake
-MAN=    efiwake.8
 
 SRCS=	efiwake.c
 

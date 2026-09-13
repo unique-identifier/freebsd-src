@@ -11,8 +11,6 @@ SRCS=		moused.c \
 		util-evdev.h \
 		util-list.c \
 		util-list.h
-MAN=		moused.8 \
-		moused.conf.5
 CONFS=		moused.conf
 QUIRKS=		5-generic-touchpad.quirks
 

@@ -1,5 +1,4 @@
 PROG=	spray
-MAN=	spray.8
 
 LIBADD=	rpcsvc
 

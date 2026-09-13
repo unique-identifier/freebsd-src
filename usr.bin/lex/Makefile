@@ -26,9 +26,6 @@ LFLAGS+=	-is
 CFLAGS+=	-I. -I${.CURDIR} -I${FLEXDIR} -DHAVE_CONFIG_H
 INCS=		FlexLexer.h
 INCSDIR=	${INCLUDEDIR}
-MLINKS+=	lex.1 flex.1
-MLINKS+=	lex.1 flex++.1
-MLINKS+=	lex.1 lex++.1
 
 WARNS?=		3
 

@@ -2,7 +2,6 @@
 
 PACKAGE=toolchain
 SCRIPTS=lorder.sh
-MAN=	lorder.1
 
 HAS_TESTS=
 SUBDIR.${MK_TESTS}=	tests

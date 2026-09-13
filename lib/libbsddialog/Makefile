@@ -19,7 +19,6 @@ SRCS=	barbox.c \
 INCS=	bsddialog.h \
 	bsddialog_theme.h \
 	bsddialog_progressview.h
-MAN=	bsddialog.3
 
 LIBADD=	ncursesw tinfow
 CFLAGS+=	-D_XOPEN_SOURCE_EXTENDED

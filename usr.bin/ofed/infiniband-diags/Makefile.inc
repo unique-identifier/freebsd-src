@@ -1,5 +1,5 @@
 _spath=	${SRCTOP}/contrib/ofed/infiniband-diags
-.PATH: ${_spath}/src ${_spath}/man
+.PATH: ${_spath}/src
 
 BINDIR?= /usr/bin
 SRCS+= ibdiag_common.c ibdiag_sa.c

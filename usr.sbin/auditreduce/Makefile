@@ -8,7 +8,6 @@ CFLAGS+=	-I${OPENBSMDIR}
 
 PACKAGE=audit
 PROG=	auditreduce
-MAN=	auditreduce.1
 
 LIBADD=	bsm
 

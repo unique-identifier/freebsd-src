@@ -14,7 +14,6 @@
 #
 
 PROG=	rrenumd
-MAN=	rrenumd.conf.5 rrenumd.8
 SRCS=	rrenumd.c  parser.y lexer.l
 
 CFLAGS+= -DIPSEC -I. -I${.CURDIR}

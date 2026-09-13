@@ -3,8 +3,6 @@
 CONFS=	inetd.conf
 PROG=	inetd
 PACKAGE=	inetd
-MAN=	inetd.8
-MLINKS=	inetd.8 inetd.conf.5
 SRCS=	inetd.c builtins.c
 
 CFLAGS+= -DLOGIN_CAP

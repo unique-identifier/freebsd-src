@@ -28,6 +28,4 @@ SRCS=	libpe_buffer.c \
 
 CFLAGS+=-I${ELFTCDIR}/libpe -I${ELFTCDIR}/common
 
-MAN=
-
 .include <bsd.lib.mk>

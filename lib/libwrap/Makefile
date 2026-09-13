@@ -7,14 +7,6 @@ LIB=	wrap
 SHLIB_MAJOR= 6
 INCS=	tcpd.h
 
-MAN=		hosts_access.3
-MLINKS=		hosts_access.3 hosts_ctl.3 \
-		hosts_access.3 request_init.3 \
-		hosts_access.3 request_set.3
-
-MANNODEV=	hosts_access.5 hosts_options.5
-MANNODEVLINKS=	hosts_options.5 hosts.allow.5
-
 .PATH:	${SRCTOP}/contrib/tcp_wrappers
 
 CFLAGS+=-DFACILITY=LOG_AUTH -DHOSTS_ACCESS -DNETGROUP -DDAEMON_UMASK=022 \

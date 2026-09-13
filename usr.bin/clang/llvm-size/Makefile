@@ -25,7 +25,6 @@ CLEANFILES+=	${TGHDRS} ${TGHDRS:C/$/.d/}
 
 .if ${MK_LLVM_BINUTILS} != "no"
 LINKS+=		${BINDIR}/llvm-size ${BINDIR}/size
-MLINKS+=	llvm-size.1 size.1
 .endif
 
 .include "../llvm.prog.mk"

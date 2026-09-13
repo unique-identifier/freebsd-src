@@ -5,7 +5,6 @@
 PACKAGE=geom
 PROG=		geom
 SRCS=		geom.c subr.c
-MAN=		geom.8
 CFLAGS+=	-I${.CURDIR} -I${.CURDIR}/core
 CFLAGS+=	-DGEOM_CLASS_DIR=\"${GEOM_CLASS_DIR}\"
 
@@ -16,7 +15,6 @@ LIBADD=		geom util xo
 	${SRCTOP}/lib/geom/label
 
 SRCS+=	geom_label.c geom_part.c
-MAN=
 
 WARNS?=	2
 CFLAGS+=-DSTATIC_GEOM_CLASSES

@@ -8,7 +8,6 @@ PRECIOUSPROG=
 LIBADD   = pam
 .if ${MK_NIS} != "no"
 SYMLINKS = passwd ${BINDIR}/yppasswd
-MLINKS	 = passwd.1 yppasswd.1
 .endif
 
 beforeinstall:

@@ -5,7 +5,6 @@
 PACKAGE=	tcpd
 
 PROG=	tcpdchk
-MAN=	tcpdchk.8
 SRCS=	tcpdchk.c fakelog.c inetcf.c scaffold.c
 
 CFLAGS+=-DREAL_DAEMON_DIR=\"${LIBEXECDIR}\" \

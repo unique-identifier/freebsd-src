@@ -6,7 +6,6 @@ PACKAGE=	blocklist
 PROG=	blocklistctl
 SRCS=	blocklistctl.c conf.c state.c support.c internal.c \
 	sockaddr_snprintf.c pidfile.c strtoi.c popenve.c
-MAN=	blocklistctl.8
 
 LDFLAGS+=-L${LIBBLOCKLISTDIR}
 LIBADD+= blocklist util

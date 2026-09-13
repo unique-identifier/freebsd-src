@@ -27,6 +27,4 @@ CFLAGS+=	-I${LIBUCL_DIR}/include \
 		-I${LIBUCL_DIR}/uthash \
 		-I${LIBUCL_DIR}/klib
 
-MAN+=		libucl.3
-
 .include <bsd.lib.mk>

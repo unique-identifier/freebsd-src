@@ -3,7 +3,6 @@
 PACKAGE=runtime
 PROG=	fsck
 SRCS=	fsck.c fsutil.c preen.c
-MAN=	fsck.8
 LIBADD=	util
 
 .include <bsd.prog.mk>

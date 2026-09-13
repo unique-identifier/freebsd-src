@@ -1,5 +1,4 @@
 PROG=	uathload
-MAN=	uathload.8
 
 SRCS=	uathload.c
 FILES=	ar5523.bin

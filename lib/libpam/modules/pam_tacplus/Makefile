@@ -25,7 +25,6 @@
 
 LIB=		pam_tacplus
 SRCS=		pam_tacplus.c
-MANNODEV=	pam_tacplus.8
 
 LIBADD+=	tacplus
 

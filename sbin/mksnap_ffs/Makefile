@@ -3,7 +3,6 @@
 PACKAGE=ufs
 PROG=	mksnap_ffs
 LIBADD=	util
-MAN=	mksnap_ffs.8
 
 WARNS?=	2
 

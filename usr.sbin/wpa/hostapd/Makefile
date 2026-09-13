@@ -14,8 +14,6 @@ SRCS=	config_file.c \
 	eap_register.c \
 	main.c
 
-MAN=	hostapd.8 hostapd.conf.5
-
 .if ${MK_EXAMPLES} != "no"
 FILESDIR= ${SHAREDIR}/examples/hostapd
 .PATH:	${HOSTAPD_DISTDIR}

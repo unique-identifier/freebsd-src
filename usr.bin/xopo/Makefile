@@ -2,11 +2,9 @@
 
 LIBXOSRC=	${SRCTOP}/contrib/libxo
 
-.PATH:
 .PATH:	${LIBXOSRC}/xopo
 
 PROG=	xopo
-MAN=	xopo.1
 
 # XXX For xoversion.h
 CFLAGS+=-I${LIBXOSRC}/libxo

@@ -25,7 +25,6 @@
 
 LIB=		pam_nologin
 SRCS=		pam_nologin.c
-MANNODEV=	pam_nologin.8
 
 LIBADD+=	util
 

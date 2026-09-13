@@ -8,8 +8,6 @@ SRCS=	apfs.c befs.c cd9660.c exfat.c ext2fs.c fstyp.c geli.c hammer.c	\
 SRCS +=	zfs.c
 .endif
 
-MAN=	fstyp.8
-
 .if ${MK_ICONV} == "yes"
 CFLAGS+=	-DWITH_ICONV
 .endif
@@ -42,7 +40,6 @@ CFLAGS.zfs.c+= -Wno-cast-qual
 CFLAGS.${src}+=-I${SRCTOP}/sys
 .endif
 .endfor
-
 
 LIBADD=	geom md ufs
 

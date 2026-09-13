@@ -6,8 +6,6 @@ SRCS+=	msgcat.c
 
 SYM_MAPS+=${LIBC_SRCTOP}/nls/Symbol.map
 
-MAN+=	catclose.3 catgets.3 catopen.3
-
 # NOTE: C.msg should not be processed here, it's used as a template
 #       for translators.
 

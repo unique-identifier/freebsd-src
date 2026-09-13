@@ -5,7 +5,6 @@ SSHDIR=	${SRCTOP}/crypto/openssh
 PACKAGE=	ssh
 
 LIB=		pam_ssh
-MANNODEV=	pam_ssh.8
 SRCS=		pam_ssh.c
 
 WARNS?=	5

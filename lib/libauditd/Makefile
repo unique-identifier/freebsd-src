@@ -20,8 +20,6 @@ CFLAGS+=	-I${OPENBSMDIR} -I${_LIBBSMDIR}
 WARNS?=		3
 PRIVATELIB=	true
 
-MAN=
-
 .include <bsd.lib.mk>
 
 # Disable -Wcast-align.  Casting res->ai_addr in auditd_set_host triggers this

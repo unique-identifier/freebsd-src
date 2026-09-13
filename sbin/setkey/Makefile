@@ -29,7 +29,6 @@
 .include <src.opts.mk>
 
 PROG=	setkey
-MAN=	setkey.8
 SRCS=	setkey.c parse.y token.l
 WARNS?=	1
 

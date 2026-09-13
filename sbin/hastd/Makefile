@@ -16,7 +16,6 @@ SRCS+=	rangelock.c
 SRCS+=	subr.c
 SRCS+=	token.l
 SRCS+=	y.tab.h
-MAN=	hastd.8 hast.conf.5
 
 NO_WFORMAT=
 NO_WCAST_ALIGN=

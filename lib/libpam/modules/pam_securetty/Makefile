@@ -25,6 +25,5 @@
 
 LIB=		pam_securetty
 SRCS=		pam_securetty.c
-MANNODEV=	pam_securetty.8
 
 .include <bsd.lib.mk>

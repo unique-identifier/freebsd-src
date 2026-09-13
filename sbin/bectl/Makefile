@@ -2,7 +2,6 @@
 
 PACKAGE=zfs
 PROG=	bectl
-MAN=	bectl.8
 
 SRCS=	bectl.c bectl_jail.c bectl_list.c
 

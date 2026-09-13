@@ -1,7 +1,6 @@
 .include <src.opts.mk>
 
 PROG=	bootparamd
-MAN=	bootparams.5 bootparamd.8
 SRCS=	bootparamd.c main.c ${GENSRCS}
 GENSRCS=bootparam_prot.h bootparam_prot_svc.c bootparam_prot_xdr.c
 

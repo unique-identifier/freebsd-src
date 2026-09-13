@@ -11,7 +11,6 @@ PROG_CXX=	ld.lld
 .if !defined(TOOLS_PREFIX) || \
     (defined(TOOLS_PREFIX) && ${MK_LLD_BOOTSTRAP} != "no")
 SYMLINKS=	${PROG_CXX} ${BINDIR}/ld
-MLINKS=		ld.lld.1 ld.1
 .endif
 
 .include "${SRCTOP}/lib/clang/llvm.pre.mk"

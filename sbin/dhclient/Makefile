@@ -40,8 +40,6 @@ SRCS=	dhclient.c clparse.c alloc.c dispatch.c hash.c bpf.c options.c \
 
 PROG=	dhclient
 SCRIPTS=dhclient-script
-MAN=	dhclient.8 dhclient.conf.5 dhclient.leases.5 dhcp-options.5 \
-	dhclient-script.8
 LIBADD=	util
 
 .if ${MK_DYNAMICROOT} == "no"

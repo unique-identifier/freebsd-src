@@ -1,5 +1,4 @@
 PROG=	watch
-MAN=	watch.8
 
 WARNS?=	2
 

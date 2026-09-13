@@ -19,7 +19,6 @@ TRACEROUTE_DISTDIR?= ${SRCTOP}/usr.sbin/traceroute
 
 PACKAGE=	runtime
 PROG=	traceroute6
-MAN=	traceroute6.8
 SRCS=	as.c traceroute6.c
 BINOWN=	root
 BINMODE= 4555

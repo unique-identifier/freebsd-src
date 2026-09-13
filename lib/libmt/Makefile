@@ -5,6 +5,4 @@ INCS=		mtlib.h
 
 LIBADD=		sbuf bsdxml
 
-MAN=		mt.3
-
 .include <bsd.lib.mk>

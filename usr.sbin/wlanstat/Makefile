@@ -1,5 +1,4 @@
 PROG=	wlanstat
-MAN=	wlanstat.8
 
 CFLAGS=	-I${SRCTOP}/lib/libbsdstat
 LIBADD=	bsdstat

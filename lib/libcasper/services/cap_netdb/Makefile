@@ -20,11 +20,6 @@ CFLAGS+=-I${.CURDIR}
 HAS_TESTS=
 SUBDIR.${MK_TESTS}+= tests
 
-MAN+=	cap_netdb.3
-
-MLINKS+=cap_netdb.3 libcap_netdb.3
-MLINKS+=cap_netdb.3 cap_getprotobyname.3
-
 .include <bsd.lib.mk>
 
 # GCC 13 complains incorrectly about free after failed realloc: GCC bug #110501

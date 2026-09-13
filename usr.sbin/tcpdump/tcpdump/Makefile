@@ -187,8 +187,6 @@ SRCS=	addrtoname.c \
 	print-whois.c \
 	print-zep.c
 
-CLEANFILES+=	${MAN}
-
 CFLAGS+= -I${.CURDIR} -I${TCPDUMP_DISTDIR}
 CFLAGS+= -DHAVE_CONFIG_H
 CFLAGS+= -D_U_="__attribute__((unused))"
@@ -217,9 +215,3 @@ CFLAGS+= -DHAVE_NET_PFVAR_H -DHAVE_NET_IF_PFLOG_H
 .endif
 
 .include <bsd.prog.mk>
-
-.for mp in ${MAN}
-${mp}: ${mp}.in
-	sed -e 's/@MAN_MISC_INFO@/7/g' -e 's/@MAN_FILE_FORMATS@/5/g' \
-		${.ALLSRC} > ${.TARGET}
-.endfor

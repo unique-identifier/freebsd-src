@@ -1,5 +1,4 @@
 PROG=	rwhod
-MAN=	rwhod.8
 
 PACKAGE=rcmds
 

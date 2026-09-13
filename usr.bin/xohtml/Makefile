@@ -2,11 +2,9 @@
 
 LIBXOSRC=	${SRCTOP}/contrib/libxo
 
-.PATH:
 .PATH:	${LIBXOSRC}/xohtml
 
 SCRIPTS= xohtml.sh
-MAN=	xohtml.1
 
 EXTERNAL_FILES = \
     external/jquery.js \

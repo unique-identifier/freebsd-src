@@ -1,5 +1,4 @@
 PROG=		virtual_oss_cmd
-MAN=		${PROG}.8
 
 SRCS=		command.c
 

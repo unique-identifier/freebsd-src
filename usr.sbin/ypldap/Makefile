@@ -7,8 +7,6 @@ SRCS=		parse.y ypldap.c log.c	\
 		aldap.c ber.c \
 		ypldap_dns.c
 
-MAN=		ypldap.8 ypldap.conf.5
-
 LIBADD=		openbsd event1 util rpcsvc
 
 CFLAGS+=-I${.CURDIR}

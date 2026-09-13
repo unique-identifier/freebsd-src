@@ -18,13 +18,5 @@ CFLAGS+=-I${BLOCKLIST_DIR}/include -I${BLOCKLIST_DIR}/port \
 
 SRCS=	old_bl.c blacklist.c vsyslog_r.c
 INCS=	blacklist.h
-MAN=	libblacklist.3
-
-MLINKS=	libblacklist.3 blacklist_open.3		\
-	libblacklist.3 blacklist_close.3	\
-	libblacklist.3 blacklist.3		\
-	libblacklist.3 blacklist_r.3		\
-	libblacklist.3 blacklist_sa.3		\
-	libblacklist.3 blacklist_sa_r.3
 
 .include <bsd.lib.mk>

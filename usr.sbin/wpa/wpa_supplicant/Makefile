@@ -38,8 +38,6 @@ SRCS=	bss.c \
 SRCS+=	pasn_supplicant.c
 .endif
 
-MAN=	wpa_supplicant.8 wpa_supplicant.conf.5
-
 .if ${MK_EXAMPLES} != "no"
 FILESDIR= ${SHAREDIR}/examples/etc
 .PATH:	${WPA_SUPPLICANT_DISTDIR}

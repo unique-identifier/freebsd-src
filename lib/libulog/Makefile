@@ -7,16 +7,6 @@ SHLIB_MAJOR= 0
 INCS=	ulog.h utempter.h
 SRCS=	ulog.h ulog_login.c ulog_login_pseudo.c utempter.c
 
-MAN=	ulog_login.3 utempter_add_record.3
-MLINKS+=ulog_login.3 ulog_login_pseudo.3 \
-	ulog_login.3 ulog_logout.3 \
-	ulog_login.3 ulog_logout_pseudo.3 \
-	utempter_add_record.3 utempter_remove_added_record.3 \
-	utempter_add_record.3 utempter_remove_record.3 \
-	utempter_add_record.3 addToUtmp.3 \
-	utempter_remove_added_record.3 removeFromUtmp.3 \
-	utempter_remove_record.3 removeLineFromUtmp.3
-
 LIBADD=	md
 
 VERSION_DEF= ${SRCTOP}/lib/libc/Versions.def

@@ -3,7 +3,6 @@
 PACKAGE= toolchain
 PROG=	unifdef
 SCRIPTS=unifdefall.sh
-MLINKS=	unifdef.1 unifdefall.1
 
 .include <src.opts.mk>
 

@@ -4,7 +4,6 @@
 MOD=	netgraph
 SRCS=	snmp_netgraph.c
 XSYM=	begemotNg
-MAN=	snmp_netgraph.3
 
 BMIBS=	BEGEMOT-NETGRAPH.txt
 DEFS=	${MOD}_tree.def

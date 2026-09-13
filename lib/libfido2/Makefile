@@ -76,6 +76,5 @@ CFLAGS+= -D_FIDO_PATCH=0
 LIBADD=	crypto z
 
 WARNS=2
-MAN=
 
 .include <bsd.lib.mk>

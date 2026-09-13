@@ -25,30 +25,6 @@ LINKS=	${BINDIR}/md5 ${BINDIR}/md5sum \
 	${BINDIR}/md5 ${BINDIR}/skein1024 \
 	${BINDIR}/md5 ${BINDIR}/skein1024sum
 
-MLINKS=	md5.1 md5sum.1 \
-	md5.1 rmd160.1 \
-	md5.1 rmd160sum.1 \
-	md5.1 sha1.1 \
-	md5.1 sha1sum.1 \
-	md5.1 sha224.1 \
-	md5.1 sha224sum.1 \
-	md5.1 sha256.1 \
-	md5.1 sha256sum.1 \
-	md5.1 sha384.1 \
-	md5.1 sha384sum.1 \
-	md5.1 sha512.1 \
-	md5.1 sha512sum.1 \
-	md5.1 sha512t224.1 \
-	md5.1 sha512t224sum.1 \
-	md5.1 sha512t256.1 \
-	md5.1 sha512t256sum.1 \
-	md5.1 skein256.1 \
-	md5.1 skein256sum.1 \
-	md5.1 skein512.1 \
-	md5.1 skein512sum.1 \
-	md5.1 skein1024.1 \
-	md5.1 skein1024sum.1
-
 # md5 can also emulate the shasum script that comes with Perl, except
 # that, in bits input mode, it can only handle input lengths that are
 # a multiple of 8 (see manual page).

@@ -4,7 +4,6 @@ PACKAGE=	sound
 
 PROG=		mixer
 SRCS=		${PROG}.c
-MAN=		${PROG}.8
 LDFLAGS+=	-lmixer
 
 HAS_TESTS=

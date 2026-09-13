@@ -1,6 +1,5 @@
 PACKAGE=rip
 PROG=	route6d
-MAN=	route6d.8
 
 CFLAGS+= -DHAVE_POLL_H
 

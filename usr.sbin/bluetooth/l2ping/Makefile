@@ -2,7 +2,6 @@
 
 PACKAGE=	bluetooth
 PROG=		l2ping
-MAN=		l2ping.8
 WARNS?=		2
 
 LIBADD=		bluetooth

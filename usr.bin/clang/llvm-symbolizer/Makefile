@@ -1,7 +1,6 @@
 .include <src.opts.mk>
 
 PROG_CXX=	llvm-symbolizer
-MAN=		llvm-symbolizer.1 llvm-addr2line.1
 
 SRCDIR=		llvm/tools/llvm-symbolizer
 SRCS+=		llvm-symbolizer-driver.cpp
@@ -27,7 +26,6 @@ LINKS+=		${BINDIR}/llvm-symbolizer ${BINDIR}/llvm-addr2line
 
 .if ${MK_LLVM_BINUTILS} != "no"
 LINKS+=		${BINDIR}/llvm-symbolizer ${BINDIR}/addr2line
-MLINKS+=	llvm-addr2line.1 addr2line.1
 .endif
 
 .include "../llvm.prog.mk"

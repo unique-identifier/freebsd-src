@@ -2,7 +2,6 @@
 
 PACKAGE=	bluetooth
 PROG=		bcmfw
-MAN=		bcmfw.8
 WARNS?=		2
 
 .include <bsd.prog.mk>

@@ -1,7 +1,6 @@
 .include <src.opts.mk>
 
 PROG=	rpc.tlsclntd
-MAN=	rpc.tlsclntd.8
 SRCS=	rpc.tlsclntd.c rpc.tlscommon.c rpctlscd.h rpctlscd_svc.c rpctlscd_xdr.c
 
 CFLAGS+= -I. -I${SRCTOP}/usr.sbin/rpc.tlsservd

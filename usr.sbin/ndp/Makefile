@@ -15,7 +15,6 @@
 .include <src.opts.mk>
 
 PROG=	ndp
-MAN=	ndp.8
 SRCS=	ndp.c
 
 LIBADD=	xo
@@ -33,7 +32,6 @@ SRCS+=	ndp_netlink.c
 .else
 CFLAGS+=-DWITHOUT_NETLINK
 .endif
-
 
 WARNS?=	3
 

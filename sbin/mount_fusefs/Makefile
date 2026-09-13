@@ -20,7 +20,6 @@ DEBUG_FLAGS+= -DFUSE4BSD_VERSION="\"${F4BVERS}\""
 
 PACKAGE=runtime
 PROG=	mount_fusefs
-MAN=	mount_fusefs.8
 LIBADD=	util
 
 .include <bsd.prog.mk>

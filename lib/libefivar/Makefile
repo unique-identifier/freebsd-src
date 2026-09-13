@@ -38,26 +38,10 @@ SRCS=		efivar.c efichar.c efivar-dp-format.c \
 		uefi-guid.c uefi-dputil.c
 INCS=		efivar.h efivar-dp.h
 SHLIB_MAJOR=	1
-MAN=		efivar.3
 
 CFLAGS+=	-I${EFIBOOT}/include
 CFLAGS+=	-I${.CURDIR} -I${EDK2INC}
 CFLAGS+=	-fno-strict-aliasing
-
-MLINKS+=efivar.3 efi_variables_supported.3 \
-	efivar.3 efi_del_variable.3 \
-	efivar.3 efi_get_variable.3 \
-	efivar.3 efi_get_variable_attributes.3 \
-	efivar.3 efi_get_variable_size.3 \
-	efivar.3 efi_append_variable.3 \
-	efivar.3 efi_set_variable.3 \
-	efivar.3 efi_get_next_variable_name.3 \
-	efivar.3 efi_str_to_guid.3 \
-	efivar.3 efi_guid_to_str.3 \
-	efivar.3 efi_name_to_guid.3 \
-	efivar.3 efi_guid_to_name.3 \
-	efivar.3 efi_guid_to_symbol.3 \
-	efivar.3 libefivar.3
 
 WARNS?=		9
 

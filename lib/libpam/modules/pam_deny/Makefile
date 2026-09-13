@@ -25,6 +25,5 @@
 
 LIB=		pam_deny
 SRCS=		pam_deny.c
-MANNODEV=	pam_deny.8
 
 .include <bsd.lib.mk>

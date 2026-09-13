@@ -1,5 +1,5 @@
 _spath=${SRCTOP}/contrib/ofed/librdmacm
-.PATH: ${_spath}/examples ${_spath}/man
+.PATH: ${_spath}/examples
 
 BINDIR?=	/usr/bin
 CFLAGS+=	-I${SRCTOP}/contrib/ofed

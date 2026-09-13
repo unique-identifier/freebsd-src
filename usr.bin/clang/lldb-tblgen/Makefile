@@ -1,5 +1,4 @@
 PROG_CXX=	lldb-tblgen
-MAN=
 
 SRCDIR=		lldb/utils/TableGen
 SRCS+=		LLDBOptionDefEmitter.cpp

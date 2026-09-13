@@ -1,5 +1,4 @@
 PROG_CXX=	llvm-cxxdump
-MAN=
 
 SRCDIR=		llvm/tools/llvm-cxxdump
 SRCS+=		Error.cpp

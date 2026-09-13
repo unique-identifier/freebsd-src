@@ -2,7 +2,6 @@
 
 PACKAGE=runtime
 PROG=	route
-MAN=	route.8
 SRCS=	route.c keywords.h
 WARNS?=	3
 CLEANFILES+=keywords.h

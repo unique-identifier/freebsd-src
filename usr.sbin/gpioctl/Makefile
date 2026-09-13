@@ -1,5 +1,4 @@
 PROG=	gpioctl
-MAN=	gpioctl.8
 
 CFLAGS+= -I${SRCTOP}/lib/libgpio
 

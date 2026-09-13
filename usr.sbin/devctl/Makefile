@@ -1,5 +1,4 @@
 PROG=	devctl
-MAN=	devctl.8
 
 LIBADD=	devctl
 

@@ -5,7 +5,6 @@ PACKAGE=	runtime
 PROG=		xinstall
 PROGNAME=	install
 SRCS=		xinstall.c getid.c
-MAN=		install.1
 
 .PATH:		${SRCTOP}/contrib/mtree
 CFLAGS+=	-I${SRCTOP}/contrib/mtree

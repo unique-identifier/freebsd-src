@@ -71,7 +71,6 @@ SRCS+=	utaddress.c utalloc.c utascii.c utbuffer.c utcache.c	\
 # os_specific/service_layers
 SRCS+=	osgendbg.c osunixxf.c
 
-MAN=	acpidb.8
 WARNS?=	3
 
 CFLAGS+= -DACPI_DB_APP -DACPI_EXEC_APP -fno-strict-aliasing

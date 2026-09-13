@@ -8,8 +8,6 @@ MOD=	vacm
 SRCS=	vacm_snmp.c
 XSYM=	snmpVacmMIB
 
-MAN=	snmp_vacm.3
-
 CFLAGS+= -I${CONTRIB}/lib -I${CONTRIB}/snmpd
 CFLAGS+= -DHAVE_ERR_H -DHAVE_GETADDRINFO -DHAVE_STRLCPY -DHAVE_SYS_TREE_H
 

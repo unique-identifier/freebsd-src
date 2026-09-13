@@ -59,8 +59,6 @@ XSYM=	host hrStorageOther hrStorageRam hrStorageVirtualMemory \
 	hrFSiso9660 hrFSRockRidge hrFSNFS hrFSNetware hrFSAFS hrFSDFS \
 	hrFSAppleshare hrFSRFS hrFSDGCFS hrFSBFS hrFSFAT32 hrFSLinuxExt2
 
-MAN=	snmp_hostres.3
-
 DEFS=	${MOD}_tree.def
 BMIBS=	BEGEMOT-HOSTRES-MIB.txt
 

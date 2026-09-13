@@ -4,7 +4,6 @@ SUBDIR_DEPEND_distextract = include
 SUBDIR_DEPEND_distfetch = include
 SUBDIR_DEPEND_partedit = include
 SCRIPTS= bsdinstall
-MAN= bsdinstall.8
 PACKAGE=	bsdinstall
 
 SCRIPTS+=	startbsdinstall

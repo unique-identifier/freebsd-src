@@ -1,7 +1,6 @@
 .include <src.opts.mk>
 
 PROG_CXX=	clang-scan-deps
-MAN=
 
 SRCDIR=		clang/tools/clang-scan-deps
 SRCS+=		ClangScanDeps.cpp \

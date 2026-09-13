@@ -2,7 +2,6 @@ SRCDIR:=${.PARSEDIR:tA}
 
 PACKAGE= toolchain
 PROG_CXX=	config
-MAN=	config.5 config.8
 SRCS=	config.y main.cc lang.l mkmakefile.cc mkheaders.c \
 	mkoptions.cc y.tab.h kernconf.c
 

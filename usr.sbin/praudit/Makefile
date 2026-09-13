@@ -10,7 +10,6 @@ CFLAGS+=	-I${OPENBSMDIR}
 
 PACKAGE=audit
 PROG=	praudit
-MAN=	praudit.1
 
 WARNS?=	3
 

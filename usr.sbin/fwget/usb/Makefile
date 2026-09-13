@@ -5,6 +5,4 @@ SCRIPTS=usb \
 
 BINDIR= ${LIBEXECDIR}/fwget
 
-MAN=
-
 .include <bsd.prog.mk>

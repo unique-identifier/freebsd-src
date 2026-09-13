@@ -1,7 +1,6 @@
 .PATH: ${.CURDIR:H}/shared
 
 PROG=	ggated
-MAN=	ggated.8
 SRCS=	ggated.c ggate.c
 PACKAGE=	ggate
 

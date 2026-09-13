@@ -8,8 +8,6 @@ PACKAGE=	bhyve
 
 .include "${MACHINE_CPUARCH}/Makefile.inc"
 
-MAN=	bhyvectl.8
-
 LIBADD=	vmmapi util
 
 CFLAGS+= -I${.CURDIR} -I${SRCTOP}/sys/amd64/vmm

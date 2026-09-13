@@ -3,7 +3,6 @@
 
 PACKAGE=runtime
 PROG=	rtquery
-MAN=	rtquery.8
 LIBADD=	md
 WARNS?=	3
 NO_WARRAY_BOUNDS=

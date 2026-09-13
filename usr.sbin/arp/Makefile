@@ -1,8 +1,6 @@
 .include <src.opts.mk>
 
 PROG=	arp
-MAN=	arp.4 arp.8
-
 
 SRCS=	arp.c
 

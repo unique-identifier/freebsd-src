@@ -23,7 +23,6 @@ CONFSDIR=	/etc/pkg
 CONFSMODE=	644
 PROG=	pkg
 SRCS=	pkg.c rsa.c dns_utils.c config.c ecc.c hash.c
-MAN=	pkg.7
 
 CFLAGS+=-I${SRCTOP}/contrib/libucl/include
 .PATH:	${SRCTOP}/contrib/libucl/include

@@ -25,9 +25,6 @@ CFLAGS+=	-I${SRCTOP}/sys/contrib/zstd/programs \
 LINKS=	${BINDIR}/zstd ${BINDIR}/unzstd \
 	${BINDIR}/zstd ${BINDIR}/zstdcat \
 	${BINDIR}/zstd ${BINDIR}/zstdmt
-MLINKS=	zstd.1 unzstd.1 \
-	zstd.1 zstdcat.1 \
-	zstd.1 zstdmt.1
 
 WARNS?=	2
 LIBADD=	zstd

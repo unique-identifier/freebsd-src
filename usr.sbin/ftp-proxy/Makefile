@@ -2,7 +2,6 @@
 
 PACKAGE=	pf
 PROG=	ftp-proxy
-MAN=	ftp-proxy.8
 
 SRCS=	ftp-proxy.c filter.c
 

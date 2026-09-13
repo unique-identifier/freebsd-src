@@ -1,5 +1,5 @@
 _spath=${SRCTOP}/contrib/ofed/libibverbs
-.PATH: ${_spath}/examples ${_spath}/man
+.PATH: ${_spath}/examples
 
 BINDIR?=	/usr/bin
 CFLAGS+=	-I${_spath}

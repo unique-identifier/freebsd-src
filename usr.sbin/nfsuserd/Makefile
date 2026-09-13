@@ -3,7 +3,6 @@
 PACKAGE=	nfs
 
 PROG=	nfsuserd
-MAN=	nfsuserd.8
 WARNS?=	3
 
 .if ${MK_INET_SUPPORT} != "no"

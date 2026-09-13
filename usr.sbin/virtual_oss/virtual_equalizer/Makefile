@@ -1,5 +1,4 @@
 PROG=		virtual_equalizer
-MAN=		${PROG}.8
 
 SRCS=		equalizer.c
 

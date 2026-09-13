@@ -5,7 +5,6 @@
 PACKAGE=	tcpd
 
 PROG=	tcpd
-MAN=	tcpd.8
 CFLAGS+=-DREAL_DAEMON_DIR=\"${LIBEXECDIR}\" \
 	-DSEVERITY=LOG_INFO -DRFC931_TIMEOUT=10 \
 	-DHOSTS_DENY=\"/etc/hosts.deny\" -DHOSTS_ALLOW=\"/etc/hosts.allow\" \

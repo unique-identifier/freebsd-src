@@ -1,8 +1,6 @@
 PACKAGE=	ipf
 PROG=		ipnat
 SRCS=		${GENHDRS} ipnat.c ipnat_y.c ipnat_l.c
-MAN=		ipnat.8 ipnat.4 ipnat.5
-MLINKS=		ipnat.5 ipnat.conf.5
 CFLAGS+=	-I.
 CFLAGS+=	-Wno-error=unused-but-set-variable
 

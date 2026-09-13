@@ -17,8 +17,6 @@ CFLAGS.sprintf_chk.c+=	-Wno-unused-parameter
 CFLAGS.vsnprintf_chk.c+=	-Wno-unused-parameter
 CFLAGS.vsprintf_chk.c+=	-Wno-unused-parameter
 
-MAN+=	ssp.3 __builtin_object_size.3
-
 VERSION_DEF=	${.CURDIR}/Versions.def
 SYMBOL_MAPS=	${.CURDIR}/Symbol.map
 

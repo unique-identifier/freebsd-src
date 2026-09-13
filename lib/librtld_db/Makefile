@@ -2,7 +2,6 @@
 
 LIB=		rtld_db
 SHLIB_MAJOR= 	2
-MAN=		librtld_db.3
 
 SRCS=		rtld_db.c
 INCS=		rtld_db.h

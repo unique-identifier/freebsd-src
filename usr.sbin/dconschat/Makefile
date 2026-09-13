@@ -1,5 +1,4 @@
 PROG=	dconschat
-MAN=	dconschat.8
 
 CFLAGS+= -I${SRCTOP}/sys
 

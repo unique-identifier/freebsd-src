@@ -1,5 +1,4 @@
 PROG=		virtual_bt_speaker
-MAN=		${PROG}.8
 
 SRCS=		bt_speaker.c
 

@@ -28,6 +28,4 @@ FILES=		USAGE
 
 SCRIPTS= bsdconfig
 
-MAN= bsdconfig.8
-
 .include <bsd.prog.mk>

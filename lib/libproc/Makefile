@@ -33,8 +33,6 @@ CFLAGS+=	-DNO_CTF
 
 SHLIB_MAJOR=	5
 
-MAN=
-
 HAS_TESTS=
 SUBDIR.${MK_TESTS}+= tests
 

@@ -50,10 +50,6 @@ LFLAGS+=-P__libipsecyy
 
 WARNS?=	2
 
-MAN=	ipsec_set_policy.3 ipsec_strerror.3
-MLINKS+=ipsec_set_policy.3 ipsec_get_policylen.3 \
-	ipsec_set_policy.3 ipsec_dump_policy.3
-
 SRCS+= y.tab.h
 y.tab.h:	policy_parse.y
 

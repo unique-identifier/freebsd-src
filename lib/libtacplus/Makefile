@@ -30,9 +30,6 @@ CFLAGS+=	-Wall
 LIBADD=		md pam
 SHLIB_MAJOR=	5
 
-MAN=		libtacplus.3
-MANNODEV=	tacplus.conf.5
-
 WARNS?=		2
 
 .include <bsd.lib.mk>

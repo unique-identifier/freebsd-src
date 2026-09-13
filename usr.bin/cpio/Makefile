@@ -24,7 +24,6 @@ CFLAGS+=	-DHAVE_ICONV=1 -DHAVE_ICONV_H=1 -DICONV_CONST=const
 .endif
 
 SYMLINKS=bsdcpio ${BINDIR}/cpio
-MLINKS= bsdcpio.1 cpio.1
 
 HAS_TESTS=
 SUBDIR.${MK_TESTS}+= tests

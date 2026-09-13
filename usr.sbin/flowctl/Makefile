@@ -4,7 +4,6 @@
 .include <src.opts.mk>
 	
 PROG=	flowctl
-MAN=	flowctl.8
 
 WARNS?= 2
 LIBADD=	netgraph

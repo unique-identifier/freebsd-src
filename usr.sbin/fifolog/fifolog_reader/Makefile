@@ -2,8 +2,6 @@ PROG=	fifolog_reader
 
 CFLAGS+= -I${.CURDIR:H}/lib
 
-MAN=
-
 LIBADD=	fifolog
 
 regress:

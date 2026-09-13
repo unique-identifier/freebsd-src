@@ -1,5 +1,4 @@
 PROG=	diskinfo
-MAN=	diskinfo.8
 
 LIBADD=	util
 

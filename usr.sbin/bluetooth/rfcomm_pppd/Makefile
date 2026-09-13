@@ -4,7 +4,6 @@
 
 PACKAGE=	bluetooth
 PROG=		rfcomm_pppd
-MAN=		rfcomm_pppd.8
 SRCS=		rfcomm_pppd.c rfcomm_sdp.c
 WARNS?=		2
 

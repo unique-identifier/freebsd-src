@@ -3,7 +3,6 @@ RPCDIR=	${SRCTOP}/include/rpcsvc
 
 PACKAGE=	yp
 PROG=	yppush
-MAN=	yppush.8
 SRCS=	ypxfr_getmap.c yp_dblookup.c yp_error.c ypxfr_misc.c yppush_main.c \
 	${GENSRCS}
 GENSRCS=yp.h yp_clnt.c yppush_svc.c

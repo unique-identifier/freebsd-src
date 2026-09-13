@@ -2,7 +2,6 @@
 
 PACKAGE=	runtime
 PROG=	pwd_mkdb
-MAN=	pwd_mkdb.8
 SRCS=	pw_scan.c pwd_mkdb.c
 
 CFLAGS+= -I${SRCTOP}/lib/libc/gen		# for pw_scan.h

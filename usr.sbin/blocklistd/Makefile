@@ -7,7 +7,6 @@ CONFS=	blocklistd.conf
 PROG=	blocklistd
 SRCS=	blocklistd.c conf.c run.c state.c support.c internal.c \
 	sockaddr_snprintf.c pidfile.c strtoi.c popenve.c vsyslog_r.c
-MAN=	blocklistd.8 blocklistd.conf.5
 
 LDFLAGS+=-L${LIBBLOCKLISTDIR}
 LIBADD+= blocklist util

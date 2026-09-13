@@ -27,7 +27,6 @@
 
 PACKAGE=runtime
 PROG=	kldstat
-MAN=	kldstat.8
 
 LIBADD=	util
 

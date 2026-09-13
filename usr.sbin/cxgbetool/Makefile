@@ -1,6 +1,5 @@
 PACKAGE=	cxgbe-tools
 PROG=	cxgbetool
-MAN=	cxgbetool.8
 SRCS=	cxgbetool.c
 SRCS+=	tcb_common.c
 SRCS+=	tcbinfot4.c tcbshowt4.c

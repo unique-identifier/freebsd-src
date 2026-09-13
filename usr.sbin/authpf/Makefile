@@ -2,7 +2,6 @@
 
 PACKAGE=pf
 PROG=	authpf
-MAN=	authpf.8
 BINOWN=	root
 BINGRP= authpf
 BINMODE= 6555
@@ -18,6 +17,5 @@ LIBADD=	m util pfctl
 WARNS?=	3
 
 LINKS=	${BINDIR}/authpf ${BINDIR}/authpf-noip
-MLINKS=	authpf.8 authpf-noip.8
 
 .include <bsd.prog.mk>

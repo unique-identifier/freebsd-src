@@ -3,7 +3,6 @@
 PACKAGE=runtime
 PROG=	ping
 SRCS=	main.c
-MAN=	ping.8
 BINOWN=	root
 BINMODE=4555
 LIBADD=	m
@@ -18,7 +17,6 @@ CFLAGS+= -DINET6 -DKAME_SCOPEID
 SRCS+=	ping6.c
 LIBADD+= md
 LINKS=	${BINDIR}/ping ${BINDIR}/ping6
-MLINKS=	ping.8 ping6.8
 .endif
 
 .if ${MK_DYNAMICROOT} == "no"

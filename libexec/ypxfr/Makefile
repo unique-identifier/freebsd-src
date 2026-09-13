@@ -8,8 +8,6 @@ GENSRCS=yp.h yp_clnt.c ypxfr_clnt.c
 
 .PATH: ${SRCTOP}/usr.sbin/ypserv
 
-MAN=	ypxfr.8
-
 CFLAGS+= -I.
 
 WARNS?=	2

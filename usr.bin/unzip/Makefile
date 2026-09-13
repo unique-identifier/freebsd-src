@@ -21,7 +21,6 @@ CFLAGS+= -I${_LIBARCHIVEDIR}/unzip -I${_LIBARCHIVEDIR}/libarchive_fe
 LIBADD=	archive
 
 SYMLINKS=bsdunzip ${BINDIR}/unzip
-MLINKS= bsdunzip.1 unzip.1
 
 HAS_TESTS=
 SUBDIR.${MK_TESTS}+= tests

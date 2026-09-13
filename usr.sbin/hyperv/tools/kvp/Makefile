@@ -5,7 +5,6 @@ HV_KVP_DAEMON_DISTDIR?= ${SRCTOP}/contrib/hyperv/tools
 
 PACKAGE=hyperv-tools
 PROG= 	hv_kvp_daemon
-MAN= 	hv_kvp_daemon.8
 
 CFLAGS+=	-I${SRCTOP}/sys/dev/hyperv/utilities
 

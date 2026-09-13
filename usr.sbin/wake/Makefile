@@ -1,5 +1,4 @@
 PROG=	wake
-MAN=	wake.8
 
 WARNS?= 3
 

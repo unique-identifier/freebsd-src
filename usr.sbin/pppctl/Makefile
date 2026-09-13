@@ -1,6 +1,5 @@
 PACKAGE=	ppp
 PROG=	pppctl
-MAN=	pppctl.8
 
 WARNS?=	2
 

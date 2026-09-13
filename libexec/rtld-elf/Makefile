@@ -39,7 +39,6 @@ SRCS= \
 	xmalloc.c \
 	debug.c \
 	libmap.c
-MAN?=		rtld.1
 ACFLAGS+=	-DLOCORE
 CFLAGS+=	-Wall -DIN_RTLD -ffreestanding
 CFLAGS+=	-I${SRCTOP}/lib/csu/common
@@ -55,8 +54,6 @@ INSTALLFLAGS=	-C -b
 PRECIOUSPROG=
 BINDIR=		/libexec
 SYMLINKS=	../..${BINDIR}/${PROG} ${LIBEXECDIR}/${PROG}
-MLINKS?=	rtld.1 ld-elf.so.1.1 \
-		rtld.1 ld.so.1
 
 CFLAGS+=	-fpic -DPIC $(DEBUG)
 
@@ -99,7 +96,6 @@ afterbuild:
 		echo "stdio leaked" 1>&2 ; \
 		exit 1 ; \
 	fi
-
 
 # Since moving rtld-elf to /libexec, we need to create a symlink.
 # Fixup the existing binary that's there so we can symlink over it.

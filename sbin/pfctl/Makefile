@@ -3,7 +3,6 @@
 PACKAGE=pf
 CONFS=	pf.os
 PROG=	pfctl
-MAN=	pfctl.8
 
 SRCS = pfctl.c parse.y pfctl_parser.c pf_print_state.c pfctl_altq.c
 SRCS+= pfctl_osfp.c pfctl_radix.c pfctl_table.c pfctl_qstats.c

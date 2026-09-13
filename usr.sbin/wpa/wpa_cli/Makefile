@@ -10,8 +10,6 @@ PACKAGE=	wpa
 PROG=	wpa_cli
 SRCS=	wpa_cli.c
 
-MAN=	wpa_cli.8
-
 CFLAGS+= -DCONFIG_TLS=openssl
 # enable use of d_type to identify unix domain sockets
 CFLAGS+= -D_DIRENT_HAVE_D_TYPE

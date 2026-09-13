@@ -1,5 +1,4 @@
 PROG=	nfsiod
-MAN=	nfsiod.8
 
 PACKAGE=	nfs
 

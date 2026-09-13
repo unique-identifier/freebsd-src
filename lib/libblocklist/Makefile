@@ -18,13 +18,5 @@ CFLAGS+=-I${BLOCKLIST_DIR}/include -I${BLOCKLIST_DIR}/port \
 
 SRCS=	bl.c blocklist.c vsyslog_r.c
 INCS=	blocklist.h
-MAN=	libblocklist.3
-
-MLINKS=	libblocklist.3 blocklist_open.3		\
-	libblocklist.3 blocklist_close.3	\
-	libblocklist.3 blocklist.3		\
-	libblocklist.3 blocklist_r.3		\
-	libblocklist.3 blocklist_sa.3		\
-	libblocklist.3 blocklist_sa_r.3
 
 .include <bsd.lib.mk>

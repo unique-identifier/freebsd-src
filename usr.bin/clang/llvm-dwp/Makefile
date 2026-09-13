@@ -1,5 +1,4 @@
 PROG_CXX=	llvm-dwp
-MAN=
 
 SRCDIR=		llvm/tools/llvm-dwp
 SRCS+=		llvm-dwp-driver.cpp

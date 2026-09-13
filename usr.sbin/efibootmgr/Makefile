@@ -7,7 +7,6 @@ CFLAGS+= -I${EFIVAR} -I${EFIINCL}
 PACKAGE=	efi-tools
 
 PROG=efibootmgr
-MAN=	efibootmgr.8
 SRCS= efichar.c efiutil.c efibootmgr.c
 
 LIBADD= efivar geom

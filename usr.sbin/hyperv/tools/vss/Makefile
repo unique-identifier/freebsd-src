@@ -7,7 +7,6 @@ HV_VSS_DAEMON_DISTDIR?= ${SRCTOP}/contrib/hyperv/tools
 
 PACKAGE=hyperv-tools
 PROG= 	hv_vss_daemon
-MAN= 	hv_vss_daemon.8
 
 CFLAGS+=	-I${SRCTOP}/sys/dev/hyperv/utilities
 

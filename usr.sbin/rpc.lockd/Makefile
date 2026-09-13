@@ -3,8 +3,6 @@
 PACKAGE=	nfs
 
 PROG=	rpc.lockd
-MAN=	rpc.lockd.8
-MLINKS=	rpc.lockd.8 lockd.8
 SRCS=	kern.c nlm_prot_svc.c lockd.c lock_proc.c lockd_lock.c
 
 CFLAGS+= -I. -I${SYSROOT:U${DESTDIR}}/usr/include/rpcsvc

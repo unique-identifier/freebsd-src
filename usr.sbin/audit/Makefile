@@ -8,7 +8,6 @@ CFLAGS+=	-I${OPENBSMDIR}
 
 PACKAGE=audit
 PROG=	audit
-MAN=	audit.8
 
 LIBADD=	bsm
 

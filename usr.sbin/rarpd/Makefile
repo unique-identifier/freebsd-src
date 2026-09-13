@@ -1,5 +1,4 @@
 PROG=	rarpd
-MAN=	rarpd.8
 
 LIBADD=	util
 

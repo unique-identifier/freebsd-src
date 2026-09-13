@@ -13,8 +13,6 @@ SRCS+=	token.l
 CFLAGS+=-I${.CURDIR}
 CFLAGS+=-I${SRCTOP}/sys/fs/autofs
 
-MAN=	automount.8 automountd.8 autounmountd.8 auto_master.5
-
 LIBADD=	util
 
 LINKS=	${BINDIR}/automountd ${BINDIR}/automount

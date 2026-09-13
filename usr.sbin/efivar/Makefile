@@ -1,7 +1,6 @@
 PACKAGE=	efi-tools
 
 PROG=	efivar
-MAN=	efivar.8
 
 LIBADD= efivar geom
 

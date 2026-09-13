@@ -2,7 +2,6 @@
 
 PACKAGE=runtime
 PROG=		mdconfig
-MAN=		mdconfig.8
 
 LIBADD=		util geom
 

@@ -15,7 +15,6 @@ YYPATCH!=	cat ${BYACC_SRC}/VERSION
 CFLAGS+=	-DYYPATCH=${YYPATCH}
 
 LINKS=	${BINDIR}/yacc ${BINDIR}/byacc
-MLINKS=	yacc.1 byacc.1
 
 HAS_TESTS=
 SUBDIR.${MK_TESTS}+= tests

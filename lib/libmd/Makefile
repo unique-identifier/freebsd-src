@@ -22,61 +22,7 @@ WARNS?=	0
 VERSION_DEF=	${SRCTOP}/lib/libc/Versions.def
 SYMBOL_MAPS=	${.CURDIR}/Symbol.map
 
-MAN+=	md4.3 md5.3 ripemd.3 sha.3 sha256.3 sha512.3 skein.3
-MLINKS+=md4.3 MD4Init.3 md4.3 MD4Update.3 md4.3 MD4Final.3
-MLINKS+=md4.3 MD4End.3  md4.3 MD4File.3   md4.3 MD4FileChunk.3
-MLINKS+=md4.3 MD4Data.3
-MLINKS+=md5.3 MD5Init.3 md5.3 MD5Update.3 md5.3 MD5Final.3
-MLINKS+=md5.3 MD5End.3  md5.3 MD5File.3   md5.3 MD5FileChunk.3
-MLINKS+=md5.3 MD5Data.3
-MLINKS+=ripemd.3 RIPEMD160_Init.3  ripemd.3 RIPEMD160_Update.3
-MLINKS+=ripemd.3 RIPEMD160_Final.3 ripemd.3 RIPEMD160_Data.3
-MLINKS+=ripemd.3 RIPEMD160_End.3   ripemd.3 RIPEMD160_File.3
-MLINKS+=ripemd.3 RIPEMD160_FileChunk.3
-MLINKS+=sha.3 SHA_Init.3  sha.3 SHA_Update.3  sha.3 SHA_Final.3
-MLINKS+=sha.3 SHA_End.3   sha.3 SHA_File.3    sha.3 SHA_FileChunk.3
-MLINKS+=sha.3 SHA_Data.3
-MLINKS+=sha.3 SHA1_Init.3 sha.3 SHA1_Update.3 sha.3 SHA1_Final.3
-MLINKS+=sha.3 SHA1_End.3  sha.3 SHA1_File.3   sha.3 SHA1_FileChunk.3
-MLINKS+=sha.3 SHA1_Data.3
-MLINKS+=sha256.3 SHA224_Init.3  sha256.3 SHA224_Update.3
-MLINKS+=sha256.3 SHA224_Final.3 sha256.3 SHA224_End.3
-MLINKS+=sha256.3 SHA224_File.3  sha256.3 SHA224_FileChunk.3
-MLINKS+=sha256.3 SHA224_Data.3
-MLINKS+=sha256.3 SHA256_Init.3  sha256.3 SHA256_Update.3
-MLINKS+=sha256.3 SHA256_Final.3 sha256.3 SHA256_End.3
-MLINKS+=sha256.3 SHA256_File.3  sha256.3 SHA256_FileChunk.3
-MLINKS+=sha256.3 SHA256_Data.3
-MLINKS+=sha512.3 SHA384_Init.3  sha512.3 SHA384_Update.3
-MLINKS+=sha512.3 SHA384_Final.3 sha512.3 SHA384_End.3
-MLINKS+=sha512.3 SHA384_File.3  sha512.3 SHA384_FileChunk.3
-MLINKS+=sha512.3 SHA384_Data.3  sha512.3 sha384.3
-MLINKS+=sha512.3 SHA512_Init.3  sha512.3 SHA512_Update.3
-MLINKS+=sha512.3 SHA512_Final.3 sha512.3 SHA512_End.3
-MLINKS+=sha512.3 SHA512_File.3  sha512.3 SHA512_FileChunk.3
-MLINKS+=sha512.3 SHA512_Data.3
-MLINKS+=sha512.3 SHA512_224_Init.3  sha512.3 SHA512_224_Update.3
-MLINKS+=sha512.3 SHA512_224_Final.3 sha512.3 SHA512_224_End.3
-MLINKS+=sha512.3 SHA512_224_File.3  sha512.3 SHA512_224_FileChunk.3
-MLINKS+=sha512.3 SHA512_224_Data.3
-MLINKS+=sha512.3 SHA512_256_Init.3  sha512.3 SHA512_256_Update.3
-MLINKS+=sha512.3 SHA512_256_Final.3 sha512.3 SHA512_256_End.3
-MLINKS+=sha512.3 SHA512_256_File.3  sha512.3 SHA512_256_FileChunk.3
-MLINKS+=sha512.3 SHA512_256_Data.3
-MLINKS+=skein.3 SKEIN256_Init.3  skein.3 SKEIN256_Update.3
-MLINKS+=skein.3 SKEIN256_Final.3 skein.3 SKEIN256_End.3
-MLINKS+=skein.3 SKEIN256_File.3  skein.3 SKEIN256_FileChunk.3
-MLINKS+=skein.3 SKEIN256_Data.3  skein.3 skein256.3
-MLINKS+=skein.3 SKEIN512_Init.3  skein.3 SKEIN512_Update.3
-MLINKS+=skein.3 SKEIN512_Final.3 skein.3 SKEIN512_End.3
-MLINKS+=skein.3 SKEIN512_File.3  skein.3 SKEIN512_FileChunk.3
-MLINKS+=skein.3 SKEIN512_Data.3  skein.3 skein512.3
-MLINKS+=skein.3 SKEIN1024_Init.3  skein.3 SKEIN1024_Update.3
-MLINKS+=skein.3 SKEIN1024_Final.3 skein.3 SKEIN1024_End.3
-MLINKS+=skein.3 SKEIN1024_File.3  skein.3 SKEIN1024_FileChunk.3
-MLINKS+=skein.3 SKEIN1024_Data.3  skein.3 skein1024.3
-
-CLEANFILES+=	md[245]hl.c md[245].ref md[245].3 mddriver \
+CLEANFILES+=	md[245]hl.c md[245].ref mddriver \
 		rmd160.ref rmd160hl.c rmddriver \
 		sha0.ref sha0hl.c sha1.ref sha1hl.c shadriver \
 		sha224.ref sha256.ref sha224hl.c sha256hl.c \
@@ -239,13 +185,6 @@ skein1024hl.c: mdXhl.c
 		sed -e 's/mdX/skein/g' -e 's/MDX/SKEIN1024_/g'	\
 			-e  's/SKEIN1024__/SKEIN1024_/g' \
 		${.ALLSRC}) > ${.TARGET}
-
-
-.for i in 2 4 5
-md${i}.3: ${.CURDIR}/mdX.3
-	sed -e "s/mdX/md${i}/g" -e "s/MDX/MD${i}/g" ${.ALLSRC} > ${.TARGET}
-	cat ${.CURDIR}/md${i}.copyright >> ${.TARGET}
-.endfor
 
 HAS_TESTS=
 SUBDIR.${MK_TESTS}+=	tests

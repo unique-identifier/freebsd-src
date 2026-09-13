@@ -3,7 +3,6 @@
 
 OPENBSMDIR=${SRCTOP}/contrib/openbsm
 .PATH: ${OPENBSMDIR}/bin/auditd
-.PATH: ${OPENBSMDIR}/man
 
 CFLAGS+=	-I${OPENBSMDIR}
 
@@ -23,13 +22,6 @@ CONFSDIR=       /etc/security
 PACKAGE=audit
 PROG=	auditd
 SRCS=	auditd.c audit_warn.c auditd_fbsd.c
-MAN=	auditd.8	\
-	audit.log.5	\
-	audit_class.5	\
-	audit_control.5	\
-	audit_event.5	\
-	audit_user.5	\
-	audit_warn.5
 
 LIBADD=	auditd bsm
 

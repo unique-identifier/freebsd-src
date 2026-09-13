@@ -13,7 +13,6 @@ WARNS?=	1
 LIBADD=	m
 
 LINKS=	${BINDIR}/awk ${BINDIR}/nawk
-MLINKS=	awk.1 nawk.1
 
 CLEANFILES= maketab proctab.c awkgram.tab.h
 

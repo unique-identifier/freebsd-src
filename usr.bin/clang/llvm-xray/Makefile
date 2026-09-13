@@ -1,5 +1,4 @@
 PROG_CXX=	llvm-xray
-MAN=
 
 SRCDIR=		llvm/tools/llvm-xray
 SRCS+=		func-id-helper.cpp

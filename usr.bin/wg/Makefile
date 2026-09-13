@@ -1,10 +1,8 @@
 PROG=	wg
-MAN=	wg.8
 
 LIBADD=	nv
 
 .PATH: ${SRCTOP}/contrib/wireguard-tools
-.PATH: ${SRCTOP}/contrib/wireguard-tools/man
 
 SRCS+=	wg.c
 

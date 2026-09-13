@@ -1,5 +1,4 @@
 PROG_CXX=	clang-tblgen
-MAN=
 
 SRCDIR=		clang/utils/TableGen
 SRCS+=		ASTTableGen.cpp

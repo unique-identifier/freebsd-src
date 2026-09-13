@@ -25,6 +25,5 @@
 
 LIB=		pam_self
 SRCS=		pam_self.c
-MANNODEV=	pam_self.8
 
 .include <bsd.lib.mk>

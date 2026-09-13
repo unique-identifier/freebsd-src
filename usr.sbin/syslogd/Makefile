@@ -7,7 +7,6 @@ PACKAGE=	syslogd
 CONFGROUPS=	CONFS SYSLOGD_D
 CONFS=	syslog.conf
 PROG=	syslogd
-MAN=	syslog.conf.5 syslogd.8
 SRCS=	syslogd.c ttymsg.c
 SYSLOGD_DPACAKGE=	syslogd
 

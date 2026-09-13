@@ -25,7 +25,6 @@
 
 LIB=		pam_radius
 SRCS=		pam_radius.c
-MANNODEV=	pam_radius.8
 
 WARNS?=	3
 

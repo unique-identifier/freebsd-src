@@ -3,7 +3,6 @@
 PACKAGE=	nfs
 
 PROG=	nfsdumpstate
-MAN=	nfsdumpstate.8
 
 .if ${MK_INET_SUPPORT} != "no"
 CFLAGS+= -DINET

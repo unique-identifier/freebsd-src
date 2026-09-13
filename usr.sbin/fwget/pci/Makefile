@@ -10,6 +10,4 @@ SCRIPTS=pci \
 
 BINDIR= ${LIBEXECDIR}/fwget
 
-MAN=
-
 .include <bsd.prog.mk>

@@ -10,8 +10,6 @@ CFLAGS.clang+=-Wno-thread-safety-analysis
 SYMBOL_MAPS=    ${.CURDIR}/Symbol.map
 VERSION_DEF=	${SRCTOP}/lib/libc/Versions.def
 
-MAN=		libuvmem.3
-
 .include <src.opts.mk>
 
 .PATH:	${SRCTOP}/sys/kern

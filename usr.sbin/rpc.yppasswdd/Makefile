@@ -7,7 +7,6 @@ PACKAGE=yp
 PROG=	rpc.yppasswdd
 SCRIPTS=yppwupdate
 SCRIPTSDIR= ${LIBEXECDIR}
-MAN=	rpc.yppasswdd.8
 SRCS=	util.c yp_access.c yp_dblookup.c yp_dbwrite.c \
 	yp_error.c yppasswdd_main.c yppasswdd_server.c ypxfr_misc.c ${GENSRCS}
 GENSRCS=yp.h yp_clnt.c yppasswd.h yppasswd_private.h yppasswd_private_svc.c \

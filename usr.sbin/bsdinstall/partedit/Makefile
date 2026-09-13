@@ -19,6 +19,5 @@ SRCS=	diskmenu.c partedit.c gpart_ops.c partedit_${PARTEDIT_ARCH}.c \
 	part_wizard.c scripted.c
 
 WARNS?=	3
-MAN= sade.8
 
 .include <bsd.prog.mk>

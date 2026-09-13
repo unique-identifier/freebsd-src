@@ -6,8 +6,6 @@
 PROG=	bhyve
 PACKAGE=	bhyve
 
-MAN=	bhyve.8 bhyve_config.5
-
 BHYVE_SYSDIR?=${SRCTOP}
 
 .PATH:	${.CURDIR}/${MACHINE_CPUARCH}	\

@@ -2,7 +2,6 @@ BINDIR=	/usr/bin
 
 PACKAGE=cron
 PROG=	crontab
-MAN=	crontab.1 crontab.5
 BINOWN=	root
 BINMODE=4555
 PRECIOUSPROG=

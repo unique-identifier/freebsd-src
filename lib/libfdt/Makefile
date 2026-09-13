@@ -24,6 +24,4 @@ INCS=					\
 CFLAGS+=	-I${LIBFDTSRCDIR}
 WARNS?=		2
 
-MAN=
-
 .include <bsd.lib.mk>

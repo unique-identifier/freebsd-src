@@ -1,7 +1,6 @@
 .include <src.opts.mk>
 
 PROG=	jls
-MAN=	jls.8
 LIBADD=	jail xo
 
 PACKAGE=jail

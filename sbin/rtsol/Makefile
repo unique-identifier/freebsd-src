@@ -25,7 +25,6 @@ SRCS=	cap_llflags.c \
 	rtsol.c \
 	rtsold.c \
 	rtsock.c
-MAN=
 LIBADD=	util
 
 .include <src.opts.mk>

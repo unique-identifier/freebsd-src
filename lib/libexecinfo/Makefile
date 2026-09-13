@@ -13,13 +13,6 @@ CFLAGS+=	-I${SRCTOP}/contrib/llvm-project/libunwind/include
 
 LIBADD=		elf
 
-MAN=		backtrace.3
-
-MLINKS+=	backtrace.3 backtrace_symbols.3
-MLINKS+=	backtrace.3 backtrace_symbols_fmt.3
-MLINKS+=	backtrace.3 backtrace_symbols_fd.3
-MLINKS+=	backtrace.3 backtrace_symbols_fd_fmt.3
-
 HAS_TESTS=
 SUBDIR.${MK_TESTS}+= tests
 

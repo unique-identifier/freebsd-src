@@ -12,9 +12,6 @@ SRCS=		crypt.c misc.c \
 		crypt-nthash.c \
 		crypt-sha256.c \
 		crypt-sha512.c
-MAN=		crypt.3
-MLINKS=		crypt.3 crypt_get_format.3 crypt.3 crypt_r.3 \
-		crypt.3 crypt_set_format.3
 CFLAGS+=	-I${SRCTOP}/lib/libmd \
 		-I${SRCTOP}/sys/crypto/sha2
 

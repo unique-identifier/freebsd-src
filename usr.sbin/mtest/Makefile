@@ -1,7 +1,6 @@
 .include <src.opts.mk>
 
 PROG=	mtest
-MAN=	mtest.8
 
 BINMODE= 555
 WARNS?=	3

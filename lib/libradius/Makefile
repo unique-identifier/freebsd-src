@@ -32,44 +32,6 @@ CFLAGS+=	-Wall
 CFLAGS+=	-DOPENSSL_API_COMPAT=0x10100000L
 SHLIB_MAJOR=	4
 
-MAN=		libradius.3
-MANNODEV=	radius.conf.5
-
-MLINKS+=libradius.3 rad_acct_open.3 \
-	libradius.3 rad_add_server.3 \
-	libradius.3 rad_add_server_ex.3 \
-	libradius.3 rad_auth_open.3 \
-	libradius.3 rad_bind_to.3 \
-	libradius.3 rad_close.3 \
-	libradius.3 rad_config.3 \
-	libradius.3 rad_continue_send_request.3 \
-	libradius.3 rad_create_request.3 \
-	libradius.3 rad_create_response.3 \
-	libradius.3 rad_cvt_addr.3 \
-	libradius.3 rad_cvt_int.3 \
-	libradius.3 rad_cvt_string.3 \
-	libradius.3 rad_demangle.3 \
-	libradius.3 rad_demangle_mppe_key.3 \
-	libradius.3 rad_get_attr.3 \
-	libradius.3 rad_get_vendor_attr.3 \
-	libradius.3 rad_init_send_request.3 \
-	libradius.3 rad_put_addr.3 \
-	libradius.3 rad_put_attr.3 \
-	libradius.3 rad_put_int.3 \
-	libradius.3 rad_put_message_authentic.3 \
-	libradius.3 rad_put_string.3 \
-	libradius.3 rad_put_vendor_addr.3 \
-	libradius.3 rad_put_vendor_attr.3 \
-	libradius.3 rad_put_vendor_int.3 \
-	libradius.3 rad_put_vendor_string.3 \
-	libradius.3 rad_receive_request.3 \
-	libradius.3 rad_request_authenticator.3 \
-	libradius.3 rad_send_request.3 \
-	libradius.3 rad_send_response.3 \
-	libradius.3 rad_server_open.3 \
-	libradius.3 rad_server_secret.3 \
-	libradius.3 rad_strerror.3
-
 WARNS?=		3
 
 .if ${MK_OPENSSL} != "no"

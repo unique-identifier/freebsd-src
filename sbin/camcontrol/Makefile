@@ -25,6 +25,5 @@ WARNS?= 3
 .endif
 CFLAGS+= -I${SRCTOP}/lib/libnvmf
 LIBADD=	cam nvmf sbuf util
-MAN=	camcontrol.8
 
 .include <bsd.prog.mk>

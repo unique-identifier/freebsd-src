@@ -14,8 +14,6 @@
 #
 
 PROG=	rtsold
-MAN=	rtsold.8
-MLINKS=	rtsold.8 rtsol.8
 SRCS=	cap_llflags.c \
 	cap_script.c \
 	cap_sendmsg.c \

@@ -2,7 +2,6 @@
 
 PACKAGE=pf
 PROG=	pflowctl
-MAN=	pflowctl.8
 
 SRCS = pflowctl.c
 

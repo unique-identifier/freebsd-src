@@ -4,11 +4,6 @@ CFLAGS+= -I${.CURDIR:H}/lib
 
 LIBADD=	util fifolog
 
-MAN=	fifolog.1
-MLINKS=	fifolog.1 fifolog_create.1 \
-	fifolog.1 fifolog_reader.1 \
-	fifolog.1 fifolog_writer.1
-
 regress:
 	rm -f /tmp/fifolog.?
 	./${PROG} /tmp/fifolog.0

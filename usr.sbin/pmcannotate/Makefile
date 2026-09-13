@@ -1,6 +1,5 @@
 PACKAGE=pmc
 PROG=	pmcannotate
-MAN=	pmcannotate.8
 
 SRCS=	pmcannotate.c
 

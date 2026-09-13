@@ -1,7 +1,6 @@
 .include <src.opts.mk>
 
 PROG=	procstat
-MAN=	procstat.1
 SRCS=	procstat.c		\
 	procstat_advlock.c	\
 	procstat_args.c		\
@@ -22,10 +21,6 @@ SRCS=	procstat.c		\
 	procstat_sigs.c		\
 	procstat_threads.c	\
 	procstat_vm.c
-
-MLINKS+=	procstat.1 pargs.1
-MLINKS+=	procstat.1 penv.1
-MLINKS+=	procstat.1 pwdx.1
 
 LIBADD+=	procstat xo util sbuf
 

@@ -1,7 +1,6 @@
 .include <src.opts.mk>
 
 PROG=	rpc.tlsservd
-MAN=	rpc.tlsservd.8
 SRCS=	rpc.tlsservd.c rpc.tlscommon.c rpctlssd.h rpctlssd_svc.c rpctlssd_xdr.c
 
 CFLAGS+= -I.

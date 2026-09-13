@@ -11,6 +11,5 @@ NO_WMISSING_VARIABLE_DECLARATIONS=
 CFLAGS+=-I. -I${.CURDIR}
 
 LINKS=	${BINDIR}/ar ${BINDIR}/ranlib
-MLINKS= ar.1 ranlib.1
 
 .include <bsd.prog.mk>

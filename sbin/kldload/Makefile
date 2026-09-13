@@ -27,6 +27,5 @@
 
 PACKAGE=runtime
 PROG=	kldload
-MAN=	kldload.8
 
 .include <bsd.prog.mk>

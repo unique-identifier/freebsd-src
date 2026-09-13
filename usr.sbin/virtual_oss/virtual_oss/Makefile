@@ -1,5 +1,4 @@
 PROG=		virtual_oss
-MAN=		${PROG}.8
 
 SRCS=		audio_delay.c \
 		compressor.c \

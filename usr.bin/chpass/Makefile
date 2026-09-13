@@ -27,11 +27,6 @@ SYMLINKS+=	chpass ${BINDIR}/ypchpass
 SYMLINKS+=	chpass ${BINDIR}/ypchsh
 .endif
 
-MLINKS=	chpass.1 chfn.1 chpass.1 chsh.1
-.if ${MK_NIS} != "no"
-MLINKS+= chpass.1 ypchpass.1 chpass.1 ypchfn.1 chpass.1 ypchsh.1
-.endif
-
 beforeinstall:
 .for i in chpass chfn chsh ypchpass ypchfn ypchsh
 .if exists(${DESTDIR}${BINDIR}/$i)

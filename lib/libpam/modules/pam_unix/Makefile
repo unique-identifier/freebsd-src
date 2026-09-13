@@ -38,7 +38,6 @@
 
 LIB=		pam_unix
 SRCS=		pam_unix.c
-MANNODEV=	pam_unix.8
 
 LIBADD+=	util crypt
 

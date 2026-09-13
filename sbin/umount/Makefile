@@ -1,7 +1,6 @@
 PACKAGE=runtime
 PROG=	umount
 SRCS=	umount.c vfslist.c mounttab.c
-MAN=	umount.8
 
 MOUNT=	${.CURDIR:H}/mount
 UMNTALL= ${SRCTOP}/usr.sbin/rpc.umntall

@@ -41,11 +41,7 @@ LIB=	pam
 NO_PIC=
 
 # Avoid redundancy with the master Makefile.
-MAN=
-MANNODEV=
 INCS=
-MLINKS=
-MANNODEVLINKS=
 MK_TESTS=	no
 
 #

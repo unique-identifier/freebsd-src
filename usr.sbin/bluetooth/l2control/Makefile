@@ -2,7 +2,6 @@
 
 PACKAGE=	bluetooth
 PROG=		l2control
-MAN=		l2control.8
 SRCS=		l2cap.c l2control.c
 WARNS?=		2
 

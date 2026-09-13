@@ -16,10 +16,6 @@ SRCS+=	\
 	signalcontext.c \
 	sigsetjmp.S \
 
-MAN+=	\
-	arm_drain_writebuf.2 \
-	arm_sync_icache.2 \
-
 .if !defined(CPUTYPE) || ${CPUTYPE:M*soft*} == ""
 
 SRCS+=	\

@@ -1,5 +1,5 @@
 _spath=	${SRCTOP}/contrib/ofed/opensm/opensm
-.PATH: ${_spath} ${_spath:H}/man
+.PATH: ${_spath}
 
 BINDIR?=	/usr/bin
 PROG=		opensm
@@ -92,7 +92,6 @@ osm_vl15intf.c \
 osm_vl_arb_rcv.c \
 st.c
 
-MAN=		opensm.8
 CFLAGS+=	-I${_spath:H} -DHAVE_CONFIG_H=1
 CFLAGS+=	-I${SYSROOT:U${DESTDIR}}/${INCLUDEDIR}/infiniband
 LIBADD=		opensm osmvendor osmcomp wrap pthread

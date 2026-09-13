@@ -6,7 +6,6 @@ LIBADD=	ufs util
 SRCS=	newfs.c mkfs.c geom_bsd_enc.c
 
 WARNS?=	3
-MAN=	newfs.8
 
 .include <bsd.prog.mk>
 

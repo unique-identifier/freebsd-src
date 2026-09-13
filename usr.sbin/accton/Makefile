@@ -1,5 +1,4 @@
 PROG=	accton
-MAN=	accton.8
 
 PACKAGE=acct
 

@@ -10,6 +10,4 @@ SRCS=	hostapd_cli.c
 
 LIBADD+=	util wpacommon wpautils
 
-MAN=	hostapd_cli.8
-
 .include <bsd.prog.mk>

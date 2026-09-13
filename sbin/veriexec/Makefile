@@ -1,5 +1,4 @@
 PROG=	veriexec
-MAN=	veriexec.8
 SRCS= \
 	veriexec.c \
 	manifest_parser.y \

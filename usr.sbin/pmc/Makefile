@@ -2,7 +2,6 @@
 
 PACKAGE=	pmc
 PROG_CXX=	pmc
-MAN=	
 CWARNFLAGS.gcc+= -Wno-redundant-decls
 CFLAGS+= -I${SRCTOP}/lib/libpmcstat
 

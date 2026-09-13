@@ -10,13 +10,7 @@ WARNS?=	0
 # compat 4.3 sources
 SRCS+=	re_comp.c rexec.c
 
-MAN+=	4.3/re_comp.3 4.3/rexec.3
-
-MLINKS+=re_comp.3 re_exec.3
-
 # compat 4.4 sources
 SRCS+=	cuserid.c
-
-MAN+=	4.4/cuserid.3
 
 .include <bsd.lib.mk>

@@ -2,7 +2,6 @@ PACKAGE=	nuageinit
 SCRIPTS=	nuageinit
 FILES=		nuage.lua
 FILESDIR=	${SHAREDIR}/flua
-MAN=		nuageinit.7
 
 .include <src.opts.mk>
 

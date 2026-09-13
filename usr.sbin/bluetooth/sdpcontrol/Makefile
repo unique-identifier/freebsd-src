@@ -2,7 +2,6 @@
 
 PACKAGE=	bluetooth
 PROG=		sdpcontrol
-MAN=		sdpcontrol.8
 SRCS=		sdpcontrol.c search.c
 WARNS?=		2
 

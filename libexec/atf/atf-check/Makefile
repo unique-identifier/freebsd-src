@@ -32,7 +32,6 @@ ATF=		${SRCTOP}/contrib/atf
 
 PROG_CXX=	atf-check
 SRCS=		atf-check.cpp
-MAN=		atf-check.1
 
 CFLAGS+=	-I${ATF}
 CFLAGS+=	-DATF_SHELL='"/bin/sh"'

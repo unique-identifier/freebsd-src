@@ -12,7 +12,6 @@ SRCS=	cd9660.c \
 	msdos.c \
 	mtree.c \
 	walk.c
-MAN=	makefs.8
 
 NO_WCAST_ALIGN=
 

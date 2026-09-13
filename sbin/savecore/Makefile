@@ -5,7 +5,6 @@ VAR_CRASH_MODE=	0750
 CONFSDIR=	VAR_CRASH
 PROG=	savecore
 LIBADD=	xo z zstd
-MAN=	savecore.8
 
 CFLAGS+=	-I${SRCTOP}/sys/contrib/zstd/lib
 

@@ -4,8 +4,6 @@ PROG=	xzdec
 
 LINKS=	${BINDIR}/xzdec ${BINDIR}/lzdec
 
-MLINKS= xzdec.1 lzmadec.1
-
 XZDIR=	${SRCTOP}/contrib/xz/src
 LZMALIBDIR=	${SRCTOP}/lib/liblzma
 

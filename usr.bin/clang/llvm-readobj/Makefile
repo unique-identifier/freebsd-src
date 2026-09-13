@@ -1,7 +1,6 @@
 .include <src.opts.mk>
 
 PROG_CXX=	llvm-readobj
-MAN=	llvm-readobj.1 llvm-readelf.1
 
 SRCDIR=		llvm/tools/llvm-readobj
 SRCS+=		ARMWinEHPrinter.cpp
@@ -37,7 +36,6 @@ LINKS+=		${BINDIR}/llvm-readobj ${BINDIR}/llvm-readelf
 
 .if ${MK_LLVM_BINUTILS} != "no"
 LINKS+=		${BINDIR}/llvm-readelf ${BINDIR}/readelf
-MLINKS+=		llvm-readelf.1 readelf.1
 .endif
 
 .include "../llvm.prog.mk"

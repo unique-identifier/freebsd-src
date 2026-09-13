@@ -27,6 +27,5 @@
 
 PACKAGE=runtime
 PROG=		kldconfig
-MAN=		kldconfig.8
 
 .include <bsd.prog.mk>

@@ -8,7 +8,6 @@ PROG=	pkill
 LIBADD=	kvm jail
 
 LINKS=	${BINDIR}/pkill ${BINDIR}/pgrep
-MLINKS=	pkill.1 pgrep.1
 
 #
 # If considering retirement of these compatibility symlinks,

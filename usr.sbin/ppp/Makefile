@@ -2,7 +2,6 @@
 
 PACKAGE=	ppp
 PROG=	ppp
-MAN=	ppp.8
 SRCS=	acf.c arp.c async.c auth.c bundle.c cbcp.c ccp.c chap.c chat.c \
 	command.c datalink.c deflate.c defs.c exec.c filter.c fsm.c hdlc.c \
 	iface.c ip.c ipcp.c ipv6cp.c iplist.c lcp.c link.c log.c lqr.c main.c \

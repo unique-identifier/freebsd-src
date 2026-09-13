@@ -6,7 +6,6 @@
 PACKAGE=	runtime
 
 PROG=	grep
-MAN=	grep.1 zgrep.1
 
 SRCS=	file.c grep.c queue.c util.c
 
@@ -29,25 +28,6 @@ LINKS=		${BINDIR}/zgrep ${BINDIR}/zfgrep \
 LINKS+=		${BINDIR}/grep ${BINDIR}/egrep \
 		${BINDIR}/grep ${BINDIR}/fgrep \
 		${BINDIR}/grep ${BINDIR}/rgrep \
-
-MLINKS=		zgrep.1 zfgrep.1 \
-		zgrep.1 zegrep.1 \
-		zgrep.1 bzgrep.1 \
-		zgrep.1 bzegrep.1 \
-		zgrep.1 bzfgrep.1 \
-		zgrep.1 lzgrep.1 \
-		zgrep.1 lzegrep.1 \
-		zgrep.1 lzfgrep.1 \
-		zgrep.1 xzgrep.1 \
-		zgrep.1 xzegrep.1 \
-		zgrep.1 xzfgrep.1 \
-		zgrep.1 zstdgrep.1 \
-		zgrep.1 zstdegrep.1 \
-		zgrep.1 zstdfgrep.1
-
-MLINKS+=	grep.1 egrep.1 \
-		grep.1 fgrep.1 \
-		grep.1 rgrep.1
 
 CFLAGS.gcc+= --param max-inline-insns-single=500
 

@@ -31,8 +31,6 @@ SCRIPTS=auto \
 
 BINDIR= ${LIBEXECDIR}/bsdinstall
 
-MAN=
-
 pkgbase: pkgbase.in
 	sed "s|%%_ALL_libcompats%%|${_ALL_libcompats}|" < ${.ALLSRC} > ${.TARGET}
 

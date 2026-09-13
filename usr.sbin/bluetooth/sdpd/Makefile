@@ -2,7 +2,6 @@
 
 PACKAGE=	bluetooth
 PROG=		sdpd
-MAN=		sdpd.8
 SRCS=		audio_sink.c audio_source.c \
 		bgd.c dun.c ftrn.c gn.c irmc.c irmc_command.c lan.c log.c \
 		main.c nap.c opush.c panu.c profile.c provider.c sar.c scr.c \

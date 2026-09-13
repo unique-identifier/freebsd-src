@@ -13,6 +13,13 @@ Items affecting the ports and packages system can be found in
 and/or ports.
 
 20260913:
+	Manual pages and their databases are no longer built or installed,
+	even with WITH_MAN or MK_MAN=yes.  Manual-page sources and utilities
+	remain temporarily; MAN_UTILS now defaults to yes independently of
+	MAN.  The weekly whatis job and the mandoc package trigger are no
+	longer installed, and weekly_whatis_enable now defaults to NO.
+
+20260913:
 	PXE boot and TFTP support have been removed, including pxeboot,
 	tftp, tftpd, the TFTP proxies, and loader TFTP access.  The
 	LOADER_PXEBOOT and TFTP build options are gone.  BIOS loaders no

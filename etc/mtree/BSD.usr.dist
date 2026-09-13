@@ -461,36 +461,6 @@
         ..
         locale
         ..
-        man
-            man1
-            ..
-            man2
-            ..
-            man3
-            ..
-            man3lua
-            ..
-            man4
-                aarch64
-                ..
-                arm
-                ..
-                i386
-                ..
-                powerpc
-                ..
-            ..
-            man5
-            ..
-            man6
-            ..
-            man7
-            ..
-            man8
-            ..
-            man9
-            ..
-        ..
         misc
             fonts
             ..
@@ -789,18 +759,6 @@
             zh_HK.UTF-8
             ..
             zh_TW.UTF-8
-            ..
-        ..
-        openssl
-            man
-                man1
-                ..
-                man3
-                ..
-                man5
-                ..
-                man7
-                ..
             ..
         ..
         pkg

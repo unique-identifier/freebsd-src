@@ -59,6 +59,12 @@
 .error bsd.man.mk cannot be included directly.
 .endif
 
+# Retain the rules below until manual-source cleanup is complete, but do not
+# generate or install pages, even when this file is included explicitly.
+.if ${MK_MAN} == "no"
+all-man maninstall realmaninstall manlinksinstall: .PHONY
+.else
+
 MANGROUPS?=	MAN
 
 # MAN_SUBPACKAGE is the subpackage manpages will be installed in.  When
@@ -354,3 +360,5 @@ checkmanlinks-${__group}-${__link}: .PHONY ${__page}
 .endif # defined(${__group}LINKS)
 
 .endfor	# __group in ${MANGROUPS}
+
+.endif # ${MK_MAN} == "no"

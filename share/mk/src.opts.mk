@@ -137,6 +137,7 @@ __DEFAULT_YES_OPTIONS = \
     MAILWRAPPER \
     MAKE \
     MALLOC_PRODUCTION \
+    MAN_UTILS \
     MLX5TOOL \
     NETCAT \
     NETGRAPH \
@@ -508,19 +509,5 @@ MK_LOADER_VERIEXEC_PASS_MANIFEST := no
 .if ${MK_CLEAN} == "yes"
 MK_DEPEND_CLEANUP:=	no
 .endif
-
-#
-# MK_* options whose default value depends on another option.
-#
-.for vv in \
-    MAN_UTILS/MAN
-.if defined(WITH_${vv:H})
-MK_${vv:H}:=	yes
-.elif defined(WITHOUT_${vv:H})
-MK_${vv:H}:=	no
-.else
-MK_${vv:H}:=	${MK_${vv:T}}
-.endif
-.endfor
 
 .endif #  !target(__<src.opts.mk>__)

@@ -32,6 +32,11 @@
 .if !target(__<bsd.opts.mk>__)
 __<bsd.opts.mk>__:	.NOTMAIN
 
+# Manual page output is retired.  Use a command-line assignment so recursive
+# builds and explicit MK_MAN=yes cannot re-enable it during the transition.
+.MAKEFLAGS: MK_MAN=no
+MK_MAN:= no
+
 .if !defined(_WITHOUT_SRCCONF)
 #
 # Define MK_* variables (which are either "yes" or "no") for users

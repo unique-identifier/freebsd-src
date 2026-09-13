@@ -18,9 +18,11 @@ LINKS=	${BINDIR}/mandoc ${BINDIR}/whatis \
 .error MK_MAN_UTILS should be set to yes when bootstrapping
 .endif
 
+.if ${MK_MAN} != "no"
 FILESGROUPS=	TRIGGERS
 TRIGGERS=	mandoc.ucl
 TRIGGERSDIR=	/usr/share/pkg/triggers
+.endif
 
 LIBMAN_SRCS=	man.c \
 		man_macro.c \

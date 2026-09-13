@@ -7,7 +7,7 @@ SUBDIR_PARALLEL=
 MAKEWHATIS?=	makewhatis
 
 makedb:
-.if ${MK_MAN_UTILS} != "no"
+.if ${MK_MAN} != "no" && ${MK_MAN_UTILS} != "no"
 	${MAKEWHATIS} ${DESTDIR}${BINDIR}/man
 .if defined(NO_ROOT) && defined(METALOG)
 	echo ".${DISTBASE}${BINDIR}/man/mandoc.db type=file uname=root gname=wheel mode=0644" | \

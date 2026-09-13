@@ -33,7 +33,7 @@ bsd.kmod.mk		- building loadable kernel modules
 bsd.lib.mk		- support for building libraries
 bsd.libnames.mk		- define library names
 bsd.links.mk		- install of links (sym/hard)
-bsd.man.mk		- install of manual pages and their links
+bsd.man.mk		- no-op compatibility targets for manual pages
 bsd.nls.mk		- build and install of NLS catalogs
 bsd.obj.mk		- creating 'obj' directories and cleaning up
 bsd.own.mk		- define common variables
@@ -228,47 +228,16 @@ Makefile.${MACHINE_CPUARCH}
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-The include file <bsd.man.mk> handles installing manual pages and their
-links.
-
-It has three targets:
-
-	all-man:
-		build manual pages.
-	maninstall:
-		install the manual pages and their links.
-	manlint:
-		verify the validity of manual pages.
-
-It sets/uses the following variables:
-
-MAN		The manual pages to be installed (use a .1 - .9 suffix).
-
-MANDIR		Base path for manual installation.
-
-MANGRP		Manual group.
-
-MANMODE		Manual mode.
-
-MANOWN		Manual owner.
-
-MANSUBDIR	Subdirectory under the manual page section, i.e. "/vax"
-		or "/tahoe" for machine specific manual pages.
-
-MLINKS		List of manual page links (using a .1 - .9 suffix).  The
-		linked-to file must come first, the linked file second,
-		and there may be multiple pairs.  The files are hard-linked.
-
-MANSRC.${MAN:T} Name of source file for an individual manual page.
-		Defaults to the manual page name.
-
-The include file <bsd.man.mk> includes a file named "../Makefile.inc" if
-it exists.
+The include file <bsd.man.mk> provides no-op compatibility targets:
+all-man, maninstall, realmaninstall, manlinksinstall, manlint, and
+checkmanlinks. Manual-page declarations are ignored; no pages are built,
+installed, staged, or linted. MK_MAN remains fixed at no for compatibility
+with older Makefiles.
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-The include file <bsd.own.mk> contains the owners, groups, etc. for both
-manual pages and binaries.
+The include file <bsd.own.mk> contains the owners, groups, etc. for
+binaries and shared data.
 
 It has no targets.
 
@@ -279,14 +248,6 @@ BINGRP		Binary group.
 BINMODE		Binary mode.
 
 BINOWN		Binary owner.
-
-MANDIR		Base path for manual installation.
-
-MANGRP		Manual group.
-
-MANMODE		Manual mode.
-
-MANOWN		Manual owner.
 
 INSTALL_LINK	Command to install a hard link.
 
@@ -312,23 +273,23 @@ they use the same default owners etc. as the rest of the tree.
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 The include file <bsd.prog.mk> handles building programs from one or
-more source files, along with their manual pages.  It has a limited number
+more source files.  It has a limited number
 of suffixes, consistent with the current needs of the BSD tree.
 
 It has seven targets:
 
 	all:
-		build the program and its manual page
+		build the program.
 	clean:
 		remove the program and any object files.
 	cleandir:
 		remove all of the files removed by the target clean, as
-		well as .depend, tags, and any manual pages.
+		well as .depend and tags.
 	depend:
 		make the dependencies for the source files, and store
 		them in the file .depend.
 	install:
-		install the program and its manual pages; if the Makefile
+		install the program; if the Makefile
 		does not itself define the target install, the targets
 		beforeinstall and afterinstall may also be used to cause
 		actions immediately before and after the install target
@@ -379,9 +340,6 @@ LINKGRP		Group of links created with LINKS [${BINGRP}].
 LINKMODE	Mode of links created with LINKS [${BINMODE}].
 
 
-MAN		Manual pages.  If no MAN variable is defined,
-		"MAN=${PROG}.1" is assumed. See bsd.man.mk for more details.
-
 PROG		The name of the program to build.  If not supplied, nothing
 		is built.
 
@@ -418,8 +376,6 @@ PROGS_CXX	PROG and PROG_CXX in one Makefile.  To define
 		- LDFLAGS
 		- LIBADD
 		- LINKS
-		- MAN
-		- MLINKS
 		- MK_WERROR=no
 		- PROGNAME
 		- SRCS
@@ -445,23 +401,15 @@ SUBDIR		A list of subdirectories that should be built as well.
 		subdirectories.
 
 The include file <bsd.prog.mk> includes the file named "../Makefile.inc"
-if it exists, as well as the include file <bsd.man.mk>.
+if it exists.
 
 Some simple examples:
 
-To build foo from foo.c with a manual page foo.1, use:
+To build foo from foo.c, use:
 
 	PROG=	foo
 
 	.include <bsd.prog.mk>
-
-To build foo from foo.c with a manual page foo.2, add the line:
-
-	MAN=	foo.2
-
-If foo does not have a manual page at all, add the line:
-
-	MAN=
 
 If foo has multiple source files, add the line:
 
@@ -484,7 +432,7 @@ WANT_COMPAT	Similar to NEED_COMPAT, but build with the base ABI if
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 The include file, <bsd.snmpmod.mk>, handles building MIB modules for bsnmpd
-from one or more source files, along with their manual pages.  It has a
+from one or more source files.  It has a
 limited number of suffixes, consistent with the current needs of the BSD
 tree.
 
@@ -609,9 +557,6 @@ LINKGRP		Group of links created with LINKS [${LIBGRP}].
 
 LINKMODE	Mode of links created with LINKS [${LIBMODE}].
 
-MAN		The manual pages to be installed. See bsd.man.mk for more
-		details.
-
 SHLIB		Like LIB but only builds a shared library.
 
 SHLIB_CXX	Like LIB_CXX but only builds a shared library.
@@ -626,7 +571,7 @@ SRCS		List of source files to build the library.  Suffix types
 		versions of make.)
 
 The include file <bsd.lib.mk> includes the file named "../Makefile.inc"
-if it exists, as well as the include file <bsd.man.mk>.
+if it exists.
 
 Libraries are ranlib'd before installation.
 

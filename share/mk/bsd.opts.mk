@@ -33,7 +33,7 @@
 __<bsd.opts.mk>__:	.NOTMAIN
 
 # Manual page output is retired.  Use a command-line assignment so recursive
-# builds and explicit MK_MAN=yes cannot re-enable it during the transition.
+# builds and explicit MK_MAN=yes cannot re-enable remaining source rules.
 .MAKEFLAGS: MK_MAN=no
 MK_MAN:= no
 
@@ -62,8 +62,6 @@ __DEFAULT_YES_OPTIONS = \
     INCLUDES \
     INSTALLLIB \
     MAKE_CHECK_USE_SANDBOX \
-    MAN \
-    MANCOMPRESS \
     NIS \
     NLS \
     OPENSSH \
@@ -82,7 +80,6 @@ __DEFAULT_NO_OPTIONS = \
     CCACHE_BUILD \
     CTF \
     INSTALL_AS_USER \
-    MANSPLITPKG \
     RETPOLINE \
     RUN_TESTS \
     STALE_STAGED \
@@ -92,7 +89,6 @@ __DEFAULT_NO_OPTIONS = \
 
 __DEFAULT_DEPENDENT_OPTIONS = \
     MAKE_CHECK_USE_SANDBOX/TESTS \
-    STAGING_MAN/STAGING \
     STAGING_PROG/STAGING \
     STALE_STAGED/STAGING \
 

@@ -51,16 +51,10 @@
 #   xargs -n1 | sort | uniq -d;
 # done
 
+# 20260913: Remove all installed system manual pages and databases.
+.include "tools/build/mk/ObsoleteManFiles.inc"
+
 # 20260913: Remove installed manual-page utilities.
-OLD_FILES+=usr/share/man/man1/mandoc.1.gz
-OLD_FILES+=usr/share/man/man1/mdocml.1.gz
-OLD_FILES+=usr/share/man/man5/mandoc.db.5.gz
-OLD_FILES+=usr/share/man/man7/eqn.7.gz
-OLD_FILES+=usr/share/man/man7/mandoc_char.7.gz
-OLD_FILES+=usr/share/man/man7/tbl.7.gz
-OLD_FILES+=usr/share/man/man7/man.7.gz
-OLD_FILES+=usr/share/man/man7/mdoc.7.gz
-OLD_FILES+=usr/share/man/man7/roff.7.gz
 OLD_FILES+=etc/periodic/weekly/320.whatis
 OLD_FILES+=usr/bin/apropos
 OLD_FILES+=usr/bin/makewhatis
@@ -69,27 +63,12 @@ OLD_FILES+=usr/bin/manpath
 OLD_FILES+=usr/bin/whatis
 OLD_FILES+=usr/libexec/makewhatis.local
 OLD_FILES+=usr/sbin/manctl
-OLD_FILES+=usr/share/man/man1/apropos.1.gz
-OLD_FILES+=usr/share/man/man1/makewhatis.1.gz
-OLD_FILES+=usr/share/man/man1/man.1.gz
-OLD_FILES+=usr/share/man/man1/manpath.1.gz
-OLD_FILES+=usr/share/man/man1/whatis.1.gz
-OLD_FILES+=usr/share/man/man5/man.conf.5.gz
-OLD_FILES+=usr/share/man/man8/makewhatis.local.8.gz
-OLD_FILES+=usr/share/man/man8/manctl.8.gz
-OLD_FILES+=usr/share/man/whatis
-OLD_FILES+=usr/share/openssl/man/whatis
 OLD_FILES+=usr/bin/mandoc
 OLD_FILES+=usr/share/pkg/triggers/mandoc.ucl
-OLD_FILES+=usr/share/man/mandoc.db
-OLD_FILES+=usr/share/openssl/man/mandoc.db
-OLD_FILES+=usr/share/man/man8/makewhatis.8.gz
 
 # 20260913: Remove PXE boot and TFTP support.
 OLD_FILES+=usr/bin/tftp
 OLD_FILES+=usr/libexec/tftpd
-OLD_FILES+=usr/share/man/man1/tftp.1.gz
-OLD_FILES+=usr/share/man/man8/tftpd.8.gz
 OLD_FILES+=usr/tests/libexec/tftpd/functional
 OLD_FILES+=usr/tests/libexec/tftpd/Kyuafile
 OLD_FILES+=usr/tests/usr.bin/tftp/tftp_test
@@ -97,18 +76,13 @@ OLD_FILES+=usr/tests/usr.bin/tftp/Kyuafile
 OLD_DIRS+=usr/tests/libexec/tftpd
 OLD_DIRS+=usr/tests/usr.bin/tftp
 OLD_FILES+=boot/pxeboot
-OLD_FILES+=usr/share/man/man8/pxeboot.8.gz
 OLD_FILES+=usr/libexec/tftp-proxy
-OLD_FILES+=usr/share/man/man8/tftp-proxy.8.gz
 OLD_FILES+=usr/include/arpa/tftp.h
 
 # 20260913: Remove the ee editor.
 OLD_FILES+=usr/bin/edit
 OLD_FILES+=usr/bin/ee
 OLD_FILES+=usr/bin/ree
-OLD_FILES+=usr/share/man/man1/edit.1.gz
-OLD_FILES+=usr/share/man/man1/ee.1.gz
-OLD_FILES+=usr/share/man/man1/ree.1.gz
 OLD_FILES+=usr/share/misc/init.ee
 OLD_FILES+=usr/share/nls/C/ee.cat
 OLD_FILES+=usr/share/nls/de_DE.ISO8859-1/ee.cat
@@ -176,17 +150,6 @@ OLD_FILES+=usr/share/examples/printing/psif
 OLD_FILES+=usr/share/examples/printing/pstf
 OLD_FILES+=usr/share/examples/printing/pstfX
 OLD_DIRS+=usr/share/examples/printing
-OLD_FILES+=usr/share/man/man1/lp.1.gz
-OLD_FILES+=usr/share/man/man1/lpq.1.gz
-OLD_FILES+=usr/share/man/man1/lpr.1.gz
-OLD_FILES+=usr/share/man/man1/lprm.1.gz
-OLD_FILES+=usr/share/man/man1/lptest.1.gz
-OLD_FILES+=usr/share/man/man5/hosts.lpd.5.gz
-OLD_FILES+=usr/share/man/man5/printcap.5.gz
-OLD_FILES+=usr/share/man/man8/chkprintcap.8.gz
-OLD_FILES+=usr/share/man/man8/lpc.8.gz
-OLD_FILES+=usr/share/man/man8/lpd.8.gz
-OLD_FILES+=usr/share/man/man8/pac.8.gz
 OLD_DIRS+=usr/lib/debug/usr/libexec/lpr/ru
 OLD_DIRS+=usr/lib/debug/usr/libexec/lpr
 OLD_DIRS+=var/spool/output/lpd
@@ -198,12 +161,6 @@ OLD_FILES+=usr/sbin/fdcontrol
 OLD_FILES+=usr/sbin/fdformat
 OLD_FILES+=usr/sbin/fdread
 OLD_FILES+=usr/sbin/fdwrite
-OLD_FILES+=usr/share/man/man1/fdformat.1.gz
-OLD_FILES+=usr/share/man/man1/fdread.1.gz
-OLD_FILES+=usr/share/man/man1/fdwrite.1.gz
-OLD_FILES+=usr/share/man/man8/fdcontrol.8.gz
-OLD_FILES+=usr/share/man/man8/fdformat.8.gz
-OLD_FILES+=usr/share/man/man4/fdc.4.gz
 OLD_FILES+=usr/include/sys/fdcio.h
 OLD_FILES+=boot/kernel/fdc.ko
 
@@ -211,7 +168,6 @@ OLD_FILES+=boot/kernel/fdc.ko
 OLD_FILES+=etc/periodic/daily/300.calendar
 OLD_FILES+=usr/bin/calendar
 OLD_FILES+=usr/share/calendar/calendar.freebsd
-OLD_FILES+=usr/share/man/man1/calendar.1.gz
 OLD_FILES+=usr/tests/usr.bin/calendar/Kyuafile
 OLD_FILES+=usr/tests/usr.bin/calendar/calendar.calibrate
 OLD_FILES+=usr/tests/usr.bin/calendar/calendar.comment
@@ -263,7 +219,6 @@ _RESCUE_FILES!=find ${DESTDIR}/rescue ! -type d 2>/dev/null | sed -e 's,^${DESTD
 OLD_DIRS+=${_RESCUE_DIRS}
 OLD_FILES+=${_RESCUE_FILES}
 .endif
-OLD_FILES+=usr/share/man/man8/rescue.8.gz
 OLD_FILES+=usr/lib/libicp_rescue.a
 OLD_FILES+=usr/lib/libicp_rescue.so
 OLD_LIBS+=usr/lib/libicp_rescue.so.3
@@ -472,8 +427,6 @@ OLD_FILES+=boot/kernel/apm_saver.ko
 OLD_FILES+=boot/kernel/splash_bmp.ko
 OLD_FILES+=boot/kernel/splash_pcx.ko
 OLD_FILES+=boot/kernel/splash_txt.ko
-OLD_FILES+=usr/share/man/man4/syscons.4.gz
-OLD_FILES+=usr/share/man/man4/splash.4.gz
 
 OLD_FILES+=usr/share/examples/libvgl/Makefile
 OLD_FILES+=usr/share/examples/libvgl/demo.c
@@ -482,49 +435,11 @@ OLD_FILES+=usr/include/vgl.h
 OLD_FILES+=usr/lib/libvgl.a
 OLD_FILES+=usr/lib/libvgl.so
 OLD_LIBS+=usr/lib/libvgl.so.6
-OLD_FILES+=usr/share/man/man3/vgl.3.gz
-OLD_FILES+=usr/share/man/man3/VGLBitmapAllocateBits.3.gz
-OLD_FILES+=usr/share/man/man3/VGLBitmapCopy.3.gz
-OLD_FILES+=usr/share/man/man3/VGLBitmapCreate.3.gz
-OLD_FILES+=usr/share/man/man3/VGLBitmapDestroy.3.gz
-OLD_FILES+=usr/share/man/man3/VGLBitmapPutChar.3.gz
-OLD_FILES+=usr/share/man/man3/VGLBitmapString.3.gz
-OLD_FILES+=usr/share/man/man3/VGLBlankDisplay.3.gz
-OLD_FILES+=usr/share/man/man3/VGLBox.3.gz
-OLD_FILES+=usr/share/man/man3/VGLCheckSwitch.3.gz
-OLD_FILES+=usr/share/man/man3/VGLClear.3.gz
-OLD_FILES+=usr/share/man/man3/VGLEllipse.3.gz
-OLD_FILES+=usr/share/man/man3/VGLEnd.3.gz
-OLD_FILES+=usr/share/man/man3/VGLFilledBox.3.gz
-OLD_FILES+=usr/share/man/man3/VGLFilledEllipse.3.gz
-OLD_FILES+=usr/share/man/man3/VGLGetXY.3.gz
-OLD_FILES+=usr/share/man/man3/VGLInit.3.gz
-OLD_FILES+=usr/share/man/man3/VGLLine.3.gz
-OLD_FILES+=usr/share/man/man3/VGLKeyboardInit.3.gz
-OLD_FILES+=usr/share/man/man3/VGLKeyboardEnd.3.gz
-OLD_FILES+=usr/share/man/man3/VGLKeyboardGetCh.3.gz
-OLD_FILES+=usr/share/man/man3/VGLMouseInit.3.gz
-OLD_FILES+=usr/share/man/man3/VGLMouseMode.3.gz
-OLD_FILES+=usr/share/man/man3/VGLMouseSetImage.3.gz
-OLD_FILES+=usr/share/man/man3/VGLMouseSetStdImage.3.gz
-OLD_FILES+=usr/share/man/man3/VGLMouseStatus.3.gz
-OLD_FILES+=usr/share/man/man3/VGLPanScreen.3.gz
-OLD_FILES+=usr/share/man/man3/VGLSetBorder.3.gz
-OLD_FILES+=usr/share/man/man3/VGLSetPalette.3.gz
-OLD_FILES+=usr/share/man/man3/VGLSetPaletteIndex.3.gz
-OLD_FILES+=usr/share/man/man3/VGLSetVScreenSize.3.gz
-OLD_FILES+=usr/share/man/man3/VGLSetXY.3.gz
-OLD_FILES+=usr/share/man/man3/VGLTextSetFontFile.3.gz
-OLD_FILES+=usr/share/man/man4/sc.4.gz
-OLD_FILES+=usr/share/man/man4/screensaver.4.gz
 
 # 20260913: Remove finger and fingerd.
 OLD_FILES+=usr/bin/finger
 OLD_FILES+=usr/libexec/fingerd
 
-OLD_FILES+=usr/share/man/man1/finger.1.gz
-OLD_FILES+=usr/share/man/man5/finger.conf.5.gz
-OLD_FILES+=usr/share/man/man8/fingerd.8.gz
 
 # 20260913: Remove games and fortune data.
 OLD_FILES+=usr/bin/caesar
@@ -564,18 +479,6 @@ OLD_DIRS+=usr/tests/usr.bin/factor
 OLD_DIRS+=usr/tests/games
 OLD_DIRS+=var/games
 
-OLD_FILES+=usr/share/man/man6/caesar.6.gz
-OLD_FILES+=usr/share/man/man6/factor.6.gz
-OLD_FILES+=usr/share/man/man6/fortune.6.gz
-OLD_FILES+=usr/share/man/man6/grdc.6.gz
-OLD_FILES+=usr/share/man/man6/morse.6.gz
-OLD_FILES+=usr/share/man/man6/number.6.gz
-OLD_FILES+=usr/share/man/man6/pom.6.gz
-OLD_FILES+=usr/share/man/man6/primes.6.gz
-OLD_FILES+=usr/share/man/man6/random.6.gz
-OLD_FILES+=usr/share/man/man6/rot13.6.gz
-OLD_FILES+=usr/share/man/man8/strfile.8.gz
-OLD_FILES+=usr/share/man/man8/unstr.8.gz
 
 # 20260913: Remove MIT Kerberos and kernel GSSAPI.
 OLD_FILES+=etc/rc.d/gssd
@@ -742,56 +645,6 @@ OLD_DIRS+=usr/lib/krb5
 OLD_DIRS+=usr/share/et
 OLD_DIRS+=etc/gss
 
-OLD_FILES+=usr/share/man/man8/gssd.8.gz
-OLD_FILES+=usr/share/man/man1/compile_et.1.gz
-OLD_FILES+=usr/share/man/man1/kdestroy.1.gz
-OLD_FILES+=usr/share/man/man1/kinit.1.gz
-OLD_FILES+=usr/share/man/man1/klist.1.gz
-OLD_FILES+=usr/share/man/man1/kpasswd.1.gz
-OLD_FILES+=usr/share/man/man1/krb5-config.1.gz
-OLD_FILES+=usr/share/man/man1/kswitch.1.gz
-OLD_FILES+=usr/share/man/man8/pam_krb5.8.gz
-OLD_FILES+=usr/share/man/man8/pam_ksu.8.gz
-OLD_FILES+=usr/share/man/man8/kadmind.8.gz
-OLD_FILES+=usr/share/man/man3/com_err.3.gz
-OLD_FILES+=usr/share/man/man3/rpcsec_gss.3.gz
-OLD_FILES+=usr/share/man/man3/rpc_gss_get_error.3.gz
-OLD_FILES+=usr/share/man/man3/rpc_gss_get_mech_info.3.gz
-OLD_FILES+=usr/share/man/man3/rpc_gss_get_mechanisms.3.gz
-OLD_FILES+=usr/share/man/man3/rpc_gss_get_principal_name.3.gz
-OLD_FILES+=usr/share/man/man3/rpc_gss_get_versions.3.gz
-OLD_FILES+=usr/share/man/man3/rpc_gss_getcred.3.gz
-OLD_FILES+=usr/share/man/man3/rpc_gss_is_installed.3.gz
-OLD_FILES+=usr/share/man/man3/rpc_gss_max_data_length.3.gz
-OLD_FILES+=usr/share/man/man3/rpc_gss_mech_to_oid.3.gz
-OLD_FILES+=usr/share/man/man3/rpc_gss_oid_to_mech.3.gz
-OLD_FILES+=usr/share/man/man3/rpc_gss_qop_to_num.3.gz
-OLD_FILES+=usr/share/man/man3/rpc_gss_seccreate.3.gz
-OLD_FILES+=usr/share/man/man3/rpc_gss_set_callback.3.gz
-OLD_FILES+=usr/share/man/man3/rpc_gss_set_defaults.3.gz
-OLD_FILES+=usr/share/man/man3/rpc_gss_set_svc_name.3.gz
-OLD_FILES+=usr/share/man/man3/rpc_gss_svc_max_data_length.3.gz
-OLD_FILES+=usr/share/man/man5/krb5.conf.5.gz
-OLD_FILES+=usr/share/man/man1/k5srvutil.1.gz
-OLD_FILES+=usr/share/man/man1/kadmin.1.gz
-OLD_FILES+=usr/share/man/man1/ksu.1.gz
-OLD_FILES+=usr/share/man/man1/ktutil.1.gz
-OLD_FILES+=usr/share/man/man1/kvno.1.gz
-OLD_FILES+=usr/share/man/man1/sclient.1.gz
-OLD_FILES+=usr/share/man/man5/.k5identity.5.gz
-OLD_FILES+=usr/share/man/man5/.k5login.5.gz
-OLD_FILES+=usr/share/man/man5/k5identity.5.gz
-OLD_FILES+=usr/share/man/man5/k5login.5.gz
-OLD_FILES+=usr/share/man/man5/kadm5.acl.5.gz
-OLD_FILES+=usr/share/man/man5/kdc.conf.5.gz
-OLD_FILES+=usr/share/man/man7/kerberos.7.gz
-OLD_FILES+=usr/share/man/man8/kadmin.local.8.gz
-OLD_FILES+=usr/share/man/man8/kdb5_util.8.gz
-OLD_FILES+=usr/share/man/man8/kprop.8.gz
-OLD_FILES+=usr/share/man/man8/kpropd.8.gz
-OLD_FILES+=usr/share/man/man8/kproplog.8.gz
-OLD_FILES+=usr/share/man/man8/krb5kdc.8.gz
-OLD_FILES+=usr/share/man/man8/pam-krb5.8.gz
 
 # 20260913: Remove the Heimdal Kerberos implementation.
 OLD_FILES+=usr/lib/debug/usr/bin/compile_et.debug
@@ -912,755 +765,6 @@ OLD_FILES+=usr/libexec/kpasswdd
 OLD_FILES+=usr/sbin/iprop-log
 OLD_FILES+=usr/sbin/kstash
 OLD_FILES+=usr/sbin/ktutil
-OLD_FILES+=usr/share/man/man1/kf.1.gz
-OLD_FILES+=usr/share/man/man1/kgetcred.1.gz
-OLD_FILES+=usr/share/man/man3/HDB.3.gz
-OLD_FILES+=usr/share/man/man3/gss_accept_sec_context.3.gz
-OLD_FILES+=usr/share/man/man3/gss_acquire_cred.3.gz
-OLD_FILES+=usr/share/man/man3/gss_add_cred.3.gz
-OLD_FILES+=usr/share/man/man3/gss_add_oid_set_member.3.gz
-OLD_FILES+=usr/share/man/man3/gss_canonicalize_name.3.gz
-OLD_FILES+=usr/share/man/man3/gss_compare_name.3.gz
-OLD_FILES+=usr/share/man/man3/gss_context_time.3.gz
-OLD_FILES+=usr/share/man/man3/gss_create_empty_oid_set.3.gz
-OLD_FILES+=usr/share/man/man3/gss_delete_sec_context.3.gz
-OLD_FILES+=usr/share/man/man3/gss_display_name.3.gz
-OLD_FILES+=usr/share/man/man3/gss_display_status.3.gz
-OLD_FILES+=usr/share/man/man3/gss_duplicate_name.3.gz
-OLD_FILES+=usr/share/man/man3/gss_export_name.3.gz
-OLD_FILES+=usr/share/man/man3/gss_export_sec_context.3.gz
-OLD_FILES+=usr/share/man/man3/gss_get_mic.3.gz
-OLD_FILES+=usr/share/man/man3/gss_import_name.3.gz
-OLD_FILES+=usr/share/man/man3/gss_import_sec_context.3.gz
-OLD_FILES+=usr/share/man/man3/gss_indicate_mechs.3.gz
-OLD_FILES+=usr/share/man/man3/gss_init_sec_context.3.gz
-OLD_FILES+=usr/share/man/man3/gss_inquire_context.3.gz
-OLD_FILES+=usr/share/man/man3/gss_inquire_cred.3.gz
-OLD_FILES+=usr/share/man/man3/gss_inquire_cred_by_mech.3.gz
-OLD_FILES+=usr/share/man/man3/gss_inquire_mechs_for_name.3.gz
-OLD_FILES+=usr/share/man/man3/gss_inquire_names_for_mech.3.gz
-OLD_FILES+=usr/share/man/man3/gss_process_context_token.3.gz
-OLD_FILES+=usr/share/man/man3/gss_release_buffer.3.gz
-OLD_FILES+=usr/share/man/man3/gss_release_cred.3.gz
-OLD_FILES+=usr/share/man/man3/gss_release_name.3.gz
-OLD_FILES+=usr/share/man/man3/gss_release_oid_set.3.gz
-OLD_FILES+=usr/share/man/man3/gss_seal.3.gz
-OLD_FILES+=usr/share/man/man3/gss_sign.3.gz
-OLD_FILES+=usr/share/man/man3/gss_test_oid_set_member.3.gz
-OLD_FILES+=usr/share/man/man3/gss_unseal.3.gz
-OLD_FILES+=usr/share/man/man3/gss_unwrap.3.gz
-OLD_FILES+=usr/share/man/man3/gss_verify.3.gz
-OLD_FILES+=usr/share/man/man3/gss_verify_mic.3.gz
-OLD_FILES+=usr/share/man/man3/gss_wrap.3.gz
-OLD_FILES+=usr/share/man/man3/gss_wrap_size_limit.3.gz
-OLD_FILES+=usr/share/man/man3/gssapi.3.gz
-OLD_FILES+=usr/share/man/man3/hdb__del.3.gz
-OLD_FILES+=usr/share/man/man3/hdb__get.3.gz
-OLD_FILES+=usr/share/man/man3/hdb__put.3.gz
-OLD_FILES+=usr/share/man/man3/hdb_auth_status.3.gz
-OLD_FILES+=usr/share/man/man3/hdb_check_constrained_delegation.3.gz
-OLD_FILES+=usr/share/man/man3/hdb_check_pkinit_ms_upn_match.3.gz
-OLD_FILES+=usr/share/man/man3/hdb_check_s4u2self.3.gz
-OLD_FILES+=usr/share/man/man3/hdb_close.3.gz
-OLD_FILES+=usr/share/man/man3/hdb_destroy.3.gz
-OLD_FILES+=usr/share/man/man3/hdb_entry_ex.3.gz
-OLD_FILES+=usr/share/man/man3/hdb_fetch_kvno.3.gz
-OLD_FILES+=usr/share/man/man3/hdb_firstkey.3.gz
-OLD_FILES+=usr/share/man/man3/hdb_free.3.gz
-OLD_FILES+=usr/share/man/man3/hdb_get_realms.3.gz
-OLD_FILES+=usr/share/man/man3/hdb_lock.3.gz
-OLD_FILES+=usr/share/man/man3/hdb_name.3.gz
-OLD_FILES+=usr/share/man/man3/hdb_nextkey.3.gz
-OLD_FILES+=usr/share/man/man3/hdb_open.3.gz
-OLD_FILES+=usr/share/man/man3/hdb_password.3.gz
-OLD_FILES+=usr/share/man/man3/hdb_remove.3.gz
-OLD_FILES+=usr/share/man/man3/hdb_rename.3.gz
-OLD_FILES+=usr/share/man/man3/hdb_store.3.gz
-OLD_FILES+=usr/share/man/man3/hdb_unlock.3.gz
-OLD_FILES+=usr/share/man/man3/heim_ntlm_build_ntlm1_master.3.gz
-OLD_FILES+=usr/share/man/man3/heim_ntlm_build_ntlm2_master.3.gz
-OLD_FILES+=usr/share/man/man3/heim_ntlm_calculate_lm2.3.gz
-OLD_FILES+=usr/share/man/man3/heim_ntlm_calculate_ntlm1.3.gz
-OLD_FILES+=usr/share/man/man3/heim_ntlm_calculate_ntlm2.3.gz
-OLD_FILES+=usr/share/man/man3/heim_ntlm_decode_targetinfo.3.gz
-OLD_FILES+=usr/share/man/man3/heim_ntlm_encode_targetinfo.3.gz
-OLD_FILES+=usr/share/man/man3/heim_ntlm_encode_type1.3.gz
-OLD_FILES+=usr/share/man/man3/heim_ntlm_encode_type2.3.gz
-OLD_FILES+=usr/share/man/man3/heim_ntlm_encode_type3.3.gz
-OLD_FILES+=usr/share/man/man3/heim_ntlm_free_buf.3.gz
-OLD_FILES+=usr/share/man/man3/heim_ntlm_free_targetinfo.3.gz
-OLD_FILES+=usr/share/man/man3/heim_ntlm_free_type1.3.gz
-OLD_FILES+=usr/share/man/man3/heim_ntlm_free_type2.3.gz
-OLD_FILES+=usr/share/man/man3/heim_ntlm_free_type3.3.gz
-OLD_FILES+=usr/share/man/man3/heim_ntlm_keyex_unwrap.3.gz
-OLD_FILES+=usr/share/man/man3/heim_ntlm_nt_key.3.gz
-OLD_FILES+=usr/share/man/man3/heim_ntlm_ntlmv2_key.3.gz
-OLD_FILES+=usr/share/man/man3/heim_ntlm_verify_ntlm2.3.gz
-OLD_FILES+=usr/share/man/man3/hx509.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_bitstring_print.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_ca.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_ca_sign.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_ca_sign_self.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_ca_tbs_add_crl_dp_uri.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_ca_tbs_add_eku.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_ca_tbs_add_san_hostname.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_ca_tbs_add_san_jid.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_ca_tbs_add_san_ms_upn.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_ca_tbs_add_san_otherName.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_ca_tbs_add_san_pkinit.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_ca_tbs_add_san_rfc822name.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_ca_tbs_free.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_ca_tbs_init.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_ca_tbs_set_ca.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_ca_tbs_set_domaincontroller.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_ca_tbs_set_notAfter.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_ca_tbs_set_notAfter_lifetime.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_ca_tbs_set_notBefore.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_ca_tbs_set_proxy.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_ca_tbs_set_serialnumber.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_ca_tbs_set_spki.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_ca_tbs_set_subject.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_ca_tbs_set_template.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_ca_tbs_set_unique.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_ca_tbs_subject_expand.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_ca_tbs_template_units.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_cert.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_cert_binary.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_cert_check_eku.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_cert_cmp.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_cert_find_subjectAltName_otherName.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_cert_free.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_cert_get_SPKI.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_cert_get_SPKI_AlgorithmIdentifier.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_cert_get_attribute.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_cert_get_base_subject.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_cert_get_friendly_name.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_cert_get_issuer.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_cert_get_issuer_unique_id.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_cert_get_notAfter.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_cert_get_notBefore.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_cert_get_serialnumber.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_cert_get_subject.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_cert_get_subject_unique_id.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_cert_init.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_cert_init_data.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_cert_keyusage_print.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_cert_ref.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_cert_set_friendly_name.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_certs_add.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_certs_append.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_certs_end_seq.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_certs_filter.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_certs_find.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_certs_free.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_certs_info.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_certs_init.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_certs_iter_f.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_certs_merge.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_certs_next_cert.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_certs_start_seq.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_certs_store.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_ci_print_names.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_clear_error_string.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_cms.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_cms_create_signed_1.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_cms_envelope_1.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_cms_unenvelope.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_cms_unwrap_ContentInfo.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_cms_verify_signed.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_cms_wrap_ContentInfo.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_context_free.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_context_init.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_context_set_missing_revoke.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_crl_add_revoked_certs.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_crl_alloc.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_crl_free.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_crl_lifetime.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_crl_sign.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_crypto.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_env.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_env_add.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_env_add_binding.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_env_find.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_env_find_binding.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_env_free.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_env_lfind.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_err.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_error.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_free_error_string.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_free_octet_string_list.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_general_name_unparse.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_get_error_string.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_get_one_cert.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_keyset.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_lock.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_misc.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_name.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_name_binary.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_name_cmp.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_name_copy.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_name_expand.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_name_free.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_name_is_null_p.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_name_to_Name.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_name_to_string.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_ocsp_request.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_ocsp_verify.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_oid_print.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_oid_sprint.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_parse_name.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_peer.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_peer_info_add_cms_alg.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_peer_info_alloc.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_peer_info_free.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_peer_info_set_cert.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_peer_info_set_cms_algs.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_print.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_print_cert.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_print_stdout.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_query.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_query_alloc.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_query_free.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_query_match_cmp_func.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_query_match_eku.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_query_match_friendly_name.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_query_match_issuer_serial.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_query_match_option.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_query_statistic_file.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_query_unparse_stats.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_revoke.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_revoke_add_crl.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_revoke_add_ocsp.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_revoke_free.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_revoke_init.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_revoke_ocsp_print.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_revoke_verify.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_set_error_string.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_set_error_stringv.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_unparse_der_name.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_validate_cert.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_validate_ctx_add_flags.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_validate_ctx_free.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_validate_ctx_init.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_validate_ctx_set_print.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_verify.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_verify_attach_anchors.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_verify_attach_revoke.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_verify_ctx_f_allow_default_trustanchors.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_verify_destroy_ctx.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_verify_hostname.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_verify_init_ctx.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_verify_path.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_verify_set_max_depth.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_verify_set_proxy_certificate.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_verify_set_strict_rfc3280_verification.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_verify_set_time.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_verify_signature.3.gz
-OLD_FILES+=usr/share/man/man3/hx509_xfree.3.gz
-OLD_FILES+=usr/share/man/man3/k_afs_cell_of_file.3.gz
-OLD_FILES+=usr/share/man/man3/k_hasafs.3.gz
-OLD_FILES+=usr/share/man/man3/k_pioctl.3.gz
-OLD_FILES+=usr/share/man/man3/k_setpag.3.gz
-OLD_FILES+=usr/share/man/man3/k_unlog.3.gz
-OLD_FILES+=usr/share/man/man3/kadm5_pwcheck.3.gz
-OLD_FILES+=usr/share/man/man3/kafs.3.gz
-OLD_FILES+=usr/share/man/man3/kafs5.3.gz
-OLD_FILES+=usr/share/man/man3/kafs_set_verbose.3.gz
-OLD_FILES+=usr/share/man/man3/kafs_settoken.3.gz
-OLD_FILES+=usr/share/man/man3/kafs_settoken5.3.gz
-OLD_FILES+=usr/share/man/man3/kafs_settoken_rxkad.3.gz
-OLD_FILES+=usr/share/man/man3/krb5.3.gz
-OLD_FILES+=usr/share/man/man3/krb524_convert_creds_kdc.3.gz
-OLD_FILES+=usr/share/man/man3/krb524_convert_creds_kdc_ccache.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_425_conv_principal.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_425_conv_principal_ext.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_524_conv_principal.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_acc_ops.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_acl_match_file.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_acl_match_string.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_add_et_list.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_add_extra_addresses.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_add_ignore_addresses.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_addlog_dest.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_addlog_func.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_addr2sockaddr.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_address.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_address_compare.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_address_order.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_address_prefixlen_boundary.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_address_search.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_afslog.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_afslog_uid.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_allow_weak_crypto.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_aname_to_localname.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_anyaddr.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_appdefault.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_appdefault_boolean.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_appdefault_string.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_appdefault_time.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_append_addresses.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth_con_free.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth_con_genaddrs.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth_con_getaddrs.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth_con_getflags.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth_con_getkey.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth_con_getlocalsubkey.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth_con_getrcache.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth_con_getremotesubkey.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth_con_getuserkey.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth_con_init.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth_con_initivector.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth_con_setaddrs.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth_con_setaddrs_from_fd.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth_con_setflags.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth_con_setivector.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth_con_setkey.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth_con_setlocalsubkey.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth_con_setrcache.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth_con_setremotesubkey.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth_con_setuserkey.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth_context.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth_getauthenticator.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth_getcksumtype.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth_getkeytype.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth_getlocalseqnumber.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth_getremoteseqnumber.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth_setcksumtype.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth_setkeytype.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth_setlocalseqnumber.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_auth_setremoteseqnumber.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_build_principal.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_build_principal_ext.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_build_principal_va.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_build_principal_va_ext.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_c_enctype_compare.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_c_make_checksum.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_cache_end_seq_get.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_cache_get_first.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_cache_match.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_cache_next.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_clear_mcred.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_close.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_copy_cache.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_copy_creds.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_copy_match_f.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_default.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_default_name.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_destroy.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_end_seq_get.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_gen_new.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_get_config.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_get_flags.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_get_friendly_name.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_get_full_name.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_get_kdc_offset.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_get_lifetime.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_get_name.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_get_ops.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_get_prefix_ops.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_get_principal.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_get_type.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_get_version.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_initialize.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_last_change_time.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_move.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_new_unique.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_next_cred.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_register.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_remove_cred.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_resolve.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_retrieve_cred.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_set_config.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_set_default_name.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_set_flags.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_set_friendly_name.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_set_kdc_offset.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_start_seq_get.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_store_cred.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_support_switch.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cc_switch.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_ccache.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_ccache_intro.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cccol_cursor_free.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cccol_cursor_new.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cccol_cursor_next.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cccol_last_change_time.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_change_password.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_check_transited.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_checksum_is_collision_proof.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_checksum_is_keyed.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_checksumsize.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_cksumtype_to_enctype.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_clear_error_message.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_clear_error_string.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_closelog.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_compare_creds.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_config_file_free.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_config_free_strings.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_config_get_bool.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_config_get_bool_default.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_config_get_list.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_config_get_string.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_config_get_string_default.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_config_get_strings.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_config_get_time.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_config_get_time_default.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_config_parse_file_multi.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_config_parse_string_multi.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_config_vget_bool.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_config_vget_bool_default.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_config_vget_list.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_config_vget_string.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_config_vget_string_default.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_config_vget_strings.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_config_vget_time.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_config_vget_time_default.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_copy_address.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_copy_addresses.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_copy_context.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_copy_creds.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_copy_creds_contents.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_copy_data.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_copy_host_realm.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_copy_keyblock.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_copy_keyblock_contents.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_copy_principal.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_copy_ticket.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_create_checksum.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_create_checksum_iov.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_credential.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_creds.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_creds_get_ticket_flags.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_crypto.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_crypto_destroy.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_crypto_fx_cf2.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_crypto_getblocksize.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_crypto_getconfoundersize.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_crypto_getenctype.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_crypto_getpadsize.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_crypto_init.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_crypto_iov.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_data_alloc.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_data_cmp.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_data_copy.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_data_ct_cmp.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_data_free.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_data_realloc.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_data_zero.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_decrypt.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_decrypt_EncryptedData.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_decrypt_iov_ivec.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_deprecated.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_digest.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_digest_probe.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_eai_to_heim_errno.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_encrypt.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_encrypt_EncryptedData.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_encrypt_iov_ivec.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_enctype_disable.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_enctype_enable.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_enctype_valid.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_enctypes_compatible_keys.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_error.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_expand_hostname.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_expand_hostname_realms.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_fcc_ops.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_fileformats.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_find_padata.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_free_address.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_free_addresses.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_free_config_files.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_free_context.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_free_cred_contents.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_free_creds.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_free_creds_contents.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_free_data.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_free_data_contents.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_free_error_string.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_free_host_realm.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_free_keyblock.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_free_keyblock_contents.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_free_krbhst.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_free_principal.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_free_ticket.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_free_unparsed_name.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_fwd_tgt_creds.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_generate_random_block.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_generate_subkey.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_generate_subkey_extended.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_all_client_addrs.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_all_server_addrs.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_cred_from_kdc.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_cred_from_kdc_opt.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_credentials.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_creds.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_default_config_files.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_default_in_tkt_etypes.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_default_principal.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_default_realm.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_default_realms.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_dns_canonicalize_hostname.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_extra_addresses.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_fcache_version.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_forwarded_creds.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_host_realm.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_ignore_addresses.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_in_cred.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_in_tkt_with_keytab.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_in_tkt_with_password.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_in_tkt_with_skey.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_init_creds.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_init_creds_keyblock.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_init_creds_keytab.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_init_creds_opt_alloc.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_init_creds_opt_free.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_init_creds_opt_get_error.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_init_creds_opt_init.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_init_creds_password.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_kdc_sec_offset.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_krb524hst.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_krb_admin_hst.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_krb_changepw_hst.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_krbhst.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_max_time_skew.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_use_admin_kdc.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_get_validated_creds.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_getportbyname.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_h_addr2addr.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_h_addr2sockaddr.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_h_errno_to_heim_errno.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_init_context.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_init_creds_free.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_init_creds_get.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_init_creds_get_error.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_init_creds_init.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_init_creds_intro.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_init_creds_set_keytab.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_init_creds_set_password.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_init_creds_set_service.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_init_creds_step.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_init_ets.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_initlog.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_introduction.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_is_config_principal.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_is_thread_safe.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_kerberos_enctypes.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_keyblock_get_enctype.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_keyblock_init.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_keyblock_zero.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_keytab.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_keytab_intro.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_keytab_key_proc.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_keytype_to_enctypes.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_keytype_to_enctypes_default.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_keytype_to_string.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_krbhst_format_string.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_krbhst_free.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_krbhst_get_addrinfo.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_krbhst_init.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_krbhst_next.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_krbhst_next_as_string.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_krbhst_reset.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_kt_add_entry.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_kt_close.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_kt_compare.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_kt_copy_entry_contents.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_kt_default.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_kt_default_modify_name.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_kt_default_name.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_kt_destroy.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_kt_end_seq_get.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_kt_free_entry.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_kt_get_entry.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_kt_get_full_name.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_kt_get_name.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_kt_get_type.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_kt_have_content.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_kt_next_entry.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_kt_read_service_key.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_kt_register.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_kt_remove_entry.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_kt_resolve.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_kt_start_seq_get.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_kuserok.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_log.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_log_msg.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_make_addrport.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_make_principal.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_max_sockaddr_size.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_mcc_ops.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_mk_req.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_mk_safe.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_openlog.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_pac.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_pac_get_buffer.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_pac_verify.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_parse_address.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_parse_name.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_parse_name_flags.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_parse_nametype.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_password_key_proc.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_plugin_register.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_prepend_config_files_default.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_princ_realm.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_princ_set_realm.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_principal.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_principal_compare.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_principal_compare_any_realm.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_principal_get_comp_string.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_principal_get_num_comp.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_principal_get_realm.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_principal_get_type.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_principal_intro.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_principal_is_krbtgt.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_principal_match.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_principal_set_realm.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_principal_set_type.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_print_address.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_random_to_key.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_rcache.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_rd_error.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_rd_req_ctx.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_rd_req_in_ctx_alloc.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_rd_req_in_set_keytab.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_rd_req_in_set_pac_check.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_rd_req_out_ctx_free.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_rd_req_out_get_server.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_rd_safe.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_realm_compare.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_ret_address.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_ret_addrs.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_ret_authdata.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_ret_creds.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_ret_creds_tag.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_ret_data.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_ret_int16.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_ret_int32.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_ret_int8.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_ret_keyblock.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_ret_principal.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_ret_string.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_ret_stringz.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_ret_times.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_ret_uint16.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_ret_uint32.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_ret_uint8.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_set_config_files.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_set_default_in_tkt_etypes.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_set_default_realm.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_set_dns_canonicalize_hostname.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_set_error_message.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_set_error_string.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_set_extra_addresses.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_set_fcache_version.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_set_home_dir_access.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_set_ignore_addresses.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_set_kdc_sec_offset.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_set_max_time_skew.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_set_password.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_set_real_time.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_set_use_admin_kdc.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_sname_to_principal.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_sock_to_principal.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_sockaddr2address.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_sockaddr2port.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_sockaddr_uninteresting.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_storage.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_storage_clear_flags.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_storage_emem.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_storage_free.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_storage_from_data.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_storage_from_fd.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_storage_from_mem.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_storage_from_readonly_mem.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_storage_get_byteorder.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_storage_get_eof_code.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_storage_is_flags.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_storage_read.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_storage_seek.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_storage_set_byteorder.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_storage_set_eof_code.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_storage_set_flags.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_storage_set_max_alloc.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_storage_to_data.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_storage_truncate.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_storage_write.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_store_address.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_store_addrs.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_store_authdata.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_store_creds.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_store_creds_tag.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_store_data.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_store_int16.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_store_int32.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_store_int8.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_store_keyblock.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_store_principal.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_store_string.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_store_stringz.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_store_times.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_store_uint16.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_store_uint32.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_store_uint8.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_string_to_key.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_string_to_keytype.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_support.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_ticket.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_ticket_get_authorization_data_type.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_ticket_get_client.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_ticket_get_endtime.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_ticket_get_flags.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_ticket_get_server.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_timeofday.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_unparse_name.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_unparse_name_fixed.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_unparse_name_fixed_flags.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_unparse_name_fixed_short.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_unparse_name_flags.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_unparse_name_short.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_us_timeofday.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_v4compat.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_verify_checksum.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_verify_checksum_iov.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_verify_init_creds.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_verify_opt_init.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_verify_opt_set_flags.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_verify_opt_set_keytab.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_verify_opt_set_secure.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_verify_opt_set_service.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_verify_user.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_verify_user_lrealm.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_verify_user_opt.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_vlog.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_vlog_msg.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_vset_error_string.3.gz
-OLD_FILES+=usr/share/man/man3/krb5_vwarn.3.gz
-OLD_FILES+=usr/share/man/man3/krb_afslog.3.gz
-OLD_FILES+=usr/share/man/man3/krb_afslog_uid.3.gz
-OLD_FILES+=usr/share/man/man3/ntlm_buf.3.gz
-OLD_FILES+=usr/share/man/man3/ntlm_core.3.gz
-OLD_FILES+=usr/share/man/man3/ntlm_type1.3.gz
-OLD_FILES+=usr/share/man/man3/ntlm_type2.3.gz
-OLD_FILES+=usr/share/man/man3/ntlm_type3.3.gz
-OLD_FILES+=usr/share/man/man5/mech.5.gz
-OLD_FILES+=usr/share/man/man5/qop.5.gz
-OLD_FILES+=usr/share/man/man8/hprop.8.gz
-OLD_FILES+=usr/share/man/man8/hpropd.8.gz
-OLD_FILES+=usr/share/man/man8/iprop-log.8.gz
-OLD_FILES+=usr/share/man/man8/iprop.8.gz
-OLD_FILES+=usr/share/man/man8/kadmin.8.gz
-OLD_FILES+=usr/share/man/man8/kcm.8.gz
-OLD_FILES+=usr/share/man/man8/kdc.8.gz
-OLD_FILES+=usr/share/man/man8/kdigest.8.gz
-OLD_FILES+=usr/share/man/man8/kerberos.8.gz
-OLD_FILES+=usr/share/man/man8/kfd.8.gz
-OLD_FILES+=usr/share/man/man8/kimpersonate.8.gz
-OLD_FILES+=usr/share/man/man8/kpasswdd.8.gz
-OLD_FILES+=usr/share/man/man8/kstash.8.gz
-OLD_FILES+=usr/share/man/man8/ktutil.8.gz
-OLD_FILES+=usr/share/man/man8/string2key.8.gz
-OLD_FILES+=usr/share/man/man8/verify_krb5_conf.8.gz
 OLD_LIBS+=usr/lib/libasn1.so.11
 OLD_LIBS+=usr/lib/libcom_err.so.5
 OLD_LIBS+=usr/lib/libgssapi.so.10
@@ -1737,20 +841,6 @@ OLD_FILES+=usr/sbin/praliases
 OLD_FILES+=usr/sbin/purgestat
 OLD_FILES+=usr/share/doc/smm/08.sendmailop/paper.ascii.gz
 OLD_FILES+=usr/share/examples/sendmail/mailer.conf
-OLD_FILES+=usr/share/man/man1/mailq.1.gz
-OLD_FILES+=usr/share/man/man1/newaliases.1.gz
-OLD_FILES+=usr/share/man/man1/vacation.1.gz
-OLD_FILES+=usr/share/man/man5/aliases.5.gz
-OLD_FILES+=usr/share/man/man8/editmap.8.gz
-OLD_FILES+=usr/share/man/man8/hoststat.8.gz
-OLD_FILES+=usr/share/man/man8/mail.local.8.gz
-OLD_FILES+=usr/share/man/man8/mailstats.8.gz
-OLD_FILES+=usr/share/man/man8/makemap.8.gz
-OLD_FILES+=usr/share/man/man8/praliases.8.gz
-OLD_FILES+=usr/share/man/man8/purgestat.8.gz
-OLD_FILES+=usr/share/man/man8/rmail.8.gz
-OLD_FILES+=usr/share/man/man8/sendmail.8.gz
-OLD_FILES+=usr/share/man/man8/smrsh.8.gz
 OLD_FILES+=usr/share/sendmail/cf/README
 OLD_FILES+=usr/share/sendmail/cf/cf/Makefile
 OLD_FILES+=usr/share/sendmail/cf/cf/README
@@ -1946,13 +1036,10 @@ OLD_LIBS+=usr/lib/libmilter.so.5
 # 20260912: Remove talk and its daemon
 OLD_FILES+=usr/bin/talk
 OLD_FILES+=usr/libexec/ntalkd
-OLD_FILES+=usr/share/man/man1/talk.1.gz
-OLD_FILES+=usr/share/man/man8/talkd.8.gz
 OLD_FILES+=usr/include/protocols/talkd.h
 
 # 20260912: Remove the telnet client
 OLD_FILES+=usr/bin/telnet
-OLD_FILES+=usr/share/man/man1/telnet.1.gz
 
 # 20260912: Remove the C shell
 OLD_DIRS+=usr/share/doc/usd/04.csh
@@ -1976,50 +1063,6 @@ OLD_FILES+=usr/share/examples/etc/csh.login
 OLD_FILES+=usr/share/examples/etc/csh.logout
 OLD_FILES+=usr/share/examples/tcsh/complete.tcsh
 OLD_FILES+=usr/share/examples/tcsh/csh-mode.el
-OLD_FILES+=usr/share/man/man1/alloc.1.gz
-OLD_FILES+=usr/share/man/man1/bindkey.1.gz
-OLD_FILES+=usr/share/man/man1/breaksw.1.gz
-OLD_FILES+=usr/share/man/man1/builtins.1.gz
-OLD_FILES+=usr/share/man/man1/complete.1.gz
-OLD_FILES+=usr/share/man/man1/csh.1.gz
-OLD_FILES+=usr/share/man/man1/default.1.gz
-OLD_FILES+=usr/share/man/man1/dirs.1.gz
-OLD_FILES+=usr/share/man/man1/echotc.1.gz
-OLD_FILES+=usr/share/man/man1/end.1.gz
-OLD_FILES+=usr/share/man/man1/endif.1.gz
-OLD_FILES+=usr/share/man/man1/endsw.1.gz
-OLD_FILES+=usr/share/man/man1/filetest.1.gz
-OLD_FILES+=usr/share/man/man1/foreach.1.gz
-OLD_FILES+=usr/share/man/man1/glob.1.gz
-OLD_FILES+=usr/share/man/man1/goto.1.gz
-OLD_FILES+=usr/share/man/man1/hashstat.1.gz
-OLD_FILES+=usr/share/man/man1/history.1.gz
-OLD_FILES+=usr/share/man/man1/hup.1.gz
-OLD_FILES+=usr/share/man/man1/limit.1.gz
-OLD_FILES+=usr/share/man/man1/log.1.gz
-OLD_FILES+=usr/share/man/man1/logout.1.gz
-OLD_FILES+=usr/share/man/man1/ls-F.1.gz
-OLD_FILES+=usr/share/man/man1/notify.1.gz
-OLD_FILES+=usr/share/man/man1/onintr.1.gz
-OLD_FILES+=usr/share/man/man1/popd.1.gz
-OLD_FILES+=usr/share/man/man1/pushd.1.gz
-OLD_FILES+=usr/share/man/man1/rehash.1.gz
-OLD_FILES+=usr/share/man/man1/repeat.1.gz
-OLD_FILES+=usr/share/man/man1/sched.1.gz
-OLD_FILES+=usr/share/man/man1/setenv.1.gz
-OLD_FILES+=usr/share/man/man1/settc.1.gz
-OLD_FILES+=usr/share/man/man1/setty.1.gz
-OLD_FILES+=usr/share/man/man1/source.1.gz
-OLD_FILES+=usr/share/man/man1/stop.1.gz
-OLD_FILES+=usr/share/man/man1/suspend.1.gz
-OLD_FILES+=usr/share/man/man1/switch.1.gz
-OLD_FILES+=usr/share/man/man1/tcsh.1.gz
-OLD_FILES+=usr/share/man/man1/telltc.1.gz
-OLD_FILES+=usr/share/man/man1/uncomplete.1.gz
-OLD_FILES+=usr/share/man/man1/unhash.1.gz
-OLD_FILES+=usr/share/man/man1/unlimit.1.gz
-OLD_FILES+=usr/share/man/man1/unsetenv.1.gz
-OLD_FILES+=usr/share/man/man1/where.1.gz
 OLD_FILES+=usr/share/nls/de_AT.ISO8859-1/tcsh.cat
 OLD_FILES+=usr/share/nls/de_AT.ISO8859-15/tcsh.cat
 OLD_FILES+=usr/share/nls/de_AT.UTF-8/tcsh.cat
@@ -2073,14 +1116,6 @@ OLD_FILES+=usr/share/skel/dot.login
 
 
 # 20260503: Kill off MANSUBDIRs
-OLD_DIRS+=usr/share/man/man4/amd64
-OLD_FILES+=usr/share/man/man8/amd64/apm.8.gz
-OLD_FILES+=usr/share/man/man8/amd64/apmconf.8.gz
-OLD_FILES+=usr/share/man/man8/i386/apmd.8.gz
-OLD_FILES+=usr/share/man/man8/powerpc/nvram.8.gz
-OLD_DIRS+=usr/share/man/man8/amd64
-OLD_DIRS+=usr/share/man/man8/i386
-OLD_DIRS+=usr/share/man/man8/powerpc
 
 # 20260430: Regenerate trust store
 OLD_FILES+=usr/share/certs/trusted/Entrust_net_Premium_2048_Secure_Server_CA.pem
@@ -2158,8 +1193,6 @@ OLD_FILES+=usr/share/certs/untrusted/thawte_Primary_Root_CA_-_G2.pem
 OLD_FILES+=usr/share/certs/untrusted/Symantec_Class_1_Public_Primary_Certification_Authority_-_G4.pem
 
 # 20260402: posix_spawn_file_actions_addchdir lost _np suffix
-OLD_FILES+=usr/share/man/man3/posix_spawn_file_actions_addchdir_np.3.gz
-OLD_FILES+=usr/share/man/man3/posix_spawn_file_actions_addfchdir_np.3.gz
 
 # 20260114: remove ncurses html documentation
 OLD_FILES+=usr/share/doc/ncurses/hackguide.html
@@ -2167,12 +1200,6 @@ OLD_FILES+=usr/share/doc/ncurses/ncurses-intro.html
 OLD_DIRS+=usr/share/doc/ncurses
 
 # 20260209: Moved allwinner pages to share/man/man4
-OLD_FILES+=usr/share/man/man4/arm/aw_gpio.4.gz
-OLD_FILES+=usr/share/man/man4/arm/aw_mmc.4.gz
-OLD_FILES+=usr/share/man/man4/arm/aw_rtc.4.gz
-OLD_FILES+=usr/share/man/man4/arm/aw_sid.4.gz
-OLD_FILES+=usr/share/man/man4/arm/aw_spi.4.gz
-OLD_FILES+=usr/share/man/man4/arm/aw_syscon.4.gz
 
 # 20260204: replaced with ATF test
 OLD_FILES+=usr/tests/usr.bin/m4/legacy_test
@@ -2191,20 +1218,15 @@ OLD_LIBS+=usr/lib/libkrb5profile.so.122
 OLD_FILES+=usr/lib/libkrb5profile.so
 
 # 20251218: Remove old MLINK to apmconf(8)
-OLD_FILES+=usr/share/man/man8/apmconf.8.gz
 
 # 20251208: Rename iwm8000C to correct name.
 OLD_FILES+=boot/firmware/iwm8000C
 
 # 20251204: zpfind.9 alias to pfind.9 removed
-OLD_FILES+=usr/share/man/man9/zpfind.9.gz
 
 # 20251121: Remove duplicate pam_krb5 manual page
-OLD_FILES+=usr/share/man/man8/pam-krb5.8.gz
 
 # 20251112: Remove pccard(4) and related
-OLD_FILES+=usr/share/man/man4/pccard.4.gz
-OLD_FILES+=usr/share/man/man4/pcic.4.gz
 
 # 20251006: Remove libnss_tacplus.a (it never should have been installed)
 OLD_FILES+=usr/lib/libnss_tacplus.a
@@ -2215,30 +1237,22 @@ OLD_DIRS+=usr/libexec/kgdb
 
 # 20250930: Rename wlanstats to wlanstat
 OLD_FILES+=usr/sbin/wlanstats
-OLD_FILES+=usr/share/man/man8/wlanstats.8.gz
 
 # 20250929: Remove ftpd(8)
 OLD_FILES+=etc/rc.d/ftpd
 OLD_FILES+=usr/libexec/ftpd
-OLD_FILES+=usr/share/man/man5/ftpchroot.5.gz
-OLD_FILES+=usr/share/man/man8/ftpd.8.gz
 
 # 20250917: Remove a miscapitalized manual
-OLD_FILES+=usr/share/man/man9/vnet.9.gz
-OLD_FILES+=usr/share/man/man9/vimage.9.gz
 
 # 20250911: This tool is no longer needed
 OLD_FILES+=usr/tests/bin/cp/sparse
 
 # 20250826: Remove a misspelled manual
-OLD_FILES+=usr/share/man/man3/sysdecode_syscallnames.3.gz
 
 # 20250812: Remove a bogus manlink
-OLD_FILES+=usr/share/man/man3/quota_statfs.3.gz
 
 # 20250808: nvmfd removed from base install
 OLD_FILES+=usr/sbin/nvmfd
-OLD_FILES+=usr/share/man/man8/nvmfd.8.gz
 
 # 20250807: Replace lib/libgssapi with krb5/lib/gssapi
 OLD_FILES+=usr/include/gssapi_krb5/gssapi.h
@@ -2261,7 +1275,6 @@ OLD_FILES+=usr/share/et/compile_et
 
 # 20250728: zfsboot (MBR) removed
 OLD_FILES+=boot/zfsboot
-OLD_FILES+=usr/share/man/man8/zfsboot.8.gz
 
 # 20250728: Machine versions of 'runq.h' do not exist anymore
 OLD_FILES+=usr/include/machine/runq.h
@@ -2306,19 +1319,8 @@ OLD_FILES+=usr/include/dyn.h
 OLD_FILES+=usr/include/dynP.h
 OLD_FILES+=usr/include/gssrpcint.h
 OLD_FILES+=usr/include/import_err.h
-OLD_FILES+=usr/share/man/man3/db_btree.3.gz
-OLD_FILES+=usr/share/man/man3/db_hash.3.gz
-OLD_FILES+=usr/share/man/man3/db_lock.3.gz
-OLD_FILES+=usr/share/man/man3/db_log.3.gz
-OLD_FILES+=usr/share/man/man3/db_mpool.3.gz
-OLD_FILES+=usr/share/man/man3/db_open.3.gz
-OLD_FILES+=usr/share/man/man3/db_recno.3.gz
-OLD_FILES+=usr/share/man/man3/db_txn.3.gz
-OLD_FILES+=usr/share/man/man5/profile.5.gz
-OLD_FILES+=usr/share/man/man8/kamdin.local.8.gz
 
 # 20250716: Remove an old manual page, vn(4) was removed in FreeBSD 5.0
-OLD_FILES+=usr/share/man/man4/vn.4.gz
 
 # 20250710: share: Delete bitrotted make_*_driver.sh scripts
 OLD_FILES+=usr/share/examples/drivers/README
@@ -2328,7 +1330,6 @@ OLD_DIRS+=usr/share/examples/drivers
 
 # 20250710: shar(1) removed
 OLD_FILES+=usr/bin/shar
-OLD_FILES+=usr/share/man/man1/shar.1.gz
 
 # 20250708: For 34 days 15.0-CURRENT installed libkadm5clnt symlink without .so
 OLD_FILES+=usr/lib/libkadm5clnt
@@ -2340,29 +1341,22 @@ MOVED_LIBS+=usr/lib/libtpool.so.2
 OLD_FILES+=usr/share/flua/yaml.lua
 
 # 20250615: don't install man page for absent function
-OLD_FILES+=usr/share/man/man9/vm_map_simplify_entry.9.gz
 
 # 20250615: OpenSSL 3.5.0
 OLD_LIBS+=lib/libcrypto.so.30
 OLD_FILES+=usr/include/openssl/asn1_mac.h
 OLD_LIBS+=usr/lib/libssl.so.30
-OLD_FILES+=usr/share/man/man3/TS_VERIFY_CTX_set_certs.3
-OLD_FILES+=usr/share/man/man7/crypto.7
-OLD_FILES+=usr/share/man/man7/migration_guide.7
-OLD_FILES+=usr/share/man/man7/ssl.7
 
 # 20250521: don't install zoneinfo version
 OLD_FILES+=usr/share/zoneinfo/version
 
 # 20250516: NDFREE(9) -> NDFREE_PNBUF(9)
-OLD_FILES+=usr/share/man/man9/NDFREE.9.gz
 
 # 20250511: mailx test renamed
 OLD_FILES+=usr/tests/usr.bin/mail/mail_sigint_test
 
 # 20250505: Remove audio(8) files after rename to sndctl(8)
 OLD_FILES+=usr/sbin/audio
-OLD_FILES+=usr/share/man/man8/audio.8.gz
 
 # 20250409: removal of iwlwifi firmware files
 OLD_FILES+=usr/share/doc/legal/intel_iwlwifi_firmware.LICENCE
@@ -2391,7 +1385,6 @@ OLD_FILES+=usr/share/certs/untrusted/Security_Communication_Root_CA.pem
 OLD_FILES+=usr/share/certs/untrusted/Trustis_FPS_Root_CA.pem
 
 # 20250205: bus_generic_attach.9 removed after the function was deprecated
-OLD_FILES+=usr/share/man/man9/bus_generic_attach.9.gz
 
 # 20250204: sys/vm/stack test symbols moved to /usr/lib/debug
 OLD_FILES+=usr/tests/sys/vm/stack/.debug/libsoxstack.so.debug
@@ -2402,7 +1395,6 @@ OLD_LIBS+=usr/lib/libdevinfo.so.6
 
 # 20250123: Remove gvinum(8)
 OLD_FILES+=sbin/gvinum
-OLD_FILES+=usr/share/man/man8/gvinum.8.gz
 
 # 20250122: Remove publickey(5) stuff
 OLD_FILES+=usr/bin/chkey
@@ -2410,20 +1402,9 @@ OLD_FILES+=usr/bin/keylogin
 OLD_FILES+=usr/bin/keylogout
 OLD_FILES+=usr/sbin/keyserv
 OLD_FILES+=usr/bin/newkey
-OLD_FILES+=usr/share/man/man1/chkey.1.gz
-OLD_FILES+=usr/share/man/man1/keylogin.1.gz
-OLD_FILES+=usr/share/man/man1/keylogout.1.gz
-OLD_FILES+=usr/share/man/man5/publickey.5.gz
-OLD_FILES+=usr/share/man/man8/keyserv.1.gz
 OLD_FILES+=etc/rc.d/keyserv
 
 # 20241206: Remove Altera DE4 drivers
-OLD_FILES+=usr/share/man/man4/altera_atse.4.gz
-OLD_FILES+=usr/share/man/man4/altera_avgen.4.gz
-OLD_FILES+=usr/share/man/man4/altera_jtag_uart.4.gz
-OLD_FILES+=usr/share/man/man4/altera_sdcard.4.gz
-OLD_FILES+=usr/share/man/man4/altera_sdcardc.4.gz
-OLD_FILES+=usr/share/man/man4/atse.4.gz
 
 # 20241124: library and tests of OpenBSD dc
 OLD_FILES+=usr/share/misc/bc.library
@@ -2616,10 +1597,8 @@ OLD_FILES+=usr/lib/libzfsbootenv_p.a
 OLD_FILES+=usr/lib/libzutil_p.a
 
 # 20241112: move p9fs from section 5 to section 4
-OLD_FILES+=usr/share/man/man5/p9fs.5.gz
 
 # 20241104: remove the outdated c2x.7 symlink in favor of c23.7
-OLD_FILES+=usr/share/man/man7/c2x.7.gz
 
 # 20241023: new clang import which bumps version from 18 to 19
 OLD_FILES+=usr/lib/clang/18/include/__clang_cuda_builtin_vars.h
@@ -3120,48 +2099,20 @@ OLD_FILES+=usr/share/examples/sound/oss/ossmidi.h
 OLD_FILES+=usr/tests/lib/libc/stdlib/quick_exit_test
 
 # 20240729: retire ifaddr_byindex
-OLD_FILES+=usr/share/man/man9/ifaddr_byindex.9.gz
 
 # 20240729: remove MD5(9)
-OLD_FILES+=usr/share/man/man9/MD5.9.gz
-OLD_FILES+=usr/share/man/man9/MD5Init.9.gz
-OLD_FILES+=usr/share/man/man9/MD5Transform.9.gz
 
 # 20240726: deprecate contigfree(9)
-OLD_FILES+=usr/share/man/man9/contigfree.9.gz
 
 # 20240721: retire vm_page_alloc_freelist
-OLD_FILES+=usr/share/man/man9/vm_page_alloc_freelist.9.gz
-OLD_FILES+=usr/share/man/man9/vm_page_alloc_freelist_domain.9.gz
 
 # 20240716: retire mergemaster
 OLD_FILES+=usr/sbin/mergemaster
-OLD_FILES+=usr/share/man/man8/mergemaster.8.gz
 
 # 20240527: csh: Remove hardlink /.cshrc
 OLD_FILES+=.cshrc
 
 # 20240511: move file system driver manuals to section four
-OLD_FILES+=usr/share/man/man5/autofs.5.gz
-OLD_FILES+=usr/share/man/man5/cd9660.5.gz
-OLD_FILES+=usr/share/man/man5/devfs.5.gz
-OLD_FILES+=usr/share/man/man5/ext2fs.5.gz
-OLD_FILES+=usr/share/man/man5/ext4fs.5.gz
-OLD_FILES+=usr/share/man/man5/fdescfs.5.gz
-OLD_FILES+=usr/share/man/man5/fusefs.5.gz
-OLD_FILES+=usr/share/man/man5/lindebugfs.5.gz
-OLD_FILES+=usr/share/man/man5/linprocfs.5.gz
-OLD_FILES+=usr/share/man/man5/linsysfs.5.gz
-OLD_FILES+=usr/share/man/man5/mqueuefs.5.gz
-OLD_FILES+=usr/share/man/man5/msdosfs.5.gz
-OLD_FILES+=usr/share/man/man5/msdos.5.gz
-OLD_FILES+=usr/share/man/man5/nullfs.5.gz
-OLD_FILES+=usr/share/man/man5/procfs.5.gz
-OLD_FILES+=usr/share/man/man5/smbfs.5.gz
-OLD_FILES+=usr/share/man/man5/tarfs.5.gz
-OLD_FILES+=usr/share/man/man5/tmpfs.5.gz
-OLD_FILES+=usr/share/man/man5/unionfs.5.gz
-OLD_FILES+=usr/share/man/man7/ffs.7.gz
 
 # 20240508: Remove remnants of portsnap(8)
 OLD_DIRS+=var/db/portsnap
@@ -3171,8 +2122,6 @@ OLD_FILES+=boot/kernel/geom_bde.ko
 OLD_FILES+=etc/rc.d/gbde
 OLD_FILES+=rescue/gbde
 OLD_FILES+=sbin/gbde
-OLD_FILES+=usr/share/man/man4/gbde.4.gz
-OLD_FILES+=usr/share/man/man8/gbde.8.gz
 
 # 20240422: remove improperly installed libcxxrt.so.1
 MOVED_LIBS+=usr/lib/libcxxrt.so.1
@@ -3630,7 +2579,6 @@ OLD_FILES+=usr/include/c++/v1/setjmp.h
 OLD_DIRS+=usr/libdata/gcc
 
 # 20240315: stop installing CAM.4 link to scsi.4
-OLD_FILES+=usr/share/man/man4/CAM.4.gz
 
 # 20240307: Improperly installed awk tests removed
 OLD_FILES+=usr/tests/usr.bin/awk/bugs-fixed/missing-precision.ok
@@ -3649,16 +2597,12 @@ OLD_FILES+=usr/share/examples/IPv6/USAGE
 OLD_DIRS+=usr/share/examples/IPv6
 
 # 20240122: callout_async_drain() removed
-OLD_FILES+=usr/share/man/man9/callout_async_drain.9.gz
 
 # 20240114: Removal of geom_map(4)
-OLD_FILES+=usr/share/man/man4/geom_map.4.gz
 
 # 20240112: remove pmap_init2()
-OLD_FILES+=usr/share/man/man9/pmap_init2.9.gz
 
 # 20240112: remove pmap_pinit2()
-OLD_FILES+=usr/share/man/man9/pmap_pinit2.9.gz
 
 # 20240112: replaced NetBSD tests for uniq with our own
 OLD_FILES+=usr/tests/usr.bin/uniq/d_basic.in
@@ -4074,24 +3018,19 @@ OLD_FILES+=usr/include/c++/v1/experimental/functional
 OLD_LIBS+=lib/libufs.so.7
 
 # 20231018: pmc.k7(3) removed
-OLD_FILES+=usr/share/man/man3/pmc.k7.3.gz
 
 # 20231018: Remove misspelled man page link
-OLD_FILES+=usr/share/man/man3/dbm_dirnfo.3.gz
 
 # 20231006: rename tcp6_v4unmapped_bind_test
 OLD_FILES+=usr/tests/sys/netinet/tcp6_v4unmapped_bind_test
 
 # 20231005: Remove man page link for now gone net80211 function.
-OLD_FILES+=usr/share/man/man9/ieee80211_unref_node.9.gz
 
 # 20231005: bsdconfig remove support for floppy and ftp
 OLD_FILES+=usr/share/bsdconfig/media/floppy.subr
 OLD_FILES+=usr/share/bsdconfig/media/ftp.subr
 
 # 20230927: Man pages renamed to match the actual functions
-OLD_FILES+=usr/share/man/man9/cr_seeothergids.9.gz
-OLD_FILES+=usr/share/man/man9/cr_seeotheruids.9.gz
 
 # 20230925
 OLD_FILES+=usr/share/examples/diskless/ME
@@ -4101,13 +3040,11 @@ OLD_FILES+=usr/share/examples/diskless/clone_root
 
 # 20230905: Removed rtw8x firmware files from src.git
 OLD_FILES+=usr/share/doc/legal/realtek_rtw88_firmware.LICENCE
-OLD_FILES+=usr/share/man/man4/rtw88fw.4.gz
 
 # 20230828
 MOVED_LIBS+=usr/lib/librt.so.1
 
 # 20230826:
-OLD_FILES+=usr/share/man/man9/knlist_remove_inevent.9.gz
 
 # 20230825: caroot bundle updated
 OLD_FILES+=usr/share/certs/trusted/E-Tugra_Certification_Authority.pem
@@ -4132,9 +3069,6 @@ OLD_FILES+=usr/tests/lib/googletest/gmock_main/gmock-matchers_test
 OLD_FILES+=usr/tests/lib/googletest/gtest_main/googletest-linked-ptr-test
 
 # 20230807: Removal of the ath(4) AHB bus-frontend for MIPS
-OLD_FILES+=usr/share/man/man4/ath_ahb.4.gz
-OLD_FILES+=usr/share/man/man4/ath_pci.4.gz
-OLD_FILES+=usr/share/man/man4/if_ath_pci.4.gz
 
 # 20230803: Removal of support for cloning pseudo interfaces from iflib(9)
 OLD_FILES+=usr/include/net/iflib_private.h
@@ -4156,7 +3090,6 @@ OLD_FILES+=usr/include/machine/swi.h
 .endif
 
 # 20230714: gsignal
-OLD_FILES+=usr/share/man/man9/gsignal.9.gz
 
 # 20230704: kinst dtrace tests moved to common
 OLD_DIRS+=usr/tests/cddl/usr.sbin/dtrace/amd64/kinst
@@ -4174,46 +3107,6 @@ OLD_DIRS+=usr/lib/engines
 .for libcompat in ${_ALL_libcompats}
 OLD_DIRS+=usr/lib${libcompat}/engines
 .endfor
-OLD_FILES+=usr/share/man/man1/list.1
-OLD_FILES+=usr/share/man/man1/openssl-tsget.1
-OLD_FILES+=usr/share/man/man3/ECDH_get_ex_data.3
-OLD_FILES+=usr/share/man/man3/ECDH_get_ex_new_index.3
-OLD_FILES+=usr/share/man/man3/ECDH_set_ex_data.3
-OLD_FILES+=usr/share/man/man3/ERR_GET_FUNC.3
-OLD_FILES+=usr/share/man/man3/EVP_PKEY_CTX_hkdf_mode.3
-OLD_FILES+=usr/share/man/man3/EVP_PKEY_set_alias_type.3
-OLD_FILES+=usr/share/man/man3/EVP_aes.3
-OLD_FILES+=usr/share/man/man3/EVP_aria.3
-OLD_FILES+=usr/share/man/man3/EVP_camellia.3
-OLD_FILES+=usr/share/man/man3/EVP_des.3
-OLD_FILES+=usr/share/man/man3/RAND_DRBG_bytes.3
-OLD_FILES+=usr/share/man/man3/RAND_DRBG_cleanup_entropy_fn.3
-OLD_FILES+=usr/share/man/man3/RAND_DRBG_cleanup_nonce_fn.3
-OLD_FILES+=usr/share/man/man3/RAND_DRBG_free.3
-OLD_FILES+=usr/share/man/man3/RAND_DRBG_generate.3
-OLD_FILES+=usr/share/man/man3/RAND_DRBG_get0_master.3
-OLD_FILES+=usr/share/man/man3/RAND_DRBG_get0_private.3
-OLD_FILES+=usr/share/man/man3/RAND_DRBG_get0_public.3
-OLD_FILES+=usr/share/man/man3/RAND_DRBG_get_entropy_fn.3
-OLD_FILES+=usr/share/man/man3/RAND_DRBG_get_ex_data.3
-OLD_FILES+=usr/share/man/man3/RAND_DRBG_get_ex_new_index.3
-OLD_FILES+=usr/share/man/man3/RAND_DRBG_get_nonce_fn.3
-OLD_FILES+=usr/share/man/man3/RAND_DRBG_instantiate.3
-OLD_FILES+=usr/share/man/man3/RAND_DRBG_new.3
-OLD_FILES+=usr/share/man/man3/RAND_DRBG_reseed.3
-OLD_FILES+=usr/share/man/man3/RAND_DRBG_secure_new.3
-OLD_FILES+=usr/share/man/man3/RAND_DRBG_set.3
-OLD_FILES+=usr/share/man/man3/RAND_DRBG_set_callbacks.3
-OLD_FILES+=usr/share/man/man3/RAND_DRBG_set_defaults.3
-OLD_FILES+=usr/share/man/man3/RAND_DRBG_set_ex_data.3
-OLD_FILES+=usr/share/man/man3/RAND_DRBG_set_reseed_defaults.3
-OLD_FILES+=usr/share/man/man3/RAND_DRBG_set_reseed_interval.3
-OLD_FILES+=usr/share/man/man3/RAND_DRBG_set_reseed_time_interval.3
-OLD_FILES+=usr/share/man/man3/RAND_DRBG_uninstantiate.3
-OLD_FILES+=usr/share/man/man3/RSA_padding_add_SSLv23.3
-OLD_FILES+=usr/share/man/man3/RSA_padding_check_SSLv23.3
-OLD_FILES+=usr/share/man/man7/RAND_DRBG.7
-OLD_FILES+=usr/share/man/man7/scrypt.7
 
 # 20230622: new clang import which bumps version from 15.0.7 to 16.0.1
 OLD_FILES+=usr/lib/clang/15.0.7/include/__clang_cuda_builtin_vars.h
@@ -4598,7 +3491,6 @@ OLD_FILES+=usr/share/certs/trusted/TrustCor_RootCert_CA-1.pem
 OLD_FILES+=usr/share/certs/trusted/TrustCor_RootCert_CA-2.pem
 
 # 20230510: twe(4) driver removed
-OLD_FILES+=usr/share/man/man4/twe.4.gz
 
 # 20230505: md5 tests are now self-contained
 OLD_FILES+=usr/tests/sbin/md5/1.inp
@@ -4678,7 +3570,6 @@ OLD_FILES+=etc/portsnap.conf
 OLD_FILES+=usr/libexec/make_index
 OLD_FILES+=usr/sbin/portsnap
 OLD_FILES+=usr/share/examples/etc/portsnap.conf
-OLD_FILES+=usr/share/man/man8/portsnap.8.gz
 
 # 20230331: libpcap updated to 1.10.3
 OLD_FILES+=usr/include/fmtutils.h
@@ -4702,8 +3593,6 @@ OLD_LIBS+=usr/lib/libvmmapi.so.5
 OLD_FILES+=usr/share/zoneinfo/posixrules
 
 # 20230320: vcount.9 removed
-OLD_FILES+=usr/share/man/man9/count_dev.9.gz
-OLD_FILES+=usr/share/man/man9/vcount.9.gz
 
 # 20230320: case-sensitive conflicts removed
 OLD_FILES+=usr/tests/bin/pkill/pgrep-F_test
@@ -4751,25 +3640,11 @@ OLD_FILES+=usr/lib/libngatm.a
 OLD_FILES+=usr/lib/libngatm.so
 OLD_LIBS+=usr/lib/libngatm.so.4
 OLD_FILES+=usr/lib/libngatm_p.a
-OLD_FILES+=usr/share/man/man1/sscop.1.gz
-OLD_FILES+=usr/share/man/man3/libngatm.3.gz
-OLD_FILES+=usr/share/man/man3/uniaddr.3.gz
-OLD_FILES+=usr/share/man/man3/unifunc.3.gz
-OLD_FILES+=usr/share/man/man3/unimsg.3.gz
-OLD_FILES+=usr/share/man/man3/unisap.3.gz
-OLD_FILES+=usr/share/man/man3/unistruct.3.gz
-OLD_FILES+=usr/share/man/man4/ng_atmllc.4.gz
-OLD_FILES+=usr/share/man/man4/ng_ccatm.4.gz
-OLD_FILES+=usr/share/man/man4/ng_sscfu.4.gz
-OLD_FILES+=usr/share/man/man4/ng_sscop.4.gz
-OLD_FILES+=usr/share/man/man4/ng_uni.4.gz
-OLD_FILES+=usr/share/man/man4/ngatmbase.4.gz
 
 # 20230308: machine-id merged into hostid_save
 OLD_FILES+=etc/rc.d/machine_id
 
 # 20230306: remove tzsetwall(3)
-OLD_FILES+=usr/share/man/man3/tzsetwall.3.gz
 
 # 20230208: new clang import which bumps version from 14.0.5 to 15.0.7
 OLD_FILES+=usr/lib/clang/14.0.5/include/cuda_wrappers/algorithm
@@ -5139,64 +4014,27 @@ OLD_FILES+=usr/tests/usr.bin/timeout/Kyuafile
 OLD_FILES+=usr/tests/usr.bin/timeout/timeout_test
 
 # 20230124: rtalloc.9 removed
-OLD_FILES+=usr/share/man/man9/rtalloc.9.gz
-OLD_FILES+=usr/share/man/man9/rtalloc_fib.9.gz
-OLD_FILES+=usr/share/man/man9/rtalloc_ign.9.gz
-OLD_FILES+=usr/share/man/man9/rtalloc_ign_fib.9.gz
-OLD_FILES+=usr/share/man/man9/rtalloc1.9.gz
-OLD_FILES+=usr/share/man/man9/rtalloc1_fib.9.gz
-OLD_FILES+=usr/share/man/man9/rtfree.9.gz
-OLD_FILES+=usr/share/man/man9/RT_ADDREF.9.gz
-OLD_FILES+=usr/share/man/man9/RT_LOCK.9.gz
-OLD_FILES+=usr/share/man/man9/RT_REMREF.9.gz
-OLD_FILES+=usr/share/man/man9/RT_RTFREE.9.gz
-OLD_FILES+=usr/share/man/man9/RT_UNLOCK.9.gz
-OLD_FILES+=usr/share/man/man9/RTFREE.9.gz
-OLD_FILES+=usr/share/man/man9/RTFREE_LOCKED.9.gz
 
 # 20230123: PCBGROUP.9 removed
-OLD_FILES+=usr/share/man/man9/PCBGROUP.9.gz
-OLD_FILES+=usr/share/man/man9/in_pcbgroup_byhash.9.gz
-OLD_FILES+=usr/share/man/man9/in_pcbgroup_byinpcb.9.gz
-OLD_FILES+=usr/share/man/man9/in_pcbgroup_destroy.9.gz
-OLD_FILES+=usr/share/man/man9/in_pcbgroup_enabled.9.gz
-OLD_FILES+=usr/share/man/man9/in_pcbgroup_init.9.gz
-OLD_FILES+=usr/share/man/man9/in_pcbgroup_remove.9.gz
-OLD_FILES+=usr/share/man/man9/in_pcbgroup_update.9.gz
-OLD_FILES+=usr/share/man/man9/in_pcbgroup_update_mbuf.9.gz
-OLD_FILES+=usr/share/man/man9/in6_pcbgroup_byhash.9.gz
 
 # 20221214: TCPDEBUG removed
 OLD_FILES+=usr/include/netinet/tcp_debug.h
 
 # 20221213: remove sync serial drivers and utilities
 OLD_FILES+=sbin/sconfig
-OLD_FILES+=usr/share/man/man4/ce.4.gz
-OLD_FILES+=usr/share/man/man4/cp.4.gz
-OLD_FILES+=usr/share/man/man8/sconfig.8.gz
 
 # 20221202: remove trpt(8)
 OLD_FILES+=usr/sbin/trpt
-OLD_FILES+=usr/share/man/man8/trpt.8.gz
 
 # 20221117: remove typo'd man page link
-OLD_FILES+=usr/share/man/man9/vm_map_wire_mapped.9.gz
 
 # 20221114: remove othermta
 OLD_FILES+=etc/rc.d/othermta
 
 # 20221109: remove rc.sendmail(8)
 OLD_FILES+=etc/rc.sendmail
-OLD_FILES+=usr/share/man/man8/rc.sendmail.8.gz
 
 # 20221015: update the ithread(9) man page
-OLD_FILES+=usr/share/man/man9/ithread.9.gz
-OLD_FILES+=usr/share/man/man9/ithread_add_handler.9.gz
-OLD_FILES+=usr/share/man/man9/ithread_create.9.gz
-OLD_FILES+=usr/share/man/man9/ithread_destroy.9.gz
-OLD_FILES+=usr/share/man/man9/ithread_priority.9.gz
-OLD_FILES+=usr/share/man/man9/ithread_remove_handler.9.gz
-OLD_FILES+=usr/share/man/man9/ithread_schedule.9.gz
 
 # 20221012: remove nls support from sort
 OLD_FILES+=usr/share/nls/hu_HU.ISO8859-2/sort.cat
@@ -5222,30 +4060,12 @@ OLD_FILES+=usr/lib/pam_opie.so
 OLD_LIBS+=usr/lib/pam_opie.so.6
 OLD_FILES+=usr/lib/pam_opieaccess.so
 OLD_LIBS+=usr/lib/pam_opieaccess.so.6
-OLD_FILES+=usr/share/man/man1/opieinfo.1.gz
-OLD_FILES+=usr/share/man/man1/opiekey.1.gz
-OLD_FILES+=usr/share/man/man1/opiepasswd.1.gz
-OLD_FILES+=usr/share/man/man1/otp-md4.1.gz
-OLD_FILES+=usr/share/man/man1/otp-md5.1.gz
-OLD_FILES+=usr/share/man/man1/otp-sha1.1.gz
-OLD_FILES+=usr/share/man/man4/opie.4.gz
-OLD_FILES+=usr/share/man/man4/skey.4.gz
-OLD_FILES+=usr/share/man/man5/opieaccess.5.gz
-OLD_FILES+=usr/share/man/man5/opiekeys.5.gz
-OLD_FILES+=usr/share/man/man8/pam_opie.8.gz
-OLD_FILES+=usr/share/man/man8/pam_opieaccess.8.gz
 
 # 20220928: telnetd(8) removed
 OLD_FILES+=etc/pam.d/telnetd
 OLD_FILES+=usr/libexec/telnetd
-OLD_FILES+=usr/share/man/man8/telnetd.8.gz
 
 # 20220914: domain(9) updated
-OLD_FILES+=usr/share/man/man9/domain_init.9.gz
-OLD_FILES+=usr/share/man/man9/pfctlinput.9.gz
-OLD_FILES+=usr/share/man/man9/pffinddomain.9.gz
-OLD_FILES+=usr/share/man/man9/pffindproto.9.gz
-OLD_FILES+=usr/share/man/man9/pffindtype.9.gz
 
 # 20220825: awk tests moved to subdirs
 OLD_FILES+=usr/tests/usr.bin/awk/awk_test
@@ -5274,11 +4094,9 @@ OLD_FILES+=usr/tests/usr.bin/awk/d_toupper.in
 OLD_FILES+=usr/tests/usr.bin/awk/d_toupper.out
 
 # 20220820: remove knlist_init_rw_reader()
-OLD_FILES+=usr/share/man/man9/knlist_init_rw_reader.9.gz
 
 # 20220813: minigzip(1) removed in favor of gzip(1)
 OLD_FILES+=usr/bin/minigzip
-OLD_FILES+=usr/share/man/man1/minigzip.1.gz
 
 # 20220811: MP_WATCHDOG removed
 OLD_FILES+=usr/include/machine/mp_watchdog.h
@@ -5318,13 +4136,6 @@ OLD_LIBS+=lib/libnv.so.0
 OLD_FILES+=usr/tests/sys/kern/unix_passfd_test
 
 # 20220621: ISA sound card drivers removed
-OLD_FILES+=usr/share/man/man4/snd_ad1816.4.gz
-OLD_FILES+=usr/share/man/man4/snd_ess.4.gz
-OLD_FILES+=usr/share/man/man4/snd_gusc.4.gz
-OLD_FILES+=usr/share/man/man4/snd_mss.4.gz
-OLD_FILES+=usr/share/man/man4/snd_sb16.4.gz
-OLD_FILES+=usr/share/man/man4/snd_sb8.4.gz
-OLD_FILES+=usr/share/man/man4/snd_sbc.4.gz
 
 # 20220612: new clang import which bumps version from 14.0.4 to 14.0.5
 OLD_FILES+=usr/lib/clang/14.0.4/include/cuda_wrappers/algorithm
@@ -6281,8 +5092,6 @@ OLD_DIRS+=usr/tests/usr.bin/uuencode
 OLD_DIRS+=usr/tests/usr.bin/uudecode
 
 # 20220318: snd_ds1 and snd_maestro drivers removed
-OLD_FILES+=usr/share/man/man4/snd_ds1.4.gz
-OLD_FILES+=usr/share/man/man4/snd_maestro.4.gz
 
 # 20220307: remove 330.news
 OLD_FILES+=etc/periodic/daily/330.news
@@ -6293,36 +5102,22 @@ OLD_FILES+=usr/include/c++/v1/unwind-itanium.h
 OLD_FILES+=usr/include/c++/v1/unwind.h
 
 # 20220128: mips pmc events removed
-OLD_FILES+=usr/share/man/man3/pmc.mips24k.3.gz
-OLD_FILES+=usr/share/man/man3/pmc.octeon.3.gz
 
 # 20220127: terasic_mtl.4 removed
-OLD_FILES+=usr/share/man/man4/terasic_mtl.4.gz
 
 # 20211229: libc++ moved to /lib
 MOVED_LIBS+=usr/lib/libc++.so.1
 
 # 20211221: efi_set_variables_supported.3 should be efi_variables_supported.3
-OLD_FILES+=usr/share/man/man3/efi_set_variables_supported.3.gz
 
 # 20211218: meteor.4 removed, see also 20200301 entry below
-OLD_FILES+=usr/share/man/man4/meteor.4.gz
 
 # 20211125: Old SCSI drivers removed
 OLD_FILES+=usr/include/dev/ic/esp.h
-OLD_FILES+=usr/share/man/man4/amr.4.gz
-OLD_FILES+=usr/share/man/man4/esp.4.gz
-OLD_FILES+=usr/share/man/man4/iir.4.gz
-OLD_FILES+=usr/share/man/man4/mly.4.gz
-OLD_FILES+=usr/share/man/man4/twa.4.gz
 
 # 20211120: kernel_vmount function removed
-OLD_FILES+=usr/share/man/man9/kernel_vmount.9.gz
 
 # 20211115: vm_page busy functions removed
-OLD_FILES+=usr/share/man/man9/vm_page_sbusy.9.gz
-OLD_FILES+=usr/share/man/man9/vm_page_xbusy.9.gz
-OLD_FILES+=usr/share/man/man9/vm_page_sleep_if_busy.9.gz
 
 # 20211113: new clang import which bumps version from 12.0.1 to 13.0.0
 OLD_FILES+=usr/lib/clang/12.0.1/include/cuda_wrappers/algorithm
@@ -6767,8 +5562,6 @@ OLD_LIBS+=usr/lib/libdpv.so.2
 
 # 20211026: retire obsolete iscsi initiator
 OLD_FILES+=sbin/iscontrol
-OLD_FILES+=usr/share/man/man4/iscsi_initiator.4.gz
-OLD_FILES+=usr/share/man/man8/iscontrol.8.gz
 
 # 20211022
 OLD_FILES+=etc/rc.d/sppp
@@ -6779,9 +5572,6 @@ OLD_FILES+=usr/include/machine/cserial.h
 .endif
 OLD_FILES+=usr/include/net/if_sppp.h
 OLD_FILES+=usr/include/netgraph/ng_sppp.h
-OLD_FILES+=usr/share/man/man4/ng_sppp.4.gz
-OLD_FILES+=usr/share/man/man4/sppp.4.gz
-OLD_FILES+=usr/share/man/man8/spppcontrol.8.gz
 
 # 20211004: Removed sparc64 tests for lastcomm/sa
 OLD_FILES+=usr/tests/usr.bin/lastcomm/v1-sparc64-acct.in
@@ -6799,30 +5589,20 @@ OLD_FILES+=usr/tests/usr.sbin/sa/v2-sparc64-usr.in
 
 # 20210929:
 OLD_FILES+=usr/sbin/hcseriald
-OLD_FILES+=usr/share/man/man8/hcseriald.8.gz
 
 # 20210929: Remove ng_h4
 OLD_FILES+=usr/include/netgraph/bluetooth/include/ng_h4.h
-OLD_FILES+=usr/share/man/man4/ng_h4.4.gz
 
 # 20210923: rename boot(9) to kern_reboot(9)
-OLD_FILES+=usr/share/man/man9/boot.9.gz
 
 # 20210921: remove cloudabi
-OLD_FILES+=usr/share/man/man4/cloudabi.4.gz
-OLD_FILES+=usr/share/man/man4/cloudabi32.4.gz
-OLD_FILES+=usr/share/man/man4/cloudabi64.4.gz
 
 # 20210906: stop installing {llvm,clang,lldb}-tblgen
 OLD_FILES+=usr/bin/llvm-tblgen
 OLD_FILES+=usr/bin/clang-tblgen
 OLD_FILES+=usr/bin/lldb-tblgen
-OLD_FILES+=usr/share/man/man1/llvm-tblgen.1.gz
 
 # 20210810: remove Pentium-related man pages and references
-OLD_FILES+=usr/share/man/man3/pmc.p4.3.gz
-OLD_FILES+=usr/share/man/man3/pmc.p5.3.gz
-OLD_FILES+=usr/share/man/man3/pmc.p6.3.gz
 
 # 20210805: C.UTF-8 installed to the wrong location
 OLD_FILES+=usr/share/C.UTF-8.LC_CTYPE
@@ -7119,8 +5899,6 @@ OLD_DIRS+=usr/lib/clang/12.0.0/lib
 OLD_DIRS+=usr/lib/clang/12.0.0
 
 # 20210616: Remove crypto_cursor_seg{base,len}
-OLD_FILES+=usr/share/man/man9/crypto_cursor_segbase.9.gz
-OLD_FILES+=usr/share/man/man9/crypto_cursor_seglen.9.gz
 
 # 20210618: rename of usr/share/certs/blacklisted
 OLD_FILES+=usr/share/certs/blacklisted/AddTrust_External_Root.pem
@@ -7448,14 +6226,6 @@ OLD_DIRS+=usr/lib/clang/11.0.1/lib
 OLD_DIRS+=usr/lib/clang/11.0.1
 
 # 20210613: Rename OpenZFS manual pages
-OLD_FILES+=usr/share/man/man5/spl-module-parameters.5.gz
-OLD_FILES+=usr/share/man/man5/zfs-events.5.gz
-OLD_FILES+=usr/share/man/man5/zfs-module-parameters.5.gz
-OLD_FILES+=usr/share/man/man8/zfsconcepts.8.gz
-OLD_FILES+=usr/share/man/man8/zfsprops.8.gz
-OLD_FILES+=usr/share/man/man5/zpool-features.5.gz
-OLD_FILES+=usr/share/man/man8/zpoolconcepts.8.gz
-OLD_FILES+=usr/share/man/man8/zpoolprops.8.gz
 
 # 20210611: Remove svn and svnlite
 OLD_FILES+=usr/bin/svn
@@ -7480,29 +6250,20 @@ OLD_FILES+=usr/bin/svnrdump
 OLD_FILES+=usr/bin/svnserve
 OLD_FILES+=usr/bin/svnsync
 OLD_FILES+=usr/bin/svnversion
-OLD_FILES+=usr/share/man/man1/svnlite.1.gz
 
 # 20210607: remove ancontrol(8) related programs
 OLD_FILES+=usr/sbin/ancontrol
-OLD_FILES+=usr/share/man/man8/ancontrol.8.gz
 
 # 20210607: remove an(4)
 OLD_FILES+=usr/include/dev/an/if_aironet_ieee.h
 OLD_FILES+=usr/include/dev/an/if_anreg.h
-OLD_FILES+=usr/share/man/man4/an.4.gz
 
 # 20210426: remove unused libexec/rc.d/addswap
 OLD_FILES+=etc/rc.d/addswap
 
 # 20210413: Remove pfctlinput2
-OLD_FILES+=usr/share/man/man9/pfctlinput2.9.gz
 
 # 20210412: Remove kernel asymmetric crypto
-OLD_FILES+=usr/share/man/man9/crypto_asym.9.gz
-OLD_FILES+=usr/share/man/man9/crypto_kdispatch.9.gz
-OLD_FILES+=usr/share/man/man9/crypto_kdone.9.gz
-OLD_FILES+=usr/share/man/man9/crypto_kregister.9.gz
-OLD_FILES+=usr/share/man/man9/CRYPTODEV_KPROCESS.9.gz
 
 # 20210410: remove unused libexec/rc.d/archdep
 OLD_FILES+=etc/rc.d/archdep
@@ -7512,14 +6273,10 @@ OLD_FILES+=usr/include/netinet/tcp_hostcache.h
 
 # 20210403: remove kgmon(8)
 OLD_FILES+=usr/sbin/kgmon
-OLD_FILES+=usr/share/man/man8/kgmon.8.gz
 
 # 20210401: remove bt(4) man page
-OLD_FILES+=usr/share/man/man4/bt.4.gz
 
 # 20210322: retire mn(4) sync serial driver
-OLD_FILES+=usr/share/man/man4/if_mn.4.gz
-OLD_FILES+=usr/share/man/man4/mn.4.gz
 
 # 20210318: remove the terminfo database
 OLD_FILES+=usr/share/terminfo/1/1178
@@ -10402,7 +9159,6 @@ OLD_FILES+=usr/include/crypto/xform_poly1305.h
 
 # 20210302: fmtree removed
 OLD_FILES+=usr/sbin/fmtree
-OLD_FILES+=usr/share/man/man8/fmtree.8.gz
 
 # 20210201: bump shared libraries which link against ncurses
 OLD_LIBS+=lib/libedit.so.7
@@ -10419,11 +9175,6 @@ OLD_LIBS+=usr/lib/libpanelw.so.5
 OLD_FILES+=usr/sbin/ndis_events
 OLD_FILES+=usr/sbin/ndiscvt
 OLD_FILES+=usr/sbin/ndisgen
-OLD_FILES+=usr/share/man/man4/ndis.4.gz
-OLD_FILES+=usr/share/man/man4/if_ndis.4.gz
-OLD_FILES+=usr/share/man/man8/ndis_events.8.gz
-OLD_FILES+=usr/share/man/man8/ndiscvt.8.gz
-OLD_FILES+=usr/share/man/man8/ndisgen.8.gz
 OLD_FILES+=usr/share/misc/windrv_stub.c
 
 # 20210116: openpromio(4) removed
@@ -10440,18 +9191,12 @@ OLD_FILES+=usr/include/dev/wi/if_wavelan_ieee.h
 OLD_FILES+=usr/include/dev/wi/if_wivar.h
 OLD_FILES+=usr/include/netgraph/bluetooth/include/ng_bt3c.h
 OLD_FILES+=usr/sbin/bt3cfw
-OLD_FILES+=usr/share/man/man4/cmw.4.gz
-OLD_FILES+=usr/share/man/man4/if_wi.4.gz
-OLD_FILES+=usr/share/man/man4/ng_bt3c.4.gz
-OLD_FILES+=usr/share/man/man4/wi.4.gz
-OLD_FILES+=usr/share/man/man8/bt3cfw.8.gz
 
 # 20210107: retire a.out support
 OLD_DIRS+=usr/lib/aout
 OLD_DIRS+=usr/lib/compat/aout
 
 # 20210107: remove cmx(4)
-OLD_FILES+=usr/share/man/man4/cmx.4.gz
 
 # 20210105: remove non widechar version of ncurses
 OLD_LIBS+=lib/libncurses.so.9
@@ -10727,7 +9472,6 @@ OLD_FILES+=usr/include/dev/ic/sab82532.h
 
 # 20201225: PMC for Xscale removed
 OLD_FILES+=usr/include/dev/hwpmc/hwpmc_xscale.h
-OLD_FILES+=usr/share/man/man3/pmc.xscale.3.gz
 
 # 20201225: libregex removed
 OLD_FILES+=usr/include/gnu/posix/regex.h
@@ -10743,19 +9487,14 @@ OLD_FILES+=usr/lib/libgnuregex_p.a
 # 20201225: gnugrep removed
 OLD_FILES+=usr/bin/bsdgrep
 OLD_FILES+=usr/bin/gnugrep
-OLD_FILES+=usr/share/man/man1/bsdgrep.1.gz
-OLD_FILES+=usr/share/man/man1/gnugrep.1.gz
 
 # 20201224: mk48txx(4) removed
-OLD_FILES+=usr/share/man/man4/mk48txx.4.gz
 
 # 20201215: in-tree gdb removed
 OLD_FILES+=usr/libexec/gdb
 OLD_FILES+=usr/libexec/kgdb
 
 # 20201211: hme(4) removed
-OLD_FILES+=usr/share/man/man4/hme.4.gz
-OLD_FILES+=usr/share/man/man4/if_hme.4.gz
 
 # 20201129: RADIX_MPATH removed
 OLD_FILES+=usr/include/net/radix_mpath.h
@@ -10856,17 +9595,14 @@ OLD_FILES+=usr/include/net/route/shared.h
 
 # 20200825: merged OpenZFS support
 OLD_LIBS+=lib/libzfs.so.3
-OLD_FILES+=usr/share/man/man1/zstreamdump.1.gz
 #OLD_FILES+=usr/share/man/man7/zpool-features.7.gz
 
 # 20200923: memfd_test moved to /usr/tests/sys/posixshm
 OLD_FILES+=usr/tests/sys/kern/memfd_test
 
 # 20200910: remove vm_map_create(9) to sync with the code
-OLD_FILES+=usr/share/man/man9/vm_map_create.9.gz
 
 # 20200820: Removal of the ufm driver
-OLD_FILES+=usr/share/man/man4/ufm.4.gz
 
 # 20200816: new clang import which bumps version from 10.0.1 to 11.0.0
 OLD_FILES+=usr/lib/clang/10.0.1/include/cuda_wrappers/algorithm
@@ -11120,19 +9856,13 @@ OLD_DIRS+=usr/lib/clang/10.0.1/lib
 OLD_DIRS+=usr/lib/clang/10.0.1
 
 # 20200803: remove free_domain(9) and uma_zfree_domain(9)
-OLD_FILES+=usr/share/man/man9/free_domain.9.gz
-OLD_FILES+=usr/share/man/man9/uma_zfree_domain.9.gz
 
 # 20200729: remove long expired serial drivers
-OLD_FILES+=usr/share/man/man4/cy.4.gz
-OLD_FILES+=usr/share/man/man4/rc.4.gz
-OLD_FILES+=usr/share/man/man4/rp.4.gz
 
 # 20200721: sys/iommu.h moved to dev/iommu/
 OLD_FILES+=usr/include/sys/iommu.h
 
 # 20200715: rework of devstat(9) man page
-OLD_FILES+=usr/share/man/man9/devstat_add_entry.9.gz
 
 # 20200714: update byacc to 20200330
 OLD_FILES+=usr/tests/usr.bin/yacc/btyacc_calc1.y
@@ -11150,10 +9880,6 @@ OLD_FILES+=usr/tests/usr.bin/yacc/inherit1.y
 OLD_FILES+=usr/tests/usr.bin/yacc/inherit2.y
 
 # 20200706: update of sglist(9), r360574
-OLD_FILES+=usr/share/man/man9/sglist_append_ext_pgs.9.gz
-OLD_FILES+=usr/share/man/man9/sglist_append_mb_ext_pgs.9.gz
-OLD_FILES+=usr/share/man/man9/sglist_count_ext_pgs.9.gz
-OLD_FILES+=usr/share/man/man9/sglist_count_mb_ext_pgs.9.gz
 
 # 20200617: update opencsd to 0.14.2
 OLD_FILES+=usr/include/opencsd/etmv4/trc_pkt_elem_etmv4d.h
@@ -11161,12 +9887,6 @@ OLD_FILES+=usr/include/opencsd/etmv4/trc_pkt_elem_etmv4d.h
 # 20200606: retire binutils build infrastructure
 OLD_FILES+=usr/bin/as
 OLD_FILES+=usr/bin/ld.bfd
-OLD_FILES+=usr/share/man/man1/as.1.gz
-OLD_FILES+=usr/share/man/man1/ld.bfd.1.gz
-OLD_FILES+=usr/share/man/man7/as.7.gz
-OLD_FILES+=usr/share/man/man7/ld.7.gz
-OLD_FILES+=usr/share/man/man7/ldint.7.gz
-OLD_FILES+=usr/share/man/man7/binutils.7.gz
 OLD_FILES+=usr/libdata/ldscripts/armelf_fbsd.x
 OLD_FILES+=usr/libdata/ldscripts/armelf_fbsd.xbn
 OLD_FILES+=usr/libdata/ldscripts/armelf_fbsd.xc
@@ -11640,7 +10360,6 @@ OLD_FILES+=usr/include/crypto/castsb.h
 OLD_FILES+=usr/include/crypto/skipjack.h
 
 # 20200511: Remove ubsec(4)
-OLD_FILES+=usr/share/man/man4/ubsec.4.gz
 
 # 20200428: route_var.h moved to net/route
 OLD_FILES+=usr/include/net/route_var.h
@@ -11652,8 +10371,6 @@ OLD_LIBS+=usr/lib/libauditd.so.5
 OLD_FILES+=usr/lib/libauditd_p.a
 
 # 20200418: Remove bogus man links
-OLD_FILES+=usr/share/man/man3/getauusernam_R.3.gz
-OLD_FILES+=usr/share/man/man3/getauclassnam_3.3.gz
 
 # 20200414: NFS file handle affinity code for the NFS server re-organized
 OLD_FILES+=usr/include/nfs/nfs_fha.h
@@ -11665,15 +10382,9 @@ OLD_FILES+=usr/include/sys/pioctl.h
 OLD_FILES+=usr/bin/gdb
 OLD_FILES+=usr/bin/gdbserver
 OLD_FILES+=usr/bin/kgdb
-OLD_FILES+=usr/share/man/man1/gdb.1.gz
-OLD_FILES+=usr/share/man/man1/gdbserver.1.gz
-OLD_FILES+=usr/share/man/man1/kgdb.1.gz
 
 # 20200327: OCF refactoring
 OLD_FILES+=usr/include/crypto/cryptosoft.h
-OLD_FILES+=usr/share/man/man9/crypto_find_driver.9.gz
-OLD_FILES+=usr/share/man/man9/crypto_register.9.gz
-OLD_FILES+=usr/share/man/man9/crypto_unregister.9.gz
 
 # 20200326: compat libs for libl are no longer built
 OLD_FILES+=usr/lib32/libfl.a
@@ -11686,8 +10397,6 @@ OLD_FILES+=usr/include/libifconfig.h
 OLD_FILES+=usr/include/libpmcstat.h
 
 # 20200320: cx and ctau drivers retired
-OLD_FILES+=usr/share/man/man4/ctau.4.gz
-OLD_FILES+=usr/share/man/man4/cx.4.gz
 
 # 20200318: host.conf was deprecated a long time ago
 OLD_FILES+=etc/host.conf
@@ -11943,15 +10652,6 @@ OLD_FILES+=usr/sbin/hlfsd
 OLD_FILES+=usr/sbin/mk-amd-map
 OLD_FILES+=usr/sbin/wire-test
 OLD_FILES+=usr/share/examples/etc/amd.map
-OLD_FILES+=usr/share/man/man1/pawd.1.gz
-OLD_FILES+=usr/share/man/man5/amd.conf.5.gz
-OLD_FILES+=usr/share/man/man8/amd.8.gz
-OLD_FILES+=usr/share/man/man8/amq.8.gz
-OLD_FILES+=usr/share/man/man8/fixmount.8.gz
-OLD_FILES+=usr/share/man/man8/fsinfo.8.gz
-OLD_FILES+=usr/share/man/man8/hlfsd.8.gz
-OLD_FILES+=usr/share/man/man8/mk-amd-map.8.gz
-OLD_FILES+=usr/share/man/man8/wire-test.8.gz
 
 # 20200301: bktr removed
 OLD_DIRS+=usr/include/dev/bktr
@@ -11962,14 +10662,10 @@ OLD_FILES+=usr/include/dev/bktr/ioctl_meteor.h
 OLD_FILES+=usr/include/machine/ioctl_bktr.h
 OLD_FILES+=usr/include/machine/ioctl_meteor.h
 .endif
-OLD_FILES+=usr/share/man/man4/bktr.4.gz
-OLD_FILES+=usr/share/man/man4/brooktree.4.gz
 
 # 20200229: GCC 4.2.1 removed
 OLD_FILES+=usr/bin/g++
 OLD_FILES+=usr/bin/gcc
-OLD_FILES+=usr/share/man/man1/g++.1.gz
-OLD_FILES+=usr/share/man/man1/gcc.1.gz
 OLD_FILES+=usr/bin/gcpp
 OLD_FILES+=usr/bin/gperf
 OLD_FILES+=usr/include/c++/4.2/algorithm
@@ -12559,9 +11255,6 @@ OLD_LIBS+=usr/lib/libgomp.so.1
 OLD_FILES+=usr/lib/libgomp_p.a
 OLD_FILES+=usr/libexec/cc1
 OLD_FILES+=usr/libexec/cc1plus
-OLD_FILES+=usr/share/man/man1/gcpp.1.gz
-OLD_FILES+=usr/share/man/man1/gperf.1.gz
-OLD_FILES+=usr/share/man/man7/gperf.7.gz
 OLD_DIRS+=usr/include/c++/4.2/tr1
 OLD_DIRS+=usr/include/c++/4.2/ext/pb_ds/detail/unordered_iterator
 OLD_DIRS+=usr/include/c++/4.2/ext/pb_ds/detail/trie_policy
@@ -12602,15 +11295,12 @@ OLD_LIBS+=lib/libncursesw.so.8
 
 # 20200206: Remove elf2aout
 OLD_FILES+=usr/bin/elf2aout
-OLD_FILES+=usr/share/man/man1/elf2aout.1.gz
 
 # 20200204: simple_httpd removed
 OLD_FILES+=usr/sbin/simple_httpd
 
 # 20200127: vpo removed
 OLD_FILES+=usr/include/dev/ppbus/vpoio.h
-OLD_FILES+=usr/share/man/man4/imm.4.gz
-OLD_FILES+=usr/share/man/man4/vpo.4.gz
 
 # 20200104: gcc libssp removed
 OLD_FILES+=usr/lib/libssp.a
@@ -12618,7 +11308,6 @@ OLD_FILES+=usr/lib/libssp.a
 # 20191229: GEOM_SCHED class and gsched tool removed
 OLD_LIBS+=lib/geom/geom_sched.so
 OLD_FILES+=sbin/gsched
-OLD_FILES+=usr/share/man/man8/gsched.8.gz
 
 # 20191222: new clang import which bumps version from 9.0.0 to 9.0.1
 OLD_FILES+=usr/lib/clang/9.0.0/include/cuda_wrappers/algorithm
@@ -12857,25 +11546,13 @@ OLD_DIRS+=usr/lib/clang/9.0.0/lib/freebsd
 OLD_DIRS+=usr/lib/clang/9.0.0/lib
 OLD_DIRS+=usr/lib/clang/9.0.0
 # 20191221: Update libpcap from 1.9.0 to 1.9.1
-OLD_FILES+=usr/share/man/man3/pcap_set_immediate_mode.3.gz
-OLD_FILES+=usr/share/man/man3/pcap_set_protocol.3.gz
 # 20191214: Removal of sranddev(3)
-OLD_FILES+=usr/share/man/man3/sranddev.3.gz
 # 20191213: Renamed (BIT|CPU)_NAND to (BIT|CPU)_ANDNOT
-OLD_FILES+=usr/share/man/man9/BIT_NAND.9.gz
-OLD_FILES+=usr/share/man/man9/CPU_NAND.9.gz
 # 20191213: remove timeout(9)
-OLD_FILES+=usr/share/man/man9/callout_handle_init.9.gz
-OLD_FILES+=usr/share/man/man9/timeout.9.gz
-OLD_FILES+=usr/share/man/man9/untimeout.9.gz
 # 20191128: Removal of trm(4)
-OLD_FILES+=usr/share/man/man4/trm.4.gz
 # 20191121: Removal of sio(4)
-OLD_FILES+=usr/share/man/man4/sio.4.gz
 # 20191105: picobsd(8), et al, removed
-OLD_FILES+=usr/share/man/man8/picobsd.8.gz
 # 20191017: taskqueue_start_threads_pinned became taskqueue_start_threads_cpuset
-OLD_FILES+=usr/share/man/man9/taskqueue_start_threads_pinned.9.gz
 # 20191009: new clang import which bumps version from 8.0.1 to 9.0.0
 OLD_FILES+=usr/lib/clang/8.0.1/include/sanitizer/allocator_interface.h
 OLD_FILES+=usr/lib/clang/8.0.1/include/sanitizer/asan_interface.h
@@ -13043,9 +11720,7 @@ OLD_FILES+=usr/tests/sys/cddl/zfs/tests/cli_root/zpool_create/zpool_create_014_n
 OLD_FILES+=usr/tests/sys/cddl/zfs/tests/cli_root/zpool_create/zpool_create_016_pos.ksh
 # 20190910: mklocale(1) and colldef(1) removed
 OLD_FILES+=usr/bin/mklocale
-OLD_FILES+=usr/share/man/man1/mklocale.1.gz
 OLD_FILES+=usr/bin/colldef
-OLD_FILES+=usr/share/man/man1/colldef.1.gz
 # 20190904: Remove boot1.efifat and gptboot.efifat (which never should have been)
 OLD_FILES+=boot/boot1.efifat
 OLD_FILES+=boot/gptboot.efifat
@@ -13060,7 +11735,6 @@ OLD_FILES+=usr/share/examples/pc-sysinstall/pcinstall.cfg.restore
 OLD_FILES+=usr/share/examples/pc-sysinstall/pcinstall.cfg.rsync
 OLD_FILES+=usr/share/examples/pc-sysinstall/pcinstall.cfg.upgrade
 OLD_FILES+=usr/share/examples/pc-sysinstall/pcinstall.cfg.zfs
-OLD_FILES+=usr/share/man/man8/pc-sysinstall.8.gz
 OLD_FILES+=usr/share/pc-sysinstall/backend-partmanager/create-part.sh
 OLD_FILES+=usr/share/pc-sysinstall/backend-partmanager/delete-part.sh
 OLD_FILES+=usr/share/pc-sysinstall/backend-query/detect-emulation.sh
@@ -13138,22 +11812,14 @@ OLD_FILES+=usr/tests/sys/netpfil/pf/pft_ping.py
 # 20190816: dir.h removed from POSIX
 OLD_FILES+=usr/include/sys/dir.h
 # 20190813: deprecated GEOM classes removed
-OLD_FILES+=usr/share/man/man4/geom_fox.4.gz
 # 20190729: gzip'ed a.out support removed
 OLD_FILES+=usr/include/sys/inflate.h
 # 20190722: cap_random(3) removed
 OLD_LIBS+=lib/casper/libcap_random.so.1
 OLD_FILES+=usr/include/casper/cap_random.h
 OLD_LIBS+=usr/lib/libcap_random.so
-OLD_FILES+=usr/share/man/man3/libcap_random.3.gz
-OLD_FILES+=usr/share/man/man3/cap_random.3.gz
-OLD_FILES+=usr/share/man/man3/cap_random_buf.3.gz
 # 20190708: vm_page_hold() and _unhold() removed
-OLD_FILES+=usr/share/man/man9/vm_page_hold.9.gz
-OLD_FILES+=usr/share/man/man9/vm_page_unhold.9.gz
 # 20190625: Remove NAND and NANDFS support
-OLD_FILES+=usr/share/man/man4/nand.4.gz
-OLD_FILES+=usr/share/man/man4/nandsim.4.gz
 # 20190618: sys/capability.h removed (sys/capsicum.h is the one to use)
 OLD_FILES+=usr/include/sys/capability.h
 # 20190615: sys/pwm.h renamed to dev/pwmc.h
@@ -13311,34 +11977,7 @@ OLD_DIRS+=usr/lib/clang/8.0.0
 # 20190523: Remove obsolete kgzip and support files
 OLD_FILES+=usr/sbin/kgzip
 OLD_FILES+=usr/lib/kgzldr.o
-OLD_FILES+=usr/share/man/man8/kgzip.8.gz
 # 20190517: Remove obsolete 10 and 10/100 ethernet drivers
-OLD_FILES+=usr/share/man/man4/bm.4.gz
-OLD_FILES+=usr/share/man/man4/cs.4.gz
-OLD_FILES+=usr/share/man/man4/de.4.gz
-OLD_FILES+=usr/share/man/man4/if_de.4.gz
-OLD_FILES+=usr/share/man/man4/ed.4.gz
-OLD_FILES+=usr/share/man/man4/if_ed.4.gz
-OLD_FILES+=usr/share/man/man4/ep.4.gz
-OLD_FILES+=usr/share/man/man4/ex.4.gz
-OLD_FILES+=usr/share/man/man4/fe.4.gz
-OLD_FILES+=usr/share/man/man4/pcn.4.gz
-OLD_FILES+=usr/share/man/man4/if_pcn.4.gz
-OLD_FILES+=usr/share/man/man4/sf.4.gz
-OLD_FILES+=usr/share/man/man4/if_sf.4.gz
-OLD_FILES+=usr/share/man/man4/sn.4.gz
-OLD_FILES+=usr/share/man/man4/if_sn.4.gz
-OLD_FILES+=usr/share/man/man4/tl.4.gz
-OLD_FILES+=usr/share/man/man4/if_tl.4.gz
-OLD_FILES+=usr/share/man/man4/tx.4.gz
-OLD_FILES+=usr/share/man/man4/if_tx.4.gz
-OLD_FILES+=usr/share/man/man4/txp.4.gz
-OLD_FILES+=usr/share/man/man4/if_txp.4.gz
-OLD_FILES+=usr/share/man/man4/vx.4.gz
-OLD_FILES+=usr/share/man/man4/wb.4.gz
-OLD_FILES+=usr/share/man/man4/if_wb.4.gz
-OLD_FILES+=usr/share/man/man4/xe.4.gz
-OLD_FILES+=usr/share/man/man4/if_xe.4.gz
 # 20190513: libcap_sysctl interface change
 OLD_LIBS+=lib/casper/libcap_sysctl.so.1
 # 20190509: tests/sys/opencrypto requires the net/py-dpkt package
@@ -13502,21 +12141,9 @@ OLD_FILES+=usr/include/sys/seq.h
 OLD_FILES+=usr/lib/libprivateifconfig.a
 OLD_FILES+=usr/lib/libprivateifconfig_p.a
 # 20190131: pfil(9) changed
-OLD_FILES+=usr/share/man/man9/pfil_hook_get.9.gz
-OLD_FILES+=usr/share/man/man9/pfil_rlock.9.gz
-OLD_FILES+=usr/share/man/man9/pfil_runlock.9.gz
-OLD_FILES+=usr/share/man/man9/pfil_wlock.9.gz
-OLD_FILES+=usr/share/man/man9/pfil_wunlock.9.gz
 # 20190126: adv(4) / adw(4) removal
-OLD_FILES+=usr/share/man/man4/adv.4.gz
-OLD_FILES+=usr/share/man/man4/adw.4.gz
 # 20190123: nonexistant cred_update_thread(9) removed
-OLD_FILES+=usr/share/man/man9/cred_update_thread.9.gz
 # 20190114: old pbuf allocator removed
-OLD_FILES+=usr/share/man/man9/getpbuf.9.gz
-OLD_FILES+=usr/share/man/man9/pbuf.9.gz
-OLD_FILES+=usr/share/man/man9/relpbuf.9.gz
-OLD_FILES+=usr/share/man/man9/trypbuf.9.gz
 # 20181219: ibcs removal
 OLD_FILES+=usr/share/examples/ibcs2/hello.uu
 OLD_FILES+=usr/share/examples/ibcs2/README
@@ -13526,17 +12153,10 @@ OLD_FILES+=usr/sbin/ctm
 OLD_FILES+=usr/sbin/ctm_dequeue
 OLD_FILES+=usr/sbin/ctm_rmail
 OLD_FILES+=usr/sbin/ctm_smail
-OLD_FILES+=usr/share/man/man1/ctm.1.gz
-OLD_FILES+=usr/share/man/man1/ctm_dequeue.1.gz
-OLD_FILES+=usr/share/man/man1/ctm_rmail.1.gz
-OLD_FILES+=usr/share/man/man1/ctm_smail.1.gz
-OLD_FILES+=usr/share/man/man5/ctm.5.gz
 # 20181214: Remove timed files
 OLD_FILES+=etc/rc.d/timed
 OLD_FILES+=usr/sbin/timed
 OLD_FILES+=usr/sbin/timedc
-OLD_FILES+=usr/share/man/man8/timed.8.gz
-OLD_FILES+=usr/share/man/man8/timedc.8.gz
 # 20181211: new clang import which bumps version from 6.0.1 to 7.0.1
 OLD_FILES+=usr/lib/clang/6.0.1/include/sanitizer/allocator_interface.h
 OLD_FILES+=usr/lib/clang/6.0.1/include/sanitizer/asan_interface.h
@@ -13680,25 +12300,16 @@ OLD_LIBS+=lib/libufs.so.6
 # 20181112: Cleanup old libcap_dns
 OLD_LIBS+=lib/casper/libcap_dns.so.1
 # 20181030: malloc_domain(9) KPI change
-OLD_FILES+=usr/share/man/man9/malloc_domain.9.gz
 # 20181026: joy(4) removal
-OLD_FILES+=usr/share/man/man4/joy.4.gz
 # 20181025: OpenSSL libraries version bump to avoid conflict with ports
 OLD_LIBS+=lib/libcrypto.so.9
 OLD_LIBS+=usr/lib/libssl.so.9
 # 20181022: aha(4) removal
-OLD_FILES+=usr/share/man/man4/aha.4.gz
 # 20181022: dpt(4) removal
-OLD_FILES+=usr/share/man/man4/dpt.4.gz
 # 20181022: ncr(4) removal
-OLD_FILES+=usr/share/man/man4/ncr.4.gz
 # 20181022: ncv(4) removal
-OLD_FILES+=usr/share/man/man4/ncv.4.gz
 # 20181022: nsp(4) removal
-OLD_FILES+=usr/share/man/man4/nsp.4.gz
 # 20181022: stg(4) removal
-OLD_FILES+=usr/share/man/man4/stg.4.gz
 # 20181021: mse(4) removal
-OLD_FILES+=usr/share/man/man4/mse.4.gz
 
 .include "tools/build/mk/OptionalObsoleteFiles.inc"

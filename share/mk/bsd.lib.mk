@@ -100,16 +100,6 @@ DEV_TAG_ARGS=	${TAG_ARGS}
 
 .endif	# defined(NO_ROOT)
 
-# By default, put library manpages in the -dev subpackage, since they're not
-# usually interesting if the development files aren't installed.   For pages
-# that should be installed in the base package, define a new MANNODEV group.
-# Note that bsd.man.mk ignores this setting if MANSPLITPKG is enabled: then
-# manpages are always installed in the -man subpackage.
-MANSUBPACKAGE?=	-dev
-MANGROUPS?=	MAN
-MANGROUPS+=	MANNODEV
-MANNODEVSUBPACKAGE=
-
 # ELF hardening knobs
 .if ${MK_BIND_NOW} != "no"
 LDFLAGS+= -Wl,-znow
@@ -353,9 +343,6 @@ all:
 all: ${_LIBS}
 .endif
 
-.if ${MK_MAN} != "no" && !defined(LIBRARIES_ONLY)
-all: all-man
-.endif
 .endif
 
 CLEANFILES+=	${_LIBS}
@@ -490,15 +477,6 @@ LINKTAGS=	${_COMPAT_TAG}
 .endif
 .include <bsd.links.mk>
 
-.if ${MK_MAN} != "no" && !defined(LIBRARIES_ONLY)
-realinstall: maninstall
-.ORDER: beforeinstall maninstall
-.endif
-
-.endif
-
-.if ${MK_MAN} != "no" && !defined(LIBRARIES_ONLY)
-.include <bsd.man.mk>
 .endif
 
 .if defined(LIB) && !empty(LIB)

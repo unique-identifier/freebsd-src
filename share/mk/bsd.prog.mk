@@ -219,13 +219,6 @@ ${PROG_FULL}.ll: ${LLOBJS}
 CLEANFILES+=	${PROG_FULL}.bc ${PROG_FULL}.ll
 .endif # defined(LLVM_LINK)
 
-.if	${MK_MAN} != "no" && !defined(MAN) && \
-	!defined(MAN1) && !defined(MAN2) && !defined(MAN3) && \
-	!defined(MAN4) && !defined(MAN5) && !defined(MAN6) && \
-	!defined(MAN7) && !defined(MAN8) && !defined(MAN9)
-MAN=	${PROG}.1
-MAN1=	${MAN}
-.endif
 .endif # defined(PROG)
 
 .if defined(_SKIP_BUILD)
@@ -236,9 +229,6 @@ all:
 all: ${PROG} ${SCRIPTS} afterbuild
 .else
 all: ${PROG} ${SCRIPTS}
-.endif
-.if ${MK_MAN} != "no"
-all: all-man
 .endif
 .endif
 
@@ -337,16 +327,7 @@ LINKGRP?=	${BINGRP}
 LINKMODE?=	${BINMODE}
 .include <bsd.links.mk>
 
-.if ${MK_MAN} != "no"
-realinstall: maninstall
-.ORDER: beforeinstall maninstall
-.endif
-
 .endif	# !target(install)
-
-.if ${MK_MAN} != "no"
-.include <bsd.man.mk>
-.endif
 
 .if defined(HAS_TESTS)
 MAKE+=			MK_MAKE_CHECK_USE_SANDBOX=yes

@@ -11,8 +11,6 @@ OLD_FILES+=etc/rc.d/accounting
 OLD_FILES+=etc/periodic/daily/310.accounting
 OLD_FILES+=usr/sbin/accton
 OLD_FILES+=usr/sbin/sa
-OLD_FILES+=usr/share/man/man8/accton.8.gz
-OLD_FILES+=usr/share/man/man8/sa.8.gz
 OLD_FILES+=usr/tests/usr.sbin/sa/Kyuafile
 OLD_FILES+=usr/tests/usr.sbin/sa/legacy_test
 OLD_FILES+=usr/tests/usr.sbin/sa/v1-amd64-sav.in
@@ -49,10 +47,6 @@ OLD_FILES+=usr/sbin/acpiconf
 OLD_FILES+=usr/sbin/acpidb
 OLD_FILES+=usr/sbin/acpidump
 OLD_FILES+=usr/sbin/iasl
-OLD_FILES+=usr/share/man/man8/acpiconf.8.gz
-OLD_FILES+=usr/share/man/man8/acpidb.8.gz
-OLD_FILES+=usr/share/man/man8/acpidump.8.gz
-OLD_FILES+=usr/share/man/man8/iasl.8.gz
 .endif
 
 .if ${MK_APM} == no
@@ -70,11 +64,6 @@ OLD_FILES+=usr/bin/atq
 OLD_FILES+=usr/bin/atrm
 OLD_FILES+=usr/bin/batch
 OLD_FILES+=usr/libexec/atrun
-OLD_FILES+=usr/share/man/man1/at.1.gz
-OLD_FILES+=usr/share/man/man1/atq.1.gz
-OLD_FILES+=usr/share/man/man1/atrm.1.gz
-OLD_FILES+=usr/share/man/man1/batch.1.gz
-OLD_FILES+=usr/share/man/man8/atrun.8.gz
 .endif
 
 .if ${MK_AUDIT} == no
@@ -85,12 +74,6 @@ OLD_FILES+=usr/sbin/auditd
 OLD_FILES+=usr/sbin/auditdistd
 OLD_FILES+=usr/sbin/auditreduce
 OLD_FILES+=usr/sbin/praudit
-OLD_FILES+=usr/share/man/man1/auditreduce.1.gz
-OLD_FILES+=usr/share/man/man1/praudit.1.gz
-OLD_FILES+=usr/share/man/man5/auditdistd.conf.5.gz
-OLD_FILES+=usr/share/man/man8/audit.8.gz
-OLD_FILES+=usr/share/man/man8/auditd.8.gz
-OLD_FILES+=usr/share/man/man8/auditdistd.8.gz
 OLD_FILES+=usr/tests/sys/audit/process-control
 OLD_FILES+=usr/tests/sys/audit/open
 OLD_FILES+=usr/tests/sys/audit/network
@@ -112,8 +95,6 @@ OLD_DIRS+=usr/tests/sys/audit
 .if ${MK_AUTHPF} == no
 OLD_FILES+=usr/sbin/authpf
 OLD_FILES+=usr/sbin/authpf-noip
-OLD_FILES+=usr/share/man/man8/authpf.8.gz
-OLD_FILES+=usr/share/man/man8/authpf-noip.8.gz
 .endif
 
 .if ${MK_AUTOFS} == no
@@ -130,11 +111,6 @@ OLD_FILES+=etc/rc.d/autounmountd
 OLD_FILES+=usr/sbin/automount
 OLD_FILES+=usr/sbin/automountd
 OLD_FILES+=usr/sbin/autounmountd
-OLD_FILES+=usr/share/man/man4/autofs.4.gz
-OLD_FILES+=usr/share/man/man5/auto_master.5.gz
-OLD_FILES+=usr/share/man/man8/automount.8.gz
-OLD_FILES+=usr/share/man/man8/automountd.8.gz
-OLD_FILES+=usr/share/man/man8/autounmountd.8.gz
 OLD_DIRS+=etc/autofs
 .endif
 
@@ -156,8 +132,6 @@ OLD_FILES+=usr/sbin/bhyve
 OLD_FILES+=usr/sbin/bhyvectl
 OLD_FILES+=usr/sbin/bhyveload
 OLD_FILES+=usr/share/examples/bhyve/vmrun.sh
-OLD_FILES+=usr/share/man/man8/bhyve.8.gz
-OLD_FILES+=usr/share/man/man8/bhyveload.8.gz
 OLD_DIRS+=usr/share/examples/bhyve
 .endif
 
@@ -171,15 +145,6 @@ OLD_LIBS+=usr/lib/libblocklist.so.0
 OLD_FILES+=usr/libexec/blocklistd-helper
 OLD_FILES+=usr/sbin/blocklistctl
 OLD_FILES+=usr/sbin/blocklistd
-OLD_FILES+=usr/share/man/man3/blocklist.3.gz
-OLD_FILES+=usr/share/man/man3/blocklist_close.3.gz
-OLD_FILES+=usr/share/man/man3/blocklist_open.3.gz
-OLD_FILES+=usr/share/man/man3/blocklist_r.3.gz
-OLD_FILES+=usr/share/man/man3/blocklist_sa.3.gz
-OLD_FILES+=usr/share/man/man3/blocklist_sa_r.3.gz
-OLD_FILES+=usr/share/man/man5/blocklistd.conf.5.gz
-OLD_FILES+=usr/share/man/man8/blocklistctl.8.gz
-OLD_FILES+=usr/share/man/man8/blocklistd.8.gz
 OLD_FILES+=etc/blacklistd.conf
 OLD_FILES+=etc/rc.d/blacklistd
 OLD_FILES+=usr/include/blacklist.h
@@ -189,15 +154,6 @@ OLD_LIBS+=usr/lib/libblacklist.so.0
 OLD_FILES+=usr/libexec/blacklistd-helper
 OLD_FILES+=usr/sbin/blacklistctl
 OLD_FILES+=usr/sbin/blacklistd
-OLD_FILES+=usr/share/man/man3/blacklist.3.gz
-OLD_FILES+=usr/share/man/man3/blacklist_close.3.gz
-OLD_FILES+=usr/share/man/man3/blacklist_open.3.gz
-OLD_FILES+=usr/share/man/man3/blacklist_r.3.gz
-OLD_FILES+=usr/share/man/man3/blacklist_sa.3.gz
-OLD_FILES+=usr/share/man/man3/blacklist_sa_r.3.gz
-OLD_FILES+=usr/share/man/man5/blacklistd.conf.5.gz
-OLD_FILES+=usr/share/man/man8/blacklistctl.8.gz
-OLD_FILES+=usr/share/man/man8/blacklistd.8.gz
 .endif
 
 .if ${MK_BLUETOOTH} == no
@@ -256,84 +212,6 @@ OLD_FILES+=usr/sbin/rtlbtfw
 OLD_FILES+=usr/sbin/sdpcontrol
 OLD_FILES+=usr/sbin/sdpd
 OLD_FILES+=usr/share/examples/etc/defaults/bluetooth.device.conf
-OLD_FILES+=usr/share/man/man1/bthost.1.gz
-OLD_FILES+=usr/share/man/man1/btsockstat.1.gz
-OLD_FILES+=usr/share/man/man1/rfcomm_sppd.1.gz
-OLD_FILES+=usr/share/man/man3/SDP_GET128.3.gz
-OLD_FILES+=usr/share/man/man3/SDP_GET16.3.gz
-OLD_FILES+=usr/share/man/man3/SDP_GET32.3.gz
-OLD_FILES+=usr/share/man/man3/SDP_GET64.3.gz
-OLD_FILES+=usr/share/man/man3/SDP_GET8.3.gz
-OLD_FILES+=usr/share/man/man3/SDP_PUT128.3.gz
-OLD_FILES+=usr/share/man/man3/SDP_PUT16.3.gz
-OLD_FILES+=usr/share/man/man3/SDP_PUT32.3.gz
-OLD_FILES+=usr/share/man/man3/SDP_PUT64.3.gz
-OLD_FILES+=usr/share/man/man3/SDP_PUT8.3.gz
-OLD_FILES+=usr/share/man/man3/bdaddr_any.3.gz
-OLD_FILES+=usr/share/man/man3/bdaddr_copy.3.gz
-OLD_FILES+=usr/share/man/man3/bdaddr_same.3.gz
-OLD_FILES+=usr/share/man/man3/bluetooth.3.gz
-OLD_FILES+=usr/share/man/man3/bt_aton.3.gz
-OLD_FILES+=usr/share/man/man3/bt_devaddr.3.gz
-OLD_FILES+=usr/share/man/man3/bt_devclose.3.gz
-OLD_FILES+=usr/share/man/man3/bt_devenum.3.gz
-OLD_FILES+=usr/share/man/man3/bt_devfilter.3.gz
-OLD_FILES+=usr/share/man/man3/bt_devfilter_evt_clr.3.gz
-OLD_FILES+=usr/share/man/man3/bt_devfilter_evt_set.3.gz
-OLD_FILES+=usr/share/man/man3/bt_devfilter_evt_tst.3.gz
-OLD_FILES+=usr/share/man/man3/bt_devfilter_pkt_clr.3.gz
-OLD_FILES+=usr/share/man/man3/bt_devfilter_pkt_set.3.gz
-OLD_FILES+=usr/share/man/man3/bt_devfilter_pkt_tst.3.gz
-OLD_FILES+=usr/share/man/man3/bt_devinfo.3.gz
-OLD_FILES+=usr/share/man/man3/bt_devinquiry.3.gz
-OLD_FILES+=usr/share/man/man3/bt_devname.3.gz
-OLD_FILES+=usr/share/man/man3/bt_devopen.3.gz
-OLD_FILES+=usr/share/man/man3/bt_devreq.3.gz
-OLD_FILES+=usr/share/man/man3/bt_devsend.3.gz
-OLD_FILES+=usr/share/man/man3/bt_endhostent.3.gz
-OLD_FILES+=usr/share/man/man3/bt_endprotoent.3.gz
-OLD_FILES+=usr/share/man/man3/bt_gethostbyaddr.3.gz
-OLD_FILES+=usr/share/man/man3/bt_gethostbyname.3.gz
-OLD_FILES+=usr/share/man/man3/bt_gethostent.3.gz
-OLD_FILES+=usr/share/man/man3/bt_getprotobyname.3.gz
-OLD_FILES+=usr/share/man/man3/bt_getprotobynumber.3.gz
-OLD_FILES+=usr/share/man/man3/bt_getprotoent.3.gz
-OLD_FILES+=usr/share/man/man3/bt_ntoa.3.gz
-OLD_FILES+=usr/share/man/man3/bt_sethostent.3.gz
-OLD_FILES+=usr/share/man/man3/bt_setprotoent.3.gz
-OLD_FILES+=usr/share/man/man3/sdp.3.gz
-OLD_FILES+=usr/share/man/man3/sdp_attr2desc.3.gz
-OLD_FILES+=usr/share/man/man3/sdp_change_service.3.gz
-OLD_FILES+=usr/share/man/man3/sdp_close.3.gz
-OLD_FILES+=usr/share/man/man3/sdp_error.3.gz
-OLD_FILES+=usr/share/man/man3/sdp_open.3.gz
-OLD_FILES+=usr/share/man/man3/sdp_open_local.3.gz
-OLD_FILES+=usr/share/man/man3/sdp_register_service.3.gz
-OLD_FILES+=usr/share/man/man3/sdp_search.3.gz
-OLD_FILES+=usr/share/man/man3/sdp_unregister_service.3.gz
-OLD_FILES+=usr/share/man/man3/sdp_uuid2desc.3.gz
-OLD_FILES+=usr/share/man/man4/ng_bluetooth.4.gz
-OLD_FILES+=usr/share/man/man5/bluetooth.device.conf.5.gz
-OLD_FILES+=usr/share/man/man5/bluetooth.hosts.5.gz
-OLD_FILES+=usr/share/man/man5/bluetooth.protocols.5.gz
-OLD_FILES+=usr/share/man/man5/hcsecd.conf.5.gz
-OLD_FILES+=usr/share/man/man8/ath3kfw.8.gz
-OLD_FILES+=usr/share/man/man8/bcmfw.8.gz
-OLD_FILES+=usr/share/man/man8/bluetooth-config.8.gz
-OLD_FILES+=usr/share/man/man8/bt3cfw.8.gz
-OLD_FILES+=usr/share/man/man8/bthidcontrol.8.gz
-OLD_FILES+=usr/share/man/man8/bthidd.8.gz
-OLD_FILES+=usr/share/man/man8/btpand.8.gz
-OLD_FILES+=usr/share/man/man8/hccontrol.8.gz
-OLD_FILES+=usr/share/man/man8/hcsecd.8.gz
-OLD_FILES+=usr/share/man/man8/hcseriald.8.gz
-OLD_FILES+=usr/share/man/man8/iwmbtfw.8.gz
-OLD_FILES+=usr/share/man/man8/l2control.8.gz
-OLD_FILES+=usr/share/man/man8/l2ping.8.gz
-OLD_FILES+=usr/share/man/man8/rfcomm_pppd.8.gz
-OLD_FILES+=usr/share/man/man8/rtlbtfw.8.gz
-OLD_FILES+=usr/share/man/man8/sdpcontrol.8.gz
-OLD_FILES+=usr/share/man/man8/sdpd.8.gz
 .endif
 
 .if ${MK_BOOT} == no
@@ -373,39 +251,19 @@ OLD_FILES+=boot/userboot.so
 OLD_FILES+=boot/version.4th
 OLD_FILES+=boot/zfsloader
 OLD_FILES+=usr/lib/kgzldr.o
-OLD_FILES+=usr/share/man/man5/loader.conf.5.gz
-OLD_FILES+=usr/share/man/man8/beastie.4th.8.gz
-OLD_FILES+=usr/share/man/man8/brand.4th.8.gz
-OLD_FILES+=usr/share/man/man8/check-password.4th.8.gz
-OLD_FILES+=usr/share/man/man8/color.4th.8.gz
-OLD_FILES+=usr/share/man/man8/delay.4th.8.gz
-OLD_FILES+=usr/share/man/man8/gptboot.8.gz
-OLD_FILES+=usr/share/man/man8/gptzfsboot.8.gz
-OLD_FILES+=usr/share/man/man8/loader.4th.8.gz
-OLD_FILES+=usr/share/man/man8/loader.8.gz
-OLD_FILES+=usr/share/man/man8/menu.4th.8.gz
-OLD_FILES+=usr/share/man/man8/menusets.4th.8.gz
-OLD_FILES+=usr/share/man/man8/version.4th.8.gz
-OLD_FILES+=usr/share/man/man8/zfsloader.8.gz
 .endif
 
 .if ${MK_BOOTPARAMD} == no
 OLD_FILES+=etc/rc.d/bootparams
 OLD_FILES+=usr/sbin/bootparamd
-OLD_FILES+=usr/share/man/man5/bootparams.5.gz
-OLD_FILES+=usr/share/man/man8/bootparamd.8.gz
 OLD_FILES+=usr/sbin/callbootd
 .endif
 
 .if ${MK_BOOTPD} == no
 OLD_FILES+=usr/libexec/bootpd
-OLD_FILES+=usr/share/man/man5/bootptab.5.gz
-OLD_FILES+=usr/share/man/man8/bootpd.8.gz
 OLD_FILES+=usr/libexec/bootpgw
 OLD_FILES+=usr/sbin/bootpef
-OLD_FILES+=usr/share/man/man8/bootpef.8.gz
 OLD_FILES+=usr/sbin/bootptest
-OLD_FILES+=usr/share/man/man8/bootptest.8.gz
 .endif
 
 .if ${MK_BSDINSTALL} == no
@@ -445,16 +303,12 @@ OLD_FILES+=usr/libexec/bsdinstall/umount
 OLD_FILES+=usr/libexec/bsdinstall/wlanconfig
 OLD_FILES+=usr/libexec/bsdinstall/zfsboot
 OLD_FILES+=usr/sbin/bsdinstall
-OLD_FILES+=usr/share/man/man8/bsdinstall.8.gz
-OLD_FILES+=usr/share/man/man8/sade.8.gz
 OLD_DIRS+=usr/libexec/bsdinstall
 .endif
 
 .if ${MK_BSD_CPIO} == no
 OLD_FILES+=usr/bin/bsdcpio
 OLD_FILES+=usr/bin/cpio
-OLD_FILES+=usr/share/man/man1/bsdcpio.1.gz
-OLD_FILES+=usr/share/man/man1/cpio.1.gz
 .endif
 
 .if ${MK_BSNMP} == no
@@ -502,214 +356,8 @@ OLD_LIBS+=usr/lib/snmp_wlan.so.6
 OLD_FILES+=usr/sbin/bsnmpd
 OLD_FILES+=usr/sbin/gensnmptree
 OLD_FILES+=usr/share/examples/etc/snmpd.config
-OLD_FILES+=usr/share/man/man1/bsnmpd.1.gz
-OLD_FILES+=usr/share/man/man1/bsnmpget.1.gz
-OLD_FILES+=usr/share/man/man1/bsnmpset.1.gz
-OLD_FILES+=usr/share/man/man1/bsnmpwalk.1.gz
-OLD_FILES+=usr/share/man/man1/gensnmptree.1.gz
 # lib/libbsnmp/libbsnmp
-OLD_FILES+=usr/share/man/man3/TRUTH_GET.3.gz
-OLD_FILES+=usr/share/man/man3/TRUTH_MK.3.gz
-OLD_FILES+=usr/share/man/man3/TRUTH_OK.3.gz
-OLD_FILES+=usr/share/man/man3/asn1.3.gz
-OLD_FILES+=usr/share/man/man3/asn_append_oid.3.gz
-OLD_FILES+=usr/share/man/man3/asn_commit_header.3.gz
-OLD_FILES+=usr/share/man/man3/asn_compare_oid.3.gz
-OLD_FILES+=usr/share/man/man3/asn_get_counter64_raw.3.gz
-OLD_FILES+=usr/share/man/man3/asn_get_header.3.gz
-OLD_FILES+=usr/share/man/man3/asn_get_integer.3.gz
-OLD_FILES+=usr/share/man/man3/asn_get_integer_raw.3.gz
-OLD_FILES+=usr/share/man/man3/asn_get_ipaddress.3.gz
-OLD_FILES+=usr/share/man/man3/asn_get_ipaddress_raw.3.gz
-OLD_FILES+=usr/share/man/man3/asn_get_null.3.gz
-OLD_FILES+=usr/share/man/man3/asn_get_null_raw.3.gz
-OLD_FILES+=usr/share/man/man3/asn_get_objid.3.gz
-OLD_FILES+=usr/share/man/man3/asn_get_objid_raw.3.gz
-OLD_FILES+=usr/share/man/man3/asn_get_octetstring.3.gz
-OLD_FILES+=usr/share/man/man3/asn_get_octetstring_raw.3.gz
-OLD_FILES+=usr/share/man/man3/asn_get_sequence.3.gz
-OLD_FILES+=usr/share/man/man3/asn_get_timeticks.3.gz
-OLD_FILES+=usr/share/man/man3/asn_get_uint32_raw.3.gz
-OLD_FILES+=usr/share/man/man3/asn_is_suboid.3.gz
-OLD_FILES+=usr/share/man/man3/asn_oid2str.3.gz
-OLD_FILES+=usr/share/man/man3/asn_oid2str_r.3.gz
-OLD_FILES+=usr/share/man/man3/asn_put_counter64.3.gz
-OLD_FILES+=usr/share/man/man3/asn_put_exception.3.gz
-OLD_FILES+=usr/share/man/man3/asn_put_header.3.gz
-OLD_FILES+=usr/share/man/man3/asn_put_integer.3.gz
-OLD_FILES+=usr/share/man/man3/asn_put_ipaddress.3.gz
-OLD_FILES+=usr/share/man/man3/asn_put_null.3.gz
-OLD_FILES+=usr/share/man/man3/asn_put_objid.3.gz
-OLD_FILES+=usr/share/man/man3/asn_put_octetstring.3.gz
-OLD_FILES+=usr/share/man/man3/asn_put_temp_header.3.gz
-OLD_FILES+=usr/share/man/man3/asn_put_timeticks.3.gz
-OLD_FILES+=usr/share/man/man3/asn_put_uint32.3.gz
-OLD_FILES+=usr/share/man/man3/asn_skip.3.gz
-OLD_FILES+=usr/share/man/man3/asn_slice_oid.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_add_binding.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_calc_keychange.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_client.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_client_init.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_client_set_host.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_client_set_port.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_close.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_debug.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_dep_commit.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_dep_finish.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_dep_lookup.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_dep_rollback.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_depop_t.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_dialog.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_discover_engine.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_get.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_get_local_keys.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_getbulk.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_getnext.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_init_context.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_make_errresp.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_oid_append.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_op_t.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_open.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_parse_server.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_passwd_to_keys.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_pdu_check.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_pdu_create.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_pdu_decode.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_pdu_decode_header.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_pdu_decode_scoped.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_pdu_decode_secmode.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_pdu_dump.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_pdu_encode.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_pdu_free.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_pdu_init_secparams.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_pdu_send.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_receive.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_send_cb_f.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_set.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_table_cb_f.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_table_fetch.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_table_fetch_async.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_timeout_cb_f.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_timeout_start_f.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_timeout_stop_f.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_trace.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_value_copy.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_value_free.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_value_parse.3.gz
-OLD_FILES+=usr/share/man/man3/tree_size.3.gz
 # usr.sbin/bsnmpd/bsnmpd
-OLD_FILES+=usr/share/man/man3/FIND_OBJECT_INT.3.gz
-OLD_FILES+=usr/share/man/man3/FIND_OBJECT_INT_LINK.3.gz
-OLD_FILES+=usr/share/man/man3/FIND_OBJECT_INT_LINK_INDEX.3.gz
-OLD_FILES+=usr/share/man/man3/FIND_OBJECT_OID.3.gz
-OLD_FILES+=usr/share/man/man3/FIND_OBJECT_OID_LINK.3.gz
-OLD_FILES+=usr/share/man/man3/FIND_OBJECT_OID_LINK_INDEX.3.gz
-OLD_FILES+=usr/share/man/man3/INSERT_OBJECT_INT.3.gz
-OLD_FILES+=usr/share/man/man3/INSERT_OBJECT_INT_LINK.3.gz
-OLD_FILES+=usr/share/man/man3/INSERT_OBJECT_INT_LINK_INDEX.3.gz
-OLD_FILES+=usr/share/man/man3/INSERT_OBJECT_OID.3.gz
-OLD_FILES+=usr/share/man/man3/INSERT_OBJECT_OID_LINK.3.gz
-OLD_FILES+=usr/share/man/man3/INSERT_OBJECT_OID_LINK_INDEX.3.gz
-OLD_FILES+=usr/share/man/man3/NEXT_OBJECT_INT.3.gz
-OLD_FILES+=usr/share/man/man3/NEXT_OBJECT_INT_LINK.3.gz
-OLD_FILES+=usr/share/man/man3/NEXT_OBJECT_INT_LINK_INDEX.3.gz
-OLD_FILES+=usr/share/man/man3/NEXT_OBJECT_OID.3.gz
-OLD_FILES+=usr/share/man/man3/NEXT_OBJECT_OID_LINK.3.gz
-OLD_FILES+=usr/share/man/man3/NEXT_OBJECT_OID_LINK_INDEX.3.gz
-OLD_FILES+=usr/share/man/man3/asn1.3.gz
-OLD_FILES+=usr/share/man/man3/bsnmpagent.3.gz
-OLD_FILES+=usr/share/man/man3/bsnmpclient.3.gz
-OLD_FILES+=usr/share/man/man3/bsnmpd_get_target_stats.3.gz
-OLD_FILES+=usr/share/man/man3/bsnmpd_get_usm_stats.3.gz
-OLD_FILES+=usr/share/man/man3/bsnmpd_reset_usm_stats.3.gz
-OLD_FILES+=usr/share/man/man3/bsnmplib.3.gz
-OLD_FILES+=usr/share/man/man3/buf_alloc.3.gz
-OLD_FILES+=usr/share/man/man3/buf_size.3.gz
-OLD_FILES+=usr/share/man/man3/comm_define.3.gz
-OLD_FILES+=usr/share/man/man3/community.3.gz
-OLD_FILES+=usr/share/man/man3/fd_deselect.3.gz
-OLD_FILES+=usr/share/man/man3/fd_resume.3.gz
-OLD_FILES+=usr/share/man/man3/fd_select.3.gz
-OLD_FILES+=usr/share/man/man3/fd_suspend.3.gz
-OLD_FILES+=usr/share/man/man3/get_ticks.3.gz
-OLD_FILES+=usr/share/man/man3/index_append.3.gz
-OLD_FILES+=usr/share/man/man3/index_append_off.3.gz
-OLD_FILES+=usr/share/man/man3/index_compare.3.gz
-OLD_FILES+=usr/share/man/man3/index_compare_off.3.gz
-OLD_FILES+=usr/share/man/man3/index_decode.3.gz
-OLD_FILES+=usr/share/man/man3/ip_commit.3.gz
-OLD_FILES+=usr/share/man/man3/ip_get.3.gz
-OLD_FILES+=usr/share/man/man3/ip_rollback.3.gz
-OLD_FILES+=usr/share/man/man3/ip_save.3.gz
-OLD_FILES+=usr/share/man/man3/or_register.3.gz
-OLD_FILES+=usr/share/man/man3/or_unregister.3.gz
-OLD_FILES+=usr/share/man/man3/oid_commit.3.gz
-OLD_FILES+=usr/share/man/man3/oid_get.3.gz
-OLD_FILES+=usr/share/man/man3/oid_rollback.3.gz
-OLD_FILES+=usr/share/man/man3/oid_save.3.gz
-OLD_FILES+=usr/share/man/man3/oid_usmNotInTimeWindows.3.gz
-OLD_FILES+=usr/share/man/man3/oid_usmUnknownEngineIDs.3.gz
-OLD_FILES+=usr/share/man/man3/oid_zeroDotZero.3.gz
-OLD_FILES+=usr/share/man/man3/reqid_allocate.3.gz
-OLD_FILES+=usr/share/man/man3/reqid_base.3.gz
-OLD_FILES+=usr/share/man/man3/reqid_istype.3.gz
-OLD_FILES+=usr/share/man/man3/reqid_next.3.gz
-OLD_FILES+=usr/share/man/man3/reqid_type.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_bridge.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_hast.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_hostres.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_input_finish.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_input_start.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_lm75.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_mibII.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_netgraph.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_output.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_pdu_auth_access.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_send_port.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_send_trap.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_target.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_usm.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_vacm.3.gz
-OLD_FILES+=usr/share/man/man3/snmp_wlan.3.gz
-OLD_FILES+=usr/share/man/man3/snmpd_target_stat.3.gz
-OLD_FILES+=usr/share/man/man3/snmpd_usmstats.3.gz
-OLD_FILES+=usr/share/man/man3/snmpmod.3.gz
-OLD_FILES+=usr/share/man/man3/start_tick.3.gz
-OLD_FILES+=usr/share/man/man3/string_commit.3.gz
-OLD_FILES+=usr/share/man/man3/string_free.3.gz
-OLD_FILES+=usr/share/man/man3/string_get.3.gz
-OLD_FILES+=usr/share/man/man3/string_get_max.3.gz
-OLD_FILES+=usr/share/man/man3/string_rollback.3.gz
-OLD_FILES+=usr/share/man/man3/string_save.3.gz
-OLD_FILES+=usr/share/man/man3/systemg.3.gz
-OLD_FILES+=usr/share/man/man3/this_tick.3.gz
-OLD_FILES+=usr/share/man/man3/timer_start.3.gz
-OLD_FILES+=usr/share/man/man3/timer_start_repeat.3.gz
-OLD_FILES+=usr/share/man/man3/timer_stop.3.gz
-OLD_FILES+=usr/share/man/man3/target_activate_address.3.gz
-OLD_FILES+=usr/share/man/man3/target_address.3.gz
-OLD_FILES+=usr/share/man/man3/target_delete_address.3.gz
-OLD_FILES+=usr/share/man/man3/target_delete_notify.3.gz
-OLD_FILES+=usr/share/man/man3/target_delete_param.3.gz
-OLD_FILES+=usr/share/man/man3/target_first_address.3.gz
-OLD_FILES+=usr/share/man/man3/target_first_notify.3.gz
-OLD_FILES+=usr/share/man/man3/target_first_param.3.gz
-OLD_FILES+=usr/share/man/man3/target_flush_all.3.gz
-OLD_FILES+=usr/share/man/man3/target_next_address.3.gz
-OLD_FILES+=usr/share/man/man3/target_next_notify.3.gz
-OLD_FILES+=usr/share/man/man3/target_next_param.3.gz
-OLD_FILES+=usr/share/man/man3/target_new_address.3.gz
-OLD_FILES+=usr/share/man/man3/target_new_notify.3.gz
-OLD_FILES+=usr/share/man/man3/target_new_param.3.gz
-OLD_FILES+=usr/share/man/man3/target_notify.3.gz
-OLD_FILES+=usr/share/man/man3/target_param.3.gz
-OLD_FILES+=usr/share/man/man3/usm_delete_user.3.gz
-OLD_FILES+=usr/share/man/man3/usm_find_user.3.gz
-OLD_FILES+=usr/share/man/man3/usm_first_user.3.gz
-OLD_FILES+=usr/share/man/man3/usm_flush_users.3.gz
-OLD_FILES+=usr/share/man/man3/usm_next_user.3.gz
-OLD_FILES+=usr/share/man/man3/usm_new_user.3.gz
-OLD_FILES+=usr/share/man/man3/usm_user.3.gz
 OLD_FILES+=usr/share/snmp/defs/bridge_tree.def
 OLD_FILES+=usr/share/snmp/defs/hast_tree.def
 OLD_FILES+=usr/share/snmp/defs/hostres_tree.def
@@ -765,8 +413,6 @@ OLD_LIBS+=lib/libcap_syslog.so.1
 .if ${MK_CCD} == no
 OLD_FILES+=etc/rc.d/ccd
 OLD_FILES+=sbin/ccdconfig
-OLD_FILES+=usr/share/man/man4/ccd.4.gz
-OLD_FILES+=usr/share/man/man8/ccdconfig.8.gz
 .endif
 
 .if (${MK_CLANG} == no && ${MK_CLANG_FORMAT} == no && ${MK_LLDB} == no) || \
@@ -793,17 +439,6 @@ OLD_FILES+=usr/bin/llvm-size
 OLD_FILES+=usr/bin/llvm-strings
 OLD_FILES+=usr/bin/llvm-symbolizer
 OLD_FILES+=usr/bin/objdump
-OLD_FILES+=usr/share/man/man1/llvm-addr2line.1.gz
-OLD_FILES+=usr/share/man/man1/llvm-ar.1.gz
-OLD_FILES+=usr/share/man/man1/llvm-nm.1.gz
-OLD_FILES+=usr/share/man/man1/llvm-objcopy.1.gz
-OLD_FILES+=usr/share/man/man1/llvm-ranlib.1.gz
-OLD_FILES+=usr/share/man/man1/llvm-readelf.1.gz
-OLD_FILES+=usr/share/man/man1/llvm-readobj.1.gz
-OLD_FILES+=usr/share/man/man1/llvm-size.1.gz
-OLD_FILES+=usr/share/man/man1/llvm-strings.1.gz
-OLD_FILES+=usr/share/man/man1/llvm-symbolizer.1.gz
-OLD_FILES+=usr/share/man/man1/objdump.1.gz
 .endif
 
 .if ${MK_CLANG} == no
@@ -1230,9 +865,6 @@ OLD_DIRS+=usr/share/doc/llvm/clang
 OLD_FILES+=usr/share/doc/llvm/COPYRIGHT.regex
 OLD_FILES+=usr/share/doc/llvm/LICENSE.TXT
 OLD_DIRS+=usr/share/doc/llvm
-OLD_FILES+=usr/share/man/man1/clang.1.gz
-OLD_FILES+=usr/share/man/man1/clang++.1.gz
-OLD_FILES+=usr/share/man/man1/clang-cpp.1.gz
 .endif
 
 .if ${MK_CLANG_EXTRAS} == no
@@ -1257,18 +889,6 @@ OLD_FILES+=usr/bin/llvm-pdbutil
 OLD_FILES+=usr/bin/llvm-rtdyld
 OLD_FILES+=usr/bin/llvm-xray
 OLD_FILES+=usr/bin/opt
-OLD_FILES+=usr/share/man/man1/bugpoint.1.gz
-OLD_FILES+=usr/share/man/man1/llc.1.gz
-OLD_FILES+=usr/share/man/man1/lli.1.gz
-OLD_FILES+=usr/share/man/man1/llvm-as.1.gz
-OLD_FILES+=usr/share/man/man1/llvm-bcanalyzer.1.gz
-OLD_FILES+=usr/share/man/man1/llvm-diff.1.gz
-OLD_FILES+=usr/share/man/man1/llvm-dis.1.gz
-OLD_FILES+=usr/share/man/man1/llvm-dwarfdump.1
-OLD_FILES+=usr/share/man/man1/llvm-extract.1.gz
-OLD_FILES+=usr/share/man/man1/llvm-link.1.gz
-OLD_FILES+=usr/share/man/man1/llvm-pdbutil.1.gz
-OLD_FILES+=usr/share/man/man1/opt.1.gz
 .endif
 
 .if ${MK_CLANG_EXTRAS} == no && ${MK_CLANG_FORMAT} == no
@@ -1277,12 +897,10 @@ OLD_FILES+=usr/bin/clang-format
 
 .if ${MK_CLANG_EXTRAS} == no && ${MK_LLVM_CXXFILT} == no
 OLD_FILES+=usr/bin/llvm-cxxfilt
-OLD_FILES+=usr/share/man/man1/llvm-cxxfilt.1.gz
 .endif
 
 .if ${MK_CPP} == no
 OLD_FILES+=usr/bin/cpp
-OLD_FILES+=usr/share/man/man1/cpp.1.gz
 .endif
 
 .if ${MK_CUSE} == no
@@ -1291,33 +909,6 @@ OLD_FILES+=usr/include/fs/cuse/cuse_ioctl.h
 OLD_FILES+=usr/include/cuse.h
 OLD_FILES+=usr/lib/libcuse.a
 OLD_LIBS+=usr/lib/libcuse.so.1
-OLD_FILES+=usr/share/man/man3/cuse.3.gz
-OLD_FILES+=usr/share/man/man3/cuse_alloc_unit_number.3.gz
-OLD_FILES+=usr/share/man/man3/cuse_alloc_unit_number_by_id.3.gz
-OLD_FILES+=usr/share/man/man3/cuse_copy_in.3.gz
-OLD_FILES+=usr/share/man/man3/cuse_copy_out.3.gz
-OLD_FILES+=usr/share/man/man3/cuse_dev_create.3.gz
-OLD_FILES+=usr/share/man/man3/cuse_dev_destroy.3.gz
-OLD_FILES+=usr/share/man/man3/cuse_dev_get_current.3.gz
-OLD_FILES+=usr/share/man/man3/cuse_dev_get_per_file_handle.3.gz
-OLD_FILES+=usr/share/man/man3/cuse_dev_get_priv0.3.gz
-OLD_FILES+=usr/share/man/man3/cuse_dev_get_priv1.3.gz
-OLD_FILES+=usr/share/man/man3/cuse_dev_set_per_file_handle.3.gz
-OLD_FILES+=usr/share/man/man3/cuse_dev_set_priv0.3.gz
-OLD_FILES+=usr/share/man/man3/cuse_dev_set_priv1.3.gz
-OLD_FILES+=usr/share/man/man3/cuse_free_unit_number.3.gz
-OLD_FILES+=usr/share/man/man3/cuse_free_unit_number_by_id.3.gz
-OLD_FILES+=usr/share/man/man3/cuse_get_local.3.gz
-OLD_FILES+=usr/share/man/man3/cuse_got_peer_signal.3.gz
-OLD_FILES+=usr/share/man/man3/cuse_init.3.gz
-OLD_FILES+=usr/share/man/man3/cuse_is_vmalloc_addr.3.gz
-OLD_FILES+=usr/share/man/man3/cuse_poll_wakeup.3.gz
-OLD_FILES+=usr/share/man/man3/cuse_set_local.3.gz
-OLD_FILES+=usr/share/man/man3/cuse_uninit.3.gz
-OLD_FILES+=usr/share/man/man3/cuse_vmalloc.3.gz
-OLD_FILES+=usr/share/man/man3/cuse_vmfree.3.gz
-OLD_FILES+=usr/share/man/man3/cuse_vmoffset.3.gz
-OLD_FILES+=usr/share/man/man3/cuse_wait_and_process.3.gz
 OLD_DIRS+=usr/include/fs/cuse
 .endif
 
@@ -1353,19 +944,6 @@ OLD_LIBS+=usr/lib/libdpv.so.3
 OLD_FILES+=usr/lib/libfigpar.a
 OLD_FILES+=usr/lib/libfigpar.so
 OLD_LIBS+=usr/lib/libfigpar.so.0
-OLD_FILES+=usr/share/man/man1/dialog.1.gz
-OLD_FILES+=usr/share/man/man1/dpv.1.gz
-OLD_FILES+=usr/share/man/man3/dialog.3.gz
-OLD_FILES+=usr/share/man/man3/dpv.3.gz
-OLD_FILES+=usr/share/man/man3/dpv_free.3.gz
-OLD_FILES+=usr/share/man/man3/figpar.3.gz
-OLD_FILES+=usr/share/man/man3/get_config_option.3.gz
-OLD_FILES+=usr/share/man/man3/parse_config.3.gz
-OLD_FILES+=usr/share/man/man3/replaceall.3.gz
-OLD_FILES+=usr/share/man/man3/strcount.3.gz
-OLD_FILES+=usr/share/man/man3/strexpand.3.gz
-OLD_FILES+=usr/share/man/man3/strexpandnl.3.gz
-OLD_FILES+=usr/share/man/man3/strtolower.3.gz
 .endif
 
 .if ${MK_DICT} == no
@@ -1384,7 +962,6 @@ OLD_FILES+=etc/dma/dma.conf
 OLD_DIRS+=etc/dma
 OLD_FILES+=usr/libexec/dma
 OLD_FILES+=usr/libexec/dma-mbox-create
-OLD_FILES+=usr/share/man/man8/dma.8.gz
 OLD_FILES+=usr/share/examples/dma/mailer.conf
 OLD_DIRS+=usr/share/examples/dma
 .endif
@@ -1507,10 +1084,6 @@ OLD_FILES+=usr/sbin/dtrace
 OLD_FILES+=usr/sbin/dwatch
 OLD_FILES+=usr/sbin/lockstat
 OLD_FILES+=usr/sbin/plockstat
-OLD_FILES+=usr/share/man/man1/dtrace.1.gz
-OLD_FILES+=usr/share/man/man1/dtruss.1.gz
-OLD_FILES+=usr/share/man/man1/lockstat.1.gz
-OLD_FILES+=usr/share/man/man1/plockstat.1.gz
 OLD_FILES+=usr/share/dtrace/blocking
 OLD_FILES+=usr/share/dtrace/disklatency
 OLD_FILES+=usr/share/dtrace/disklatencycmd
@@ -1528,7 +1101,6 @@ OLD_FILES+=usr/share/dtrace/tcpdebug
 OLD_FILES+=usr/share/dtrace/tcpstate
 OLD_FILES+=usr/share/dtrace/tcptrack
 OLD_FILES+=usr/share/dtrace/udptrack
-OLD_FILES+=usr/share/man/man1/dtrace.1.gz
 OLD_DIRS+=usr/lib/dtrace
 .  for libcompat in ${_ALL_libcompats}
 OLD_DIRS+=usr/lib${libcompat}/dtrace
@@ -1875,7 +1447,6 @@ OLD_DIRS+=usr/tests/share/examples
 
 .if ${MK_FDT} == no
 OLD_FILES+=usr/sbin/ofwdump
-OLD_FILES+=usr/share/man/man8/ofwdump.8.gz
 .endif
 
 
@@ -1906,28 +1477,16 @@ OLD_FILES+=boot/shortcuts.4th
 OLD_FILES+=boot/support.4th
 OLD_LIBS+=boot/userboot_4th.so
 OLD_FILES+=boot/version.4th
-OLD_FILES+=usr/share/man/man8/beastie.4th.8.gz
-OLD_FILES+=usr/share/man/man8/brand.4th.8.gz
-OLD_FILES+=usr/share/man/man8/check-password.4th.8.gz
-OLD_FILES+=usr/share/man/man8/color.4th.8.gz
-OLD_FILES+=usr/share/man/man8/delay.4th.8.gz
-OLD_FILES+=usr/share/man/man8/loader.4th.8.gz
-OLD_FILES+=usr/share/man/man8/menu.4th.8.gz
-OLD_FILES+=usr/share/man/man8/menusets.4th.8.gz
-OLD_FILES+=usr/share/man/man8/version.4th.8.gz
 .endif
 
 .if ${MK_FREEBSD_UPDATE} == no
 OLD_FILES+=etc/freebsd-update.conf
 OLD_FILES+=usr/sbin/freebsd-update
 OLD_FILES+=usr/share/examples/etc/freebsd-update.conf
-OLD_FILES+=usr/share/man/man5/freebsd-update.conf.5.gz
-OLD_FILES+=usr/share/man/man8/freebsd-update.8.gz
 .endif
 
 .if ${MK_FREEBSD_UPDATE} == no
 OLD_FILES+=usr/libexec/phttpget
-OLD_FILES+=usr/share/man/man8/phttpget.8.gz
 .endif
 
 .if ${MK_FTP} == no
@@ -1936,9 +1495,6 @@ OLD_FILES+=etc/pam.d/ftpd
 OLD_FILES+=usr/bin/ftp
 OLD_FILES+=usr/bin/gate-ftp
 OLD_FILES+=usr/bin/pftp
-OLD_FILES+=usr/share/man/man1/ftp.1.gz
-OLD_FILES+=usr/share/man/man1/gate-ftp.1.gz
-OLD_FILES+=usr/share/man/man1/pftp.1.gz
 .endif
 
 
@@ -2068,28 +1624,6 @@ OLD_FILES+=usr/lib/libgpio.a
 OLD_FILES+=usr/lib/libgpio.so
 OLD_LIBS+=usr/lib/libgpio.so.0
 OLD_FILES+=usr/sbin/gpioctl
-OLD_FILES+=usr/share/man/man3/gpio.3.gz
-OLD_FILES+=usr/share/man/man3/gpio_close.3.gz
-OLD_FILES+=usr/share/man/man3/gpio_open.3.gz
-OLD_FILES+=usr/share/man/man3/gpio_open_device.3.gz
-OLD_FILES+=usr/share/man/man3/gpio_pin_config.3.gz
-OLD_FILES+=usr/share/man/man3/gpio_pin_get.3.gz
-OLD_FILES+=usr/share/man/man3/gpio_pin_high.3.gz
-OLD_FILES+=usr/share/man/man3/gpio_pin_input.3.gz
-OLD_FILES+=usr/share/man/man3/gpio_pin_invin.3.gz
-OLD_FILES+=usr/share/man/man3/gpio_pin_invout.3.gz
-OLD_FILES+=usr/share/man/man3/gpio_pin_list.3.gz
-OLD_FILES+=usr/share/man/man3/gpio_pin_low.3.gz
-OLD_FILES+=usr/share/man/man3/gpio_pin_opendrain.3.gz
-OLD_FILES+=usr/share/man/man3/gpio_pin_output.3.gz
-OLD_FILES+=usr/share/man/man3/gpio_pin_pulldown.3.gz
-OLD_FILES+=usr/share/man/man3/gpio_pin_pullup.3.gz
-OLD_FILES+=usr/share/man/man3/gpio_pin_pulsate.3.gz
-OLD_FILES+=usr/share/man/man3/gpio_pin_pushpull.3.gz
-OLD_FILES+=usr/share/man/man3/gpio_pin_set.3.gz
-OLD_FILES+=usr/share/man/man3/gpio_pin_set_flags.3.gz
-OLD_FILES+=usr/share/man/man3/gpio_pin_tristate.3.gz
-OLD_FILES+=usr/share/man/man8/gpioctl.8.gz
 .endif
 
 .if ${MK_HAST} == no
@@ -2101,14 +1635,10 @@ OLD_FILES+=usr/share/examples/hast/ucarp_down.sh
 OLD_FILES+=usr/share/examples/hast/ucarp_up.sh
 OLD_FILES+=usr/share/examples/hast/vip-down.sh
 OLD_FILES+=usr/share/examples/hast/vip-up.sh
-OLD_FILES+=usr/share/man/man5/hast.conf.5.gz
-OLD_FILES+=usr/share/man/man8/hastctl.8.gz
-OLD_FILES+=usr/share/man/man8/hastd.8.gz
 OLD_DIRS+=usr/share/examples/hast
 # bsnmp
 OLD_FILES+=usr/lib/snmp_hast.so
 OLD_LIBS+=usr/lib/snmp_hast.so.6
-OLD_FILES+=usr/share/man/man3/snmp_hast.3.gz
 OLD_FILES+=usr/share/snmp/defs/hast_tree.def
 OLD_FILES+=usr/share/snmp/mibs/BEGEMOT-HAST-MIB.txt
 .endif
@@ -2116,9 +1646,6 @@ OLD_FILES+=usr/share/snmp/mibs/BEGEMOT-HAST-MIB.txt
 .if ${MK_HESIOD} == no
 OLD_FILES+=usr/bin/hesinfo
 OLD_FILES+=usr/include/hesiod.h
-OLD_FILES+=usr/share/man/man1/hesinfo.1.gz
-OLD_FILES+=usr/share/man/man3/hesiod.3.gz
-OLD_FILES+=usr/share/man/man5/hesiod.conf.5.gz
 .endif
 
 .if ${MK_HTML} == no
@@ -2197,7 +1724,6 @@ OLD_FILES+=usr/libexec/hyperv/hv_get_dns_info
 OLD_FILES+=usr/libexec/hyperv/hv_get_dhcp_info
 OLD_FILES+=usr/sbin/hv_kvp_daemon
 OLD_FILES+=usr/sbin/hv_vss_daemon
-OLD_FILES+=usr/share/man/man8/hv_kvp_daemon.8.gz
 .endif
 
 .if ${MK_ICONV} == no
@@ -2252,19 +1778,6 @@ OLD_LIBS+=usr/lib/i18n/libmapper_std.so.5
 OLD_FILES+=usr/lib/i18n/libmapper_std.so
 OLD_LIBS+=usr/lib/i18n/libmapper_zone.so.5
 OLD_FILES+=usr/lib/i18n/libmapper_zone.so
-OLD_FILES+=usr/share/man/man1/iconv.1.gz
-OLD_FILES+=usr/share/man/man1/mkcsmapper.1.gz
-OLD_FILES+=usr/share/man/man1/mkesdb.1.gz
-OLD_FILES+=usr/share/man/man3/__iconv.3.gz
-OLD_FILES+=usr/share/man/man3/__iconv_free_list.3.gz
-OLD_FILES+=usr/share/man/man3/__iconv_get_list.3.gz
-OLD_FILES+=usr/share/man/man3/iconv.3.gz
-OLD_FILES+=usr/share/man/man3/iconv_canonicalize.3.gz
-OLD_FILES+=usr/share/man/man3/iconv_close.3.gz
-OLD_FILES+=usr/share/man/man3/iconv_open.3.gz
-OLD_FILES+=usr/share/man/man3/iconv_open_into.3.gz
-OLD_FILES+=usr/share/man/man3/iconvctl.3.gz
-OLD_FILES+=usr/share/man/man3/iconvlist.3.gz
 OLD_DIRS+=usr/lib/i18n
 OLD_DIRS+=usr/share/i18n
 OLD_DIRS+=usr/share/i18n/esdb
@@ -2306,7 +1819,6 @@ OLD_DIRS+=usr/share/i18n/csmapper/GB
 
 .if ${MK_INET} == no && ${MK_INET6} == no
 OLD_FILES+=sbin/ping
-OLD_FILES+=usr/share/man/man8/ping.8.gz
 .endif
 
 .if ${MK_INET6} == no
@@ -2323,30 +1835,12 @@ OLD_FILES+=usr/sbin/rtadvd
 OLD_FILES+=usr/sbin/rtsold
 OLD_FILES+=usr/sbin/traceroute6
 OLD_FILES+=usr/share/doc/IPv6/IMPLEMENTATION
-OLD_FILES+=usr/share/man/man5/rrenumd.conf.5.gz
-OLD_FILES+=usr/share/man/man5/rtadvd.conf.5.gz
-OLD_FILES+=usr/share/man/man8/ip6addrctl.8.gz
-OLD_FILES+=usr/share/man/man8/mld6query.8.gz
-OLD_FILES+=usr/share/man/man8/ndp.8.gz
-OLD_FILES+=usr/share/man/man8/rip6query.8.gz
-OLD_FILES+=usr/share/man/man8/route6d.8.gz
-OLD_FILES+=usr/share/man/man8/rrenumd.8.gz
-OLD_FILES+=usr/share/man/man8/rtadvctl.8.gz
-OLD_FILES+=usr/share/man/man8/rtadvd.8.gz
-OLD_FILES+=usr/share/man/man8/rtsol.8.gz
-OLD_FILES+=usr/share/man/man8/rtsold.8.gz
-OLD_FILES+=usr/share/man/man8/traceroute6.8.gz
-.endif
-
-.if ${MK_INET6_SUPPORT} == no
 .endif
 
 .if ${MK_INETD} == no
 OLD_FILES+=etc/inetd.conf
 OLD_FILES+=etc/rc.d/inetd
 OLD_FILES+=usr/sbin/inetd
-OLD_FILES+=usr/share/man/man5/inetd.conf.5.gz
-OLD_FILES+=usr/share/man/man8/inetd.8.gz
 .endif
 
 .if ${MK_IPFILTER} == no
@@ -2416,27 +1910,6 @@ OLD_FILES+=usr/share/examples/ipfilter/examples.txt
 OLD_FILES+=usr/share/examples/ipfilter/rules.txt
 OLD_FILES+=usr/share/examples/ipfilter/mkfilters
 OLD_DIRS+=usr/share/examples/ipfilter
-OLD_FILES+=usr/share/man/man1/ipftest.1.gz
-OLD_FILES+=usr/share/man/man1/ipresend.1.gz
-OLD_FILES+=usr/share/man/man4/ipf.4.gz
-OLD_FILES+=usr/share/man/man4/ipl.4.gz
-OLD_FILES+=usr/share/man/man4/ipfilter.4.gz
-OLD_FILES+=usr/share/man/man4/ipnat.4.gz
-OLD_FILES+=usr/share/man/man5/ipf.5.gz
-OLD_FILES+=usr/share/man/man5/ipf.conf.5.gz
-OLD_FILES+=usr/share/man/man5/ipf6.conf.5.gz
-OLD_FILES+=usr/share/man/man5/ipfilter.5.gz
-OLD_FILES+=usr/share/man/man8/ipmon.5.gz
-OLD_FILES+=usr/share/man/man5/ipmon.conf.5.gz
-OLD_FILES+=usr/share/man/man5/ipnat.5.gz
-OLD_FILES+=usr/share/man/man5/ipnat.conf.5.gz
-OLD_FILES+=usr/share/man/man5/ippool.5.gz
-OLD_FILES+=usr/share/man/man8/ipf.8.gz
-OLD_FILES+=usr/share/man/man8/ipfs.8.gz
-OLD_FILES+=usr/share/man/man8/ipfstat.8.gz
-OLD_FILES+=usr/share/man/man8/ipmon.8.gz
-OLD_FILES+=usr/share/man/man8/ipnat.8.gz
-OLD_FILES+=usr/share/man/man8/ippool.8.gz
 .endif
 
 .if ${MK_IPFILTER_IPFS} == no
@@ -2451,9 +1924,6 @@ OLD_FILES+=etc/periodic/security/550.ipfwlimit
 OLD_FILES+=sbin/ipfw
 OLD_FILES+=sbin/natd
 OLD_FILES+=usr/sbin/ipfwpcap
-OLD_FILES+=usr/share/man/man8/ipfw.8.gz
-OLD_FILES+=usr/share/man/man8/ipfwpcap.8.gz
-OLD_FILES+=usr/share/man/man8/natd.8.gz
 .endif
 
 .if ${MK_ISCSI} == no
@@ -2461,10 +1931,6 @@ OLD_FILES+=etc/rc.d/iscsictl
 OLD_FILES+=etc/rc.d/iscsid
 OLD_FILES+=usr/bin/iscsictl
 OLD_FILES+=usr/sbin/iscsid
-OLD_FILES+=usr/share/man/man4/iscsi.4.gz
-OLD_FILES+=usr/share/man/man5/iscsi.conf.5.gz
-OLD_FILES+=usr/share/man/man8/iscsictl.8.gz
-OLD_FILES+=usr/share/man/man8/iscsid.8.gz
 .endif
 
 .if ${MK_JAIL} == no
@@ -2472,17 +1938,11 @@ OLD_FILES+=etc/rc.d/jail
 OLD_FILES+=usr/sbin/jail
 OLD_FILES+=usr/sbin/jexec
 OLD_FILES+=usr/sbin/jls
-OLD_FILES+=usr/share/man/man5/jail.conf.5.gz
-OLD_FILES+=usr/share/man/man8/jail.8.gz
-OLD_FILES+=usr/share/man/man8/jexec.8.gz
-OLD_FILES+=usr/share/man/man8/jls.8.gz
 .endif
 
 .if ${MK_KDUMP} == no
 OLD_FILES+=usr/bin/kdump
 OLD_FILES+=usr/bin/truss
-OLD_FILES+=usr/share/man/man1/kdump.1.gz
-OLD_FILES+=usr/share/man/man1/truss.1.gz
 .endif
 
 
@@ -2494,9 +1954,7 @@ OLD_LIBS+=usr/lib/libprivateldns.so.5
 
 .if ${MK_LDNS_UTILS} == no
 OLD_FILES+=usr/bin/drill
-OLD_FILES+=usr/share/man/man1/drill.1.gz
 OLD_FILES+=usr/bin/host
-OLD_FILES+=usr/share/man/man1/host.1.gz
 .endif
 
 .if ${MK_LEGACY_CONSOLE} == no
@@ -2510,15 +1968,6 @@ OLD_FILES+=usr/sbin/moused
 OLD_FILES+=usr/sbin/msconvd
 OLD_FILES+=usr/sbin/vidcontrol
 OLD_FILES+=usr/sbin/vidfont
-OLD_FILES+=usr/share/man/man1/kbdcontrol.1.gz
-OLD_FILES+=usr/share/man/man1/kbdmap.1.gz
-OLD_FILES+=usr/share/man/man1/vidcontrol.1.gz
-OLD_FILES+=usr/share/man/man1/vidfont.1.gz
-OLD_FILES+=usr/share/man/man5/kbdmap.5.gz
-OLD_FILES+=usr/share/man/man5/keymap.5.gz
-OLD_FILES+=usr/share/man/man5/moused.conf.5.gz
-OLD_FILES+=usr/share/man/man8/moused.8.gz
-OLD_FILES+=usr/share/man/man8/msconvd.8.gz
 OLD_FILES+=usr/share/moused/5-generic-touchpad.quirks
 OLD_DIRS+=usr/share/moused
 .endif
@@ -2565,17 +2014,12 @@ OLD_LIBS+=usr/lib/libprivatelldb.so.19
 .if ${MK_LLDB} == no
 OLD_FILES+=usr/bin/lldb
 OLD_FILES+=usr/bin/lldb-server
-OLD_FILES+=usr/share/man/man1/lldb-server.1.gz
-OLD_FILES+=usr/share/man/man1/lldb.1.gz
 .endif
 
 .if ${MK_LLVM_COV} == no
 OLD_FILES+=usr/bin/gcov
 OLD_FILES+=usr/bin/llvm-cov
 OLD_FILES+=usr/bin/llvm-profdata
-OLD_FILES+=usr/share/man/man1/gcov.1.gz
-OLD_FILES+=usr/share/man/man1/llvm-cov.1.gz
-OLD_FILES+=usr/share/man/man1/llvm-profdata.1.gz
 .endif
 
 .if ${MK_LOCALES} == no
@@ -3927,9 +3371,6 @@ OLD_FILES+=usr/libexec/locate.code
 OLD_FILES+=usr/libexec/locate.concatdb
 OLD_FILES+=usr/libexec/locate.mklocatedb
 OLD_FILES+=usr/libexec/locate.updatedb
-OLD_FILES+=usr/share/man/man1/locate.1.gz
-OLD_FILES+=usr/share/man/man8/locate.updatedb.8.gz
-OLD_FILES+=usr/share/man/man8/updatedb.8.gz
 .endif
 
 .if ${MK_MAIL} == no
@@ -3946,13 +3387,6 @@ OLD_FILES+=usr/bin/mailx
 OLD_FILES+=usr/bin/msgs
 OLD_FILES+=usr/libexec/comsat
 OLD_FILES+=usr/share/examples/etc/mail.rc
-OLD_FILES+=usr/share/man/man1/Mail.1.gz
-OLD_FILES+=usr/share/man/man1/biff.1.gz
-OLD_FILES+=usr/share/man/man1/from.1.gz
-OLD_FILES+=usr/share/man/man1/mail.1.gz
-OLD_FILES+=usr/share/man/man1/mailx.1.gz
-OLD_FILES+=usr/share/man/man1/msgs.1.gz
-OLD_FILES+=usr/share/man/man8/comsat.8.gz
 OLD_FILES+=usr/share/misc/mail.help
 OLD_FILES+=usr/share/misc/mail.tildehelp
 .endif
@@ -3963,12 +3397,10 @@ OLD_FILES+=etc/mail/mailer.conf
 # /usr/sbin/sendmail -> /usr/sbin/mailwrapper
 # /usr/sbin/mailwrapper -> /usr/libexec/dma
 #OLD_FILES+=usr/sbin/mailwrapper
-OLD_FILES+=usr/share/man/man8/mailwrapper.8.gz
 .endif
 
 .if ${MK_MAKE} == no
 OLD_FILES+=usr/bin/make
-OLD_FILES+=usr/share/man/man1/make.1.gz
 OLD_FILES+=usr/share/mk/atf.test.mk
 OLD_FILES+=usr/share/mk/bsd.README
 OLD_FILES+=usr/share/mk/bsd.arch.inc.mk
@@ -4331,16 +3763,8 @@ OLD_FILES+=usr/tests/usr.bin/bmake/variables/t0/expected.stdout.1
 OLD_FILES+=usr/tests/usr.bin/bmake/variables/t0/legacy_test
 .endif
 
-.if ${MK_MAN} == no
-MAN_FILES!=find ${DESTDIR}/usr/share/man ${DESTDIR}/usr/share/openssl/man -type f | sed -e 's,^${DESTDIR}/,,'; echo
-OLD_FILES+=${MAN_FILES}
-MAN_DIRS!=find ${DESTDIR}/usr/share/man ${DESTDIR}/usr/share/openssl/man -type d | sed -e 's,^${DESTDIR}/,,'; echo
-OLD_DIRS+=${MAN_DIRS}
-.endif
-
 .if ${MK_NETCAT} == no
 OLD_FILES+=usr/bin/nc
-OLD_FILES+=usr/share/man/man1/nc.1.gz
 .endif
 
 .if ${MK_NETGRAPH} == no
@@ -4353,26 +3777,6 @@ OLD_FILES+=usr/sbin/flowctl
 OLD_FILES+=usr/sbin/lmcconfig
 OLD_FILES+=usr/sbin/ngctl
 OLD_FILES+=usr/sbin/nghook
-OLD_FILES+=usr/share/man/man3/NgAllocRecvAsciiMsg.3.gz
-OLD_FILES+=usr/share/man/man3/NgAllocRecvData.3.gz
-OLD_FILES+=usr/share/man/man3/NgAllocRecvMsg.3.gz
-OLD_FILES+=usr/share/man/man3/NgMkSockNode.3.gz
-OLD_FILES+=usr/share/man/man3/NgNameNode.3.gz
-OLD_FILES+=usr/share/man/man3/NgRecvAsciiMsg.3.gz
-OLD_FILES+=usr/share/man/man3/NgRecvData.3.gz
-OLD_FILES+=usr/share/man/man3/NgRecvMsg.3.gz
-OLD_FILES+=usr/share/man/man3/NgSendAsciiMsg.3.gz
-OLD_FILES+=usr/share/man/man3/NgSendData.3.gz
-OLD_FILES+=usr/share/man/man3/NgSendMsg.3.gz
-OLD_FILES+=usr/share/man/man3/NgSendReplyMsg.3.gz
-OLD_FILES+=usr/share/man/man3/NgSetDebug.3.gz
-OLD_FILES+=usr/share/man/man3/NgSetErrLog.3.gz
-OLD_FILES+=usr/share/man/man3/netgraph.3.gz
-OLD_FILES+=usr/share/man/man8/flowctl.8.gz
-OLD_FILES+=usr/share/man/man8/lmcconfig.8.gz
-OLD_FILES+=usr/share/man/man8/ngctl.8.gz
-OLD_FILES+=usr/share/man/man8/nghook.8.gz
-OLD_FILES+=usr/share/man/man8/pppoed.8.gz
 .endif
 
 .if ${MK_IPFW} == no || ${MK_NETGRAPH} == no
@@ -4383,14 +3787,12 @@ OLD_FILES+=etc/rc.d/ipfw_netflow
 OLD_FILES+=usr/include/bsnmp/snmp_netgraph.h
 OLD_FILES+=usr/lib/snmp_netgraph.so
 OLD_LIBS+=usr/lib/snmp_netgraph.so.6
-OLD_FILES+=usr/share/man/man3/snmp_netgraph.3.gz
 OLD_FILES+=usr/share/snmp/defs/netgraph_tree.def
 OLD_FILES+=usr/share/snmp/mibs/BEGEMOT-NETGRAPH.txt
 .endif
 
 .if ${MK_NETLINK} == no
 OLD_FILES+=usr.bin/genl
-OLD_FILES+=usr/share/man/man1/genl.1.gz
 .endif
 
 .if ${MK_NIS} == no
@@ -4427,31 +3829,6 @@ OLD_FILES+=usr/sbin/yppoll
 OLD_FILES+=usr/sbin/yppush
 OLD_FILES+=usr/sbin/ypserv
 OLD_FILES+=usr/sbin/ypset
-OLD_FILES+=usr/share/man/man1/ypcat.1.gz
-OLD_FILES+=usr/share/man/man1/ypchfn.1.gz
-OLD_FILES+=usr/share/man/man1/ypchpass.1.gz
-OLD_FILES+=usr/share/man/man1/ypchsh.1.gz
-OLD_FILES+=usr/share/man/man1/ypmatch.1.gz
-OLD_FILES+=usr/share/man/man1/yppasswd.1.gz
-OLD_FILES+=usr/share/man/man1/ypwhich.1.gz
-OLD_FILES+=usr/share/man/man5/netid.5.gz
-OLD_FILES+=usr/share/man/man5/ypldap.conf.5.gz
-OLD_FILES+=usr/share/man/man8/mknetid.8.gz
-OLD_FILES+=usr/share/man/man8/rpc.yppasswdd.8.gz
-OLD_FILES+=usr/share/man/man8/rpc.ypxfrd.8.gz
-OLD_FILES+=usr/share/man/man8/NIS.8.gz
-OLD_FILES+=usr/share/man/man8/YP.8.gz
-OLD_FILES+=usr/share/man/man8/yp.8.gz
-OLD_FILES+=usr/share/man/man8/nis.8.gz
-OLD_FILES+=usr/share/man/man8/yp_mkdb.8.gz
-OLD_FILES+=usr/share/man/man8/ypbind.8.gz
-OLD_FILES+=usr/share/man/man8/ypinit.8.gz
-OLD_FILES+=usr/share/man/man8/ypldap.8.gz
-OLD_FILES+=usr/share/man/man8/yppoll.8.gz
-OLD_FILES+=usr/share/man/man8/yppush.8.gz
-OLD_FILES+=usr/share/man/man8/ypserv.8.gz
-OLD_FILES+=usr/share/man/man8/ypset.8.gz
-OLD_FILES+=usr/share/man/man8/ypxfr.8.gz
 OLD_FILES+=var/yp/Makefile
 OLD_FILES+=var/yp/Makefile.dist
 OLD_DIRS+=var/yp
@@ -4634,16 +4011,11 @@ OLD_DIRS+=usr/share/nls/zh_TW.UTF-8
 OLD_FILES+=usr/tests/bin/sh/builtins/locale1.0
 .endif
 
-.if ${MK_NLS_CATALOGS} == no
-.endif
-
 .if ${MK_NS_CACHING} == no
 OLD_FILES+=etc/nscd.conf
 OLD_FILES+=etc/rc.d/nscd
 OLD_FILES+=usr/sbin/nscd
 OLD_FILES+=usr/share/examples/etc/nscd.conf
-OLD_FILES+=usr/share/man/man5/nscd.conf.5.gz
-OLD_FILES+=usr/share/man/man8/nscd.8.gz
 .endif
 
 .if ${MK_NTP} == no
@@ -4938,15 +4310,6 @@ OLD_DIRS+=usr/share/doc/ntp/pic
 OLD_DIRS+=usr/share/doc/ntp/scripts
 OLD_DIRS+=usr/share/doc/ntp
 OLD_FILES+=usr/share/examples/etc/ntp.conf
-OLD_FILES+=usr/share/man/man1/sntp.1.gz
-OLD_FILES+=usr/share/man/man5/ntp.conf.5.gz
-OLD_FILES+=usr/share/man/man5/ntp.keys.5.gz
-OLD_FILES+=usr/share/man/man8/ntp-keygen.8.gz
-OLD_FILES+=usr/share/man/man8/ntpd.8.gz
-OLD_FILES+=usr/share/man/man8/ntpdate.8.gz
-OLD_FILES+=usr/share/man/man8/ntpdc.8.gz
-OLD_FILES+=usr/share/man/man8/ntpq.8.gz
-OLD_FILES+=usr/share/man/man8/ntptime.8.gz
 .endif
 
 .if ${MK_OFED} == no
@@ -5148,126 +4511,6 @@ OLD_LIBS+=usr/lib/libosmvendor.so.4
 OLD_FILES+=usr/lib/librdmacm.a
 OLD_FILES+=usr/lib/librdmacm.so
 OLD_LIBS+=usr/lib/librdmacm.so.1
-OLD_FILES+=usr/share/man/man1/ibv_asyncwatch.1.gz
-OLD_FILES+=usr/share/man/man1/ibv_devices.1.gz
-OLD_FILES+=usr/share/man/man1/ibv_devinfo.1.gz
-OLD_FILES+=usr/share/man/man1/ibv_rc_pingpong.1.gz
-OLD_FILES+=usr/share/man/man1/ibv_srq_pingpong.1.gz
-OLD_FILES+=usr/share/man/man1/ibv_uc_pingpong.1.gz
-OLD_FILES+=usr/share/man/man1/ibv_ud_pingpong.1.gz
-OLD_FILES+=usr/share/man/man1/mckey.1.gz
-OLD_FILES+=usr/share/man/man1/rping.1.gz
-OLD_FILES+=usr/share/man/man1/ucmatose.1.gz
-OLD_FILES+=usr/share/man/man1/udaddy.1.gz
-OLD_FILES+=usr/share/man/man3/ibnd_debug.3.gz
-OLD_FILES+=usr/share/man/man3/ibnd_destroy_fabric.3.gz
-OLD_FILES+=usr/share/man/man3/ibnd_discover_fabric.3.gz
-OLD_FILES+=usr/share/man/man3/ibnd_find_node_dr.3.gz
-OLD_FILES+=usr/share/man/man3/ibnd_find_node_guid.3.gz
-OLD_FILES+=usr/share/man/man3/ibnd_iter_nodes.3.gz
-OLD_FILES+=usr/share/man/man3/ibnd_iter_nodes_type.3.gz
-OLD_FILES+=usr/share/man/man3/ibnd_show_progress.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_alloc_mw.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_alloc_pd.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_attach_mcast.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_bind_mw.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_create_ah.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_create_ah_from_wc.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_create_comp_channel.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_create_cq.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_create_cq_ex.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_create_flow.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_create_qp.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_create_qp_ex.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_create_rwq_ind_table.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_create_srq.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_create_srq_ex.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_create_wq.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_event_type_str.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_fork_init.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_get_async_event.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_get_cq_event.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_get_device_guid.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_get_device_list.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_get_device_name.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_get_srq_num.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_inc_rkey.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_modify_qp.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_modify_srq.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_modify_wq.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_open_device.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_open_qp.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_open_xrcd.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_poll_cq.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_post_recv.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_post_send.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_post_srq_recv.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_query_device.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_query_device_ex.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_query_gid.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_query_pkey.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_query_port.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_query_qp.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_query_rt_values_ex.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_query_srq.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_rate_to_mbps.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_rate_to_mult.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_reg_mr.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_req_notify_cq.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_rereg_mr.3.gz
-OLD_FILES+=usr/share/man/man3/ibv_resize_cq.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_accept.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_ack_cm_event.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_bind_addr.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_connect.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_create_ep.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_create_event_channel.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_create_id.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_create_qp.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_create_srq.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_dereg_mr.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_destroy_ep.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_destroy_event_channel.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_destroy_id.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_destroy_qp.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_destroy_srq.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_disconnect.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_event_str.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_free_devices.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_get_cm_event.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_get_devices.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_get_dst_port.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_get_local_addr.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_get_peer_addr.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_get_recv_comp.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_get_request.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_get_send_comp.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_get_src_port.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_getaddrinfo.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_join_multicast.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_leave_multicast.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_listen.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_migrate_id.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_notify.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_post_read.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_post_readv.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_post_recv.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_post_recvv.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_post_send.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_post_sendv.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_post_ud_send.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_post_write.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_post_writev.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_reg_msgs.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_reg_read.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_reg_write.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_reject.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_resolve_addr.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_resolve_route.3.gz
-OLD_FILES+=usr/share/man/man3/rdma_set_option.3.gz
-OLD_FILES+=usr/share/man/man4/mlx4ib.4.gz
-OLD_FILES+=usr/share/man/man4/mlx5ib.4.gz
-OLD_FILES+=usr/share/man/man8/ibstat.8.gz
 .endif
 
 .if ${MK_OFED_EXTRA} == no
@@ -5293,26 +4536,6 @@ OLD_FILES+=usr/bin/sminfo
 OLD_FILES+=usr/bin/smpdump
 OLD_FILES+=usr/bin/smpquery
 OLD_FILES+=usr/bin/vendstat
-OLD_FILES+=usr/share/man/man8/dump_fts.8.gz
-OLD_FILES+=usr/share/man/man8/ibaddr.8.gz
-OLD_FILES+=usr/share/man/man8/ibcacheedit.8.gz
-OLD_FILES+=usr/share/man/man8/ibccconfig.8.gz
-OLD_FILES+=usr/share/man/man8/ibccquery.8.gz
-OLD_FILES+=usr/share/man/man8/iblinkinfo.8.gz
-OLD_FILES+=usr/share/man/man8/ibnetdiscover.8.gz
-OLD_FILES+=usr/share/man/man8/ibping.8.gz
-OLD_FILES+=usr/share/man/man8/ibportstate.8.gz
-OLD_FILES+=usr/share/man/man8/ibqueryerrors.8.gz
-OLD_FILES+=usr/share/man/man8/ibroute.8.gz
-OLD_FILES+=usr/share/man/man8/ibsysstat.8.gz
-OLD_FILES+=usr/share/man/man8/ibtracert.8.gz
-OLD_FILES+=usr/share/man/man8/opensm.8.gz
-OLD_FILES+=usr/share/man/man8/perfquery.8.gz
-OLD_FILES+=usr/share/man/man8/saquery.8.gz
-OLD_FILES+=usr/share/man/man8/sminfo.8.gz
-OLD_FILES+=usr/share/man/man8/smpdump.8.gz
-OLD_FILES+=usr/share/man/man8/smpquery.8.gz
-OLD_FILES+=usr/share/man/man8/vendstat.8.gz
 .endif
 
 .if ${MK_OPENMP} == no
@@ -5352,23 +4575,6 @@ OLD_FILES+=usr/libexec/ssh-keysign
 OLD_FILES+=usr/libexec/ssh-pkcs11-helper
 OLD_FILES+=usr/libexec/ssh-sk-helper
 OLD_FILES+=usr/sbin/sshd
-OLD_FILES+=usr/share/man/man1/scp.1.gz
-OLD_FILES+=usr/share/man/man1/sftp.1.gz
-OLD_FILES+=usr/share/man/man1/slogin.1.gz
-OLD_FILES+=usr/share/man/man1/ssh-add.1.gz
-OLD_FILES+=usr/share/man/man1/ssh-agent.1.gz
-OLD_FILES+=usr/share/man/man1/ssh-copy-id.1.gz
-OLD_FILES+=usr/share/man/man1/ssh-keygen.1.gz
-OLD_FILES+=usr/share/man/man1/ssh-keyscan.1.gz
-OLD_FILES+=usr/share/man/man1/ssh.1.gz
-OLD_FILES+=usr/share/man/man5/ssh_config.5.gz
-OLD_FILES+=usr/share/man/man5/sshd_config.5.gz
-OLD_FILES+=usr/share/man/man8/pam_ssh.8.gz
-OLD_FILES+=usr/share/man/man8/sftp-server.8.gz
-OLD_FILES+=usr/share/man/man8/ssh-keysign.8.gz
-OLD_FILES+=usr/share/man/man8/ssh-pkcs11-helper.8.gz
-OLD_FILES+=usr/share/man/man8/ssh-sk-helper.8.gz
-OLD_FILES+=usr/share/man/man8/sshd.8.gz
 .endif
 
 .if ${MK_OPENSSL} == no
@@ -5403,21 +4609,12 @@ OLD_FILES+=usr/share/examples/pf/queue3
 OLD_FILES+=usr/share/examples/pf/queue4
 OLD_FILES+=usr/share/examples/pf/spamd
 OLD_DIRS+=usr/share/examples/pf
-OLD_FILES+=usr/share/man/man4/pf.4.gz
-OLD_FILES+=usr/share/man/man4/pflog.4.gz
-OLD_FILES+=usr/share/man/man4/pfsync.4.gz
-OLD_FILES+=usr/share/man/man5/pf.conf.5.gz
-OLD_FILES+=usr/share/man/man5/pf.os.5.gz
-OLD_FILES+=usr/share/man/man8/ftp-proxy.8.gz
-OLD_FILES+=usr/share/man/man8/pfctl.8.gz
-OLD_FILES+=usr/share/man/man8/pflogd.8.gz
 OLD_FILES+=usr/share/snmp/defs/pf_tree.def
 OLD_FILES+=usr/share/snmp/mibs/BEGEMOT-PF-MIB.txt
 .endif
 
 .if ${MK_PKGBOOTSTRAP} == no
 OLD_FILES+=usr/sbin/pkg
-OLD_FILES+=usr/share/man/man7/pkg.7.gz
 .endif
 
 .if ${MK_PMC} == no
@@ -5497,71 +4694,6 @@ OLD_FILES+=usr/sbin/pmc
 OLD_FILES+=usr/sbin/pmcannotate
 OLD_FILES+=usr/sbin/pmccontrol
 OLD_FILES+=usr/sbin/pmcstat
-OLD_FILES+=usr/share/man/man3/pmc.3.gz
-OLD_FILES+=usr/share/man/man3/pmc.amd.3.gz
-OLD_FILES+=usr/share/man/man3/pmc.atom.3.gz
-OLD_FILES+=usr/share/man/man3/pmc.atomsilvermont.3.gz
-OLD_FILES+=usr/share/man/man3/pmc.core.3.gz
-OLD_FILES+=usr/share/man/man3/pmc.core2.3.gz
-OLD_FILES+=usr/share/man/man3/pmc.corei7.3.gz
-OLD_FILES+=usr/share/man/man3/pmc.corei7uc.3.gz
-OLD_FILES+=usr/share/man/man3/pmc.haswell.3.gz
-OLD_FILES+=usr/share/man/man3/pmc.haswelluc.3.gz
-OLD_FILES+=usr/share/man/man3/pmc.haswellxeon.3.gz
-OLD_FILES+=usr/share/man/man3/pmc.iaf.3.gz
-OLD_FILES+=usr/share/man/man3/pmc.ivybridge.3.gz
-OLD_FILES+=usr/share/man/man3/pmc.ivybridgexeon.3.gz
-OLD_FILES+=usr/share/man/man3/pmc.k8.3.gz
-OLD_FILES+=usr/share/man/man3/pmc.sandybridge.3.gz
-OLD_FILES+=usr/share/man/man3/pmc.sandybridgeuc.3.gz
-OLD_FILES+=usr/share/man/man3/pmc.sandybridgexeon.3.gz
-OLD_FILES+=usr/share/man/man3/pmc.soft.3.gz
-OLD_FILES+=usr/share/man/man3/pmc.tsc.3.gz
-OLD_FILES+=usr/share/man/man3/pmc.ucf.3.gz
-OLD_FILES+=usr/share/man/man3/pmc.westmere.3.gz
-OLD_FILES+=usr/share/man/man3/pmc.westmereuc.3.gz
-OLD_FILES+=usr/share/man/man3/pmc.xscale.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_allocate.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_attach.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_capabilities.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_configure_logfile.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_cpuinfo.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_detach.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_disable.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_enable.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_event_names_of_class.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_flush_logfile.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_get_driver_stats.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_get_msr.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_init.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_name_of_capability.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_name_of_class.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_name_of_cputype.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_name_of_disposition.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_name_of_event.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_name_of_mode.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_name_of_state.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_ncpu.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_npmc.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_pmcinfo.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_read.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_release.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_rw.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_set.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_start.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_stop.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_width.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_write.3.gz
-OLD_FILES+=usr/share/man/man3/pmc_writelog.3.gz
-OLD_FILES+=usr/share/man/man3/pmclog.3.gz
-OLD_FILES+=usr/share/man/man3/pmclog_close.3.gz
-OLD_FILES+=usr/share/man/man3/pmclog_feed.3.gz
-OLD_FILES+=usr/share/man/man3/pmclog_open.3.gz
-OLD_FILES+=usr/share/man/man3/pmclog_read.3.gz
-OLD_FILES+=usr/share/man/man8/pmcannotate.8.gz
-OLD_FILES+=usr/share/man/man8/pmccontrol.8.gz
-OLD_FILES+=usr/share/man/man8/pmcstat.8.gz
-OLD_FILES+=usr/share/man/man8/pmcstudy.8.gz
 .endif
 
 .if ${MK_PPP} == no
@@ -5572,8 +4704,6 @@ OLD_FILES+=etc/syslog.d/ppp.conf
 OLD_DIRS+=etc/ppp
 OLD_FILES+=usr/sbin/ppp
 OLD_FILES+=usr/sbin/pppctl
-OLD_FILES+=usr/share/man/man8/ppp.8.gz
-OLD_FILES+=usr/share/man/man8/pppctl.8.gz
 .endif
 
 .if ${MK_QUOTAS} == no
@@ -5583,12 +4713,6 @@ OLD_FILES+=usr/sbin/edquota
 OLD_FILES+=usr/sbin/quotaoff
 OLD_FILES+=usr/sbin/quotaon
 OLD_FILES+=usr/sbin/repquota
-OLD_FILES+=usr/share/man/man1/quota.1.gz
-OLD_FILES+=usr/share/man/man8/edquota.8.gz
-OLD_FILES+=usr/share/man/man8/quotacheck.8.gz
-OLD_FILES+=usr/share/man/man8/quotaoff.8.gz
-OLD_FILES+=usr/share/man/man8/quotaon.8.gz
-OLD_FILES+=usr/share/man/man8/repquota.8.gz
 .endif
 
 .if ${MK_RADIUS_SUPPORT} == no
@@ -5599,56 +4723,16 @@ OLD_FILES+=usr/lib/pam_radius.so
 OLD_LIBS+=usr/lib/pam_radius.so.6
 OLD_FILES+=usr/include/radlib.h
 OLD_FILES+=usr/include/radlib_vs.h
-OLD_FILES+=usr/share/man/man3/libradius.3.gz
-OLD_FILES+=usr/share/man/man3/rad_acct_open.3.gz
-OLD_FILES+=usr/share/man/man3/rad_add_server.3.gz
-OLD_FILES+=usr/share/man/man3/rad_add_server_ex.3.gz
-OLD_FILES+=usr/share/man/man3/rad_auth_open.3.gz
-OLD_FILES+=usr/share/man/man3/rad_bind_to.3.gz
-OLD_FILES+=usr/share/man/man3/rad_close.3.gz
-OLD_FILES+=usr/share/man/man3/rad_config.3.gz
-OLD_FILES+=usr/share/man/man3/rad_continue_send_request.3.gz
-OLD_FILES+=usr/share/man/man3/rad_create_request.3.gz
-OLD_FILES+=usr/share/man/man3/rad_create_response.3.gz
-OLD_FILES+=usr/share/man/man3/rad_cvt_addr.3.gz
-OLD_FILES+=usr/share/man/man3/rad_cvt_int.3.gz
-OLD_FILES+=usr/share/man/man3/rad_cvt_string.3.gz
-OLD_FILES+=usr/share/man/man3/rad_demangle.3.gz
-OLD_FILES+=usr/share/man/man3/rad_demangle_mppe_key.3.gz
-OLD_FILES+=usr/share/man/man3/rad_get_attr.3.gz
-OLD_FILES+=usr/share/man/man3/rad_get_vendor_attr.3.gz
-OLD_FILES+=usr/share/man/man3/rad_init_send_request.3.gz
-OLD_FILES+=usr/share/man/man3/rad_put_addr.3.gz
-OLD_FILES+=usr/share/man/man3/rad_put_attr.3.gz
-OLD_FILES+=usr/share/man/man3/rad_put_int.3.gz
-OLD_FILES+=usr/share/man/man3/rad_put_message_authentic.3.gz
-OLD_FILES+=usr/share/man/man3/rad_put_string.3.gz
-OLD_FILES+=usr/share/man/man3/rad_put_vendor_addr.3.gz
-OLD_FILES+=usr/share/man/man3/rad_put_vendor_attr.3.gz
-OLD_FILES+=usr/share/man/man3/rad_put_vendor_int.3.gz
-OLD_FILES+=usr/share/man/man3/rad_put_vendor_string.3.gz
-OLD_FILES+=usr/share/man/man3/rad_receive_request.3.gz
-OLD_FILES+=usr/share/man/man3/rad_request_authenticator.3.gz
-OLD_FILES+=usr/share/man/man3/rad_send_request.3.gz
-OLD_FILES+=usr/share/man/man3/rad_send_response.3.gz
-OLD_FILES+=usr/share/man/man3/rad_server_open.3.gz
-OLD_FILES+=usr/share/man/man3/rad_server_secret.3.gz
-OLD_FILES+=usr/share/man/man3/rad_strerror.3.gz
-OLD_FILES+=usr/share/man/man5/radius.conf.5.gz
-OLD_FILES+=usr/share/man/man8/pam_radius.8.gz
 .endif
 
 .if ${MK_RBOOTD} == no
 OLD_FILES+=usr/libexec/rbootd
-OLD_FILES+=usr/share/man/man8/rbootd.8.gz
 .endif
 
 .if ${MK_ROUTED} == no
 OLD_FILES+=etc/rc.d/routed
 OLD_FILES+=sbin/routed
 OLD_FILES+=sbin/rtquery
-OLD_FILES+=usr/share/man/man8/routed.8.gz
-OLD_FILES+=usr/share/man/man8/rtquery.8.gz
 .endif
 
 
@@ -6192,15 +5276,6 @@ OLD_FILES+=usr/share/doc/atf/COPYING
 OLD_FILES+=usr/share/doc/atf/NEWS
 OLD_FILES+=usr/share/doc/atf/README
 OLD_FILES+=usr/share/doc/pjdfstest/README
-OLD_FILES+=usr/share/man/man1/atf-check.1.gz
-OLD_FILES+=usr/share/man/man1/atf-sh.1.gz
-OLD_FILES+=usr/share/man/man1/atf-test-program.1.gz
-OLD_FILES+=usr/share/man/man3/atf-c-api.3.gz
-OLD_FILES+=usr/share/man/man3/atf-c++-api.3.gz
-OLD_FILES+=usr/share/man/man3/atf-sh-api.3.gz
-OLD_FILES+=usr/share/man/man3/atf-sh.3.gz
-OLD_FILES+=usr/share/man/man4/atf-test-case.4.gz
-OLD_FILES+=usr/share/man/man7/atf.7.gz
 OLD_FILES+=usr/share/mk/atf.test.mk
 OLD_FILES+=usr/share/mk/plain.test.mk
 OLD_FILES+=usr/share/mk/suite.test.mk
@@ -6248,24 +5323,6 @@ OLD_FILES+=usr/share/kyua/misc/test_result.html
 OLD_FILES+=usr/share/kyua/store/migrate_v1_v2.sql
 OLD_FILES+=usr/share/kyua/store/migrate_v2_v3.sql
 OLD_FILES+=usr/share/kyua/store/schema_v3.sql
-OLD_FILES+=usr/share/man/man1/kyua-about.1.gz
-OLD_FILES+=usr/share/man/man1/kyua-config.1.gz
-OLD_FILES+=usr/share/man/man1/kyua-db-exec.1.gz
-OLD_FILES+=usr/share/man/man1/kyua-db-migrate.1.gz
-OLD_FILES+=usr/share/man/man1/kyua-debug.1.gz
-OLD_FILES+=usr/share/man/man1/kyua-help.1.gz
-OLD_FILES+=usr/share/man/man1/kyua-list.1.gz
-OLD_FILES+=usr/share/man/man1/kyua-report-html.1.gz
-OLD_FILES+=usr/share/man/man1/kyua-report-junit.1.gz
-OLD_FILES+=usr/share/man/man1/kyua-report.1.gz
-OLD_FILES+=usr/share/man/man1/kyua-test.1.gz
-OLD_FILES+=usr/share/man/man1/kyua.1.gz
-OLD_FILES+=usr/share/man/man3/atf-c++.3.gz
-OLD_FILES+=usr/share/man/man3/atf-c-api++.3.gz
-OLD_FILES+=usr/share/man/man3/atf-c-api.3.gz
-OLD_FILES+=usr/share/man/man3/atf-c.3.gz
-OLD_FILES+=usr/share/man/man5/kyua.conf.5.gz
-OLD_FILES+=usr/share/man/man5/kyuafile.5.gz
 OLD_FILES+=usr/tests/lib/atf/Kyuafile
 OLD_FILES+=usr/tests/lib/atf/libatf-c++/Kyuafile
 OLD_FILES+=usr/tests/lib/atf/libatf-c++/atf_c++_test
@@ -6322,9 +5379,6 @@ OLD_FILES+=usr/tests/lib/atf/test-programs/srcdir_test
 OLD_FILES+=usr/bin/checknr
 OLD_FILES+=usr/bin/colcrt
 OLD_FILES+=usr/bin/ul
-OLD_FILES+=usr/share/man/man1/checknr.1.gz
-OLD_FILES+=usr/share/man/man1/colcrt.1.gz
-OLD_FILES+=usr/share/man/man1/ul.1.gz
 .endif
 
 .if ${MK_TOOLCHAIN} == no
@@ -6345,73 +5399,8 @@ OLD_FILES+=usr/bin/readelf
 OLD_FILES+=usr/bin/size
 OLD_FILES+=usr/bin/strip
 OLD_FILES+=usr/bin/yacc
-OLD_FILES+=usr/share/man/man1/addr2line.1.gz
-OLD_FILES+=usr/share/man/man1/c++filt.1.gz
-OLD_FILES+=usr/share/man/man1/elfcopy.1.gz
-OLD_FILES+=usr/share/man/man1/nm.1.gz
-OLD_FILES+=usr/share/man/man1/readelf.1.gz
-OLD_FILES+=usr/share/man/man1/size.1.gz
-OLD_FILES+=usr/share/man/man1/strip.1.gz
-OLD_FILES+=usr/share/man/man1/objcopy.1.gz
 # lib/libelf
-OLD_FILES+=usr/share/man/man3/elf.3.gz
-OLD_FILES+=usr/share/man/man3/elf_begin.3.gz
-OLD_FILES+=usr/share/man/man3/elf_cntl.3.gz
-OLD_FILES+=usr/share/man/man3/elf_end.3.gz
-OLD_FILES+=usr/share/man/man3/elf_errmsg.3.gz
-OLD_FILES+=usr/share/man/man3/elf_fill.3.gz
-OLD_FILES+=usr/share/man/man3/elf_flagdata.3.gz
-OLD_FILES+=usr/share/man/man3/elf_getarhdr.3.gz
-OLD_FILES+=usr/share/man/man3/elf_getarsym.3.gz
-OLD_FILES+=usr/share/man/man3/elf_getbase.3.gz
-OLD_FILES+=usr/share/man/man3/elf_getdata.3.gz
-OLD_FILES+=usr/share/man/man3/elf_getident.3.gz
-OLD_FILES+=usr/share/man/man3/elf_getscn.3.gz
-OLD_FILES+=usr/share/man/man3/elf_getphdrnum.3.gz
-OLD_FILES+=usr/share/man/man3/elf_getphnum.3.gz
-OLD_FILES+=usr/share/man/man3/elf_getshdrnum.3.gz
-OLD_FILES+=usr/share/man/man3/elf_getshnum.3.gz
-OLD_FILES+=usr/share/man/man3/elf_getshdrstrndx.3.gz
-OLD_FILES+=usr/share/man/man3/elf_getshstrndx.3.gz
-OLD_FILES+=usr/share/man/man3/elf_hash.3.gz
-OLD_FILES+=usr/share/man/man3/elf_kind.3.gz
-OLD_FILES+=usr/share/man/man3/elf_memory.3.gz
-OLD_FILES+=usr/share/man/man3/elf_next.3.gz
-OLD_FILES+=usr/share/man/man3/elf_open.3.gz
-OLD_FILES+=usr/share/man/man3/elf_rawfile.3.gz
-OLD_FILES+=usr/share/man/man3/elf_rand.3.gz
-OLD_FILES+=usr/share/man/man3/elf_strptr.3.gz
-OLD_FILES+=usr/share/man/man3/elf_update.3.gz
-OLD_FILES+=usr/share/man/man3/elf_version.3.gz
-OLD_FILES+=usr/share/man/man3/gelf.3.gz
-OLD_FILES+=usr/share/man/man3/gelf_checksum.3.gz
-OLD_FILES+=usr/share/man/man3/gelf_fsize.3.gz
-OLD_FILES+=usr/share/man/man3/gelf_getcap.3.gz
-OLD_FILES+=usr/share/man/man3/gelf_getclass.3.gz
-OLD_FILES+=usr/share/man/man3/gelf_getdyn.3.gz
-OLD_FILES+=usr/share/man/man3/gelf_getehdr.3.gz
-OLD_FILES+=usr/share/man/man3/gelf_getmove.3.gz
-OLD_FILES+=usr/share/man/man3/gelf_getphdr.3.gz
-OLD_FILES+=usr/share/man/man3/gelf_getrel.3.gz
-OLD_FILES+=usr/share/man/man3/gelf_getrela.3.gz
-OLD_FILES+=usr/share/man/man3/gelf_getshdr.3.gz
-OLD_FILES+=usr/share/man/man3/gelf_getsym.3.gz
-OLD_FILES+=usr/share/man/man3/gelf_getsyminfo.3.gz
-OLD_FILES+=usr/share/man/man3/gelf_getsymshndx.3.gz
-OLD_FILES+=usr/share/man/man3/gelf_newehdr.3.gz
-OLD_FILES+=usr/share/man/man3/gelf_newphdr.3.gz
-OLD_FILES+=usr/share/man/man3/gelf_update_ehdr.3.gz
-OLD_FILES+=usr/share/man/man3/gelf_xlatetof.3.gz
 # lib/libelftc
-OLD_FILES+=usr/share/man/man3/elftc.3.gz
-OLD_FILES+=usr/share/man/man3/elftc_bfd_find_target.3.gz
-OLD_FILES+=usr/share/man/man3/elftc_copyfile.3.gz
-OLD_FILES+=usr/share/man/man3/elftc_demangle.3.gz
-OLD_FILES+=usr/share/man/man3/elftc_reloc_type_str.3.gz
-OLD_FILES+=usr/share/man/man3/elftc_set_timestamps.3.gz
-OLD_FILES+=usr/share/man/man3/elftc_timestamp.3.gz
-OLD_FILES+=usr/share/man/man3/elftc_string_table_create.3.gz
-OLD_FILES+=usr/share/man/man3/elftc_version.3.gz
 # usr.bin/lorder
 OLD_FILES+=usr/bin/lorder
 OLD_FILES+=usr/tests/usr.bin/lorder/Kyuafile
@@ -6735,11 +5724,6 @@ OLD_FILES+=etc/unbound
 OLD_FILES+=usr/lib/libprivateunbound.a
 OLD_FILES+=usr/lib/libprivateunbound.so
 OLD_LIBS+=usr/lib/libprivateunbound.so.5
-OLD_FILES+=usr/share/man/man5/local-unbound.conf.5.gz
-OLD_FILES+=usr/share/man/man8/local-unbound-anchor.8.gz
-OLD_FILES+=usr/share/man/man8/local-unbound-checkconf.8.gz
-OLD_FILES+=usr/share/man/man8/local-unbound-control.8.gz
-OLD_FILES+=usr/share/man/man8/local-unbound.8.gz
 OLD_FILES+=usr/sbin/local-unbound-setup
 OLD_FILES+=usr/sbin/local-unbound
 OLD_FILES+=usr/sbin/local-unbound-anchor
@@ -6780,323 +5764,6 @@ OLD_FILES+=usr/share/examples/libusb20/util.c
 OLD_FILES+=usr/share/examples/libusb20/util.h
 OLD_DIRS+=usr/share/examples/libusb20
 OLD_FILES+=usr/share/firmware/ar5523.bin
-OLD_FILES+=usr/share/man/man1/uhsoctl.1.gz
-OLD_FILES+=usr/share/man/man1/usbhidaction.1.gz
-OLD_FILES+=usr/share/man/man1/usbhidctl.1.gz
-OLD_FILES+=usr/share/man/man3/hid_dispose_report_desc.3.gz
-OLD_FILES+=usr/share/man/man3/hid_end_parse.3.gz
-OLD_FILES+=usr/share/man/man3/hid_get_data.3.gz
-OLD_FILES+=usr/share/man/man3/hid_get_item.3.gz
-OLD_FILES+=usr/share/man/man3/hid_get_report_desc.3.gz
-OLD_FILES+=usr/share/man/man3/hid_init.3.gz
-OLD_FILES+=usr/share/man/man3/hid_locate.3.gz
-OLD_FILES+=usr/share/man/man3/hid_report_size.3.gz
-OLD_FILES+=usr/share/man/man3/hid_set_data.3.gz
-OLD_FILES+=usr/share/man/man3/hid_start_parse.3.gz
-OLD_FILES+=usr/share/man/man3/hid_usage_in_page.3.gz
-OLD_FILES+=usr/share/man/man3/hid_usage_page.3.gz
-OLD_FILES+=usr/share/man/man3/libusb.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_be_add_dev_quirk.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_be_alloc_default.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_be_dequeue_device.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_be_device_foreach.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_be_enqueue_device.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_be_free.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_be_get_dev_quirk.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_be_get_quirk_name.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_be_get_template.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_be_remove_dev_quirk.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_be_set_template.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_desc_foreach.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_alloc.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_alloc_config.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_check_connected.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_close.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_detach_kernel_driver.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_free.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_get_address.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_get_backend_name.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_get_bus_number.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_get_config_index.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_get_debug.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_get_desc.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_get_device_desc.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_get_fd.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_get_iface_desc.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_get_info.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_get_mode.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_get_parent_address.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_get_parent_port.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_get_port_path.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_get_power_mode.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_get_power_usage.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_get_speed.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_kernel_driver_active.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_open.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_process.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_req_string_simple_sync.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_req_string_sync.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_request_sync.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_reset.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_set_alt_index.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_set_config_index.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_set_debug.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_set_power_mode.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_dev_wait_process.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_error_name.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_me_decode.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_me_encode.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_me_get_1.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_me_get_2.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_strerror.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_bulk_intr_sync.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_callback_wrapper.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_clear_stall_sync.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_close.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_drain.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_get_actual_frames.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_get_actual_length.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_get_length.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_get_max_frames.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_get_max_packet_length.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_get_max_total_length.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_get_pointer.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_get_priv_sc0.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_get_priv_sc1.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_get_status.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_get_time_complete.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_open.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_pending.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_set_buffer.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_set_callback.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_set_flags.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_set_length.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_set_priv_sc0.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_set_priv_sc1.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_set_timeout.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_set_total_frames.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_setup_bulk.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_setup_control.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_setup_intr.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_setup_isoc.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_start.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_stop.3.gz
-OLD_FILES+=usr/share/man/man3/libusb20_tr_submit.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_alloc_transfer.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_attach_kernel_driver.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_bulk_transfer.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_cancel_transfer.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_check_connected.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_claim_interface.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_clear_halt.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_close.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_control_transfer.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_detach_kernel_driver.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_detach_kernel_driver_np.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_error_name.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_event_handler_active.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_event_handling_ok.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_exit.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_free_bos_descriptor.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_free_config_descriptor.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_free_device_list.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_free_ss_endpoint_comp.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_free_transfer.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_get_active_config_descriptor.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_get_bus_number.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_get_config_descriptor.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_get_config_descriptor_by_value.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_get_configuration.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_get_device.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_get_device_address.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_get_device_descriptor.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_get_device_list.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_get_device_speed.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_get_driver.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_get_driver_np.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_get_max_iso_packet_size.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_get_max_packet_size.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_get_next_timeout.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_get_pollfds.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_get_string_descriptor.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_get_string_descriptor_ascii.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_handle_events.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_handle_events_completed.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_handle_events_locked.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_handle_events_timeout.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_handle_events_timeout_completed.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_init.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_interrupt_transfer.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_kernel_driver_active.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_lock_event_waiters.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_lock_events.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_open.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_open_device_with_vid_pid.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_parse_bos_descriptor.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_parse_ss_endpoint_comp.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_ref_device.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_release_interface.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_reset_device.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_set_configuration.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_set_debug.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_set_interface_alt_setting.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_set_pollfd_notifiers.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_strerror.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_submit_transfer.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_try_lock_events.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_unlock_event_waiters.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_unlock_events.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_unref_device.3.gz
-OLD_FILES+=usr/share/man/man3/libusb_wait_for_event.3.gz
-OLD_FILES+=usr/share/man/man3/libusbhid.3.gz
-OLD_FILES+=usr/share/man/man3/usb.3.gz
-OLD_FILES+=usr/share/man/man3/usb_bulk_read.3.gz
-OLD_FILES+=usr/share/man/man3/usb_bulk_write.3.gz
-OLD_FILES+=usr/share/man/man3/usb_check_connected.3.gz
-OLD_FILES+=usr/share/man/man3/usb_claim_interface.3.gz
-OLD_FILES+=usr/share/man/man3/usb_clear_halt.3.gz
-OLD_FILES+=usr/share/man/man3/usb_close.3.gz
-OLD_FILES+=usr/share/man/man3/usb_control_msg.3.gz
-OLD_FILES+=usr/share/man/man3/usb_destroy_configuration.3.gz
-OLD_FILES+=usr/share/man/man3/usb_device.3.gz
-OLD_FILES+=usr/share/man/man3/usb_fetch_and_parse_descriptors.3.gz
-OLD_FILES+=usr/share/man/man3/usb_find_busses.3.gz
-OLD_FILES+=usr/share/man/man3/usb_find_devices.3.gz
-OLD_FILES+=usr/share/man/man3/usb_get_busses.3.gz
-OLD_FILES+=usr/share/man/man3/usb_get_descriptor.3.gz
-OLD_FILES+=usr/share/man/man3/usb_get_descriptor_by_endpoint.3.gz
-OLD_FILES+=usr/share/man/man3/usb_get_string.3.gz
-OLD_FILES+=usr/share/man/man3/usb_get_string_simple.3.gz
-OLD_FILES+=usr/share/man/man3/usb_init.3.gz
-OLD_FILES+=usr/share/man/man3/usb_interrupt_read.3.gz
-OLD_FILES+=usr/share/man/man3/usb_interrupt_write.3.gz
-OLD_FILES+=usr/share/man/man3/usb_open.3.gz
-OLD_FILES+=usr/share/man/man3/usb_parse_configuration.3.gz
-OLD_FILES+=usr/share/man/man3/usb_parse_descriptor.3.gz
-OLD_FILES+=usr/share/man/man3/usb_release_interface.3.gz
-OLD_FILES+=usr/share/man/man3/usb_reset.3.gz
-OLD_FILES+=usr/share/man/man3/usb_resetep.3.gz
-OLD_FILES+=usr/share/man/man3/usb_set_altinterface.3.gz
-OLD_FILES+=usr/share/man/man3/usb_set_configuration.3.gz
-OLD_FILES+=usr/share/man/man3/usb_set_debug.3.gz
-OLD_FILES+=usr/share/man/man3/usb_strerror.3.gz
-OLD_FILES+=usr/share/man/man3/usbhid.3.gz
-OLD_FILES+=usr/share/man/man4/if_otus.4.gz
-OLD_FILES+=usr/share/man/man4/if_rsu.4.gz
-OLD_FILES+=usr/share/man/man4/if_rtwn_usb.4.gz
-OLD_FILES+=usr/share/man/man4/if_rum.4.gz
-OLD_FILES+=usr/share/man/man4/if_run.4.gz
-OLD_FILES+=usr/share/man/man4/if_zyd.4.gz
-OLD_FILES+=usr/share/man/man4/otus.4.gz
-OLD_FILES+=usr/share/man/man4/otusfw.4.gz
-OLD_FILES+=usr/share/man/man4/rsu.4.gz
-OLD_FILES+=usr/share/man/man4/rsufw.4.gz
-OLD_FILES+=usr/share/man/man4/rtwn_usb.4.gz
-OLD_FILES+=usr/share/man/man4/rum.4.gz
-OLD_FILES+=usr/share/man/man4/run.4.gz
-OLD_FILES+=usr/share/man/man4/runfw.4.gz
-OLD_FILES+=usr/share/man/man4/u3g.4.gz
-OLD_FILES+=usr/share/man/man4/u3gstub.4.gz
-OLD_FILES+=usr/share/man/man4/uark.4.gz
-OLD_FILES+=usr/share/man/man4/uart.4.gz
-OLD_FILES+=usr/share/man/man4/uath.4.gz
-OLD_FILES+=usr/share/man/man4/ubsa.4.gz
-OLD_FILES+=usr/share/man/man4/ubser.4.gz
-OLD_FILES+=usr/share/man/man4/ubtbcmfw.4.gz
-OLD_FILES+=usr/share/man/man4/uchcom.4.gz
-OLD_FILES+=usr/share/man/man4/ucom.4.gz
-OLD_FILES+=usr/share/man/man4/ucycom.4.gz
-OLD_FILES+=usr/share/man/man4/udav.4.gz
-OLD_FILES+=usr/share/man/man4/udbp.4.gz
-OLD_FILES+=usr/share/man/man4/uep.4.gz
-OLD_FILES+=usr/share/man/man4/ufm.4.gz
-OLD_FILES+=usr/share/man/man4/ufoma.4.gz
-OLD_FILES+=usr/share/man/man4/uftdi.4.gz
-OLD_FILES+=usr/share/man/man4/ugen.4.gz
-OLD_FILES+=usr/share/man/man4/uhci.4.gz
-OLD_FILES+=usr/share/man/man4/uhid.4.gz
-OLD_FILES+=usr/share/man/man4/uhso.4.gz
-OLD_FILES+=usr/share/man/man4/uipaq.4.gz
-OLD_FILES+=usr/share/man/man4/ukbd.4.gz
-OLD_FILES+=usr/share/man/man4/uled.4.gz
-OLD_FILES+=usr/share/man/man4/ulpt.4.gz
-OLD_FILES+=usr/share/man/man4/umass.4.gz
-OLD_FILES+=usr/share/man/man4/umcs.4.gz
-OLD_FILES+=usr/share/man/man4/umct.4.gz
-OLD_FILES+=usr/share/man/man4/umodem.4.gz
-OLD_FILES+=usr/share/man/man4/umoscom.4.gz
-OLD_FILES+=usr/share/man/man4/ums.4.gz
-OLD_FILES+=usr/share/man/man4/unix.4.gz
-OLD_FILES+=usr/share/man/man4/upgt.4.gz
-OLD_FILES+=usr/share/man/man4/uplcom.4.gz
-OLD_FILES+=usr/share/man/man4/ural.4.gz
-OLD_FILES+=usr/share/man/man4/urio.4.gz
-OLD_FILES+=usr/share/man/man4/urndis.4.gz
-OLD_FILES+=usr/share/man/man4/urtw.4.gz
-OLD_FILES+=usr/share/man/man4/usb.4.gz
-OLD_FILES+=usr/share/man/man4/usb_quirk.4.gz
-OLD_FILES+=usr/share/man/man4/usb_template.4.gz
-OLD_FILES+=usr/share/man/man4/usfs.4.gz
-OLD_FILES+=usr/share/man/man4/uslcom.4.gz
-OLD_FILES+=usr/share/man/man4/uvisor.4.gz
-OLD_FILES+=usr/share/man/man4/uvscom.4.gz
-OLD_FILES+=usr/share/man/man4/zyd.4.gz
-OLD_FILES+=usr/share/man/man8/uathload.8.gz
-OLD_FILES+=usr/share/man/man8/usbconfig.8.gz
-OLD_FILES+=usr/share/man/man8/usbdump.8.gz
-OLD_FILES+=usr/share/man/man9/usb_fifo_alloc_buffer.9.gz
-OLD_FILES+=usr/share/man/man9/usb_fifo_attach.9.gz
-OLD_FILES+=usr/share/man/man9/usb_fifo_detach.9.gz
-OLD_FILES+=usr/share/man/man9/usb_fifo_free_buffer.9.gz
-OLD_FILES+=usr/share/man/man9/usb_fifo_get_data.9.gz
-OLD_FILES+=usr/share/man/man9/usb_fifo_get_data_buffer.9.gz
-OLD_FILES+=usr/share/man/man9/usb_fifo_get_data_error.9.gz
-OLD_FILES+=usr/share/man/man9/usb_fifo_get_data_linear.9.gz
-OLD_FILES+=usr/share/man/man9/usb_fifo_put_bytes_max.9.gz
-OLD_FILES+=usr/share/man/man9/usb_fifo_put_data.9.gz
-OLD_FILES+=usr/share/man/man9/usb_fifo_put_data_buffer.9.gz
-OLD_FILES+=usr/share/man/man9/usb_fifo_put_data_error.9.gz
-OLD_FILES+=usr/share/man/man9/usb_fifo_put_data_linear.9.gz
-OLD_FILES+=usr/share/man/man9/usb_fifo_reset.9.gz
-OLD_FILES+=usr/share/man/man9/usb_fifo_softc.9.gz
-OLD_FILES+=usr/share/man/man9/usb_fifo_wakeup.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_do_request.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_do_request_flags.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_errstr.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_lookup_id_by_info.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_lookup_id_by_uaa.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_transfer_clear_stall.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_transfer_drain.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_transfer_pending.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_transfer_poll.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_transfer_setup.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_transfer_start.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_transfer_stop.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_transfer_submit.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_transfer_unsetup.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_xfer_clr_flag.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_xfer_frame_data.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_xfer_frame_len.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_xfer_get_frame.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_xfer_get_priv.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_xfer_is_stalled.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_xfer_max_framelen.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_xfer_max_frames.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_xfer_max_len.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_xfer_set_flag.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_xfer_set_frame_data.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_xfer_set_frame_len.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_xfer_set_frame_offset.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_xfer_set_frames.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_xfer_set_interval.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_xfer_set_priv.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_xfer_set_stall.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_xfer_set_timeout.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_xfer_softc.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_xfer_state.9.gz
-OLD_FILES+=usr/share/man/man9/usbd_xfer_status.9.gz
-OLD_FILES+=usr/share/man/man9/usbdi.9.gz
 OLD_FILES+=usr/share/misc/usb_hid_usages
 OLD_FILES+=usr/share/misc/usbdevs
 .endif
@@ -7110,17 +5777,10 @@ OLD_FILES+=usr/bin/who
 OLD_FILES+=usr/sbin/ac
 OLD_FILES+=usr/sbin/lastlogin
 OLD_FILES+=usr/sbin/utx
-OLD_FILES+=usr/share/man/man1/last.1.gz
-OLD_FILES+=usr/share/man/man1/users.1.gz
-OLD_FILES+=usr/share/man/man1/who.1.gz
-OLD_FILES+=usr/share/man/man8/ac.8.gz
-OLD_FILES+=usr/share/man/man8/lastlogin.8.gz
-OLD_FILES+=usr/share/man/man8/utx.8.gz
 .endif
 
 .if ${MK_VERIEXEC} == no
 OLD_FILES+=sbin/veriexec
-OLD_FILES+=usr/share/man/man8/veriexec.8.gz
 OLD_FILES+=usr/lib/libveriexec.a
 OLD_FILES+=usr/lib/libveriexec.so
 OLD_LIBS+=usr/lib/libveriexec.so.5
@@ -7134,12 +5794,6 @@ OLD_FILES+=usr/bin/nvi
 OLD_FILES+=usr/bin/nview
 OLD_FILES+=usr/bin/vi
 OLD_FILES+=usr/bin/view
-OLD_FILES+=usr/share/man/man1/ex.1.gz
-OLD_FILES+=usr/share/man/man1/nex.1.gz
-OLD_FILES+=usr/share/man/man1/nvi.1.gz
-OLD_FILES+=usr/share/man/man1/nview.1.gz
-OLD_FILES+=usr/share/man/man1/vi.1.gz
-OLD_FILES+=usr/share/man/man1/view.1.gz
 .  if exists(${DESTDIR}/usr/share/vi)
 VI_DIRS!=find ${DESTDIR}/usr/share/vi -type d \
     | sed -e 's,^${DESTDIR}/,,'; echo
@@ -7168,20 +5822,9 @@ OLD_FILES+=usr/share/examples/hostapd/hostapd.conf
 OLD_FILES+=usr/share/examples/hostapd/hostapd.eap_user
 OLD_FILES+=usr/share/examples/hostapd/hostapd.wpa_psk
 OLD_DIRS+=usr/share/examples/hostapd
-OLD_FILES+=usr/share/man/man5/hostapd.conf.5.gz
-OLD_FILES+=usr/share/man/man5/wpa_supplicant.conf.5.gz
-OLD_FILES+=usr/share/man/man8/ancontrol.8.gz
-OLD_FILES+=usr/share/man/man8/hostapd.8.gz
-OLD_FILES+=usr/share/man/man8/hostapd_cli.8.gz
-OLD_FILES+=usr/share/man/man8/ndis_events.8.gz
-OLD_FILES+=usr/share/man/man8/wlandebug.8.gz
-OLD_FILES+=usr/share/man/man8/wpa_cli.8.gz
-OLD_FILES+=usr/share/man/man8/wpa_passphrase.8.gz
-OLD_FILES+=usr/share/man/man8/wpa_supplicant.8.gz
 OLD_FILES+=usr/lib/snmp_wlan.so
 OLD_LIBS+=usr/lib/snmp_wlan.so.6
 # bsnmp module
-OLD_FILES+=usr/share/man/man3/snmp_wlan.3.gz
 OLD_FILES+=usr/share/snmp/defs/wlan_tree.def
 OLD_FILES+=usr/share/snmp/mibs/BEGEMOT-WIRELESS-MIB.txt
 .endif
@@ -7237,52 +5880,6 @@ OLD_LIBS+=usr/lib/libzpool.so.2
 OLD_FILES+=usr/sbin/zfsd
 OLD_FILES+=usr/sbin/zhack
 OLD_FILES+=usr/sbin/zdb
-OLD_FILES+=usr/share/man/man3/be_activate.3.gz
-OLD_FILES+=usr/share/man/man3/be_active_name.3.gz
-OLD_FILES+=usr/share/man/man3/be_active_path.3.gz
-OLD_FILES+=usr/share/man/man3/be_create_depth.3.gz
-OLD_FILES+=usr/share/man/man3/be_create_from_existing_snap.3.gz
-OLD_FILES+=usr/share/man/man3/be_create_from_existing.3.gz
-OLD_FILES+=usr/share/man/man3/be_create.3.gz
-OLD_FILES+=usr/share/man/man3/be_deactivate.3.gz
-OLD_FILES+=usr/share/man/man3/be_destroy.3.gz
-OLD_FILES+=usr/share/man/man3/be_exists.3.gz
-OLD_FILES+=usr/share/man/man3/be_export.3.gz
-OLD_FILES+=usr/share/man/man3/be_get_bootenv_props.3.gz
-OLD_FILES+=usr/share/man/man3/be_get_dataset_props.3.gz
-OLD_FILES+=usr/share/man/man3/be_get_dataset_snapshots.3.gz
-OLD_FILES+=usr/share/man/man3/be_import.3.gz
-OLD_FILES+=usr/share/man/man3/be_is_auto_snapshot_name.3.gz
-OLD_FILES+=usr/share/man/man3/be_mount.3.gz
-OLD_FILES+=usr/share/man/man3/be_mounted_at.3.gz
-OLD_FILES+=usr/share/man/man3/be_nextboot_name.3.gz
-OLD_FILES+=usr/share/man/man3/be_nextboot_path.3.gz
-OLD_FILES+=usr/share/man/man3/be_nicenum.3.gz
-OLD_FILES+=usr/share/man/man3/be_prop_list_alloc.3.gz
-OLD_FILES+=usr/share/man/man3/be_prop_list_free.3.gz
-OLD_FILES+=usr/share/man/man3/be_rename.3.gz
-OLD_FILES+=usr/share/man/man3/be_root_concat.3.gz
-OLD_FILES+=usr/share/man/man3/be_root_path.3.gz
-OLD_FILES+=usr/share/man/man3/be_snapshot.3.gz
-OLD_FILES+=usr/share/man/man3/be_unmount.3.gz
-OLD_FILES+=usr/share/man/man3/be_validate_name.3.gz
-OLD_FILES+=usr/share/man/man3/be_validate_snap.3.gz
-OLD_FILES+=usr/share/man/man3/libbe_close.3.gz
-OLD_FILES+=usr/share/man/man3/libbe_errno.3.gz
-OLD_FILES+=usr/share/man/man3/libbe_error_description.3.gz
-OLD_FILES+=usr/share/man/man3/libbe_init.3.gz
-OLD_FILES+=usr/share/man/man3/libbe_print_on_error.3.gz
-OLD_FILES+=usr/share/man/man3/libbe.3.gz
-OLD_FILES+=usr/share/man/man5/zpool-features.5.gz
-OLD_FILES+=usr/share/man/man8/bectl.8.gz
-OLD_FILES+=usr/share/man/man8/gptzfsboot.8.gz
-OLD_FILES+=usr/share/man/man8/zdb.8.gz
-OLD_FILES+=usr/share/man/man8/zfs-program.8.gz
-OLD_FILES+=usr/share/man/man8/zfs.8.gz
-OLD_FILES+=usr/share/man/man8/zfsbootcfg.8.gz
-OLD_FILES+=usr/share/man/man8/zfsd.8.gz
-OLD_FILES+=usr/share/man/man8/zfsloader.8.gz
-OLD_FILES+=usr/share/man/man8/zpool.8.gz
 OLD_FILES+=usr/share/zfs/compatibility.d/2018
 OLD_FILES+=usr/share/zfs/compatibility.d/2019
 OLD_FILES+=usr/share/zfs/compatibility.d/2020

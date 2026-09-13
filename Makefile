@@ -163,7 +163,7 @@ TGTS=	all all-man buildenv buildenvvars buildetc buildkernel buildworld \
 	everything hier hierarchy install installcheck installetc installkernel \
 	installkernel.debug packagekernel packageworld \
 	reinstallkernel reinstallkernel.debug \
-	installworld kernel-toolchain libraries maninstall \
+	installworld kernel-toolchain libraries \
 	list-old-dirs list-old-files list-old-libs \
 	obj objlink showconfig tags toolchain \
 	makeman sysent \

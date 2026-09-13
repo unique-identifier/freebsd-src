@@ -11,7 +11,6 @@ SUBDIR=	${_colldef} \
 	${_firmwares} \
 	${_i18n} \
 	keys \
-	${_man} \
 	${_me} \
 	misc \
 	${_mk} \
@@ -63,10 +62,6 @@ _timedef=	timedef
 
 .if ${MK_MAKE} != "no"
 _mk=		mk
-.endif
-
-.if ${MK_MAN} != "no"
-_man=		man
 .endif
 
 .if ${MK_SHAREDOCS} != "no"

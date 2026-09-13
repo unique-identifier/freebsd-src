@@ -13,6 +13,24 @@ Items affecting the ports and packages system can be found in
 and/or ports.
 
 20260913:
+	Manual-page upgrade cleanup now uses an explicit list of system
+	pages and aliases, including uncompressed, compressed, and formatted
+	copies and the former whatis/mandoc databases.  Run check-old before
+	delete-old to review the files selected for your installation.
+	Unknown local pages are preserved; manual-directory symlinks are
+	not traversed and nonempty directories are retained.  Pages installed
+	under usr/local are outside this cleanup.  Locally replaced files
+	with the same names as listed system pages remain cleanup candidates.
+
+20260913:
+	The shared manual-page build rules and the MAN, MANCOMPRESS,
+	MANSPLITPKG, and STAGING_MAN options have been removed.
+	bsd.man.mk remains as a no-op compatibility include; MK_MAN stays
+	fixed at no for remaining source Makefiles.  The old compression
+	and MAN_ARCH cleanup scans have been removed; explicit obsolete-file
+	cleanup remains in place pending the manual-file cleanup stage.
+
+20260913:
 	The installed manual-page utilities and MAN_UTILS build option have
 	been removed, along with their weekly job and package trigger.
 	whereis now searches only binaries and sources; its -m and -M

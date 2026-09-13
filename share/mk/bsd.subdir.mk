@@ -40,19 +40,19 @@ _obj=	obj
 .endif
 
 SUBDIR_TARGETS+= \
-		all all-man analyze buildconfig buildfiles buildincludes \
+		all analyze buildconfig buildfiles buildincludes \
 		checkdpadd clean cleandepend cleandir cleanilinks \
 		cleanobj depend distribute files includes installconfig \
 		installdirs \
 		installfiles installincludes print-dir realinstall \
-		maninstall manlint ${_obj} objlink tags \
+		${_obj} objlink tags \
 
 # Described above.
 STANDALONE_SUBDIR_TARGETS+= \
-		all-man buildconfig buildfiles buildincludes check checkdpadd \
+		buildconfig buildfiles buildincludes check checkdpadd \
 		clean cleandepend cleandir cleanilinks cleanobj files includes \
 		installconfig installdirs installincludes installfiles print-dir \
-		maninstall manlint obj objlink
+		obj objlink
 
 .include <bsd.init.mk>
 

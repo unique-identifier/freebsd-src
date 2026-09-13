@@ -4338,27 +4338,6 @@ MAN_DIRS!=find ${DESTDIR}/usr/share/man ${DESTDIR}/usr/share/openssl/man -type d
 OLD_DIRS+=${MAN_DIRS}
 .endif
 
-.if ${MK_MAN_UTILS} == no
-OLD_FILES+=etc/periodic/weekly/320.whatis
-OLD_FILES+=usr/bin/apropos
-OLD_FILES+=usr/bin/makewhatis
-OLD_FILES+=usr/bin/man
-OLD_FILES+=usr/bin/manpath
-OLD_FILES+=usr/bin/whatis
-OLD_FILES+=usr/libexec/makewhatis.local
-OLD_FILES+=usr/sbin/manctl
-OLD_FILES+=usr/share/man/man1/apropos.1.gz
-OLD_FILES+=usr/share/man/man1/makewhatis.1.gz
-OLD_FILES+=usr/share/man/man1/man.1.gz
-OLD_FILES+=usr/share/man/man1/manpath.1.gz
-OLD_FILES+=usr/share/man/man1/whatis.1.gz
-OLD_FILES+=usr/share/man/man5/man.conf.5.gz
-OLD_FILES+=usr/share/man/man8/makewhatis.local.8.gz
-OLD_FILES+=usr/share/man/man8/manctl.8.gz
-OLD_FILES+=usr/share/man/whatis
-OLD_FILES+=usr/share/openssl/man/whatis
-.endif
-
 .if ${MK_NETCAT} == no
 OLD_FILES+=usr/bin/nc
 OLD_FILES+=usr/share/man/man1/nc.1.gz

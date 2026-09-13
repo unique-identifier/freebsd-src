@@ -51,6 +51,40 @@
 #   xargs -n1 | sort | uniq -d;
 # done
 
+# 20260913: Remove installed manual-page utilities.
+OLD_FILES+=usr/share/man/man1/mandoc.1.gz
+OLD_FILES+=usr/share/man/man1/mdocml.1.gz
+OLD_FILES+=usr/share/man/man5/mandoc.db.5.gz
+OLD_FILES+=usr/share/man/man7/eqn.7.gz
+OLD_FILES+=usr/share/man/man7/mandoc_char.7.gz
+OLD_FILES+=usr/share/man/man7/tbl.7.gz
+OLD_FILES+=usr/share/man/man7/man.7.gz
+OLD_FILES+=usr/share/man/man7/mdoc.7.gz
+OLD_FILES+=usr/share/man/man7/roff.7.gz
+OLD_FILES+=etc/periodic/weekly/320.whatis
+OLD_FILES+=usr/bin/apropos
+OLD_FILES+=usr/bin/makewhatis
+OLD_FILES+=usr/bin/man
+OLD_FILES+=usr/bin/manpath
+OLD_FILES+=usr/bin/whatis
+OLD_FILES+=usr/libexec/makewhatis.local
+OLD_FILES+=usr/sbin/manctl
+OLD_FILES+=usr/share/man/man1/apropos.1.gz
+OLD_FILES+=usr/share/man/man1/makewhatis.1.gz
+OLD_FILES+=usr/share/man/man1/man.1.gz
+OLD_FILES+=usr/share/man/man1/manpath.1.gz
+OLD_FILES+=usr/share/man/man1/whatis.1.gz
+OLD_FILES+=usr/share/man/man5/man.conf.5.gz
+OLD_FILES+=usr/share/man/man8/makewhatis.local.8.gz
+OLD_FILES+=usr/share/man/man8/manctl.8.gz
+OLD_FILES+=usr/share/man/whatis
+OLD_FILES+=usr/share/openssl/man/whatis
+OLD_FILES+=usr/bin/mandoc
+OLD_FILES+=usr/share/pkg/triggers/mandoc.ucl
+OLD_FILES+=usr/share/man/mandoc.db
+OLD_FILES+=usr/share/openssl/man/mandoc.db
+OLD_FILES+=usr/share/man/man8/makewhatis.8.gz
+
 # 20260913: Remove PXE boot and TFTP support.
 OLD_FILES+=usr/bin/tftp
 OLD_FILES+=usr/libexec/tftpd

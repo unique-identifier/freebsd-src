@@ -13,6 +13,13 @@ Items affecting the ports and packages system can be found in
 and/or ports.
 
 20260913:
+	The installed manual-page utilities and MAN_UTILS build option have
+	been removed, along with their weekly job and package trigger.
+	whereis now searches only binaries and sources; its -m and -M
+	options are no longer supported.  Build-host mandoc is retained
+	temporarily for bootstrap and native cross-tool builds.
+
+20260913:
 	Manual pages and their databases are no longer built or installed,
 	even with WITH_MAN or MK_MAN=yes.  Manual-page sources and utilities
 	remain temporarily; MAN_UTILS now defaults to yes independently of

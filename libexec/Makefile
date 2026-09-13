@@ -10,7 +10,6 @@ SUBDIR=	${_atf} \
 	flua \
 	getty \
 	${_hyperv} \
-	${_makewhatis.local} \
 	${_mknetid} \
 	${_phttpget} \
 	${_pppoed} \
@@ -76,10 +75,6 @@ SUBDIR.${MK_LIB${LIBCOMPAT}}+=	rtld-elf${libcompat}
 
 .if ${MK_RBOOTD} != "no"
 SUBDIR+=	rbootd
-.endif
-
-.if ${MK_MAN_UTILS} != "no"
-_makewhatis.local=	makewhatis.local
 .endif
 
 .if ${MK_TCP_WRAPPERS} != "no"

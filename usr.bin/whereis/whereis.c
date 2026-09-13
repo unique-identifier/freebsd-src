@@ -26,7 +26,7 @@
  */
 
 /*
- * 4.3BSD UI-compatible whereis(1) utility.  Rewritten from scratch
+ * whereis(1) binary and source lookup utility.  Rewritten from scratch
  * since the original 4.3BSD version suffers legal problems that
  * prevent it from being redistributed, and since the 4.4BSD version
  * was pretty inferior in functionality.
@@ -50,18 +50,16 @@
 #include "pathnames.h"
 
 #define	NO_BIN_FOUND	1
-#define	NO_MAN_FOUND	2
 #define	NO_SRC_FOUND	4
 
 typedef const char *ccharp;
 
-static int opt_a, opt_b, opt_m, opt_q, opt_s, opt_u, opt_x;
-static ccharp *bindirs, *mandirs, *sourcedirs;
+static int opt_a, opt_b, opt_q, opt_s, opt_u, opt_x;
+static ccharp *bindirs, *sourcedirs;
 static char **query;
 
 static const char *sourcepath = PATH_SOURCES;
 
-static char	*colonify(ccharp *);
 static int	 contains(ccharp *, const char *);
 static void	 decolonify(char *, ccharp **, int *);
 static void	 defaults(void);
@@ -88,14 +86,14 @@ static void
 usage(void)
 {
 	(void)fprintf(stderr,
-	     "usage: whereis [-abmqsux] [-BMS dir ... -f] program ...\n");
+	     "usage: whereis [-abqsux] [-BS dir ... -f] program ...\n");
 	exit(EX_USAGE);
 }
 
 /*
  * Scan options passed to program.
  *
- * Note that the -B/-M/-S options expect a list of directory
+ * Note that the -B/-S options expect a list of directory
  * names that must be terminated with -f.
  */
 static void
@@ -104,14 +102,10 @@ scanopts(int argc, char **argv)
 	int c, i;
 	ccharp **dirlist;
 
-	while ((c = getopt(argc, argv, "BMSabfmqsux")) != -1)
+	while ((c = getopt(argc, argv, "BSabfqsux")) != -1)
 		switch (c) {
 		case 'B':
 			dirlist = &bindirs;
-			goto dolist;
-
-		case 'M':
-			dirlist = &mandirs;
 			goto dolist;
 
 		case 'S':
@@ -123,7 +117,6 @@ scanopts(int argc, char **argv)
 			while (optind < argc &&
 			       strcmp(argv[optind], "-f") != 0 &&
 			       strcmp(argv[optind], "-B") != 0 &&
-			       strcmp(argv[optind], "-M") != 0 &&
 			       strcmp(argv[optind], "-S") != 0) {
 				decolonify(argv[optind], dirlist, &i);
 				optind++;
@@ -140,10 +133,6 @@ scanopts(int argc, char **argv)
 
 		case 'f':
 			goto breakout;
-
-		case 'm':
-			opt_m = 1;
-			break;
 
 		case 'q':
 			opt_q = 1;
@@ -220,49 +209,22 @@ decolonify(char *s, ccharp **cppp, int *ip)
 }
 
 /*
- * Join string list `cpp' into a colon-separated string.
- */
-static char *
-colonify(ccharp *cpp)
-{
-	size_t s;
-	char *cp;
-	int i;
-
-	if (cpp == NULL)
-		return (0);
-
-	for (s = 0, i = 0; cpp[i] != NULL; i++)
-		s += strlen(cpp[i]) + 1;
-	if ((cp = malloc(s + 1)) == NULL)
-		abort();
-	for (i = 0, *cp = '\0'; cpp[i] != NULL; i++) {
-		strcat(cp, cpp[i]);
-		strcat(cp, ":");
-	}
-	cp[s - 1] = '\0';		/* eliminate last colon */
-
-	return (cp);
-}
-
-/*
  * Provide defaults for all options and directory lists.
  */
 static void
 defaults(void)
 {
 	size_t s;
-	char *b, buf[BUFSIZ], *cp;
+	char *b, *cp;
 	int nele;
-	FILE *p;
 	DIR *dir;
 	struct stat sb;
 	struct dirent *dirp;
 	const int oid[2] = {CTL_USER, USER_CS_PATH};
 
-	/* default to -bms if none has been specified */
-	if (!opt_b && !opt_m && !opt_s)
-		opt_b = opt_m = opt_s = 1;
+	/* default to -bs if none has been specified */
+	if (!opt_b && !opt_s)
+		opt_b = opt_s = 1;
 
 	/* -b defaults to default path + /usr/libexec +
 	 * user's path */
@@ -287,22 +249,6 @@ defaults(void)
 				abort();
 			decolonify(b, &bindirs, &nele);
 		}
-	}
-
-	/* -m defaults to $(manpath) */
-	if (!mandirs) {
-		if ((p = popen(MANPATHCMD, "r")) == NULL)
-			err(EX_OSERR, "cannot execute manpath command");
-		if (fgets(buf, BUFSIZ - 1, p) == NULL ||
-		    pclose(p))
-			err(EX_OSERR, "error processing manpath results");
-		if ((b = strchr(buf, '\n')) != NULL)
-			*b = '\0';
-		b = strdup(buf);
-		if (b == NULL)
-			abort();
-		nele = 0;
-		decolonify(b, &mandirs, &nele);
 	}
 
 	/* -s defaults to precompiled list, plus subdirs of /usr/ports */
@@ -377,13 +323,11 @@ int
 main(int argc, char **argv)
 {
 	int unusual, i, printed;
-	char *bin, buf[BUFSIZ], *cp, *cp2, *man, *name, *src;
+	char *bin, buf[BUFSIZ], *cp, *cp2, *name, *src;
 	ccharp *dp;
 	size_t nlen, olen, s;
 	struct stat sb;
-	regex_t re, re2;
-	regmatch_t matches[2];
-	regoff_t rlen;
+	regex_t re2;
 	FILE *p;
 
 	setlocale(LC_ALL, "");
@@ -391,23 +335,12 @@ main(int argc, char **argv)
 	scanopts(argc, argv);
 	defaults();
 
-	if (mandirs == NULL)
-		opt_m = 0;
 	if (bindirs == NULL)
 		opt_b = 0;
 	if (sourcedirs == NULL)
 		opt_s = 0;
-	if (opt_m + opt_b + opt_s == 0)
+	if (opt_b + opt_s == 0)
 		errx(EX_DATAERR, "no directories to search");
-
-	if (opt_m) {
-		setenv("MANPATH", colonify(mandirs), 1);
-		if ((i = regcomp(&re, MANWHEREISMATCH, REG_EXTENDED)) != 0) {
-			regerror(i, &re, buf, BUFSIZ - 1);
-			errx(EX_UNAVAILABLE, "regcomp(%s) failed: %s",
-			     MANWHEREISMATCH, buf);
-		}
-	}
 
 	for (; (name = *query) != NULL; query++) {
 		/* strip leading path name component */
@@ -432,7 +365,7 @@ main(int argc, char **argv)
 			name[s - 4] = '\0';
 
 		unusual = 0;
-		bin = man = src = NULL;
+		bin = src = NULL;
 		s = strlen(name);
 
 		if (opt_b) {
@@ -470,80 +403,6 @@ main(int argc, char **argv)
 						break;
 					}
 				}
-				free(cp);
-			}
-		}
-
-		if (opt_m) {
-			/*
-			 * Ask the man command to perform the search for us.
-			 */
-			unusual = unusual | NO_MAN_FOUND;
-			if (opt_a)
-				cp = malloc(sizeof MANWHEREISALLCMD - 2 + s);
-			else
-				cp = malloc(sizeof MANWHEREISCMD - 2 + s);
-
-			if (cp == NULL)
-				abort();
-
-			if (opt_a)
-				sprintf(cp, MANWHEREISALLCMD, name);
-			else
-				sprintf(cp, MANWHEREISCMD, name);
-
-			if ((p = popen(cp, "r")) != NULL) {
-			    
-				while (fgets(buf, BUFSIZ - 1, p) != NULL) {
-					unusual = unusual & ~NO_MAN_FOUND;
-				
-					if ((cp2 = strchr(buf, '\n')) != NULL)
-						*cp2 = '\0';
-					if (regexec(&re, buf, 2, 
-						    matches, 0) == 0 &&
-					    (rlen = matches[1].rm_eo - 
-					     matches[1].rm_so) > 0) {
-						/*
-						 * man -w found formatted
-						 * page, need to pick up
-						 * source page name.
-						 */
-						cp2 = malloc(rlen + 1);
-						if (cp2 == NULL)
-							abort();
-						memcpy(cp2, 
-						       buf + matches[1].rm_so,
-						       rlen);
-						cp2[rlen] = '\0';
-					} else {
-						/*
-						 * man -w found plain source
-						 * page, use it.
-						 */
-						cp2 = strdup(buf);
-						if (cp2 == NULL)
-							abort();
-					}
-
-					if (man == NULL) {
-						man = strdup(cp2);
-					} else {
-						olen = strlen(man);
-						nlen = strlen(cp2);
-						man = realloc(man, 
-							      olen + nlen + 2);
-						if (man == NULL)
-							abort();
-						strcat(man, " ");
-						strcat(man, cp2);
-					}
-
-					free(cp2);
-					
-					if (!opt_a)
-						break;
-				}
-				pclose(p);
 				free(cp);
 			}
 		}
@@ -620,7 +479,7 @@ main(int argc, char **argv)
 					if ((i = regcomp(&re2, cp2,
 							 REG_EXTENDED|REG_NOSUB))
 					    != 0) {
-						regerror(i, &re, buf,
+						regerror(i, &re2, buf,
 							 BUFSIZ - 1);
 						errx(EX_UNAVAILABLE,
 						     "regcomp(%s) failed: %s",
@@ -667,11 +526,6 @@ main(int argc, char **argv)
 				putchar(' ');
 			fputs(bin, stdout);
 		}
-		if (man) {
-			if (printed++)
-				putchar(' ');
-			fputs(man, stdout);
-		}
 		if (src) {
 			if (printed++)
 				putchar(' ');
@@ -680,9 +534,6 @@ main(int argc, char **argv)
 		if (printed)
 			putchar('\n');
 	}
-
-	if (opt_m)
-		regfree(&re);
 
 	return (0);
 }

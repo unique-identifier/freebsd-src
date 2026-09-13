@@ -763,8 +763,7 @@ BSARGS= 	DESTDIR= \
 		MK_TESTS=no \
 		MK_UBSAN=no \
 		MK_WERROR=no \
-		MK_INCLUDES=yes \
-		MK_MAN_UTILS=yes
+		MK_INCLUDES=yes
 
 BMAKE=		\
 		${TIME_ENV} ${BMAKEENV} ${MAKE} ${WORLD_FLAGS} -f Makefile.inc1 \
@@ -1378,11 +1377,6 @@ ITOOLS=	[ awk cap_mkdb cat chflags chmod chown cmp cp \
 
 .if ${MK_ZONEINFO} != "no"
 ITOOLS+=tzsetup
-.endif
-
-# Needed for share/man
-.if ${MK_MAN_UTILS} != "no"
-ITOOLS+=makewhatis
 .endif
 
 ITOOLS+=${LOCAL_ITOOLS}
@@ -3111,7 +3105,6 @@ NXBMAKEARGS+= \
 	MK_LLDB=no \
 	MK_LLVM_LINK_STATIC_LIBRARIES=yes \
 	MK_MAN=no \
-	MK_MAN_UTILS=yes \
 	MK_OFED=no \
 	MK_OPENSSH=no \
 	MK_RETPOLINE=no \

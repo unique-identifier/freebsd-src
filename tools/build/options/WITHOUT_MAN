@@ -1,4 +1,2 @@
 Manual pages are no longer built or installed.
 This option is retained for compatibility and has no effect.
-Manual-page utilities remain controlled by
-.Va WITHOUT_MAN_UTILS .

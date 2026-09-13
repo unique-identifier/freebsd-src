@@ -252,8 +252,6 @@ DIRDEPS+= \
 	usr.bin/lzmainfo \
 	usr.bin/m4 \
 	usr.bin/mail \
-	usr.bin/man \
-	usr.bin/mandoc \
 	usr.bin/mesg \
 	usr.bin/minigzip \
 	usr.bin/ministat \
@@ -555,7 +553,6 @@ DIRDEPS+= \
 	usr.sbin/lmcconfig \
 	usr.sbin/mailwrapper \
 	usr.sbin/makefs \
-	usr.sbin/manctl \
 	usr.sbin/memcontrol \
 	usr.sbin/mfiutil \
 	usr.sbin/mixer \

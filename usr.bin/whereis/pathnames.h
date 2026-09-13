@@ -42,13 +42,5 @@
 /* Each subdirectory of PATH_PORTS will be appended to PATH_SOURCES. */
 #define PATH_PORTS "/usr/ports"
 
-/* How to query the current manpath. */
-#define MANPATHCMD "manpath -q"
-
-/* How to obtain the location of manpages, and how to match this result. */
-#define MANWHEREISCMD "man -S1:8:6 -w %s 2>/dev/null"
-#define MANWHEREISALLCMD "man -a -w %s 2>/dev/null"
-#define MANWHEREISMATCH "^.* [(]source: (.*)[)]$"
-
 /* Command used to locate sources that have not been found yet. */
 #define LOCATECMD "locate '*'/%s 2>/dev/null"

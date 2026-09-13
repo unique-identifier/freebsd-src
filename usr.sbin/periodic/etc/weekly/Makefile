@@ -12,8 +12,4 @@ CONFS=	340.noid \
 CONFS+=	310.locate
 .endif
 
-.if ${MK_MAN} != "no" && ${MK_MAN_UTILS} != "no"
-CONFS+=	320.whatis
-.endif
-
 .include <bsd.prog.mk>

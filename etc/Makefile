@@ -22,11 +22,6 @@ FREEBSD=COPYRIGHT
 # Sanitize DESTDIR
 DESTDIR:=	${DESTDIR:C://*:/:g}
 
-afterinstall:
-.if ${MK_MAN} != "no"
-	${_+_}cd ${SRCTOP}/share/man; ${MAKE} makedb
-.endif
-
 distribute:
 	# Avoid installing tests here; "make distribution" will do this and
 	# correctly place them in the right location.

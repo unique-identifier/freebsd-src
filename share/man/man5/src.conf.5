@@ -1233,21 +1233,11 @@ also default to true.
 .It Va WITHOUT_MAN
 Manual pages are no longer built or installed.
 This option is retained for compatibility and has no effect.
-Manual-page utilities remain controlled by
-.Va WITHOUT_MAN_UTILS .
 .It Va WITHOUT_MANCOMPRESS
 Do not install compressed man pages.
 Only the uncompressed versions will be installed.
 .It Va WITH_MANSPLITPKG
 Split man pages into their own packages during make package.
-.It Va WITHOUT_MAN_UTILS
-Do not build utilities for manual pages,
-.Xr apropos 1 ,
-.Xr makewhatis 1 ,
-.Xr man 1 ,
-.Xr whatis 1 ,
-.Xr manctl 8 ,
-and related support files.
 .It Va WITH_META_ERROR_TARGET
 Enable the META_MODE .ERROR target.
 .Pp

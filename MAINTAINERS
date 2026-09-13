@@ -64,8 +64,6 @@ libfigpar	dteske	Pre-commit review requested.
 libm		freebsd-numerics	Send email with patches to freebsd-numerics@
 libpam		des	Pre-commit review requested, email only.
 linprocfs	des	Pre-commit review requested, email only.
-lpr		gad	Pre-commit review requested, particularly for
-			lpd/recvjob.c and lpd/printjob.c.
 nanobsd		imp	Pre-commit phabricator review requested.
 net80211	adrian	Pre-commit review requested, send to freebsd-wireless@freebsd.org
 nfs		freebsd-fs@FreeBSD.org, rmacklem is best for reviews.

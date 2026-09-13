@@ -15,5 +15,3 @@ CRUNCH_PROGS_usr.bin+=	sed
 # vi
 # Disable - it's big! -adrian
 #CRUNCH_PROGS_usr.bin+=	vi
-
-CRUNCH_PROGS_usr.bin+=	ee

@@ -57,10 +57,6 @@
             libexec
                 bsdinstall
                 ..
-                lpr		tags=package=lp
-                    ru		tags=package=lp
-                    ..
-                ..
                 sendmail
                 ..
                 sm.bin

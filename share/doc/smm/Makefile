@@ -15,14 +15,9 @@ SUBDIR=	title \
 	04.quotas \
 	05.fastfs \
 	06.nfs \
-	${_07.lpd} \
 	11.timedop \
 	12.timed \
 	18.net
-
-.if ${MK_LPR} != "no"
-_07.lpd=	07.lpd
-.endif
 
 SUBDIR_PARALLEL=
 

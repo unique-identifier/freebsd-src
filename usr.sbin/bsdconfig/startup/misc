@@ -59,7 +59,6 @@ dialog_menu_main()
 	local var_list="
 		accounting_enable
 		local_startup
-		lpd_enable
 		named_enable
 		named_flags
 		nis_client_enable
@@ -91,7 +90,6 @@ dialog_menu_main()
 		export msg_nis_domainname msg_nis_domainname_desc
 		export msg_nis_server     msg_nis_server_desc
 		export msg_accounting     msg_accounting_desc
-		export msg_lpd            msg_lpd_desc
 		:| awk \
 			-v uname_p="$UNAME_P"            \
 			-v menu_tags="$DIALOG_MENU_TAGS" \
@@ -209,17 +207,6 @@ dialog_menu_main()
 			mprint(tag, ENVIRON["msg_accounting_desc"])
 			if (ditem == char) defaultitem = tag
 
-			#
-			# lpd: This host has a printer and wants to run lpd.
-			#
-			char = substr(menu_tags, i++, 1)
-			mark = ( ENVIRON["lpd_enable"] ~ \
-					/^[Yy][Ee][Ss]$/ ? "X" : " " )
-			subtag = ENVIRON["msg_lpd"]
-			tag = sprintf(mtag_fmt, char, mark, subtag)
-			mprint(tag, ENVIRON["msg_lpd_desc"])
-			if (ditem == char) defaultitem = tag
-
 			printf "\"\n"
 
 			if ( defaultitem )
@@ -322,9 +309,6 @@ while :; do
 	?" ["?"] $msg_accounting")
 		f_eval_catch -dk err "$0" f_sysrc_set \
 			'f_sysrc_set accounting_enable "%s"' "$reverse" ;;
-	?" ["?"] $msg_lpd")
-		f_eval_catch -dk err "$0" f_sysrc_set \
-			'f_sysrc_set lpd_enable "%s"' "$reverse" ;;
 	# Multi-variable On/Off toggle bits
 	?" ["?"] $msg_nis_client")
 		if f_eval_catch -dk err "$0" f_sysrc_set \

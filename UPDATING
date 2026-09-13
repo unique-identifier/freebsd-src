@@ -13,6 +13,15 @@ Items affecting the ports and packages system can be found in
 and/or ports.
 
 20260913:
+	The ee editor, its edit and ree aliases, and the EE build option have
+	been removed.  bsdconfig now defaults to vi when EDITOR is not set.
+
+20260913:
+	The legacy lpr printing system and the LPR build option have been
+	removed.  The lpd and chkprintcap rc.conf settings are no longer used.
+	The SNMP host-resources hrPrinterTable is now empty.
+
+20260913:
 	The legacy fdc floppy controller driver, fdcontrol, fdformat, fdread,
 	and fdwrite have been removed, along with the FLOPPY build option.
 	Remove device fdc and FDC_DEBUG from custom kernel configurations.

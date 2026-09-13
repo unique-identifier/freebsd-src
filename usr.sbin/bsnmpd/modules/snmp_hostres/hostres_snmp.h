@@ -289,15 +289,6 @@ void fini_swins_tbl(void);
 /* refresh the hrSWInstalledTable if necessary */
 void refresh_swins_tbl(void);
 
-/* Init the things for hrPrinterTable */
-void init_printer_tbl(void);
-
-/* Finalization routine for hrPrinterTable. */
-void fini_printer_tbl(void);
-
-/* Refresh printer table */
-void refresh_printer_tbl(void);
-
 /* get boot command line */
 int OS_getSystemInitialLoadParameters(u_char **);
 

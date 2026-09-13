@@ -242,29 +242,6 @@ SE_PPP= \
 	ppp.secret.span-isp \
 	ppp.secret.span-isp.working
 
-.if ${MK_LPR} != "no"
-LDIRS+=		printing
-SE_DIRS+=	printing
-SE_PRINTINGPACKAGE=lp
-SE_PRINTING= \
-	diablo-if-net \
-	hpdf \
-	hpif \
-	hpof \
-	hprf \
-	hpvf \
-	if-simple \
-	if-simpleX \
-	ifhp \
-	make-ps-header \
-	netprint \
-	psdf \
-	psdfX \
-	psif \
-	pstf \
-	pstfX
-.endif
-
 SE_DIRS+=	ses
 SE_SES= \
 	Makefile \

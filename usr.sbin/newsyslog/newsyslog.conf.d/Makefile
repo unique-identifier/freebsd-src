@@ -6,13 +6,6 @@ CONFSDIR=	/etc/newsyslog.conf.d
 CONFGROUPS=	CONFS
 CONFS=
 
-.if ${MK_LPR} != "no"
-CONFGROUPS+=	LP
-LP+=		lpr.conf
-LPPACKAGE=	lp
-LPDIR=		/etc/newsyslog.conf.d
-.endif
-
 .if ${MK_OFED} != "no"
 CONFS+=		opensm.conf
 .endif

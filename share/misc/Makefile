@@ -16,11 +16,4 @@ FILES+=	usb_hid_usages
 FILES+=	usbdevs
 .endif
 
-.if ${MK_EE} != "no"
-FILESGROUPS+=	EE
-EE=		init.ee
-EEDIR=		${FILESDIR}
-EEPACKAGE=	ee
-.endif
-
 .include <bsd.prog.mk>

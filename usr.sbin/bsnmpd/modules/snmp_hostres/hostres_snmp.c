@@ -84,7 +84,6 @@ hostres_fini(void)
 	fini_device_tbl();
 	fini_partition_tbl();
 	fini_network_tbl();
-	fini_printer_tbl();
 
 	fini_swrun_tbl();
 	fini_swins_tbl();
@@ -128,7 +127,6 @@ hostres_init(struct lmodule *mod, int argc __unused, char *argv[] __unused)
 		return (-1);
 	}
 	init_processor_tbl();
-	init_printer_tbl();
 
 	/*
 	 * populate storage and FS tables. Must be done after device

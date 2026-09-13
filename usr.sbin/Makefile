@@ -160,7 +160,6 @@ SUBDIR.${MK_LEGACY_CONSOLE}+=	moused
 SUBDIR.${MK_LEGACY_CONSOLE}+=	vidcontrol
 SUBDIR.${MK_PPP}+=	pppctl
 SUBDIR.${MK_NS_CACHING}+=	nscd
-SUBDIR.${MK_LPR}+=	lpr
 SUBDIR.${MK_MAN_UTILS}+=	manctl
 SUBDIR.${MK_MLX5TOOL}+=	mlx5tool
 SUBDIR.${MK_NETGRAPH}+=	flowctl

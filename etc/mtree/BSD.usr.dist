@@ -169,10 +169,6 @@
         ..
         hyperv
         ..
-        lpr			tags=package=lp
-            ru			tags=package=lp
-            ..
-        ..
         sendmail
         ..
         sm.bin

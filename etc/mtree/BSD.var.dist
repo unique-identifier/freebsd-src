@@ -85,14 +85,6 @@
         ..
         lock            uname=uucp gname=dialer mode=0775
         ..
-/set gname=daemon
-        lpd
-        ..
-        output
-            lpd
-            ..
-        ..
-/set gname=wheel
     ..
     tmp             mode=01777
         vi.recover      mode=01777

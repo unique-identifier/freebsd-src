@@ -27,9 +27,6 @@
 #
 #
 
-LPRSRC=	${SRCTOP}/usr.sbin/lpr/common_source
-.PATH: ${LPRSRC}
-
 MOD=	hostres
 SRCS=	hostres_begemot.c		\
 	hostres_device_tbl.c		\
@@ -43,11 +40,10 @@ SRCS=	hostres_begemot.c		\
 	hostres_snmp.c			\
 	hostres_storage_tbl.c		\
 	hostres_swinstalled_tbl.c	\
-	hostres_swrun_tbl.c		\
-	printcap.c
+	hostres_swrun_tbl.c
 
 #Not having NDEBUG defined will enable assertions and a lot of output on stderr
-CFLAGS+= -DNDEBUG -I${LPRSRC}
+CFLAGS+= -DNDEBUG
 XSYM=	host hrStorageOther hrStorageRam hrStorageVirtualMemory \
 	hrStorageFixedDisk hrStorageRemovableDisk hrStorageFloppyDisk \
 	hrStorageCompactDisc hrStorageRamDisk hrStorageFlashMemory \
@@ -71,6 +67,3 @@ BMIBS=	BEGEMOT-HOSTRES-MIB.txt
 LIBADD=	kvm devinfo m geom memstat
 
 .include <bsd.snmpmod.mk>
-
-printcap.pico: printcap.c
-	${CC} ${PICFLAG} -DPIC ${CFLAGS:C/^-W.*//} -c ${.IMPSRC} -o ${.TARGET}

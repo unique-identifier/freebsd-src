@@ -181,7 +181,6 @@ DIRDEPS+= \
 	usr.bin/drill \
 	usr.bin/dtc \
 	usr.bin/du \
-	usr.bin/ee \
 	usr.bin/elf2aout \
 	usr.bin/elfdump \
 	usr.bin/enigma \
@@ -555,19 +554,6 @@ DIRDEPS+= \
 	usr.sbin/kldxref \
 	usr.sbin/lastlogin \
 	usr.sbin/lmcconfig \
-	usr.sbin/lpr/chkprintcap \
-	usr.sbin/lpr/common_source \
-	usr.sbin/lpr/filters \
-	usr.sbin/lpr/filters.ru/koi2855 \
-	usr.sbin/lpr/filters.ru/koi2alt \
-	usr.sbin/lpr/lp \
-	usr.sbin/lpr/lpc \
-	usr.sbin/lpr/lpd \
-	usr.sbin/lpr/lpq \
-	usr.sbin/lpr/lpr \
-	usr.sbin/lpr/lprm \
-	usr.sbin/lpr/lptest \
-	usr.sbin/lpr/pac \
 	usr.sbin/mailwrapper \
 	usr.sbin/makefs \
 	usr.sbin/manctl \

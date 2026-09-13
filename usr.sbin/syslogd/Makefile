@@ -30,13 +30,6 @@ CFLAGS+= -DINET6
 SYSLOGD_D=
 SYSLOGD_DDIR=	/etc/syslog.d
 
-.if ${MK_LPR} != "no"
-CONFGROUPS+=	LP
-LP+=		lpr.conf
-LPDIR=		/etc/syslog.d
-LPPACKAGE=	lp
-.endif
-
 .if ${MK_PPP} != "no"
 CONFGROUPS+=	PPP
 PPP+=		ppp.conf

@@ -1,6 +1,6 @@
  /*
   * This module implements a simple access control language that is based on
-  * host (or domain) names, NIS (host) netgroup names, IP addresses (or
+  * host (or domain) names, (host) netgroup names, IP addresses (or
   * network numbers) and daemon process names. When a match is found the
   * search is terminated, and depending on whether PROCESS_OPTIONS is defined,
   * a list of options is executed or an optional shell command is executed.
@@ -36,6 +36,7 @@ static char sccsid[] = "@(#) hosts_access.c 1.21 97/02/12 02:13:22";
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <stdio.h>
+#include <unistd.h>
 #include <syslog.h>
 #include <ctype.h>
 #include <errno.h>
@@ -103,7 +104,7 @@ static int masked_match6(char *net_tok, char *mask_tok, char *string);
 
 /* definition to be used from workarounds.c */
 #ifdef NETGROUP
-int     yp_get_default_domain(char  **);
+
 #endif
 
 /* hosts_access - host access control facility */
@@ -295,9 +296,10 @@ static int host_match(char *tok, struct host_info *host)
 
     if (tok[0] == '@') {			/* netgroup: look it up */
 #ifdef  NETGROUP
-	static char *mydomain = 0;
-	if (mydomain == 0)
-	    yp_get_default_domain(&mydomain);
+	char mydomain[MAXHOSTNAMELEN];
+	if (getdomainname(mydomain, sizeof(mydomain)) != 0)
+	    return (NO);
+	mydomain[sizeof(mydomain) - 1] = '\0';
 	return (innetgr(tok + 1, eval_hostname(host), (char *) 0, mydomain));
 #else
 	tcpd_warn("netgroup support is disabled");	/* not tcpd_jump() */

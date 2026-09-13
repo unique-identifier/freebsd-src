@@ -46,7 +46,7 @@ file specifies how the
 .Pp
 The configuration file controls how a process looks up various databases
 containing information regarding hosts, users (passwords), groups, etc.
-Each database comes from a source (such as local files, DNS, NIS ,
+Each database comes from a source (such as local files, DNS,
 and cache), and the order to look up the sources is specified in
 .Nm .
 .Pp
@@ -81,8 +81,6 @@ use
 class entries, all other databases use
 .Sy HS
 class (Hesiod) entries.
-.It nis
-NIS (formerly YP)
 .It compat
 support
 .Sq +/-
@@ -225,7 +223,7 @@ file.
 It should come after
 .Dq files ,
 but before remote sources like
-.Dq nis .
+.Dq dns .
 You should also enable caching for this database in
 .Xr nscd.conf 5 .
 If for a particular query
@@ -245,10 +243,10 @@ In historical multi-source implementations, the
 and
 .Sq -
 characters are used to specify the importing of user password and
-group information from NIS .
+group information from another source.
 Although
 .Nm
-provides alternative methods of accessing distributed sources such as NIS ,
+provides alternative methods of accessing distributed sources,
 specifying a sole source of
 .Dq compat
 will provide the historical behaviour.
@@ -260,7 +258,6 @@ can be used by specifying
 .Dq source
 in this case can be
 .Sq dns ,
-.Sq nis ,
 or
 any other source except for
 .Sq files
@@ -294,20 +291,8 @@ Exceptions are:
 .Bl -tag -width services_compat -compact
 .It Sy Database
 .Sy "Default source list"
-.It group
-compat
-.It group_compat
-nis
 .It hosts
 files dns
-.It passwd
-compat
-.It passwd_compat
-nis
-.It services
-compat
-.It services_compat
-nis
 .El
 .Sh FILES
 .Bl -tag -width /etc/nsswitch.conf -compact
@@ -321,34 +306,22 @@ resides in
 To lookup hosts in
 .Pa /etc/hosts
 , then in cache,
-and then from the DNS, and lookup user information from NIS then files, use:
+and then from DNS, and lookup users and groups in local files, use:
 .Pp
 .Bl -tag -width passwd: -compact
 .It hosts:
 files cache dns
 .It passwd:
-nis [notfound=return] files
+files
 .It group:
-nis [notfound=return] files
+files
 .El
-.Pp
-The criteria
-.Dq [notfound=return]
-sets a policy of "if the user is notfound in nis, do not try files."
-This treats nis as the authoritative source of information, except
-when the server is down.
 .Sh NOTES
 The
 .Nm
 file is parsed by each program only once.
 Subsequent changes will not be applied until the program
 is restarted.
-.Pp
-If system got compiled with
-.Va WITHOUT_NIS
-you have to remove
-.Sq nis
-entries.
 .Pp
 .Fx Ns 's
 .Lb libc

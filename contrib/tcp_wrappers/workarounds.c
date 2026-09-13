@@ -23,9 +23,6 @@ char    sccsid[] = "@(#) workarounds.c 1.6 96/03/19 16:22:25";
 #include <stdio.h>
 #include <syslog.h>
 #include <string.h>
-#ifdef USE_GETDOMAIN
-#include <unistd.h>
-#endif
 
 #include "tcpd.h"
 
@@ -181,24 +178,6 @@ int     fix_getpeername(int sock, struct sockaddr *sa, int *len)
 }
 
 #endif /* GETPEERNAME_BUG */
-
- /*
-  * According to Karl Vogel (vogelke@c-17igp.wpafb.af.mil) some Pyramid
-  * versions have no yp_default_domain() function. We use getdomainname()
-  * instead.
-  */
-
-#ifdef USE_GETDOMAIN
-
-int     yp_get_default_domain(char **ptr)
-{
-    static char mydomain[MAXHOSTNAMELEN];
-
-    *ptr = mydomain;
-    return (getdomainname(mydomain, MAXHOSTNAMELEN));
-}
-
-#endif /* USE_GETDOMAIN */
 
 #ifndef INADDR_NONE
 #define INADDR_NONE 0xffffffff

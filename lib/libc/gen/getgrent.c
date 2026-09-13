@@ -34,11 +34,6 @@
  */
 #include "namespace.h"
 #include <sys/param.h>
-#ifdef YP
-#include <rpc/rpc.h>
-#include <rpcsvc/yp_prot.h>
-#include <rpcsvc/ypclnt.h>
-#endif
 #include <assert.h>
 #include <ctype.h>
 #include <errno.h>
@@ -70,7 +65,7 @@ enum constants {
 };
 
 static const ns_src defaultsrc[] = {
-	{ NSSRC_COMPAT, NS_SUCCESS },
+	{ NSSRC_FILES, NS_SUCCESS },
 	{ NULL, 0 }
 };
 
@@ -113,20 +108,6 @@ static	void	 dns_endstate(void *);
 NSS_TLS_HANDLING(dns);
 static	int	 dns_setgrent(void *, void *, va_list);
 static	int	 dns_group(void *, void *, va_list);
-#endif
-
-
-#ifdef YP
-struct nis_state {
-	char	 domain[MAXHOSTNAMELEN];
-	int	 done;
-	char	*key;
-	int	 keylen;
-};
-static	void	 nis_endstate(void *);
-NSS_TLS_HANDLING(nis);
-static	int	 nis_setgrent(void *, void *, va_list);
-static	int	 nis_group(void *, void *, va_list);
 #endif
 
 struct compat_state {
@@ -388,9 +369,6 @@ static const ns_dtab setgrent_dtab[] = {
 #ifdef HESIOD
 	{ NSSRC_DNS, dns_setgrent, (void *)SETGRENT },
 #endif
-#ifdef YP
-	{ NSSRC_NIS, nis_setgrent, (void *)SETGRENT },
-#endif
 	{ NSSRC_COMPAT, compat_setgrent, (void *)SETGRENT },
 #ifdef NS_CACHING
 	NS_CACHE_CB(&setgrent_cache_info)
@@ -409,9 +387,6 @@ static const ns_dtab endgrent_dtab[] = {
 #ifdef HESIOD
 	{ NSSRC_DNS, dns_setgrent, (void *)ENDGRENT },
 #endif
-#ifdef YP
-	{ NSSRC_NIS, nis_setgrent, (void *)ENDGRENT },
-#endif
 	{ NSSRC_COMPAT, compat_setgrent, (void *)ENDGRENT },
 #ifdef NS_CACHING
 	NS_CACHE_CB(&endgrent_cache_info)
@@ -429,9 +404,6 @@ static const ns_dtab getgrent_r_dtab[] = {
 	{ NSSRC_FILES, files_group, (void *)nss_lt_all },
 #ifdef HESIOD
 	{ NSSRC_DNS, dns_group, (void *)nss_lt_all },
-#endif
-#ifdef YP
-	{ NSSRC_NIS, nis_group, (void *)nss_lt_all },
 #endif
 	{ NSSRC_COMPAT, compat_group, (void *)nss_lt_all },
 #ifdef NS_CACHING
@@ -600,9 +572,6 @@ getgrnam_r(const char *name, struct group *grp, char *buffer, size_t bufsize,
 #ifdef HESIOD
 		{ NSSRC_DNS, dns_group, (void *)nss_lt_name },
 #endif
-#ifdef YP
-		{ NSSRC_NIS, nis_group, (void *)nss_lt_name },
-#endif
 		{ NSSRC_COMPAT, compat_group, (void *)nss_lt_name },
 #ifdef NS_CACHING
 		NS_CACHE_CB(&cache_info)
@@ -637,9 +606,6 @@ getgrgid_r(gid_t gid, struct group *grp, char *buffer, size_t bufsize,
 		{ NSSRC_FILES, files_group, (void *)nss_lt_id },
 #ifdef HESIOD
 		{ NSSRC_DNS, dns_group, (void *)nss_lt_id },
-#endif
-#ifdef YP
-		{ NSSRC_NIS, nis_group, (void *)nss_lt_id },
 #endif
 		{ NSSRC_COMPAT, compat_group, (void *)nss_lt_id },
 #ifdef NS_CACHING
@@ -1055,164 +1021,6 @@ fin:
 }
 #endif /* HESIOD */
 
-
-#ifdef YP
-/*
- * nis backend
- */
-static void
-nis_endstate(void *p)
-{
-
-	if (p == NULL)
-		return;
-	free(((struct nis_state *)p)->key);
-	free(p);
-}
-
-
-static int
-nis_setgrent(void *retval, void *cb_data, va_list ap)
-{
-	struct nis_state	*st;
-	int			 rv;
-
-	rv = nis_getstate(&st);
-	if (rv != 0)
-		return (NS_UNAVAIL);
-	st->done = 0;
-	free(st->key);
-	st->key = NULL;
-	return (NS_UNAVAIL);
-}
-
-
-static int
-nis_group(void *retval, void *mdata, va_list ap)
-{
-	char		 *map;
-	struct nis_state *st;
-	struct group	*grp;
-	const char	*name;
-	char		*buffer, *key, *result;
-	size_t		 bufsize;
-	gid_t		 gid;
-	enum nss_lookup_type how;
-	int		*errnop, keylen, resultlen, rv;
-	
-	name = NULL;
-	gid = (gid_t)-1;
-	how = (enum nss_lookup_type)(uintptr_t)mdata;
-	switch (how) {
-	case nss_lt_name:
-		name = va_arg(ap, const char *);
-		map = "group.byname";
-		break;
-	case nss_lt_id:
-		gid = va_arg(ap, gid_t);
-		map = "group.bygid";
-		break;
-	case nss_lt_all:
-		map = "group.byname";
-		break;
-	}
-	grp     = va_arg(ap, struct group *);
-	buffer  = va_arg(ap, char *);
-	bufsize = va_arg(ap, size_t);
-	errnop  = va_arg(ap, int *);
-	*errnop = nis_getstate(&st);
-	if (*errnop != 0)
-		return (NS_UNAVAIL);
-	if (st->domain[0] == '\0') {
-		if (getdomainname(st->domain, sizeof(st->domain)) != 0) {
-			*errnop = errno;
-			return (NS_UNAVAIL);
-		}
-	}
-	result = NULL;
-	do {
-		rv = NS_NOTFOUND;
-		switch (how) {
-		case nss_lt_name:
-			if (strlcpy(buffer, name, bufsize) >= bufsize)
-				goto erange;
-			break;
-		case nss_lt_id:
-			if (snprintf(buffer, bufsize, "%lu",
-			    (unsigned long)gid) >= bufsize)
-				goto erange;
-			break;
-		case nss_lt_all:
-			if (st->done)
-				goto fin;
-			break;
-		}
-		result = NULL;
-		if (how == nss_lt_all) {
-			if (st->key == NULL)
-				rv = yp_first(st->domain, map, &st->key,
-				    &st->keylen, &result, &resultlen);
-			else {
-				key = st->key;
-				keylen = st->keylen;
-				st->key = NULL;
-				rv = yp_next(st->domain, map, key, keylen,
-				    &st->key, &st->keylen, &result,
-				    &resultlen);
-				free(key);
-			}
-			if (rv != 0) {
-				free(result);
-				free(st->key);
-				st->key = NULL;
-				if (rv == YPERR_NOMORE) {
-					st->done = 1;
-					rv = NS_NOTFOUND;
-				} else
-					rv = NS_UNAVAIL;
-				goto fin;
-			}
-		} else {
-			rv = yp_match(st->domain, map, buffer, strlen(buffer),
-			    &result, &resultlen);
-			if (rv == YPERR_KEY) {
-				rv = NS_NOTFOUND;
-				continue;
-			} else if (rv != 0) {
-				free(result);
-				rv = NS_UNAVAIL;
-				continue;
-			}
-		}
-		/* We need room at least for the line, a string NUL
-		 * terminator, alignment padding, and one (char *)
-		 * pointer for the member list terminator.
-		 */
-		if (resultlen >= bufsize - _ALIGNBYTES - sizeof(char *)) {
-			free(result);
-			goto erange;
-		}
-		memcpy(buffer, result, resultlen);
-		buffer[resultlen] = '\0';
-		free(result);
-		rv = __gr_match_entry(buffer, resultlen, how, name, gid);
-		if (rv == NS_SUCCESS)
-			rv = __gr_parse_entry(buffer, resultlen, grp,
-			    &buffer[resultlen+1], bufsize - resultlen - 1,
-			    errnop);
-	} while (how == nss_lt_all && !(rv & NS_TERMINATE));
-fin:
-	if (rv == NS_SUCCESS && retval != NULL)
-		*(struct group **)retval = grp;
-	return (rv);	
-erange:
-	*errnop = ERANGE;
-	return (NS_RETURN);
-}
-#endif /* YP */
-
-
-
 /*
  * compat backend
  */
@@ -1235,17 +1043,11 @@ static int
 compat_setgrent(void *retval, void *mdata, va_list ap)
 {
 	static const ns_src compatsrc[] = {
-#ifdef YP
-		{ NSSRC_NIS, NS_SUCCESS },
-#endif
 		{ NULL, 0 }
 	};
 	ns_dtab dtab[] = {
 #ifdef HESIOD
 		{ NSSRC_DNS, dns_setgrent, NULL },
-#endif
-#ifdef YP
-		{ NSSRC_NIS, nis_setgrent, NULL },
 #endif
 		{ NULL, NULL, NULL }
 	};
@@ -1297,15 +1099,9 @@ static int
 compat_group(void *retval, void *mdata, va_list ap)
 {
 	static const ns_src compatsrc[] = {
-#ifdef YP
-		{ NSSRC_NIS, NS_SUCCESS },
-#endif
 		{ NULL, 0 }
 	};
 	ns_dtab dtab[] = {
-#ifdef YP
-		{ NSSRC_NIS, nis_group, NULL },
-#endif
 #ifdef HESIOD
 		{ NSSRC_DNS, dns_group, NULL },
 #endif

@@ -47,58 +47,6 @@
 
 #include "nss_tls.h"
 
-#ifdef YP
-/*
- * Notes:
- * We want to be able to use NIS netgroups properly while retaining
- * the ability to use a local /etc/netgroup file. Unfortunately, you
- * can't really do both at the same time - at least, not efficiently.
- * NetBSD deals with this problem by creating a netgroup database
- * using Berkeley DB (just like the password database) that allows
- * for lookups using netgroup, netgroup.byuser or netgroup.byhost
- * searches. This is a neat idea, but I don't have time to implement
- * something like that now. (I think ultimately it would be nice
- * if we DB-fied the group and netgroup stuff all in one shot, but
- * for now I'm satisfied just to have something that works well
- * without requiring massive code changes.)
- * 
- * Therefore, to still permit the use of the local file and maintain
- * optimum NIS performance, we allow for the following conditions:
- *
- * - If /etc/netgroup does not exist and NIS is turned on, we use
- *   NIS netgroups only.
- *
- * - If /etc/netgroup exists but is empty, we use NIS netgroups
- *   only.
- *
- * - If /etc/netgroup exists and contains _only_ a '+', we use
- *   NIS netgroups only.
- *
- * - If /etc/netgroup exists, contains locally defined netgroups
- *   and a '+', we use a mixture of NIS and the local entries.
- *   This method should return the same NIS data as just using
- *   NIS alone, but it will be slower if the NIS netgroup database
- *   is large (innetgr() in particular will suffer since extra
- *   processing has to be done in order to determine memberships
- *   using just the raw netgroup data).
- *
- * - If /etc/netgroup exists and contains only locally defined
- *   netgroup entries, we use just those local entries and ignore
- *   NIS (this is the original, pre-NIS behavior).
- */
-
-#include <rpc/rpc.h>
-#include <rpcsvc/yp_prot.h>
-#include <rpcsvc/ypclnt.h>
-#include <sys/param.h>
-#include <sys/stat.h>
-#include <sys/errno.h>
-static char *_netgr_yp_domain;
-int _use_only_yp;
-static int _netgr_yp_enabled;
-static int _yp_innetgr;
-#endif
-
 #ifndef _PATH_NETGROUP
 #define _PATH_NETGROUP "/etc/netgroup"
 #endif
@@ -109,7 +57,7 @@ enum constants {
 };
 
 static const ns_src defaultsrc[] = {
-	{ NSSRC_COMPAT, NS_SUCCESS },
+	{ NSSRC_FILES, NS_SUCCESS },
 	{ NULL, 0 },
 };
 
@@ -163,8 +111,8 @@ static int	_getnetgrent_r(char **, char **, char **, char *, size_t, int *,
 static int	_innetgr_fallback(void *, void *, const char *, const char *,
 		    const char *, const char *);
 static int	innetgr_fallback(void *, void *, va_list);
-static int	parse_netgrp(const char *, struct netgr_state *, int);
-static struct linelist *read_for_group(const char *, struct netgr_state *, int);
+static int	parse_netgrp(const char *, struct netgr_state *);
+static struct linelist *read_for_group(const char *, struct netgr_state *);
 
 #define	LINSIZ	1024	/* Length of netgroup file line */
 
@@ -267,7 +215,7 @@ files_setnetgrent(void *retval, void *mdata, va_list ap)
 		(void)_nsdispatch(NULL, endnetgrent_dtab, NSDB_NETGROUP,
 		    "endnetgrent", src);
 		if ((st->st_netf = fopen(_PATH_NETGROUP, "re")) != NULL) {
-			if (parse_netgrp(group, st, 0) != 0)
+			if (parse_netgrp(group, st) != 0)
 				(void)_nsdispatch(NULL, endnetgrent_dtab,
 				    NSDB_NETGROUP, "endnetgrent", src);
 			else
@@ -297,9 +245,6 @@ compat_getnetgrent_r(void *retval, void *mdata, va_list ap)
 	char **hostp, **userp, **domp, *buf;
 	size_t bufsize;
 	int *errnop;
-#ifdef YP
-	_yp_innetgr = 0;
-#endif
 
 	hostp = va_arg(ap, char **);
 	userp = va_arg(ap, char **);
@@ -323,10 +268,6 @@ compat_setnetgrent(void *retval, void *mdata, va_list ap)
 {
 	FILE *netf;
 	const char *group;
-#ifdef YP
-	struct stat _yp_statp;
-	char _yp_plus;
-#endif
 
 	group = va_arg(ap, const char *);
 
@@ -338,45 +279,9 @@ compat_setnetgrent(void *retval, void *mdata, va_list ap)
 	    strcmp(group, compat_state.st_grname) != 0) {
 		_compat_clearstate();
 
-#ifdef YP
-		/* Presumed guilty until proven innocent. */
-		_use_only_yp = 0;
-		/*
-		 * If /etc/netgroup doesn't exist or is empty,
-		 * use NIS exclusively.
-		 */
-		if (((stat(_PATH_NETGROUP, &_yp_statp) < 0) &&
-		    errno == ENOENT) || _yp_statp.st_size == 0)
-			_use_only_yp = _netgr_yp_enabled = 1;
-		if ((netf = fopen(_PATH_NETGROUP,"re")) != NULL ||_use_only_yp){
-			compat_state.st_netf = netf;
-		/*
-		 * Icky: grab the first character of the netgroup file
-		 * and turn on NIS if it's a '+'. rewind the stream
-		 * afterwards so we don't goof up read_for_group() later.
-		 */
-			if (netf) {
-				fscanf(netf, "%c", &_yp_plus);
-				rewind(netf);
-				if (_yp_plus == '+')
-					_use_only_yp = _netgr_yp_enabled = 1;
-			}
-		/*
-		 * If we were called specifically for an innetgr()
-		 * lookup and we're in NIS-only mode, short-circuit
-		 * parse_netgroup() and cut directly to the chase.
-		 */
-			if (_use_only_yp && _yp_innetgr) {
-				/* dohw! */
-				if (netf != NULL)
-					fclose(netf);
-				return (NS_RETURN);
-			}
-#else
 		if ((netf = fopen(_PATH_NETGROUP, "re"))) {
 			compat_state.st_netf = netf;
-#endif
-			if (parse_netgrp(group, &compat_state, 1)) {
+			if (parse_netgrp(group, &compat_state)) {
 				_compat_clearstate();
 			} else {
 				compat_state.st_grname = strdup(group);
@@ -393,9 +298,6 @@ static void
 _compat_clearstate(void)
 {
 
-#ifdef YP
-	_netgr_yp_enabled = 0;
-#endif
 	netgr_endstate(&compat_state);
 }
 
@@ -447,90 +349,12 @@ _getnetgrent_r(char **hostp, char **userp, char **domp, char *buf,
 	return (rv);
 }
 
-#ifdef YP
-static int
-_listmatch(const char *list, const char *group, int len)
-{
-	const char *ptr = list;
-	const char *cptr;
-	int glen = strlen(group);
-
-	/* skip possible leading whitespace */
-	while (isspace((unsigned char)*ptr))
-		ptr++;
-
-	while (ptr < list + len) {
-		cptr = ptr;
-		while(*ptr != ','  && *ptr != '\0' && !isspace((unsigned char)*ptr))
-			ptr++;
-		if (strncmp(cptr, group, glen) == 0 && glen == (ptr - cptr))
-			return (1);
-		while (*ptr == ','  || isspace((unsigned char)*ptr))
-			ptr++;
-	}
-
-	return (0);
-}
-
-static int
-_revnetgr_lookup(char* lookupdom, char* map, const char* str,
-		 const char* dom, const char* group)
-{
-	int y, rv, rot;
-	char key[MAXHOSTNAMELEN];
-	char *result;
-	int resultlen;
-
-	for (rot = 0; ; rot++) {
-		switch (rot) {
-		case 0:
-			snprintf(key, MAXHOSTNAMELEN, "%s.%s", str,
-			    dom ? dom : lookupdom);
-			break;
-		case 1:
-			snprintf(key, MAXHOSTNAMELEN, "%s.*", str);
-			break;
-		case 2:
-			snprintf(key, MAXHOSTNAMELEN, "*.%s",
-			    dom ? dom : lookupdom);
-			break;
-		case 3:
-			snprintf(key, MAXHOSTNAMELEN, "*.*");
-			break;
-		default:
-			return (0);
-		}
-		y = yp_match(lookupdom, map, key, strlen(key), &result,
-		    &resultlen);
-		if (y == 0) {
-			rv = _listmatch(result, group, resultlen);
-			free(result);
-			if (rv)
-				return (1);
-		} else if (y != YPERR_KEY) {
-			/*
-			 * If we get an error other than 'no
-			 * such key in map' then something is
-			 * wrong and we should stop the search.
-			 */
-			return (-1);
-		}
-	}
-}
-#endif
-
 /*
  * Search for a match in a netgroup.
  */
 static int
 compat_innetgr(void *retval, void *mdata, va_list ap)
 {
-#ifdef YP
-	const ns_src src[] = {
-		{ mdata, NS_SUCCESS },
-		{ NULL, 0 },
-	};
-#endif
 	const char *group, *host, *user, *dom;
 
 	group = va_arg(ap, const char *);
@@ -540,51 +364,6 @@ compat_innetgr(void *retval, void *mdata, va_list ap)
 
 	if (group == NULL || !strlen(group))
 		return (NS_RETURN);
-
-#ifdef YP
-	_yp_innetgr = 1;
-	(void)_nsdispatch(NULL, setnetgrent_dtab, NSDB_NETGROUP, "setnetgrent",
-	    src, group);
-	_yp_innetgr = 0;
-	/*
-	 * If we're in NIS-only mode, do the search using
-	 * NIS 'reverse netgroup' lookups.
-	 * 
-	 * What happens with 'reverse netgroup' lookups:
-	 * 
-	 * 1) try 'reverse netgroup' lookup
-	 *    1.a) if host is specified and user is null:
-	 *         look in netgroup.byhost
-	 *         (try host.domain, host.*, *.domain or *.*)
-	 *         if found, return yes
-	 *    1.b) if user is specified and host is null:
-	 *         look in netgroup.byuser
-	 *         (try host.domain, host.*, *.domain or *.*)
-	 *         if found, return yes
-	 *    1.c) if both host and user are specified,
-	 *         don't do 'reverse netgroup' lookup.  It won't work.
-	 *    1.d) if neither host ane user are specified (why?!?)
-	 *         don't do 'reverse netgroup' lookup either.
-	 * 2) if domain is specified and 'reverse lookup' is done:
-	 *    'reverse lookup' was authoritative.  bye bye.
-	 * 3) otherwise, too bad, try it the slow way.
-	 */
-	if (_use_only_yp && (host == NULL) != (user == NULL)) {
-		int ret;
-		if(yp_get_default_domain(&_netgr_yp_domain))
-			return (NS_NOTFOUND);
-		ret = _revnetgr_lookup(_netgr_yp_domain,
-				      host?"netgroup.byhost":"netgroup.byuser",
-				      host?host:user, dom, group);
-		if (ret == 1) {
-			*(int *)retval = 1;
-			return (NS_SUCCESS);
-		} else if (ret == 0 && dom != NULL) {
-			*(int *)retval = 0;
-			return (NS_SUCCESS);
-		}
-	}
-#endif /* YP */
 
 	return (_innetgr_fallback(retval, mdata, group, host, user, dom));
 }
@@ -667,7 +446,7 @@ innetgr_fallback(void *retval, void *mdata, va_list ap)
  * Parse the netgroup file setting up the linked lists.
  */
 static int
-parse_netgrp(const char *group, struct netgr_state *st, int niscompat)
+parse_netgrp(const char *group, struct netgr_state *st)
 {
 	struct netgrp *grp;
 	struct linelist *lp = st->st_linehead;
@@ -686,7 +465,7 @@ parse_netgrp(const char *group, struct netgr_state *st, int niscompat)
 			break;
 		lp = lp->l_next;
 	}
-	if (lp == NULL && (lp = read_for_group(group, st, niscompat)) == NULL)
+	if (lp == NULL && (lp = read_for_group(group, st)) == NULL)
 		return (1);
 	if (lp->l_parsed) {
 #ifdef DEBUG
@@ -770,7 +549,7 @@ parse_netgrp(const char *group, struct netgr_state *st, int niscompat)
 #endif
 		} else {
 			spos = strsep(&pos, ", \t");
-			if (parse_netgrp(spos, st, niscompat))
+			if (parse_netgrp(spos, st))
 				continue;
 		}
 		if (pos == NULL)
@@ -786,7 +565,7 @@ parse_netgrp(const char *group, struct netgr_state *st, int niscompat)
  * is found. Return 1 if eof is encountered.
  */
 static struct linelist *
-read_for_group(const char *group, struct netgr_state *st, int niscompat)
+read_for_group(const char *group, struct netgr_state *st)
 {
 	char *linep, *olinep, *pos, *spos;
 	int len, olen;
@@ -794,46 +573,9 @@ read_for_group(const char *group, struct netgr_state *st, int niscompat)
 	struct linelist *lp;
 	char line[LINSIZ + 2];
 	FILE *netf;
-#ifdef YP
-	char *result;
-	int resultlen;
-	linep = NULL;
-
-	netf = st->st_netf;
-	while ((_netgr_yp_enabled && niscompat) ||
-	    fgets(line, LINSIZ, netf) != NULL) {
-		if (_netgr_yp_enabled) {
-			if(!_netgr_yp_domain)
-				if(yp_get_default_domain(&_netgr_yp_domain))
-					continue;
-			if (yp_match(_netgr_yp_domain, "netgroup", group,
-			    strlen(group), &result, &resultlen)) {
-				free(result);
-				if (_use_only_yp)
-					return ((struct linelist *)0);
-				else {
-					_netgr_yp_enabled = 0;
-					continue;
-				}
-			}
-			if (strlen(result) == 0) {
-				free(result);
-				return (NULL);
-			}
-			snprintf(line, LINSIZ, "%s %s", group, result);
-			free(result);
-		}
-#else
 	linep = NULL;
 	while (fgets(line, LINSIZ, netf) != NULL) {
-#endif
 		pos = (char *)&line;
-#ifdef YP
-		if (niscompat && *pos == '+') {
-			_netgr_yp_enabled = 1;
-			continue;
-		}
-#endif
 		if (*pos == '#')
 			continue;
 		while (*pos == ' ' || *pos == '\t')
@@ -908,16 +650,6 @@ read_for_group(const char *group, struct netgr_state *st, int niscompat)
 				return (lp);
 		}
 	}
-#ifdef YP
-	/*
-	 * Yucky. The recursive nature of this whole mess might require
-	 * us to make more than one pass through the netgroup file.
-	 * This might be best left outside the #ifdef YP, but YP is
-	 * defined by default anyway, so I'll leave it like this
-	 * until I know better.
-	 */
-	rewind(netf);
-#endif
 	return (NULL);
 }
 

@@ -34,11 +34,6 @@
  */
 #include "namespace.h"
 #include <sys/param.h>
-#ifdef YP
-#include <rpc/rpc.h>
-#include <rpcsvc/yp_prot.h>
-#include <rpcsvc/ypclnt.h>
-#endif
 #include <arpa/inet.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -85,7 +80,7 @@ enum constants {
 };
 
 static const ns_src defaultsrc[] = {
-	{ NSSRC_COMPAT, NS_SUCCESS },
+	{ NSSRC_FILES, NS_SUCCESS },
 	{ NULL, 0 }
 };
 
@@ -151,23 +146,6 @@ NSS_TLS_HANDLING(dns);
 static	int	 dns_setpwent(void *, void *, va_list);
 static	int	 dns_passwd(void *, void *, va_list);
 #endif
-
-
-#ifdef YP
-struct nis_state {
-	char	 domain[MAXHOSTNAMELEN];
-	int	 done;
-	char	*key;
-	int	 keylen;
-};
-static	void	 nis_endstate(void *);
-NSS_TLS_HANDLING(nis);
-static	int	 nis_setpwent(void *, void *, va_list);
-static	int	 nis_passwd(void *, void *, va_list);
-static	int	 nis_map(char *, enum nss_lookup_type, char *, size_t, int *);
-static	int	 nis_adjunct(char *, const char *, char *, size_t);
-#endif
-
 
 struct compat_state {
 	DB		*db;
@@ -434,9 +412,6 @@ setpwent(void)
 #ifdef HESIOD
 		{ NSSRC_DNS, dns_setpwent, (void *)SETPWENT },
 #endif
-#ifdef YP
-		{ NSSRC_NIS, nis_setpwent, (void *)SETPWENT },
-#endif
 		{ NSSRC_COMPAT, compat_setpwent, (void *)SETPWENT },
 #ifdef NS_CACHING
 		NS_CACHE_CB(&cache_info)
@@ -460,9 +435,6 @@ setpassent(int stayopen)
 		{ NSSRC_FILES, files_setpwent, (void *)SETPWENT },
 #ifdef HESIOD
 		{ NSSRC_DNS, dns_setpwent, (void *)SETPWENT },
-#endif
-#ifdef YP
-		{ NSSRC_NIS, nis_setpwent, (void *)SETPWENT },
 #endif
 		{ NSSRC_COMPAT, compat_setpwent, (void *)SETPWENT },
 #ifdef NS_CACHING
@@ -490,9 +462,6 @@ endpwent(void)
 #ifdef HESIOD
 		{ NSSRC_DNS, dns_setpwent, (void *)ENDPWENT },
 #endif
-#ifdef YP
-		{ NSSRC_NIS, nis_setpwent, (void *)ENDPWENT },
-#endif
 		{ NSSRC_COMPAT, compat_setpwent, (void *)ENDPWENT },
 #ifdef NS_CACHING
 		NS_CACHE_CB(&cache_info)
@@ -517,9 +486,6 @@ getpwent_r(struct passwd *pwd, char *buffer, size_t bufsize,
 		{ NSSRC_FILES, files_passwd, (void *)nss_lt_all },
 #ifdef HESIOD
 		{ NSSRC_DNS, dns_passwd, (void *)nss_lt_all },
-#endif
-#ifdef YP
-		{ NSSRC_NIS, nis_passwd, (void *)nss_lt_all },
 #endif
 		{ NSSRC_COMPAT, compat_passwd, (void *)nss_lt_all },
 #ifdef NS_CACHING
@@ -557,9 +523,6 @@ getpwnam_r(const char *name, struct passwd *pwd, char *buffer, size_t bufsize,
 #ifdef HESIOD
 		{ NSSRC_DNS, dns_passwd, (void *)nss_lt_name },
 #endif
-#ifdef YP
-		{ NSSRC_NIS, nis_passwd, (void *)nss_lt_name },
-#endif
 		{ NSSRC_COMPAT, compat_passwd, (void *)nss_lt_name },
 #ifdef NS_CACHING
 		NS_CACHE_CB(&cache_info)
@@ -595,9 +558,6 @@ getpwuid_r(uid_t uid, struct passwd *pwd, char *buffer, size_t bufsize,
 		{ NSSRC_FILES, files_passwd, (void *)nss_lt_id },
 #ifdef HESIOD
 		{ NSSRC_DNS, dns_passwd, (void *)nss_lt_id },
-#endif
-#ifdef YP
-		{ NSSRC_NIS, nis_passwd, (void *)nss_lt_id },
 #endif
 		{ NSSRC_COMPAT, compat_passwd, (void *)nss_lt_id },
 #ifdef NS_CACHING
@@ -1189,232 +1149,6 @@ fin:
 }
 #endif /* HESIOD */
 
-
-#ifdef YP
-/*
- * nis backend
- */
-static void
-nis_endstate(void *p)
-{
-	free(((struct nis_state *)p)->key);
-	free(p);
-}
-
-/*
- * Test for the presence of special FreeBSD-specific master.passwd.by*
- * maps. We do this using yp_order(). If it fails, then either the server
- * doesn't have the map, or the YPPROC_ORDER procedure isn't supported by
- * the server (Sun NIS+ servers in YP compat mode behave this way). If
- * the master.passwd.by* maps don't exist, then let the lookup routine try
- * the regular passwd.by* maps instead. If the lookup routine fails, it
- * can return an error as needed.
- */
-static int
-nis_map(char *domain, enum nss_lookup_type how, char *buffer, size_t bufsize,
-    int *master)
-{
-	int	rv, order;
-
-	*master = 0;
-	if (geteuid() == 0) {
-		if (snprintf(buffer, bufsize, "master.passwd.by%s",
-		    (how == nss_lt_id) ? "uid" : "name") >= bufsize)
-			return (NS_UNAVAIL);
-		rv = yp_order(domain, buffer, &order);
-		if (rv == 0) {
-			*master = 1;
-			return (NS_SUCCESS);
-		}
-	}
-
-	if (snprintf(buffer, bufsize, "passwd.by%s",
-	    (how == nss_lt_id) ? "uid" : "name") >= bufsize)
-		return (NS_UNAVAIL);
-
-	return (NS_SUCCESS);
-}
-
-
-static int
-nis_adjunct(char *domain, const char *name, char *buffer, size_t bufsize)
-{
-	int	 rv;
-	char	*result, *p, *q, *eor;
-	int	 resultlen;
-
-	result = NULL;
-	rv = yp_match(domain, "passwd.adjunct.byname", name, strlen(name),
-	    &result, &resultlen);
-	if (rv != 0)
-		rv = 1;
-	else {
-		eor = &result[resultlen];
-		p = memchr(result, ':', eor - result);
-		if (p != NULL && ++p < eor &&
-		    (q = memchr(p, ':', eor - p)) != NULL) {
-			if (q - p >= bufsize)
-				rv = -1;
-			else {
-				memcpy(buffer, p, q - p);
-				buffer[q - p] ='\0';
-			}
-		} else
-			rv = 1;
-	}
-	free(result);
-	return (rv);
-}
-
-
-static int
-nis_setpwent(void *retval, void *mdata, va_list ap)
-{
-	struct nis_state	*st;
-	int			 rv;
-
-	rv = nis_getstate(&st);
-	if (rv != 0)
-		return (NS_UNAVAIL);
-	st->done = 0;
-	free(st->key);
-	st->key = NULL;
-	return (NS_UNAVAIL);
-}
-
-
-static int
-nis_passwd(void *retval, void *mdata, va_list ap)
-{
-	char		 map[YPMAXMAP];
-	struct nis_state *st;
-	struct passwd	*pwd;
-	const char	*name;
-	char		*buffer, *key, *result;
-	size_t		 bufsize;
-	uid_t		 uid;
-	enum nss_lookup_type how;
-	int		*errnop, keylen, resultlen, rv, master;
-
-	name = NULL;
-	uid = (uid_t)-1;
-	how = (enum nss_lookup_type)(uintptr_t)mdata;
-	switch (how) {
-	case nss_lt_name:
-		name = va_arg(ap, const char *);
-		break;
-	case nss_lt_id:
-		uid = va_arg(ap, uid_t);
-		break;
-	case nss_lt_all:
-		break;
-	}
-	pwd     = va_arg(ap, struct passwd *);
-	buffer  = va_arg(ap, char *);
-	bufsize = va_arg(ap, size_t);
-	errnop  = va_arg(ap, int *);
-	*errnop = nis_getstate(&st);
-	if (*errnop != 0)
-		return (NS_UNAVAIL);
-	if (st->domain[0] == '\0') {
-		if (getdomainname(st->domain, sizeof(st->domain)) != 0) {
-			*errnop = errno;
-			return (NS_UNAVAIL);
-		}
-	}
-	rv = nis_map(st->domain, how, map, sizeof(map), &master);
-	if (rv != NS_SUCCESS)
-		return (rv);
-	result = NULL;
-	do {
-		rv = NS_NOTFOUND;
-		switch (how) {
-		case nss_lt_name:
-			if (strlcpy(buffer, name, bufsize) >= bufsize)
-				goto erange;
-			break;
-		case nss_lt_id:
-			if (snprintf(buffer, bufsize, "%lu",
-			    (unsigned long)uid) >= bufsize)
-				goto erange;
-			break;
-		case nss_lt_all:
-			if (st->done)
-				goto fin;
-			break;
-		}
-		result = NULL;
-		if (how == nss_lt_all) {
-			if (st->key == NULL)
-				rv = yp_first(st->domain, map, &st->key,
-				    &st->keylen, &result, &resultlen);
-			else {
-				key = st->key;
-				keylen = st->keylen;
-				st->key = NULL;
-				rv = yp_next(st->domain, map, key, keylen,
-				    &st->key, &st->keylen, &result,
-				    &resultlen);
-				free(key);
-			}
-			if (rv != 0) {
-				free(result);
-				free(st->key);
-				st->key = NULL;
-				if (rv == YPERR_NOMORE)
-					st->done = 1;
-				else
-					rv = NS_UNAVAIL;
-				goto fin;
-			}
-		} else {
-			rv = yp_match(st->domain, map, buffer, strlen(buffer),
-			    &result, &resultlen);
-			if (rv == YPERR_KEY) {
-				rv = NS_NOTFOUND;
-				continue;
-			} else if (rv != 0) {
-				free(result);
-				rv = NS_UNAVAIL;
-				continue;
-			}
-		}
-		if (resultlen >= bufsize) {
-			free(result);
-			goto erange;
-		}
-		memcpy(buffer, result, resultlen);
-		buffer[resultlen] = '\0';
-		free(result);
-		rv = __pw_match_entry(buffer, resultlen, how, name, uid);
-		if (rv == NS_SUCCESS)
-			rv = __pw_parse_entry(buffer, resultlen, pwd, master,
-			    errnop);
-	} while (how == nss_lt_all && !(rv & NS_TERMINATE));
-fin:
-	if (rv == NS_SUCCESS) {
-		if (strstr(pwd->pw_passwd, "##") != NULL) {
-			rv = nis_adjunct(st->domain, pwd->pw_name,
-			    &buffer[resultlen+1], bufsize-resultlen-1);
-			if (rv < 0)
-				goto erange;
-			else if (rv == 0)
-				pwd->pw_passwd = &buffer[resultlen+1];
-		}
-		pwd->pw_fields &= ~_PWF_SOURCE;
-		pwd->pw_fields |= _PWF_NIS;
-		if (retval != NULL)
-			*(struct passwd **)retval = pwd;
-		rv = NS_SUCCESS;
-	}
-	return (rv);
-erange:
-	*errnop = ERANGE;
-	return (NS_RETURN);
-}
-#endif /* YP */
-
-
 /*
  * compat backend
  */
@@ -1579,15 +1313,9 @@ compat_redispatch(struct compat_state *st, enum nss_lookup_type how,
     uid_t uid, struct passwd *pwd, char *buffer, size_t bufsize, int *errnop)
 {
 	static const ns_src compatsrc[] = {
-#ifdef YP
-		{ NSSRC_NIS, NS_SUCCESS },
-#endif
 		{ NULL, 0 }
 	};
 	ns_dtab dtab[] = {
-#ifdef YP
-		{ NSSRC_NIS, nis_passwd, NULL },
-#endif
 #ifdef HESIOD
 		{ NSSRC_DNS, dns_passwd, NULL },
 #endif
@@ -1671,15 +1399,9 @@ static int
 compat_setpwent(void *retval, void *mdata, va_list ap)
 {
 	static const ns_src compatsrc[] = {
-#ifdef YP
-		{ NSSRC_NIS, NS_SUCCESS },
-#endif
 		{ NULL, 0 }
 	};
 	ns_dtab dtab[] = {
-#ifdef YP
-		{ NSSRC_NIS, nis_setpwent, NULL },
-#endif
 #ifdef HESIOD
 		{ NSSRC_DNS, dns_setpwent, NULL },
 #endif

@@ -4,9 +4,9 @@
 CONFS+=	net/hosts net/hosts.equiv net/networks ${.OBJDIR}/nsswitch.conf net/protocols
 SRCS+=	base64.c ether_addr.c eui64.c \
 	gai_strerror.c getaddrinfo.c \
-	gethostbydns.c gethostbyht.c gethostbynis.c gethostnamadr.c \
+	gethostbydns.c gethostbyht.c gethostnamadr.c \
 	getifaddrs.c getifmaddrs.c getnameinfo.c \
-	getnetbydns.c getnetbyht.c getnetbynis.c getnetnamadr.c \
+	getnetbydns.c getnetbyht.c getnetnamadr.c \
 	getproto.c getprotoent.c getprotoname.c getservent.c \
 	if_indextoname.c if_nameindex.c if_nametoindex.c \
 	ip6opt.c linkaddr.c map_v4v6.c name6.c ntoh.c \
@@ -41,11 +41,6 @@ SYM_MAPS+=${LIBC_SRCTOP}/net/Symbol.hesiod.map
 
 all: ${.OBJDIR}/nsswitch.conf
 
-# Manually stage nsswitch.conf in the object directory so that we can edit it
-# before installing.
+# Stage nsswitch.conf in the object directory before installing.
 ${.OBJDIR}/nsswitch.conf: ${LIBC_SRCTOP}/net/nsswitch.conf
 	cp -f ${LIBC_SRCTOP}/net/nsswitch.conf ${.TARGET}
-.if ${MK_NIS} == "no"
-	sed -i "" -e 's/.*_compat:/# &/' -e 's/compat$$/files/' \
-		${.TARGET}
-.endif

@@ -18,7 +18,7 @@
 # of one or more tty names (for non-networked logins), host names, domain
 # names (begin with "."), host addresses, internet network numbers (end
 # with "."), ALL (always matches) or LOCAL (matches any string that does
-# not contain a "." character). If you run NIS you can use @netgroupname
+# not contain a "." character). You can use @netgroupname
 # in host or user patterns.
 #
 # The EXCEPT operator makes it possible to write very compact rules.

@@ -78,9 +78,6 @@ struct hostent_data {
 	char hostbuf[_HOSTBUFSIZE];
 	FILE *hostf;
 	int stayopen;
-#ifdef YP
-	char *yp_domain;
-#endif
 };
 
 struct netent_data {
@@ -88,9 +85,6 @@ struct netent_data {
 	char netbuf[_NETBUFSIZE];
 	FILE *netf;
 	int stayopen;
-#ifdef YP
-	char *yp_domain;
-#endif
 };
 
 struct protoent_data {
@@ -140,7 +134,6 @@ void _sethosthtent(int, struct hostent_data *);
 void _setnetdnsent(int);
 void _setnethtent(int, struct netent_data *);
 
-struct hostent *__dns_getanswer(const char *, int, const char *, int);
 int _dns_gethostbyaddr(void *, void *, va_list);
 int _dns_gethostbyname(void *, void *, va_list);
 int _dns_getnetbyaddr(void *, void *, va_list);
@@ -149,10 +142,6 @@ int _ht_gethostbyaddr(void *, void *, va_list);
 int _ht_gethostbyname(void *, void *, va_list);
 int _ht_getnetbyaddr(void *, void *, va_list);
 int _ht_getnetbyname(void *, void *, va_list);
-int _nis_gethostbyaddr(void *, void *, va_list);
-int _nis_gethostbyname(void *, void *, va_list);
-int _nis_getnetbyaddr(void *, void *, va_list);
-int _nis_getnetbyname(void *, void *, va_list);
 #ifdef NS_CACHING
 int __proto_id_func(char *, size_t *, va_list, void *);
 int __proto_marshal_func(char *, size_t *, void *, va_list, void *);

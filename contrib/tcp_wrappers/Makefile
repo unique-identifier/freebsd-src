@@ -312,7 +312,7 @@ pyramid:
 	@make REAL_DAEMON_DIR=$(REAL_DAEMON_DIR) STYLE=$(STYLE) \
 	LIBS= RANLIB=ranlib ARFLAGS=rv AUX_OBJ="environ.o vfprintf.o" \
 	STRINGS="-Dstrchr=index -Dstrrchr=rindex -Dmemcmp=bcmp -Dno_memcpy" \
-	NETGROUP="-DNETGROUP -DUSE_GETDOMAIN" TLI= all
+	NETGROUP="-DNETGROUP" TLI= all
 
 # Untested.
 mips:
@@ -705,7 +705,7 @@ KIT	= README miscd.c tcpd.c fromhost.c hosts_access.c shell_cmd.c \
 	tli-sequent.h misc.c diag.c ncr.c tcpdchk.c percent_m.c \
 	myvsyslog.c mystdarg.h printf.ck README.IRIX Banners.Makefile \
 	refuse.c tcpdchk.8 setenv.c inetcf.c inetcf.h scaffold.c \
-	scaffold.h tcpdmatch.8 README.NIS
+	scaffold.h tcpdmatch.8
 
 LIB	= libwrap.a
 

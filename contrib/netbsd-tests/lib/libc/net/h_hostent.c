@@ -162,11 +162,6 @@ main(int argc, char *argv[])
 	case 'd':
 		f = byaddr ? _dns_gethtbyaddr : _dns_gethtbyname;
 		break;
-#ifdef YP
-	case 'n':
-		f = byaddr ? _yp_gethtbyaddr : _yp_gethtbyname;
-		break;
-#endif
 	case 'f':
 		f = byaddr ? _hf_gethtbyaddr : _hf_gethtbyname;
 		break;

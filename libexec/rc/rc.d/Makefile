@@ -218,17 +218,6 @@ NFS=		lockd \
 		nfsuserd \
 		statd
 
-CONFGROUPS.${MK_NIS}+=		NIS
-NISPACKAGE=			yp
-NIS=		ypbind \
-		ypldap \
-		yppasswdd \
-		ypserv \
-		ypset \
-		ypupdated \
-		ypxfrd \
-		nisdomain
-
 CONFGROUPS.${MK_NS_CACHING}+=	NSCD
 NSCD=		nscd
 

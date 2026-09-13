@@ -49,9 +49,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#ifdef YP
-#include <ypclnt.h>
-#endif
 
 #include <pw_scan.h>
 #include <libutil.h>
@@ -72,18 +69,10 @@ main(int argc, char *argv[])
 	const char *password;
 	char *arg = NULL, *cryptpw;
 	uid_t uid;
-#ifdef YP
-	struct ypclnt *ypclnt;
-	const char *yp_domain = NULL, *yp_host = NULL;
-#endif
 
 	pw = old_pw = NULL;
 	op = EDITENTRY;
-#ifdef YP
-	while ((ch = getopt(argc, argv, "a:p:s:e:d:h:loy")) != -1)
-#else
 	while ((ch = getopt(argc, argv, "a:p:s:e:")) != -1)
-#endif
 		switch (ch) {
 		case 'a':
 			op = LOADENTRY;
@@ -101,19 +90,6 @@ main(int argc, char *argv[])
 			op = NEWEXP;
 			arg = optarg;
 			break;
-#ifdef YP
-		case 'd':
-			yp_domain = optarg;
-			break;
-		case 'h':
-			yp_host = optarg;
-			break;
-		case 'l':
-		case 'o':
-		case 'y':
-			/* compatibility */
-			break;
-#endif
 		case '?':
 		default:
 			usage();
@@ -145,15 +121,6 @@ main(int argc, char *argv[])
 			err(1, "pw_dup");
 	}
 
-#ifdef YP
-	if (pw != NULL && (pw->pw_fields & _PWF_SOURCE) == _PWF_NIS) {
-		ypclnt = ypclnt_new(yp_domain, "passwd.byname", yp_host);
-		master_mode = (ypclnt != NULL &&
-		    ypclnt_connect(ypclnt) != -1 &&
-		    ypclnt_havepasswdd(ypclnt) == 1);
-		ypclnt_free(ypclnt);
-	} else
-#endif
 	master_mode = (uid == 0);
 
 	if (op == NEWSH) {
@@ -226,22 +193,6 @@ main(int argc, char *argv[])
 	if (old_pw != NULL)
 		pw->pw_fields |= (old_pw->pw_fields & _PWF_SOURCE);
 	switch (pw->pw_fields & _PWF_SOURCE) {
-#ifdef YP
-	case _PWF_NIS:
-		ypclnt = ypclnt_new(yp_domain, "passwd.byname", yp_host);
-		if (ypclnt == NULL) {
-			warnx("ypclnt_new failed");
-			exit(1);
-		}
-		if (ypclnt_connect(ypclnt) == -1 ||
-		    ypclnt_passwd(ypclnt, pw, password) == -1) {
-			warnx("%s", ypclnt->error);
-			ypclnt_free(ypclnt);
-			exit(1);
-		}
-		ypclnt_free(ypclnt);
-		errx(0, "NIS user information updated");
-#endif /* YP */
 	case 0:
 	case _PWF_FILES:
 		if (pw_init(NULL, NULL))
@@ -282,12 +233,7 @@ usage(void)
 {
 
 	(void)fprintf(stderr,
-	    "usage: chpass%s %s [user]\n",
-#ifdef YP
-	    " [-d domain] [-h host]",
-#else
-	    "",
-#endif
-	    "[-a list] [-p encpass] [-s shell] [-e mmm dd yy]");
+	    "usage: chpass [-a list] [-p encpass] [-s shell] "
+	    "[-e mmm dd yy] [user]\n");
 	exit(1);
 }

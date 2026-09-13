@@ -118,8 +118,6 @@ struct bootp {
 /* RFC 1497 */
 #define TAG_EXTEN_FILE		((unsigned char)  18)
 /* RFC 1533 */
-#define TAG_NIS_DOMAIN		((unsigned char)  40)
-#define TAG_NIS_SERVER		((unsigned char)  41)
 #define TAG_NTP_SERVER		((unsigned char)  42)
 /* DHCP maximum message size. */
 #define TAG_MAX_MSGSZ		((unsigned char)  57)

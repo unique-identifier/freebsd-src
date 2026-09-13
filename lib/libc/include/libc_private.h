@@ -265,9 +265,6 @@ enum {
 /*
  * yplib internal interfaces
  */
-#ifdef YP
-int _yp_check(char **);
-#endif
 
 void __libc_start1(int, char *[], char *[],
     void (*)(void), int (*)(int, char *[], char *[])) __dead2;

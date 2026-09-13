@@ -41,9 +41,4 @@ SRCS=		pam_unix.c
 
 LIBADD+=	util crypt
 
-.if ${MK_NIS} != "no"
-CFLAGS+= -DYP
-LIBADD+=	ypclnt
-.endif
-
 .include <bsd.lib.mk>

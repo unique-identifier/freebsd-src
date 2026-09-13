@@ -137,7 +137,7 @@ SUBDIR_DEPEND_libedit= ncurses
 SUBDIR_DEPEND_libgeom= libexpat libsbuf
 SUBDIR_DEPEND_libmagic= libz
 SUBDIR_DEPEND_libmemstat= libkvm
-SUBDIR_DEPEND_libpam= libcrypt ${_libradius} librpcsvc libtacplus libutil ${_libypclnt}
+SUBDIR_DEPEND_libpam= libcrypt ${_libradius} librpcsvc libtacplus libutil
 SUBDIR_DEPEND_libpjdlog= libutil
 SUBDIR_DEPEND_libprocstat= libkvm libutil
 SUBDIR_DEPEND_libradius= libmd
@@ -193,7 +193,6 @@ SUBDIR.${MK_EFI}+=	libefivar
 .endif
 SUBDIR.${MK_GOOGLETEST}+=	googletest
 SUBDIR.${MK_NETGRAPH}+=	libnetgraph
-SUBDIR.${MK_NIS}+=	libypclnt
 
 .if ${MACHINE_CPUARCH} == "aarch64"
 SUBDIR.${MK_PMC}+=	libopencsd

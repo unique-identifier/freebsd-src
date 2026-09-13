@@ -346,7 +346,6 @@ getnetbyname_r(const char *name, struct netent *ne, char *buffer,
 	static const ns_dtab dtab[] = {
 		NS_FILES_CB(_ht_getnetbyname, NULL)
 		{ NSSRC_DNS, _dns_getnetbyname, NULL },
-		NS_NIS_CB(_nis_getnetbyname, NULL) /* force -DHESIOD */
 #ifdef NS_CACHING
 		NS_CACHE_CB(&cache_info)
 #endif
@@ -378,7 +377,6 @@ getnetbyaddr_r(uint32_t addr, int af, struct netent *ne, char *buffer,
 	static const ns_dtab dtab[] = {
 		NS_FILES_CB(_ht_getnetbyaddr, NULL)
 		{ NSSRC_DNS, _dns_getnetbyaddr, NULL },
-		NS_NIS_CB(_nis_getnetbyaddr, NULL) /* force -DHESIOD */
 #ifdef NS_CACHING
 		NS_CACHE_CB(&cache_info)
 #endif

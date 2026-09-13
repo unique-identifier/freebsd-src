@@ -62,7 +62,6 @@ __DEFAULT_YES_OPTIONS = \
     INCLUDES \
     INSTALLLIB \
     MAKE_CHECK_USE_SANDBOX \
-    NIS \
     NLS \
     OPENSSH \
     RELRO \

@@ -1377,7 +1377,6 @@ OLD_FILES+=usr/tests/share/examples/tests/tap/cp_test
 OLD_FILES+=usr/tests/share/examples/tests/tap/printf_test
 OLD_FILES+=usr/tests/share/examples/tests/Kyuafile
 OLD_FILES+=usr/share/examples/uefisign/uefikeys
-OLD_FILES+=usr/share/examples/ypldap/ypldap.conf
 OLD_DIRS+=usr/share/examples
 OLD_DIRS+=usr/share/examples/BSD_daemon
 OLD_DIRS+=usr/share/examples/FreeBSD_version
@@ -1436,7 +1435,6 @@ OLD_DIRS+=usr/share/examples/sunrpc/dir
 OLD_DIRS+=usr/share/examples/sunrpc/msg
 OLD_DIRS+=usr/share/examples/sunrpc/sort
 OLD_DIRS+=usr/share/examples/uefisign
-OLD_DIRS+=usr/share/examples/ypldap
 OLD_DIRS+=usr/tests/share/examples/tests/atf
 OLD_DIRS+=usr/tests/share/examples/tests/plain
 OLD_DIRS+=usr/tests/share/examples/tests/googletest
@@ -3784,45 +3782,6 @@ OLD_FILES+=usr/share/snmp/mibs/BEGEMOT-NETGRAPH.txt
 
 .if ${MK_NETLINK} == no
 OLD_FILES+=usr.bin/genl
-.endif
-
-.if ${MK_NIS} == no
-OLD_FILES+=etc/rc.d/nisdomain
-OLD_FILES+=etc/rc.d/ypbind
-OLD_FILES+=etc/rc.d/ypldap
-OLD_FILES+=etc/rc.d/yppasswdd
-OLD_FILES+=etc/rc.d/ypserv
-OLD_FILES+=etc/rc.d/ypset
-OLD_FILES+=etc/rc.d/ypupdated
-OLD_FILES+=etc/rc.d/ypxfrd
-OLD_FILES+=usr/bin/ypcat
-OLD_FILES+=usr/bin/ypchfn
-OLD_FILES+=usr/bin/ypchpass
-OLD_FILES+=usr/bin/ypchsh
-OLD_FILES+=usr/bin/ypmatch
-OLD_FILES+=usr/bin/yppasswd
-OLD_FILES+=usr/bin/ypwhich
-OLD_FILES+=usr/include/ypclnt.h
-OLD_FILES+=usr/lib/libypclnt.a
-OLD_FILES+=usr/lib/libypclnt.so
-OLD_LIBS+=usr/lib/libypclnt.so.4
-OLD_FILES+=usr/libexec/mknetid
-OLD_FILES+=usr/libexec/yppwupdate
-OLD_FILES+=usr/libexec/ypxfr
-OLD_FILES+=usr/sbin/rpc.yppasswdd
-OLD_FILES+=usr/sbin/rpc.ypupdated
-OLD_FILES+=usr/sbin/rpc.ypxfrd
-OLD_FILES+=usr/sbin/yp_mkdb
-OLD_FILES+=usr/sbin/ypbind
-OLD_FILES+=usr/sbin/ypinit
-OLD_FILES+=usr/sbin/ypldap
-OLD_FILES+=usr/sbin/yppoll
-OLD_FILES+=usr/sbin/yppush
-OLD_FILES+=usr/sbin/ypserv
-OLD_FILES+=usr/sbin/ypset
-OLD_FILES+=var/yp/Makefile
-OLD_FILES+=var/yp/Makefile.dist
-OLD_DIRS+=var/yp
 .endif
 
 .if ${MK_NLS} == no

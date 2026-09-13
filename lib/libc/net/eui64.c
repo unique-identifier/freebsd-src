@@ -73,11 +73,6 @@
 #include <sys/eui64.h>
 #include <string.h>
 #include <stdlib.h>
-#ifdef YP
-#include <rpc/rpc.h>
-#include <rpcsvc/yp_prot.h>
-#include <rpcsvc/ypclnt.h>
-#endif
 
 #ifndef _PATH_EUI64
 #define _PATH_EUI64 "/etc/eui64"
@@ -209,7 +204,7 @@ eui64_ntoa(const struct eui64 *id, char *a, size_t len)
 }
 
 /*
- * Map an EUI-64 to a hostname. Use either /etc/eui64 or NIS/YP.
+ * Map an EUI-64 to a hostname. Use /etc/eui64.
  */
 int
 eui64_ntohost(char *hostname, size_t len, const struct eui64 *id)
@@ -218,32 +213,12 @@ eui64_ntohost(char *hostname, size_t len, const struct eui64 *id)
 	char buf[BUFSIZ + 2];
 	struct eui64 local_eui64;
 	char local_host[MAXHOSTNAMELEN];
-#ifdef YP
-	char *result;
-	int resultlen;
-	char eui64_a[24];
-	char *yp_domain;
-#endif
 	if ((fp = fopen(_PATH_EUI64, "re")) == NULL)
 		return (1);
 
 	while (fgets(buf,BUFSIZ,fp)) {
 		if (buf[0] == '#')
 			continue;
-#ifdef YP
-		if (buf[0] == '+') {
-			if (yp_get_default_domain(&yp_domain))
-				continue;
-			eui64_ntoa(id, eui64_a, sizeof(eui64_a));
-			if (yp_match(yp_domain, "eui64.byid", eui64_a,
-				strlen(eui64_a), &result, &resultlen)) {
-				continue;
-			}
-			strncpy(buf, result, resultlen);
-			buf[resultlen] = '\0';
-			free(result);
-		}
-#endif
 		if (eui64_line(buf, &local_eui64, local_host,
 		    sizeof(local_host)) == 0) {
 			if (bcmp(&local_eui64.octet[0],
@@ -260,7 +235,7 @@ eui64_ntohost(char *hostname, size_t len, const struct eui64 *id)
 }
 
 /*
- * Map a hostname to an EUI-64 using /etc/eui64 or NIS/YP.
+ * Map a hostname to an EUI-64 using /etc/eui64.
  */
 int
 eui64_hostton(const char *hostname, struct eui64 *id)
@@ -269,30 +244,12 @@ eui64_hostton(const char *hostname, struct eui64 *id)
 	char buf[BUFSIZ + 2];
 	struct eui64 local_eui64;
 	char local_host[MAXHOSTNAMELEN];
-#ifdef YP
-	char *result;
-	int resultlen;
-	char *yp_domain;
-#endif
 	if ((fp = fopen(_PATH_EUI64, "re")) == NULL)
 		return (1);
 
 	while (fgets(buf,BUFSIZ,fp)) {
 		if (buf[0] == '#')
 			continue;
-#ifdef YP
-		if (buf[0] == '+') {
-			if (yp_get_default_domain(&yp_domain))
-				continue;
-			if (yp_match(yp_domain, "eui64.byname", hostname,
-				strlen(hostname), &result, &resultlen)) {
-				continue;
-			}
-			strncpy(buf, result, resultlen);
-			buf[resultlen] = '\0';
-			free(result);
-		}
-#endif
 		if (eui64_line(buf, &local_eui64, local_host,
 		    sizeof(local_host)) == 0) {
 			if (strcmp(hostname, local_host) == 0) {

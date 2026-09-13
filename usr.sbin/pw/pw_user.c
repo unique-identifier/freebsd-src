@@ -225,29 +225,16 @@ pw_set_passwd(struct passwd *pwd, int fd, bool precrypted, bool update)
 }
 
 static void
-perform_chgpwent(const char *name, struct passwd *pwd, char *nispasswd)
+perform_chgpwent(const char *name, struct passwd *pwd)
 {
 	int rc;
-	struct passwd *nispwd;
-
-	/* duplicate for nis so that chgpwent is not modifying before NIS */
-	if (nispasswd && *nispasswd == '/')
-		nispwd = pw_dup(pwd);
 
 	rc = chgpwent(name, pwd);
 	if (rc == -1)
-		errx(EX_IOERR, "user '%s' does not exist (NIS?)", pwd->pw_name);
+		errx(EX_IOERR, "user '%s' does not exist", pwd->pw_name);
 	else if (rc != 0)
 		err(EX_IOERR, "passwd file update");
 
-	if (nispasswd && *nispasswd == '/') {
-		rc = chgnispwent(nispasswd, name, nispwd);
-		if (rc == -1)
-			warn("User '%s' not found in NIS passwd", pwd->pw_name);
-		else if (rc != 0)
-			warn("NIS passwd update");
-		/* NOTE: NIS-only update errors are not fatal */
-	}
 }
 
 static void
@@ -315,7 +302,7 @@ pw_userlock(char *arg1, int mode)
 		pwd->pw_passwd += sizeof(locked_str)-1;
 	}
 
-	perform_chgpwent(name, pwd, NULL);
+	perform_chgpwent(name, pwd);
 	free(passtmp);
 
 	return (EXIT_SUCCESS);
@@ -841,14 +828,12 @@ pw_user_del(int argc, char **argv, char *arg1)
 	struct group *gr, *grp;
 	char *name = NULL;
 	char grname[MAXLOGNAME];
-	char *nispasswd = NULL;
 	char file[MAXPATHLEN];
 	char home[MAXPATHLEN];
 	const char *cfg = NULL;
 	struct stat st;
 	intmax_t id = -1;
 	int ch, rc;
-	bool nis = false;
 	bool deletehome = false;
 	bool quiet = false;
 
@@ -859,7 +844,7 @@ pw_user_del(int argc, char **argv, char *arg1)
 			name = arg1;
 	}
 
-	while ((ch = getopt(argc, argv, "C:qn:u:rYy:")) != -1) {
+	while ((ch = getopt(argc, argv, "C:qn:u:r")) != -1) {
 		switch (ch) {
 		case 'C':
 			cfg = optarg;
@@ -875,12 +860,6 @@ pw_user_del(int argc, char **argv, char *arg1)
 			break;
 		case 'r':
 			deletehome = true;
-			break;
-		case 'y':
-			nispasswd = optarg;
-			break;
-		case 'Y':
-			nis = true;
 			break;
 		default:
 			usage();
@@ -899,9 +878,6 @@ pw_user_del(int argc, char **argv, char *arg1)
 
 	cnf = get_userconfig(cfg);
 
-	if (nispasswd == NULL)
-		nispasswd = cnf->nispasswd;
-
 	pwd = (name != NULL) ? GETPWNAM(pw_checkname(name, 0)) : GETPWUID(id);
 	if (pwd == NULL) {
 		if (name == NULL)
@@ -911,14 +887,8 @@ pw_user_del(int argc, char **argv, char *arg1)
 
 	if (PWF._altdir == PWF_REGULAR &&
 	    ((pwd->pw_fields & _PWF_SOURCE) != _PWF_FILES)) {
-		if ((pwd->pw_fields & _PWF_SOURCE) == _PWF_NIS) {
-			if (!nis && nispasswd && *nispasswd != '/')
-				errx(EX_NOUSER, "Cannot remove NIS user `%s'",
-				    name);
-		} else {
-			errx(EX_NOUSER, "Cannot remove non local user `%s'",
-			    name);
-		}
+		errx(EX_NOUSER, "Cannot remove non local user `%s'",
+		    name);
 	}
 
 	id = pwd->pw_uid;
@@ -967,15 +937,6 @@ pw_user_del(int argc, char **argv, char *arg1)
 		err(EX_IOERR, "user '%s' does not exist", pwd->pw_name);
 	else if (rc != 0)
 		err(EX_IOERR, "passwd update");
-
-	if (nis && nispasswd && *nispasswd=='/') {
-		rc = delnispwent(nispasswd, name);
-		if (rc == -1)
-			warnx("WARNING: user '%s' does not exist in NIS passwd",
-			    pwd->pw_name);
-		else if (rc != 0)
-			warn("WARNING: NIS passwd update");
-	}
 
 	grp = GETGRNAM(name);
 	if (grp != NULL &&
@@ -1152,8 +1113,6 @@ mix_config(struct userconf *cmdcnf, struct userconf *cfg)
 		cmdcnf->reuse_uids = cfg->reuse_uids;
 	if (cmdcnf->reuse_gids == 0)
 		cmdcnf->reuse_gids = cfg->reuse_gids;
-	if (cmdcnf->nispasswd == NULL)
-		cmdcnf->nispasswd = cfg->nispasswd;
 	if (cmdcnf->dotdir == NULL)
 		cmdcnf->dotdir = cfg->dotdir;
 	if (cmdcnf->newmail == NULL)
@@ -1197,7 +1156,7 @@ pw_user_add(int argc, char **argv, char *arg1)
 	struct passwd *pwd;
 	struct group *grp;
 	struct stat st;
-	char args[] = "C:qn:u:c:d:e:p:g:G:mM:k:s:oL:i:w:h:H:Db:NPy:Y";
+	char args[] = "C:qn:u:c:d:e:p:g:G:mM:k:s:oL:i:w:h:H:Db:NP";
 	char line[_PASSWORD_LEN+1], path[MAXPATHLEN];
 	char *gecos, *homedir, *skel, *walk, *userid, *groupid, *grname;
 	char *default_passwd, *name, *p;
@@ -1208,9 +1167,9 @@ pw_user_add(int argc, char **argv, char *arg1)
 	time_t now;
 	int rc, ch, fd = -1;
 	size_t i;
-	bool dryrun, nis, pretty, quiet, createhome, precrypted, genconf;
+	bool dryrun, pretty, quiet, createhome, precrypted, genconf;
 
-	dryrun = nis = pretty = quiet = createhome = precrypted = false;
+	dryrun = pretty = quiet = createhome = precrypted = false;
 	genconf = false;
 	gecos = homedir = skel = userid = groupid = default_passwd = NULL;
 	grname = name = NULL;
@@ -1327,12 +1286,6 @@ pw_user_add(int argc, char **argv, char *arg1)
 		case 'P':
 			pretty = true;
 			break;
-		case 'y':
-			cmdcnf->nispasswd = optarg;
-			break;
-		case 'Y':
-			nis = true;
-			break;
 		default:
 			usage();
 		}
@@ -1435,16 +1388,6 @@ pw_user_add(int argc, char **argv, char *arg1)
 		else if (rc != 0)
 			err(EX_IOERR, "passwd file update");
 	}
-	if (nis && cmdcnf->nispasswd && *cmdcnf->nispasswd == '/') {
-		printf("%s\n", cmdcnf->nispasswd);
-		rc = addnispwent(cmdcnf->nispasswd, pwd);
-		if (rc == -1)
-			warnx("User '%s' already exists in NIS passwd",
-			    pwd->pw_name);
-		else if (rc != 0)
-			warn("NIS passwd update");
-		/* NOTE: we treat NIS-only update errors as non-fatal */
-	}
 
 	if (cmdcnf->groups != NULL) {
 		for (i = 0; i < cmdcnf->groups->sl_cur; i++) {
@@ -1519,9 +1462,6 @@ pw_user_add(int argc, char **argv, char *arg1)
 		fclose(fp);
 	}
 
-	if (nis && nis_update() == 0)
-		pw_log(cnf, M_ADD, W_USER, "NIS maps updated");
-
 	return (EXIT_SUCCESS);
 }
 
@@ -1532,16 +1472,16 @@ pw_user_mod(int argc, char **argv, char *arg1)
 	struct passwd *pwd;
 	struct group *grp;
 	StringList *groups = NULL;
-	char args[] = "C:qn:u:c:d:e:p:g:G:mM:l:k:s:w:L:h:H:NPYy:";
+	char args[] = "C:qn:u:c:d:e:p:g:G:mM:l:k:s:w:L:h:H:NP";
 	const char *cfg = NULL;
 	char *gecos, *homedir, *grname, *name, *newname, *walk, *skel, *shell;
-	char *passwd, *class, *nispasswd;
+	char *passwd, *class;
 	login_cap_t *lc;
 	struct stat st;
 	intmax_t id = -1;
 	int ch, fd = -1;
 	size_t i, j;
-	bool quiet, createhome, pretty, dryrun, nis, edited;
+	bool quiet, createhome, pretty, dryrun, edited;
 	bool precrypted;
 	mode_t homemode = 0;
 	time_t expire_time, password_time, now;
@@ -1549,8 +1489,8 @@ pw_user_mod(int argc, char **argv, char *arg1)
 	expire_time = password_time = -1;
 	gecos = homedir = grname = name = newname = skel = shell =NULL;
 	passwd = NULL;
-	class = nispasswd = NULL;
-	quiet = createhome = pretty = dryrun = nis = precrypted = false;
+	class = NULL;
+	quiet = createhome = pretty = dryrun = precrypted = false;
 	edited = false;
 	now = time(NULL);
 
@@ -1644,12 +1584,6 @@ pw_user_mod(int argc, char **argv, char *arg1)
 		case 'P':
 			pretty = true;
 			break;
-		case 'y':
-			nispasswd = optarg;
-			break;
-		case 'Y':
-			nis = true;
-			break;
 		default:
 			usage();
 		}
@@ -1681,19 +1615,10 @@ pw_user_mod(int argc, char **argv, char *arg1)
 	if (name == NULL)
 		name = pwd->pw_name;
 
-	if (nis && nispasswd == NULL)
-		nispasswd = cnf->nispasswd;
-
 	if (PWF._altdir == PWF_REGULAR &&
 	    ((pwd->pw_fields & _PWF_SOURCE) != _PWF_FILES)) {
-		if ((pwd->pw_fields & _PWF_SOURCE) == _PWF_NIS) {
-			if (!nis && nispasswd && *nispasswd != '/')
-				errx(EX_NOUSER, "Cannot modify NIS user `%s'",
-				    name);
-		} else {
-			errx(EX_NOUSER, "Cannot modify non local user `%s'",
-			    name);
-		}
+		errx(EX_NOUSER, "Cannot modify non local user `%s'",
+		    name);
 	}
 
 	if (newname) {
@@ -1787,7 +1712,7 @@ pw_user_mod(int argc, char **argv, char *arg1)
 		return (print_user(pwd, pretty, false));
 
 	if (edited) /* Only updated this if required */
-		perform_chgpwent(name, pwd, nis ? nispasswd : NULL);
+		perform_chgpwent(name, pwd);
 	/* Now perform the needed changes concern groups */
 	if (groups != NULL) {
 		/* Delete User from groups using old name */
@@ -1857,9 +1782,6 @@ pw_user_mod(int argc, char **argv, char *arg1)
 			homemode = cnf->homemode;
 		create_and_populate_homedir(cnf, pwd, skel, homemode, true);
 	}
-
-	if (nis && nis_update() == 0)
-		pw_log(cnf, M_MODIFY, W_USER, "NIS maps updated");
 
 	return (EXIT_SUCCESS);
 }

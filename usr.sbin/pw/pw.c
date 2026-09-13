@@ -113,10 +113,10 @@ main(int argc, char *argv[])
 	int		tmp;
 	struct stat	st;
 	char		arg, *arg1;
-	bool		relocated, nis;
+	bool		relocated;
 
 	arg1 = NULL;
-	relocated = nis = false;
+	relocated = false;
 	memset(&conf, 0, sizeof(conf));
 	strlcpy(conf.rootdir, "/", sizeof(conf.rootdir));
 	strlcpy(conf.etcpath, _PATH_PWD, sizeof(conf.etcpath));
@@ -280,7 +280,6 @@ cmdhelp(int mode, int which)
 				"\t-L class       user class\n"
 				"\t-h fd          read password on fd\n"
 				"\t-H fd          read encrypted password on fd\n"
-				"\t-Y             update NIS maps\n"
 				"\t-N             no update\n"
 				"  Setting defaults:\n"
 				"\t-D             set user defaults\n"
@@ -295,15 +294,12 @@ cmdhelp(int mode, int which)
 				"\t-u min,max     set min,max uids\n"
 				"\t-i min,max     set min,max gids\n"
 				"\t-w method      set default password method\n"
-				"\t-s shell       default shell\n"
-				"\t-y path        set NIS passwd file path\n",
+				"\t-s shell       default shell\n",
 				"usage: pw userdel [uid|name] [switches]\n"
 				"\t-V etcdir      alternate /etc location\n"
 				"\t-R rootdir     alternate root directory\n"
 				"\t-n name        login name\n"
 				"\t-u uid         user id\n"
-				"\t-Y             update NIS maps\n"
-				"\t-y path        set NIS passwd file path\n"
 				"\t-r             remove home & contents\n",
 				"usage: pw usermod [uid|name] [switches]\n"
 				"\t-V etcdir      alternate /etc location\n"
@@ -327,8 +323,6 @@ cmdhelp(int mode, int which)
 				"\t-w method      set new password using method\n"
 				"\t-h fd          read password on fd\n"
 				"\t-H fd          read encrypted password on fd\n"
-				"\t-Y             update NIS maps\n"
-				"\t-y path        set NIS passwd file path\n"
 				"\t-N             no update\n",
 				"usage: pw usershow [uid|name] [switches]\n"
 				"\t-V etcdir      alternate /etc location\n"
@@ -363,14 +357,12 @@ cmdhelp(int mode, int which)
 				"\t-g gid         group id\n"
 				"\t-M usr1,usr2   add users as group members\n"
 				"\t-o             duplicate gid ok\n"
-				"\t-Y             update NIS maps\n"
 				"\t-N             no update\n",
 				"usage: pw groupdel [group|gid] [switches]\n"
 				"\t-V etcdir      alternate /etc location\n"
 				"\t-R rootdir     alternate root directory\n"
 				"\t-n name        group name\n"
-				"\t-g gid         group id\n"
-				"\t-Y             update NIS maps\n",
+				"\t-g gid         group id\n",
 				"usage: pw groupmod [group|gid] [switches]\n"
 				"\t-V etcdir      alternate /etc location\n"
 				"\t-R rootdir     alternate root directory\n"
@@ -383,7 +375,6 @@ cmdhelp(int mode, int which)
 				"\t-m usr1,usr2   add users as group members\n"
 				"\t-d usr1,usr2   delete users as group members\n"
 				"\t-l name        new group name\n"
-				"\t-Y             update NIS maps\n"
 				"\t-N             no update\n",
 				"usage: pw groupshow [group|gid] [switches]\n"
 				"\t-V etcdir      alternate /etc location\n"

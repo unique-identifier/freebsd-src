@@ -206,7 +206,6 @@ _LIBRARIES=	\
 		wrap \
 		xo \
 		y \
-		ypclnt \
 		z \
 		zdb \
 		zfs_core \
@@ -359,9 +358,6 @@ _DP_pam=	radius tacplus md util
 .if ${MK_OPENSSH} != "no"
 _DP_fido2+=	crypto z
 _DP_pam+=	ssh
-.endif
-.if ${MK_NIS} != "no"
-_DP_pam+=	ypclnt
 .endif
 _DP_lzma=	md pthread
 _DP_ucl=	m

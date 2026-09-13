@@ -89,7 +89,7 @@ main(int argc, char *argv[])
 	DBT data, sdata, key;
 	FILE *fp, *oldfp;
 	sigset_t set;
-	int ch, cnt, ypcnt, makeold, tfd, yp_enabled = 0;
+	int ch, cnt, makeold, tfd;
 	unsigned int len;
 	uint32_t store;
 	const char *t;
@@ -219,9 +219,8 @@ main(int argc, char *argv[])
 			error(sbuf);
 
 		/*
-		 * Do some trouble to check if we should store this users 
-		 * uid. Don't use getpwnam/getpwuid as that interferes 
-		 * with NIS.
+		 * Check whether to store this user's uid directly in the
+		 * local database without invoking name-service lookups.
 		 */
 		pw_db = dbopen(_PATH_MP_DB, O_RDONLY, 0, DB_HASH, NULL);
 		if (!pw_db)
@@ -334,16 +333,10 @@ main(int argc, char *argv[])
 		if ((sdp->put)(sdp, &key, &data, 0) == -1)
 			error("put");
 	}
-	ypcnt = 0;
 	data.data = (u_char *)buf;
 	sdata.data = (u_char *)sbuf;
 	key.data = (u_char *)tbuf;
 	for (cnt = 1; scan(fp, &pwd); ++cnt) {
-		if (!is_comment && 
-		    (pwd.pw_name[0] == '+' || pwd.pw_name[0] == '-')) {
-			yp_enabled = 1;
-			ypcnt++;
-		}
 		if (is_comment)
 			--cnt;
 #define	COMPACT(e)	t = e; while ((*p++ = *t++));
@@ -436,17 +429,6 @@ main(int argc, char *argv[])
 			if ((sdp->put)(sdp, &key, &sdata, methoduid) == -1)
 				error("put");
 
-			/* Store insecure and secure special plus and special minus */
-			if (pwd.pw_name[0] == '+' || pwd.pw_name[0] == '-') {
-				tbuf[0] = CURRENT_VERSION(_PW_KEYYPBYNUM);
-				store = htonl(ypcnt);
-				memmove(tbuf + 1, &store, sizeof(store));
-				key.size = sizeof(store) + 1;
-				if ((dp->put)(dp, &key, &data, method) == -1)
-					error("put");
-				if ((sdp->put)(sdp, &key, &sdata, method) == -1)
-					error("put");
-			}
 		}
 		/*
 		 * Create original style password file entry.
@@ -468,17 +450,6 @@ main(int argc, char *argv[])
 			    pwd.pw_gecos, pwd.pw_dir, pwd.pw_shell) < 0)
 				error("write old");
 		}
-	}
-	/* If YP enabled, set flag. */
-	if (yp_enabled) {
-		buf[0] = yp_enabled + 2;
-		data.size = 1;
-		key.size = 1;
-		tbuf[0] = CURRENT_VERSION(_PW_KEYYPENABLED);
-		if ((dp->put)(dp, &key, &data, method) == -1)
-			error("put");
-		if ((sdp->put)(sdp, &key, &data, method) == -1)
-			error("put");
 	}
 
 	if ((dp->close)(dp) == -1)

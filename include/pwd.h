@@ -94,8 +94,6 @@ typedef __size_t	size_t;
 #define	_PW_KEYBYNAME		'\x31'	/* stored by name */
 #define	_PW_KEYBYNUM		'\x32'	/* stored by entry in the "file" */
 #define	_PW_KEYBYUID		'\x33'	/* stored by uid */
-#define _PW_KEYYPENABLED	'\x34'	/* YP is enabled */
-#define	_PW_KEYYPBYNUM		'\x35'	/* special +@netgroup entries */
 
 /* The database also contains a key to indicate the format version of
  * the entries therein.  There may be other, older versioned entries
@@ -140,7 +138,6 @@ struct passwd {
  */                           
 #define _PWF_SOURCE	0x3000
 #define _PWF_FILES	0x1000
-#define _PWF_NIS	0x2000
 #define _PWF_HESIOD	0x3000
 
 __BEGIN_DECLS

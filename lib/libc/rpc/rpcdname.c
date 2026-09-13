@@ -61,10 +61,7 @@ get_default_domain(void)
 }
 
 /*
- * This is a wrapper for the system call getdomainname which returns a
- * ypclnt.h error code in the failure case.  It also checks to see that
- * the domain name is non-null, knowing that the null string is going to
- * get rejected elsewhere in the NIS client package.
+ * Return the nonempty RPC domain name, or -1 if it is unavailable.
  */
 int
 __rpc_get_default_domain(char **domain)

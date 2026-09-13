@@ -31,17 +31,13 @@
 /*
  * netname utility routines convert from unix names to network names and
  * vice-versa This module is operating system dependent! What we define here
- * will work with any unix system that has adopted the sun NIS domain
+ * will work with any unix system that has adopted the Sun RPC domain
  * architecture.
  */
 #include "namespace.h"
 #include <sys/param.h>
 #include <rpc/rpc.h>
 #include <rpc/rpc_com.h>
-#ifdef YP
-#include <rpcsvc/yp_prot.h>
-#include <rpcsvc/ypclnt.h>
-#endif
 #include <ctype.h>
 #include <stdio.h>
 #include <grp.h>
@@ -52,9 +48,6 @@
 #include "un-namespace.h"
 
 static char    *OPSYS = "unix";
-#ifdef YP
-static char    *NETID = "netid.byname";
-#endif
 static char    *NETIDFILE = "/etc/netid";
 
 static int getnetid( char *, char * );
@@ -233,24 +226,13 @@ getnetid(char *key, char *ret)
 	char           *mkey;
 	char           *mval;
 	FILE           *fd;
-#ifdef YP
-	char           *domain;
-	int             err;
-	char           *lookup;
-	int             len;
-#endif
 	int rv;
 
 	rv = 0;
 
 	fd = fopen(NETIDFILE, "r");
 	if (fd == NULL) {
-#ifdef YP
-		res = "+";
-		goto getnetidyp;
-#else
 		return (0);
-#endif
 	}
 	while (fd != NULL) {
 		res = fgets(buf, sizeof(buf), fd);
@@ -261,34 +243,7 @@ getnetid(char *key, char *ret)
 		if (res[0] == '#')
 			continue;
 		else if (res[0] == '+') {
-#ifdef YP
-	getnetidyp:
-			err = yp_get_default_domain(&domain);
-			if (err) {
-				continue;
-			}
-			lookup = NULL;
-			err = yp_match(domain, NETID, key,
-				strlen(key), &lookup, &len);
-			if (err) {
-#ifdef DEBUG
-				fprintf(stderr, "match failed error %d\n", err);
-#endif
-				continue;
-			}
-			lookup[len] = 0;
-			strcpy(ret, lookup);
-			free(lookup);
-			rv = 2;
-			goto done;
-#else	/* YP */
-#ifdef DEBUG
-			fprintf(stderr,
-"Bad record in %s '+' -- NIS not supported in this library copy\n",
-				NETIDFILE);
-#endif
 			continue;
-#endif	/* YP */
 		} else {
 			mkey = strsep(&res, "\t ");
 			if (mkey == NULL) {

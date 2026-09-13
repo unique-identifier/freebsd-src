@@ -5,11 +5,6 @@ DIRDEPS.BLACKLIST_SUPPORT.yes+= lib/libblacklist
 DIRDEPS.BLOCKLIST_SUPPORT.yes+= lib/libblocklist
 DIRDEPS.CASPER.yes+= lib/libcasper/libcasper
 DIRDEPS.JAIL.yes+= lib/libjail
-DIRDEPS.NIS.yes+= \
-	include/rpc \
-	include/rpcsvc \
-	lib/librpcsvc
-
 DIRDEPS.OPENSSL.yes+= secure/lib/libcrypto
 DIRDEPS.OPENSSL.no+= lib/libmd
 DIRDEPS.PAM_SUPPORT.yes+= lib/libpam/libpam

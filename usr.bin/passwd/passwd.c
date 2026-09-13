@@ -52,13 +52,10 @@ static struct pam_conv pamc = {
 	NULL
 };
 
-static char	*yp_domain;
-static char	*yp_host;
-
 static void
 usage(void)
 {
-	fprintf(stderr, "usage: passwd [-ly] [-d domain] [-h host] [user]\n");
+	fprintf(stderr, "usage: passwd [-lo] [user]\n");
 	exit(1);
 }
 
@@ -70,17 +67,10 @@ main(int argc, char *argv[])
 	int o, pam_err;
 	uid_t uid;
 
-	while ((o = getopt(argc, argv, "d:h:loy")) != -1)
+	while ((o = getopt(argc, argv, "lo")) != -1)
 		switch (o) {
-		case 'd':
-			yp_domain = optarg;
-			break;
-		case 'h':
-			yp_host = optarg;
-			break;
 		case 'l':
 		case 'o':
-		case 'y':
 			/* compatibility */
 			break;
 		default:
@@ -114,14 +104,10 @@ main(int argc, char *argv[])
 		fprintf(stderr, "Changing local password for %s\n",
 		    pwd->pw_name);
 		break;
-	case _PWF_NIS:
-		fprintf(stderr, "Changing NIS password for %s\n",
-		    pwd->pw_name);
-		break;
 	default:
 		/* XXX: Green men ought to be supported via PAM. */
 		errx(1, 
-	  "Sorry, `passwd' can only change passwords for local or NIS users.");
+	  "Sorry, `passwd' can only change passwords for local users.");
 	}
 
 #define pam_check(func) do { \
@@ -146,12 +132,6 @@ main(int argc, char *argv[])
 	pam_check("pam_set_item");
 	pam_err = pam_set_item(pamh, PAM_RUSER, getlogin());
 	pam_check("pam_set_item");
-
-	/* set YP domain and host */
-	pam_err = pam_set_data(pamh, "yp_domain", yp_domain, NULL);
-	pam_check("pam_set_data");
-	pam_err = pam_set_data(pamh, "yp_server", yp_host, NULL);
-	pam_check("pam_set_data");
 
 	/* set new password */
 	pam_err = pam_chauthtok(pamh, 0);

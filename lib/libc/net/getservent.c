@@ -42,11 +42,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
-#ifdef YP
-#include <rpc/rpc.h>
-#include <rpcsvc/yp_prot.h>
-#include <rpcsvc/ypclnt.h>
-#endif
 #include "namespace.h"
 #include "reentrant.h"
 #include "un-namespace.h"
@@ -71,7 +66,7 @@ struct servent_mdata
 };
 
 static const ns_src defaultsrc[] = {
-	{ NSSRC_COMPAT, NS_SUCCESS },
+	{ NSSRC_FILES, NS_SUCCESS },
 	{ NULL, 0 }
 };
 
@@ -103,25 +98,6 @@ NSS_TLS_HANDLING(db);
 
 static int db_servent(void *, void *, va_list);
 static int db_setservent(void *, void *, va_list);
-
-#ifdef YP
-/* nis backend declarations */
-static 	int 	nis_servent(void *, void *, va_list);
-static 	int 	nis_setservent(void *, void *, va_list);
-
-struct nis_state
-{
-	int yp_stepping;
-	char yp_domain[MAXHOSTNAMELEN];
-	char *yp_key;
-	int yp_keylen;
-};
-static void nis_endstate(void *);
-NSS_TLS_HANDLING(nis);
-
-static int nis_servent(void *, void *, va_list);
-static int nis_setservent(void *, void *, va_list);
-#endif
 
 /* compat backend declarations */
 static int compat_setservent(void *, void *, va_list);
@@ -267,18 +243,11 @@ static int
 files_servent(void *retval, void *mdata, va_list ap)
 {
 	static const ns_src compat_src[] = {
-#ifdef YP
-		{ NSSRC_NIS, NS_SUCCESS },
-#endif
 		{ NULL, 0 }
 	};
 	ns_dtab compat_dtab[] = {
 		{ NSSRC_DB, db_servent,
 			(void *)((struct servent_mdata *)mdata)->how },
-#ifdef YP
-		{ NSSRC_NIS, nis_servent,
-			(void *)((struct servent_mdata *)mdata)->how },
-#endif
 		{ NULL, NULL, NULL }
 	};
 
@@ -641,203 +610,15 @@ db_setservent(void *retval, void *mdata, va_list ap)
 	return (NS_UNAVAIL);
 }
 
-/* nis backend implementation */
-#ifdef YP
-static 	void
-nis_endstate(void *p)
-{
-	if (p == NULL)
-		return;
-
-	free(((struct nis_state *)p)->yp_key);
-	free(p);
-}
-
-static int
-nis_servent(void *retval, void *mdata, va_list ap)
-{
-	char *resultbuf, *lastkey;
-	int resultbuflen;
-	char *buf;
-
-	struct nis_state *st;
-	int rv;
-
-	enum nss_lookup_type how;
-	char *name;
-	char *proto;
-	int port;
-
-	struct servent *serv;
-	char *buffer;
-	size_t bufsize;
-	int *errnop;
-
-	name = NULL;
-	proto = NULL;
-	buf = NULL;
-	how = (enum nss_lookup_type)(uintptr_t)mdata;
-	switch (how) {
-	case nss_lt_name:
-		name = va_arg(ap, char *);
-		proto = va_arg(ap, char *);
-		break;
-	case nss_lt_id:
-		port = va_arg(ap, int);
-		proto = va_arg(ap, char *);
-		break;
-	case nss_lt_all:
-		break;
-	default:
-		return NS_NOTFOUND;
-	}
-
-	serv = va_arg(ap, struct servent *);
-	buffer  = va_arg(ap, char *);
-	bufsize = va_arg(ap, size_t);
-	errnop = va_arg(ap, int *);
-
-	*errnop = nis_getstate(&st);
-	if (*errnop != 0)
-		return (NS_UNAVAIL);
-
-	if (st->yp_domain[0] == '\0') {
-		if (getdomainname(st->yp_domain, sizeof st->yp_domain)) {
-			*errnop = errno;
-			return (NS_UNAVAIL);
-		}
-	}
-
-	do {
-		switch (how) {
-		case nss_lt_name:
-			free(buf);
-			asprintf(&buf, "%s/%s", name, proto);
-			if (buf == NULL)
-				return (NS_TRYAGAIN);
-			if (yp_match(st->yp_domain, "services.byname", buf,
-			    strlen(buf), &resultbuf, &resultbuflen)) {
-				rv = NS_NOTFOUND;
-				goto fin;
-			}
-			break;
-		case nss_lt_id:
-			free(buf);
-			asprintf(&buf, "%d/%s", ntohs(port), proto);
-			if (buf == NULL)
-				return (NS_TRYAGAIN);
-
-			/*
-			 * We have to be a little flexible
-			 * here. Ideally you're supposed to have both
-			 * a services.byname and a services.byport
-			 * map, but some systems have only
-			 * services.byname. FreeBSD cheats a little by
-			 * putting the services.byport information in
-			 * the same map as services.byname so that
-			 * either case will work. We allow for both
-			 * possibilities here: if there is no
-			 * services.byport map, we try services.byname
-			 * instead.
-			 */
-			rv = yp_match(st->yp_domain, "services.byport", buf,
-			    strlen(buf), &resultbuf, &resultbuflen);
-			if (rv) {
-				if (rv == YPERR_MAP) {
-					if (yp_match(st->yp_domain,
-					    "services.byname", buf,
-					    strlen(buf), &resultbuf,
-					    &resultbuflen)) {
-						rv = NS_NOTFOUND;
-						goto fin;
-					}
-				} else {
-					rv = NS_NOTFOUND;
-					goto fin;
-				}
-			}
-
-			break;
-		case nss_lt_all:
-			if (!st->yp_stepping) {
-				free(st->yp_key);
-				rv = yp_first(st->yp_domain, "services.byname",
-				    &st->yp_key, &st->yp_keylen, &resultbuf,
-				    &resultbuflen);
-				if (rv) {
-					rv = NS_NOTFOUND;
-					goto fin;
-				}
-				st->yp_stepping = 1;
-			} else {
-				lastkey = st->yp_key;
-				rv = yp_next(st->yp_domain, "services.byname",
-				    st->yp_key, st->yp_keylen, &st->yp_key,
-				    &st->yp_keylen, &resultbuf, &resultbuflen);
-				free(lastkey);
-				if (rv) {
-					st->yp_stepping = 0;
-					rv = NS_NOTFOUND;
-					goto fin;
-				}
-			}
-			break;
-		}
-
-		rv = parse_result(serv, buffer, bufsize, resultbuf,
-		    resultbuflen, errnop);
-		free(resultbuf);
-
-	} while (!(rv & NS_TERMINATE) && how == nss_lt_all);
-
-fin:
-	free(buf);
-	if (rv == NS_SUCCESS && retval != NULL)
-		*(struct servent **)retval = serv;
-
-	return (rv);
-}
-
-static int
-nis_setservent(void *result, void *mdata, va_list ap)
-{
-	struct nis_state *st;
-	int rv;
-
-	rv = nis_getstate(&st);
-	if (rv != 0)
-		return (NS_UNAVAIL);
-
-	switch ((enum constants)(uintptr_t)mdata) {
-	case SETSERVENT:
-	case ENDSERVENT:
-		free(st->yp_key);
-		st->yp_key = NULL;
-		st->yp_stepping = 0;
-		break;
-	default:
-		break;
-	}
-
-	return (NS_UNAVAIL);
-}
-#endif
-
 /* compat backend implementation */
 static int
 compat_setservent(void *retval, void *mdata, va_list ap)
 {
 	static const ns_src compat_src[] = {
-#ifdef YP
-		{ NSSRC_NIS, NS_SUCCESS },
-#endif
 		{ NULL, 0 }
 	};
 	ns_dtab compat_dtab[] = {
 		{ NSSRC_DB, db_setservent, mdata },
-#ifdef YP
-		{ NSSRC_NIS, nis_setservent, mdata },
-#endif
 		{ NULL, NULL, NULL }
 	};
 	int f;
@@ -1122,9 +903,6 @@ getservbyname_r(const char *name, const char *proto, struct servent *serv,
 	static const ns_dtab dtab[] = {
 		{ NSSRC_FILES, files_servent, (void *)&mdata },
 		{ NSSRC_DB, db_servent, (void *)nss_lt_name },
-#ifdef YP
-		{ NSSRC_NIS, nis_servent, (void *)nss_lt_name },
-#endif
 		{ NSSRC_COMPAT, files_servent, (void *)&compat_mdata },
 #ifdef NS_CACHING
 		NS_CACHE_CB(&cache_info)
@@ -1159,9 +937,6 @@ getservbyport_r(int port, const char *proto, struct servent *serv,
 	static const ns_dtab dtab[] = {
 		{ NSSRC_FILES, files_servent, (void *)&mdata },
 		{ NSSRC_DB, db_servent, (void *)nss_lt_id },
-#ifdef YP
-		{ NSSRC_NIS, nis_servent, (void *)nss_lt_id },
-#endif
 		{ NSSRC_COMPAT, files_servent, (void *)&compat_mdata },
 #ifdef NS_CACHING
 		NS_CACHE_CB(&cache_info)
@@ -1195,9 +970,6 @@ getservent_r(struct servent *serv, char *buffer, size_t bufsize,
 	static const ns_dtab dtab[] = {
 		{ NSSRC_FILES, files_servent, (void *)&mdata },
 		{ NSSRC_DB, db_servent, (void *)nss_lt_all },
-#ifdef YP
-		{ NSSRC_NIS, nis_servent, (void *)nss_lt_all },
-#endif
 		{ NSSRC_COMPAT, files_servent, (void *)&compat_mdata },
 #ifdef NS_CACHING
 		NS_CACHE_CB(&cache_info)
@@ -1228,9 +1000,6 @@ setservent(int stayopen)
 	static const ns_dtab dtab[] = {
 		{ NSSRC_FILES, files_setservent, (void *)SETSERVENT },
 		{ NSSRC_DB, db_setservent, (void *)SETSERVENT },
-#ifdef YP
-		{ NSSRC_NIS, nis_setservent, (void *)SETSERVENT },
-#endif
 		{ NSSRC_COMPAT, compat_setservent, (void *)SETSERVENT },
 #ifdef NS_CACHING
 		NS_CACHE_CB(&cache_info)
@@ -1253,9 +1022,6 @@ endservent(void)
 	static const ns_dtab dtab[] = {
 		{ NSSRC_FILES, files_setservent, (void *)ENDSERVENT },
 		{ NSSRC_DB, db_setservent, (void *)ENDSERVENT },
-#ifdef YP
-		{ NSSRC_NIS, nis_setservent, (void *)ENDSERVENT },
-#endif
 		{ NSSRC_COMPAT, compat_setservent, (void *)ENDSERVENT },
 #ifdef NS_CACHING
 		NS_CACHE_CB(&cache_info)

@@ -432,38 +432,6 @@ gethostanswer(const querybuf *answer, int anslen, const char *qname, int qtype,
 	return (-1);
 }
 
-/* XXX: for async DNS resolver in ypserv */
-struct hostent *
-__dns_getanswer(const char *answer, int anslen, const char *qname, int qtype)
-{
-	struct hostent *he;
-	struct hostent_data *hed;
-	int error;
-	res_state statp;
-
-	statp = __res_state();
-	if ((he = __hostent_init()) == NULL ||
-	    (hed = __hostent_data_init()) == NULL) {
-		RES_SET_H_ERRNO(statp, NETDB_INTERNAL);
-		return (NULL);
-	}
-	switch (qtype) {
-	case T_AAAA:
-		he->h_addrtype = AF_INET6;
-		he->h_length = NS_IN6ADDRSZ;
-		break;
-	case T_A:
-	default:
-		he->h_addrtype = AF_INET;
-		he->h_length = NS_INADDRSZ;
-		break;
-	}
-
-	error = gethostanswer((const querybuf *)answer, anslen, qname, qtype,
-	    he, hed, statp);
-	return (error == 0) ? he : NULL;
-}
-
 int
 _dns_gethostbyname(void *rval, void *cb_data, va_list ap)
 {

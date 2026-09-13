@@ -27,12 +27,6 @@
 
 del_user $ZFS_USER
 
-if [ "${USES_NIS}" == "true" ]
-then
-    $SVCADM enable svc:/network/nis/client:default 
-fi
-
 $RM $TMPDIR/zfs-xattr-test-user.txt
-$RM $TMPDIR/zfs-xattr-test-nis.txt
 
 default_cleanup

@@ -20,9 +20,6 @@
 #include <rpcsvc/mount.h>
 #include <rpcsvc/rquota.h>
 #include <rpcsvc/nfs_prot.h>
-#include <rpcsvc/yp.h>
-#include <rpcsvc/ypclnt.h>
-#include <rpcsvc/yppasswd.h>
 
 #include "rpcbind.h"
 
@@ -252,20 +249,20 @@ check_callit(SVCXPRT *xprt, struct r_rmtcall_args *args, int versnum __unused)
 		    args->rmt_proc != MOUNTPROC_UMNT)
 			break;
 		goto deny;
-	case YPBINDPROG:
-		if (args->rmt_proc != YPBINDPROC_SETDOM)
+	case 100007: /* Legacy domain binding service. */
+		if (args->rmt_proc != 2)
 			break;
 		/* FALLTHROUGH */
-	case YPPASSWDPROG:
+	case 100009: /* Legacy password update service. */
 	case NFS_PROGRAM:
 	case RQUOTAPROG:
 		goto deny;
-	case YPPROG:
+	case 100004: /* Legacy directory service. */
 		switch (args->rmt_proc) {
-		case YPPROC_ALL:
-		case YPPROC_MATCH:
-		case YPPROC_FIRST:
-		case YPPROC_NEXT:
+		case 8:
+		case 3:
+		case 4:
+		case 5:
 			goto deny;
 		default:
 			break;

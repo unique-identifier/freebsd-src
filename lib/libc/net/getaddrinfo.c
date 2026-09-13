@@ -70,8 +70,6 @@
 #include <arpa/inet.h>
 #include <arpa/nameser.h>
 #include <rpc/rpc.h>
-#include <rpcsvc/yp_prot.h>
-#include <rpcsvc/ypclnt.h>
 #include <netdb.h>
 #include <resolv.h>
 #include <string.h>
@@ -297,10 +295,6 @@ static void _endhtent(FILE **);
 static struct addrinfo *_gethtent(FILE **, const char *,
 	const struct addrinfo *);
 static int _files_getaddrinfo(void *, void *, va_list);
-#ifdef YP
-static struct addrinfo *_yphostent(char *, const struct addrinfo *);
-static int _yp_getaddrinfo(void *, void *, va_list);
-#endif
 #ifdef NS_CACHING
 static int addrinfo_id_func(char *, size_t *, va_list, void *);
 static int addrinfo_marshal_func(char *, size_t *, void *, va_list, void *);
@@ -1924,7 +1918,6 @@ explore_fqdn(const struct addrinfo *pai, const char *hostname,
 	static const ns_dtab dtab[] = {
 		NS_FILES_CB(_files_getaddrinfo, NULL)
 		{ NSSRC_DNS, _dns_getaddrinfo, NULL },	/* force -DHESIOD */
-		NS_NIS_CB(_yp_getaddrinfo, NULL)
 #ifdef NS_CACHING
 		NS_CACHE_CB(&cache_info)
 #endif
@@ -2528,167 +2521,6 @@ _files_getaddrinfo(void *rv, void *cb_data, va_list ap)
 		return NS_NOTFOUND;
 	return NS_SUCCESS;
 }
-
-#ifdef YP
-/*ARGSUSED*/
-static struct addrinfo *
-_yphostent(char *line, const struct addrinfo *pai)
-{
-	struct addrinfo sentinel, *cur;
-	struct addrinfo hints, *res, *res0;
-	int error;
-	char *p = line;
-	const char *addr, *canonname;
-	char *nextline;
-	char *cp;
-
-	addr = canonname = NULL;
-
-	memset(&sentinel, 0, sizeof(sentinel));
-	cur = &sentinel;
-
-nextline:
-	/* terminate line */
-	cp = strchr(p, '\n');
-	if (cp) {
-		*cp++ = '\0';
-		nextline = cp;
-	} else
-		nextline = NULL;
-
-	cp = strpbrk(p, " \t");
-	if (cp == NULL) {
-		if (canonname == NULL)
-			return (NULL);
-		else
-			goto done;
-	}
-	*cp++ = '\0';
-
-	addr = p;
-
-	while (cp && *cp) {
-		if (*cp == ' ' || *cp == '\t') {
-			cp++;
-			continue;
-		}
-		if (!canonname)
-			canonname = cp;
-		if ((cp = strpbrk(cp, " \t")) != NULL)
-			*cp++ = '\0';
-	}
-
-	hints = *pai;
-	hints.ai_flags = AI_NUMERICHOST;
-	if (pai->ai_family == AF_INET6 &&
-	    (pai->ai_flags & AI_V4MAPPED) == AI_V4MAPPED)
-		hints.ai_flags |= AI_V4MAPPED;
-	error = getaddrinfo(addr, NULL, &hints, &res0);
-	if (error == 0) {
-		for (res = res0; res; res = res->ai_next) {
-			/* cover it up */
-			res->ai_flags = pai->ai_flags;
-
-			if (pai->ai_flags & AI_CANONNAME)
-				(void)get_canonname(pai, res, canonname);
-		}
-	} else
-		res0 = NULL;
-	if (res0) {
-		cur->ai_next = res0;
-		while (cur && cur->ai_next)
-			cur = cur->ai_next;
-	}
-
-	if (nextline) {
-		p = nextline;
-		goto nextline;
-	}
-
-done:
-	return sentinel.ai_next;
-}
-
-/*ARGSUSED*/
-static int
-_yp_getaddrinfo(void *rv, void *cb_data, va_list ap)
-{
-	struct addrinfo sentinel, *cur;
-	struct addrinfo *ai = NULL;
-	char *ypbuf;
-	int ypbuflen, r;
-	const char *name;
-	const struct addrinfo *pai;
-	char *ypdomain;
-
-	if (_yp_check(&ypdomain) == 0)
-		return NS_UNAVAIL;
-
-	name = va_arg(ap, char *);
-	pai = va_arg(ap, const struct addrinfo *);
-
-	memset(&sentinel, 0, sizeof(sentinel));
-	cur = &sentinel;
-
-	/* ipnodes.byname can hold both IPv4/v6 */
-	r = yp_match(ypdomain, "ipnodes.byname", name,
-		(int)strlen(name), &ypbuf, &ypbuflen);
-	if (r == 0) {
-		ai = _yphostent(ypbuf, pai);
-		if (ai) {
-			cur->ai_next = ai;
-			while (cur && cur->ai_next)
-				cur = cur->ai_next;
-		}
-		free(ypbuf);
-	}
-
-	if (ai != NULL) {
-		struct sockaddr_in6 *sin6;
-
-		switch (ai->ai_family) {
-		case AF_INET:
-			goto done;
-		case AF_INET6:
-			sin6 = (struct sockaddr_in6 *)ai->ai_addr;
-			if (IN6_IS_ADDR_V4MAPPED(&sin6->sin6_addr))
-				goto done;
-			break;
-		}
-	}
-
-	/* hosts.byname is only for IPv4 (Solaris8) */
-	if (pai->ai_family == AF_UNSPEC || pai->ai_family == AF_INET ||
-	    ((pai->ai_family == AF_INET6 &&
-	     (pai->ai_flags & AI_V4MAPPED) == AI_V4MAPPED) &&
-	      (ai == NULL || (pai->ai_flags & AI_ALL) == AI_ALL))) {
-		r = yp_match(ypdomain, "hosts.byname", name,
-			(int)strlen(name), &ypbuf, &ypbuflen);
-		if (r == 0) {
-			struct addrinfo ai4;
-
-			ai4 = *pai;
-			if (pai->ai_family == AF_UNSPEC)
-				ai4.ai_family = AF_INET;
-			ai = _yphostent(ypbuf, &ai4);
-			if (ai) {
-				cur->ai_next = ai;
-				while (cur && cur->ai_next)
-					cur = cur->ai_next;
-			}
-			free(ypbuf);
-		}
-	}
-
-done:
-	if (sentinel.ai_next == NULL) {
-		RES_SET_H_ERRNO(__res_state(), HOST_NOT_FOUND);
-		return NS_NOTFOUND;
-	}
-	*((struct addrinfo **)rv) = sentinel.ai_next;
-	return NS_SUCCESS;
-}
-#endif
 
 /* resolver logic */
 

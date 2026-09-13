@@ -152,7 +152,7 @@ netgroup_match(const char *group, const char *machine, const char *user)
     unsigned int i;
 
     if (getdomainname(domain, sizeof(domain)) != 0 || *domain == '\0') {
-	syslog(LOG_ERR, "NIS netgroup support disabled: no NIS domain");
+	syslog(LOG_ERR, "Netgroup support disabled: no RPC domain");
 	return (NO);
     }
 
@@ -161,7 +161,7 @@ netgroup_match(const char *group, const char *machine, const char *user)
 	if (domain[i] == '\0')
 	    break;
     if (i == sizeof(domain)) {
-	syslog(LOG_ERR, "NIS netgroup support disabled: invalid NIS domain");
+	syslog(LOG_ERR, "Netgroup support disabled: invalid RPC domain");
 	return (NO);
     }
 

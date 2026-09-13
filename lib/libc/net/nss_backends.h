@@ -38,6 +38,5 @@
 #if 0
 NSS_BACKEND(	files,	_files_nss_module_register	)
 NSS_BACKEND(	dns,	_dns_nss_module_register	)
-NSS_BACKEND(	nis,	_nis_nss_module_register	)
 NSS_BACKEND(	compat,	_compat_nss_module_register	)
 #endif

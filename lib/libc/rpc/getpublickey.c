@@ -41,18 +41,11 @@
 #include <pwd.h>
 #include <rpc/rpc.h>
 #include <rpc/key_prot.h>
-#include <rpcsvc/yp_prot.h>
-#include <rpcsvc/ypclnt.h>
 #include <string.h>
 #include <stdlib.h>
 #include "un-namespace.h"
 
 #define PKFILE "/etc/publickey"
-
-/*
- * Hack to let ypserv/rpc.nisd use AUTH_DES.
- */
-int (*__getpublickey_LOCAL)(const char *, char *) = 0;
 
 /*
  * Get somebody's public key
@@ -78,8 +71,7 @@ __getpublickey_real(const char *netname, char *publickey)
 }
 
 /*
- * reads the file /etc/publickey looking for a + to optionally go to the
- * yellow pages
+ * Reads public keys from /etc/publickey.
  */
 
 int
@@ -103,37 +95,7 @@ getpublicandprivatekey(const char *key, char *ret)
 		if (res[0] == '#')
 			continue;
 		else if (res[0] == '+') {
-#ifdef YP
-			char *PKMAP = "publickey.byname";
-			char *lookup;
-			char *domain;
-			int err;
-			int len;
-
-			err = yp_get_default_domain(&domain);
-			if (err) {
-				continue;
-			}
-			lookup = NULL;
-			err = yp_match(domain, PKMAP, key, strlen(key), &lookup, &len);
-			if (err) {
-#ifdef DEBUG
-				fprintf(stderr, "match failed error %d\n", err);
-#endif
-				continue;
-			}
-			lookup[len] = 0;
-			strcpy(ret, lookup);
-			fclose(fd);
-			free(lookup);
-			return (2);
-#else /* YP */
-#ifdef DEBUG
-			fprintf(stderr,
-"Bad record in %s '+' -- NIS not supported in this library copy\n", PKFILE);
-#endif /* DEBUG */
 			continue;
-#endif /* YP */
 		} else {
 			mkey = strsep(&res, "\t ");
 			if (mkey == NULL) {
@@ -160,8 +122,5 @@ getpublicandprivatekey(const char *key, char *ret)
 
 int getpublickey(const char *netname, char *publickey)
 {
-	if (__getpublickey_LOCAL != NULL)
-		return(__getpublickey_LOCAL(netname, publickey));
-	else
-		return(__getpublickey_real(netname, publickey));
+	return (__getpublickey_real(netname, publickey));
 }

@@ -30,10 +30,4 @@
 
 cleanup_user_group
 
-# restore the state of svc:/network/nis/client:default
-if [[ -e $NISSTAFILE ]]; then
-    log_must $SVCADM enable svc:/network/nis/client:default
-    log_must $RM -f $NISSTAFILE
-fi
-
 default_cleanup

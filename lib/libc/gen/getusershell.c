@@ -49,11 +49,6 @@ __RCSID("$NetBSD: getusershell.c,v 1.17 1999/01/25 01:09:34 lukem Exp $");
 #ifdef HESIOD
 #include <hesiod.h>
 #endif
-#ifdef YP
-#include <rpc/rpc.h>
-#include <rpcsvc/ypclnt.h>
-#include <rpcsvc/yp_prot.h>
-#endif
 #include "un-namespace.h"
 
 static const char *const *curshell;
@@ -170,70 +165,12 @@ _dns_initshells(void *rv, void *cb_data, va_list ap)
 }
 #endif /* HESIOD */
 
-#ifdef YP
-static int	_nis_initshells(void *, void *, va_list);
-
-/*ARGSUSED*/
-static int
-_nis_initshells(void *rv, void *cb_data, va_list ap)
-{
-	static char *ypdomain;
-	char	*key, *data;
-	char	*lastkey;
-	int	 keylen, datalen;
-	int	 r;
-
-	if (sl)
-		sl_free(sl, 1);
-	sl = sl_init();
-
-	if (ypdomain == NULL) {
-		switch (yp_get_default_domain(&ypdomain)) {
-		case 0:
-			break;
-		case YPERR_RESRC:
-			return NS_TRYAGAIN;
-		default:
-			return NS_UNAVAIL;
-		}
-	}
-
-	/*
-	 * `key' and `data' point to strings dynamically allocated by
-	 * the yp_... functions.
-	 * `data' is directly put into the stringlist of shells.
-	 */
-	key = data = NULL;
-	if (yp_first(ypdomain, "shells", &key, &keylen, &data, &datalen))
-		return NS_UNAVAIL;
-	do {
-		data[datalen] = '\0';		/* clear trailing \n */
-		sl_add(sl, data);
-
-		lastkey = key;
-		r = yp_next(ypdomain, "shells", lastkey, keylen,
-		    &key, &keylen, &data, &datalen);
-		free(lastkey);
-	} while (r == 0);
-	
-	if (r == YPERR_NOMORE) {
-		/*
-		 * `data' and `key' ought to be NULL - do not try to free them.
-		 */
-		return NS_SUCCESS;
-	}
-
-	return NS_UNAVAIL;
-}
-#endif /* YP */
-
 static const char *const *
 initshells(void)
 {
 	static const ns_dtab dtab[] = {
 		NS_FILES_CB(_local_initshells, NULL)
 		NS_DNS_CB(_dns_initshells, NULL)
-		NS_NIS_CB(_nis_initshells, NULL)
 		{ 0 }
 	};
 	if (sl)

@@ -33,17 +33,13 @@
  * convert from unix names to network names and vice-versa
  * This module is operating system dependent!
  * What we define here will work with any unix system that has adopted
- * the sun NIS domain architecture.
+ * the Sun RPC domain architecture.
  */
 
 #include "namespace.h"
 #include <sys/param.h>
 #include <rpc/rpc.h>
 #include <rpc/rpc_com.h>
-#ifdef YP
-#include <rpcsvc/yp_prot.h>
-#include <rpcsvc/ypclnt.h>
-#endif
 #include <ctype.h>
 #include <limits.h>
 #include <stdio.h>

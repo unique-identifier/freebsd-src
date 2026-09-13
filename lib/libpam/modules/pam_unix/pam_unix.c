@@ -54,10 +54,6 @@
 
 #include <libutil.h>
 
-#ifdef YP
-#include <ypclnt.h>
-#endif
-
 #define PAM_SM_AUTH
 #define PAM_SM_ACCOUNT
 #define	PAM_SM_PASSWORD
@@ -78,7 +74,6 @@ static void makesalt(char [SALTSIZE + 1]);
 static char password_hash[] =		PASSWORD_HASH;
 
 #define PAM_OPT_LOCAL_PASS	"local_pass"
-#define PAM_OPT_NIS_PASS	"nis_pass"
 
 /*
  * authentication management
@@ -273,16 +268,12 @@ pam_sm_acct_mgmt(pam_handle_t *pamh, int flags __unused,
 /*
  * password management
  *
- * standard Unix and NIS password changing
+ * standard Unix password changing
  */
 PAM_EXTERN int
 pam_sm_chauthtok(pam_handle_t *pamh, int flags,
     int argc __unused, const char *argv[] __unused)
 {
-#ifdef YP
-	struct ypclnt *ypclnt;
-	const void *yp_domain, *yp_server;
-#endif
 	char salt[SALTSIZE + 1];
 	login_cap_t *lc;
 	struct passwd *pwd, *old_pwd;
@@ -313,31 +304,6 @@ pam_sm_chauthtok(pam_handle_t *pamh, int flags,
 		    (pwd->pw_fields & _PWF_SOURCE) == _PWF_FILES)
 			/* root doesn't need the old password */
 			return (pam_set_item(pamh, PAM_OLDAUTHTOK, ""));
-#ifdef YP
-		if (getuid() == 0 &&
-		    (pwd->pw_fields & _PWF_SOURCE) == _PWF_NIS) {
-
-			yp_domain = yp_server = NULL;
-			(void)pam_get_data(pamh, "yp_domain", &yp_domain);
-			(void)pam_get_data(pamh, "yp_server", &yp_server);
-
-			ypclnt = ypclnt_new(yp_domain, "passwd.byname", yp_server);
-			if (ypclnt == NULL)
-				return (PAM_BUF_ERR);
-
-			if (ypclnt_connect(ypclnt) == -1) {
-				ypclnt_free(ypclnt);
-				return (PAM_SERVICE_ERR);
-			}
-
-			retval = ypclnt_havepasswdd(ypclnt);
-			ypclnt_free(ypclnt);
-			if (retval == 1)
-				return (pam_set_item(pamh, PAM_OLDAUTHTOK, ""));
-			else if (retval == -1)
-				return (PAM_SERVICE_ERR);
-		}
-#endif
 		if (pwd->pw_passwd[0] == '\0'
 		    && openpam_get_option(pamh, PAM_OPT_NULLOK)) {
 			/*
@@ -406,10 +372,8 @@ pam_sm_chauthtok(pam_handle_t *pamh, int flags,
 		login_close(lc);
 		makesalt(salt);
 		pwd->pw_passwd = crypt(new_pass, salt);
-#ifdef YP
 		switch (old_pwd->pw_fields & _PWF_SOURCE) {
 		case _PWF_FILES:
-#endif
 			retval = PAM_SERVICE_ERR;
 			if (pw_init(NULL, NULL))
 				openpam_log(PAM_LOG_ERROR, "pw_init() failed");
@@ -424,31 +388,12 @@ pam_sm_chauthtok(pam_handle_t *pamh, int flags,
 			else
 				retval = PAM_SUCCESS;
 			pw_fini();
-#ifdef YP
-			break;
-		case _PWF_NIS:
-			yp_domain = yp_server = NULL;
-			(void)pam_get_data(pamh, "yp_domain", &yp_domain);
-			(void)pam_get_data(pamh, "yp_server", &yp_server);
-			ypclnt = ypclnt_new(yp_domain,
-			    "passwd.byname", yp_server);
-			if (ypclnt == NULL) {
-				retval = PAM_BUF_ERR;
-			} else if (ypclnt_connect(ypclnt) == -1 ||
-			    ypclnt_passwd(ypclnt, pwd, old_pass) == -1) {
-				openpam_log(PAM_LOG_ERROR, "%s", ypclnt->error);
-				retval = PAM_SERVICE_ERR;
-			} else {
-				retval = PAM_SUCCESS;
-			}
-			ypclnt_free(ypclnt);
 			break;
 		default:
 			openpam_log(PAM_LOG_ERROR, "unsupported source 0x%x",
 			    pwd->pw_fields & _PWF_SOURCE);
 			retval = PAM_SERVICE_ERR;
 		}
-#endif
 		free(old_pwd);
 	}
 	else {

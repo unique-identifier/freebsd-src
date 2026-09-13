@@ -44,12 +44,6 @@
 
 #include <net/ethernet.h>
 
-#ifdef YP
-#include <rpc/rpc.h>
-#include <rpcsvc/yp_prot.h>
-#include <rpcsvc/ypclnt.h>
-#endif
-
 #include <paths.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -132,7 +126,7 @@ ether_ntoa(const struct ether_addr *n)
 }
 
 /*
- * Map an ethernet address to a hostname. Use either /etc/ethers or NIS/YP.
+ * Map an ethernet address to a hostname. Use /etc/ethers.
  */
 int
 ether_ntohost(char *hostname, const struct ether_addr *e)
@@ -141,32 +135,12 @@ ether_ntohost(char *hostname, const struct ether_addr *e)
 	char buf[BUFSIZ + 2];
 	struct ether_addr local_ether;
 	char local_host[MAXHOSTNAMELEN];
-#ifdef YP
-	char *result;
-	int resultlen;
-	char *ether_a;
-	char *yp_domain;
-#endif
 
 	if ((fp = fopen(_PATH_ETHERS, "re")) == NULL)
 		return (1);
 	while (fgets(buf,BUFSIZ,fp)) {
 		if (buf[0] == '#')
 			continue;
-#ifdef YP
-		if (buf[0] == '+') {
-			if (yp_get_default_domain(&yp_domain))
-				continue;
-			ether_a = ether_ntoa(e);
-			if (yp_match(yp_domain, "ethers.byaddr", ether_a,
-			    strlen(ether_a), &result, &resultlen)) {
-				continue;
-			}
-			strncpy(buf, result, resultlen);
-			buf[resultlen] = '\0';
-			free(result);
-		}
-#endif
 		if (!ether_line(buf, &local_ether, local_host)) {
 			if (!bcmp((char *)&local_ether.octet[0],
 			    (char *)&e->octet[0], 6)) {
@@ -182,7 +156,7 @@ ether_ntohost(char *hostname, const struct ether_addr *e)
 }
 
 /*
- * Map a hostname to an ethernet address using /etc/ethers or NIS/YP.
+ * Map a hostname to an ethernet address using /etc/ethers.
  */
 int
 ether_hostton(const char *hostname, struct ether_addr *e)
@@ -191,30 +165,12 @@ ether_hostton(const char *hostname, struct ether_addr *e)
 	char buf[BUFSIZ + 2];
 	struct ether_addr local_ether;
 	char local_host[MAXHOSTNAMELEN];
-#ifdef YP
-	char *result;
-	int resultlen;
-	char *yp_domain;
-#endif
 
 	if ((fp = fopen(_PATH_ETHERS, "re")) == NULL)
 		return (1);
 	while (fgets(buf,BUFSIZ,fp)) {
 		if (buf[0] == '#')
 			continue;
-#ifdef YP
-		if (buf[0] == '+') {
-			if (yp_get_default_domain(&yp_domain))
-				continue;
-			if (yp_match(yp_domain, "ethers.byname", hostname,
-			    strlen(hostname), &result, &resultlen)) {
-				continue;
-			}
-			strncpy(buf, result, resultlen);
-			buf[resultlen] = '\0';
-			free(result);
-		}
-#endif
 		if (!ether_line(buf, &local_ether, local_host)) {
 			if (!strcmp(hostname, local_host)) {
 				/* We have a match. */

@@ -28,15 +28,6 @@ RCLINKS=	rc.8 rc.d.8 \
 		rc.8 rc.suspend.8
 RCPACKAGE=	rc
 
-.if ${MK_NIS} != "no"
-MANGROUPS+=	YP
-YP=		yp.8
-YPLINKS=	yp.8 NIS.8 \
-		yp.8 nis.8 \
-		yp.8 YP.8
-YPPACKAGE=	yp
-.endif
-
 # This makes more sense for aarch 64 and amd64
 # we decide to install all manpages in all architectures
 _uefi.8= uefi.8

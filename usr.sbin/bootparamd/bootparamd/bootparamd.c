@@ -8,11 +8,6 @@ use and modify. Please send modifications and/or suggestions + bug fixes to
 */
 
 #include <sys/cdefs.h>
-#ifdef YP
-#include <rpc/rpc.h>
-#include <rpcsvc/yp_prot.h>
-#include <rpcsvc/ypclnt.h>
-#endif
 #include "bootparam_prot.h"
 #include <ctype.h>
 #include <err.h>
@@ -181,11 +176,6 @@ getthefile(char *l_askname, char *fileid, char *buf, int blen __unused)
 {
   FILE *bpf;
   char  *where;
-#ifdef YP
-  static char *result;
-  int resultlen;
-  static char *yp_domain;
-#endif
 
   int ch, pch, fid_len, res = 0;
   int match = 0;
@@ -200,39 +190,13 @@ getthefile(char *l_askname, char *fileid, char *buf, int blen __unused)
 
   /* XXX see comment below */
   while ( fscanf(bpf, "%255s", hostname) > 0  && !match ) {
-    if ( *hostname != '#' ) { /* comment */
+    if ( *hostname != '#' && *hostname != '+' ) { /* comment */
       if ( ! strcmp(hostname, l_askname) ) {
 	match = 1;
       } else {
 	he = gethostbyname(hostname);
 	if (he && !strcmp(he->h_name, l_askname)) match = 1;
       }
-    }
-    if (*hostname == '+' ) { /* NIS */
-#ifdef YP
-      if (yp_get_default_domain(&yp_domain)) {
-	 if (debug) warn("NIS");
-	 return(0);
-      }
-      if (yp_match(yp_domain, "bootparams", l_askname, strlen(l_askname),
-		&result, &resultlen))
-	return (0);
-      if (strstr(result, fileid) == NULL) {
-	buf[0] = '\0';
-      } else {
-	snprintf(buf, blen,
-		"%s",strchr(strstr(result,fileid), '=') + 1);
-	if (strchr(buf, ' ') != NULL)
-	  *(char *)(strchr(buf, ' ')) = '\0';
-      }
-      if (fclose(bpf))
-        warnx("could not close %s", bootpfile);
-      return(1);
-#else
-      if (fclose(bpf))
-        warnx("could not close %s", bootpfile);
-      return(0);	/* ENOTSUP */
-#endif
     }
     /* skip to next entry */
     if ( match ) break;
@@ -288,11 +252,6 @@ checkhost(char *l_askname, char *l_hostname, int len __unused)
   int ch, pch;
   FILE *bpf;
   int res = 0;
-#ifdef YP
-  static char *result;
-  int resultlen;
-  static char *yp_domain;
-#endif
 
 /*  struct hostent *cmp_he;*/
 
@@ -303,7 +262,7 @@ checkhost(char *l_askname, char *l_hostname, int len __unused)
   /* XXX there is no way in ISO C to specify the maximal length for a
      conversion in a variable way */
   while ( fscanf(bpf, "%254s", l_hostname) > 0 ) {
-    if ( *l_hostname != '#' ) { /* comment */
+    if ( *l_hostname != '#' && *l_hostname != '+' ) { /* comment */
       if ( ! strcmp(l_hostname, l_askname) ) {
         /* return true for match of l_hostname */
         res = 1;
@@ -317,29 +276,6 @@ checkhost(char *l_askname, char *l_hostname, int len __unused)
 	  break;
         }
       }
-    }
-    if (*l_hostname == '+' ) { /* NIS */
-#ifdef YP
-      if (yp_get_default_domain(&yp_domain)) {
-	 if (debug) warn("NIS");
-	 return(0);
-      }
-      if (!yp_match(yp_domain, "bootparams", l_askname, strlen(l_askname),
-		&result, &resultlen)) {
-        /* return true for match of hostname */
-        he = NULL;
-        he = gethostbyname(l_askname);
-        if (he && !strcmp(l_askname, he->h_name)) {
-  	  res = 1;
-	  snprintf(l_hostname, len, "%s", he->h_name);
-	}
-      }
-      if (fclose(bpf))
-        warnx("could not close %s", bootpfile);
-      return(res);
-#else
-      return(0);	/* ENOTSUP */
-#endif
     }
     /* skip to next entry */
     pch = ch = getc(bpf);

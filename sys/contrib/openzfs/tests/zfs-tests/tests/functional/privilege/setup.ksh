@@ -33,15 +33,7 @@
 . $STF_SUITE/include/libtest.shlib
 
 ZFS_USER=zfsrbac
-USES_NIS=false
 
-# if we're running NIS, turn it off until we clean up
-# (it can cause useradd to take a long time, hitting our TIMEOUT)
-if svcs svc:/network/nis/client:default | grep -q online
-then
-  svcadm disable svc:/network/nis/client:default
-  USES_NIS=true
-fi
 
 
 # create a unique user that we can use to run the tests,
@@ -62,6 +54,5 @@ log_must mkdir -p /export/home/$ZFS_USER
 log_must useradd -c "ZFS Privileges Test User" -d /export/home/$ZFS_USER $ZFS_USER
 
 echo $ZFS_USER > $TEST_BASE_DIR/zfs-privs-test-user.txt
-echo $USES_NIS > $TEST_BASE_DIR/zfs-privs-test-nis.txt
 
 log_pass

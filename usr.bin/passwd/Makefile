@@ -6,12 +6,9 @@ BINOWN	 = root
 BINMODE	 = 4555
 PRECIOUSPROG=
 LIBADD   = pam
-.if ${MK_NIS} != "no"
-SYMLINKS = passwd ${BINDIR}/yppasswd
-.endif
 
 beforeinstall:
-.for i in passwd yppasswd
+.for i in passwd
 	[ ! -e ${DESTDIR}${BINDIR}/$i ] || \
 		chflags noschg ${DESTDIR}${BINDIR}/$i || true
 .endfor

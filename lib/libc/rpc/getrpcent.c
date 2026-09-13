@@ -46,10 +46,6 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <rpc/rpc.h>
-#ifdef YP
-#include <rpcsvc/yp_prot.h>
-#include <rpcsvc/ypclnt.h>
-#endif
 #include <unistd.h>
 #include "namespace.h"
 #include "reentrant.h"
@@ -73,9 +69,6 @@ enum constants
 
 static const ns_src defaultsrc[] = {
 	{ NSSRC_FILES, NS_SUCCESS },
-#ifdef YP
-	{ NSSRC_NIS, NS_SUCCESS },
-#endif
 	{ NULL, 0 }
 };
 
@@ -90,23 +83,6 @@ static	int	files_setrpcent(void *, void *, va_list);
 
 static	void	files_endstate(void *);
 NSS_TLS_HANDLING(files);
-
-/* nis backend declarations */
-#ifdef YP
-struct nis_state {
-	char	domain[MAXHOSTNAMELEN];
-	char	*current;
-	int	currentlen;
-	int	stepping;
-	int	no_name_map;
-};
-
-static	int	nis_rpcent(void *, void *, va_list);
-static	int	nis_setrpcent(void *, void *, va_list);
-
-static	void	nis_endstate(void *);
-NSS_TLS_HANDLING(nis);
-#endif
 
 /* get** wrappers for get**_r functions declarations */
 struct rpcent_state {
@@ -365,235 +341,6 @@ files_setrpcent(void *retval, void *mdata, va_list ap)
 	return (NS_UNAVAIL);
 }
 
-/* nis backend implementation */
-#ifdef YP
-static 	void
-nis_endstate(void *p)
-{
-	if (p == NULL)
-		return;
-
-	free(((struct nis_state *)p)->current);
-	free(p);
-}
-
-static int
-nis_rpcent(void *retval, void *mdata, va_list ap)
-{
-	char		*name;
-	int		number;
-	struct rpcent	*rpc;
-	char		*buffer;
-	size_t	bufsize;
-	int		*errnop;
-
-	char		**rp;
-	char		**aliases;
-	int		aliases_size;
-
-	char	*lastkey;
-	char	*resultbuf;
-	int	resultbuflen;
-	char	*buf;
-
-	struct nis_state	*st;
-	int		rv;
-	enum nss_lookup_type	how;
-	int	no_name_active;
-
-	how = (enum nss_lookup_type)(uintptr_t)mdata;
-	switch (how)
-	{
-	case nss_lt_name:
-		name = va_arg(ap, char *);
-		break;
-	case nss_lt_id:
-		number = va_arg(ap, int);
-		break;
-	case nss_lt_all:
-		break;
-	default:
-		return (NS_NOTFOUND);
-	}
-
-	buf = NULL;
-	rpc = va_arg(ap, struct rpcent *);
-	buffer = va_arg(ap, char *);
-	bufsize = va_arg(ap, size_t);
-	errnop = va_arg(ap, int *);
-
-	*errnop = nis_getstate(&st);
-	if (*errnop != 0)
-		return (NS_UNAVAIL);
-
-	if (st->domain[0] == '\0') {
-		if (getdomainname(st->domain, sizeof(st->domain)) != 0) {
-			*errnop = errno;
-			return (NS_UNAVAIL);
-		}
-	}
-
-	no_name_active = 0;
-	do {
-		switch (how)
-		{
-		case nss_lt_name:
-			if (!st->no_name_map)
-			{
-				free(buf);
-				asprintf(&buf, "%s", name);
-				if (buf == NULL)
-					return (NS_TRYAGAIN);
-				rv = yp_match(st->domain, "rpc.byname", buf,
-			    		strlen(buf), &resultbuf, &resultbuflen);
-
-				switch (rv) {
-				case 0:
-					break;
-				case YPERR_MAP:
-					st->stepping = 0;
-					no_name_active = 1;
-					how = nss_lt_all;
-
-					rv = NS_NOTFOUND;
-					continue;
-				default:
-					rv = NS_NOTFOUND;
-					goto fin;
-				}
-			} else {
-				st->stepping = 0;
-				no_name_active = 1;
-				how = nss_lt_all;
-
-				rv = NS_NOTFOUND;
-				continue;
-			}
-		break;
-		case nss_lt_id:
-			free(buf);
-			asprintf(&buf, "%d", number);
-			if (buf == NULL)
-				return (NS_TRYAGAIN);
-			if (yp_match(st->domain, "rpc.bynumber", buf,
-			    	strlen(buf), &resultbuf, &resultbuflen)) {
-				rv = NS_NOTFOUND;
-				goto fin;
-			}
-			break;
-		case nss_lt_all:
-				if (!st->stepping) {
-					rv = yp_first(st->domain, "rpc.bynumber",
-				    		&st->current,
-						&st->currentlen, &resultbuf,
-				    		&resultbuflen);
-					if (rv) {
-						rv = NS_NOTFOUND;
-						goto fin;
-					}
-					st->stepping = 1;
-				} else {
-					lastkey = st->current;
-					rv = yp_next(st->domain, "rpc.bynumber",
-				    		st->current,
-						st->currentlen, &st->current,
-				    		&st->currentlen,
-						&resultbuf,	&resultbuflen);
-					free(lastkey);
-					if (rv) {
-						st->stepping = 0;
-						rv = NS_NOTFOUND;
-						goto fin;
-					}
-				}
-			break;
-		}
-
-		/* we need a room for additional \n symbol */
-		if (bufsize <= resultbuflen + 1 + _ALIGNBYTES +
-		    sizeof(char *)) {
-			*errnop = ERANGE;
-			rv = NS_RETURN;
-			free(resultbuf);
-			break;
-		}
-
-		aliases=(char **)_ALIGN(&buffer[resultbuflen+2]);
-		aliases_size = (buffer + bufsize - (char *)aliases) /
-			sizeof(char *);
-		if (aliases_size < 1) {
-			*errnop = ERANGE;
-			rv = NS_RETURN;
-			free(resultbuf);
-			break;
-		}
-
-		/*
-		 * rpcent_unpack expects lines terminated with \n -- make it happy
-		 */
-		memcpy(buffer, resultbuf, resultbuflen);
-		buffer[resultbuflen] = '\n';
-		buffer[resultbuflen+1] = '\0';
-		free(resultbuf);
-
-		if (rpcent_unpack(buffer, rpc, aliases, aliases_size,
-		    errnop) != 0) {
-			if (*errnop == 0)
-				rv = NS_NOTFOUND;
-			else
-				rv = NS_RETURN;
-		} else {
-			if ((how == nss_lt_all) && (no_name_active != 0)) {
-				if (strcmp(rpc->r_name, name) == 0)
-					goto done;
-				for (rp = rpc->r_aliases; *rp != NULL; rp++) {
-					if (strcmp(*rp, name) == 0)
-						goto done;
-				}
-				rv = NS_NOTFOUND;
-				continue;
-done:
-				rv = NS_SUCCESS;
-			} else
-				rv = NS_SUCCESS;
-		}
-
-	} while (!(rv & NS_TERMINATE) && (how == nss_lt_all));
-
-fin:
-	free(buf);
-	if ((rv == NS_SUCCESS) && (retval != NULL))
-		*((struct rpcent **)retval) = rpc;
-
-	return (rv);
-}
-
-static int
-nis_setrpcent(void *retval, void *mdata, va_list ap)
-{
-	struct nis_state	*st;
-	int	rv;
-
-	rv = nis_getstate(&st);
-	if (rv != 0)
-		return (NS_UNAVAIL);
-
-	switch ((enum constants)(uintptr_t)mdata)
-	{
-	case SETRPCENT:
-	case ENDRPCENT:
-		free(st->current);
-		st->current = NULL;
-		st->stepping = 0;
-		break;
-	default:
-		break;
-	}
-
-	return (NS_UNAVAIL);
-}
-#endif
-
 #ifdef NS_CACHING
 static int
 rpc_id_func(char *buffer, size_t *buffer_size, va_list ap, void *cache_mdata)
@@ -814,9 +561,6 @@ getrpcbyname_r(const char *name, struct rpcent *rpc, char *buffer,
 #endif
 	static const ns_dtab dtab[] = {
 		{ NSSRC_FILES, files_rpcent, (void *)nss_lt_name },
-#ifdef YP
-		{ NSSRC_NIS, nis_rpcent, (void *)nss_lt_name },
-#endif
 #ifdef NS_CACHING
 		NS_CACHE_CB(&cache_info)
 #endif
@@ -847,9 +591,6 @@ getrpcbynumber_r(int number, struct rpcent *rpc, char *buffer,
 #endif
 	static const ns_dtab dtab[] = {
 		{ NSSRC_FILES, files_rpcent, (void *)nss_lt_id },
-#ifdef YP
-		{ NSSRC_NIS, nis_rpcent, (void *)nss_lt_id },
-#endif
 #ifdef NS_CACHING
 		NS_CACHE_CB(&cache_info)
 #endif
@@ -879,9 +620,6 @@ getrpcent_r(struct rpcent *rpc, char *buffer, size_t bufsize,
 #endif
 	static const ns_dtab dtab[] = {
 		{ NSSRC_FILES, files_rpcent, (void *)nss_lt_all },
-#ifdef YP
-		{ NSSRC_NIS, nis_rpcent, (void *)nss_lt_all },
-#endif
 #ifdef NS_CACHING
 		NS_CACHE_CB(&cache_info)
 #endif
@@ -1014,9 +752,6 @@ setrpcent(int stayopen)
 
 	static const ns_dtab dtab[] = {
 		{ NSSRC_FILES, files_setrpcent, (void *)SETRPCENT },
-#ifdef YP
-		{ NSSRC_NIS, nis_setrpcent, (void *)SETRPCENT },
-#endif
 #ifdef NS_CACHING
 		NS_CACHE_CB(&cache_info)
 #endif
@@ -1038,9 +773,6 @@ endrpcent(void)
 
 	static const ns_dtab dtab[] = {
 		{ NSSRC_FILES, files_setrpcent, (void *)ENDRPCENT },
-#ifdef YP
-		{ NSSRC_NIS, nis_setrpcent, (void *)ENDRPCENT },
-#endif
 #ifdef NS_CACHING
 		NS_CACHE_CB(&cache_info)
 #endif

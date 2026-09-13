@@ -102,7 +102,6 @@ DIRDEPS = \
 	lib/libvmmapi \
 	lib/libwrap \
 	lib/libxo/libxo \
-	lib/libypclnt \
 	lib/libz \
 	lib/libzstd \
 	lib/msun \

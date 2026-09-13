@@ -126,28 +126,6 @@ dovend_rfc1497(struct host *hp, byte *buf, int len)
 		vp += len;
 		bytesleft -= len + 2;
 	}
-	/*
-	 * NIS (YP) server and domain
-	 */
-	if (hp->flags.nis_server) {
-		if (insert_ip(TAG_NIS_SERVER,
-					  hp->nis_server,
-					  &vp, &bytesleft))
-			NEED(8, "ys");
-	}
-	if (hp->flags.nis_domain) {
-		/*
-		 * Check for room for nis_domain.  Add 2 to account for
-		 * TAG_NIS_DOMAIN and length.
-		 */
-		len = strlen(hp->nis_domain->string);
-		NEED((len + 2), "yn");
-		*vp++ = TAG_NIS_DOMAIN;
-		*vp++ = (byte) (len & 0xFF);
-		bcopy(hp->nis_domain->string, vp, len);
-		vp += len;
-		bytesleft -= len + 2;
-	}
 	/* IEN 116 name server */
 	if (hp->flags.name_server) {
 		if (insert_ip(TAG_NAME_SERVER,

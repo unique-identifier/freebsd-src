@@ -26,9 +26,7 @@ LDIRS=	BSD_daemon \
 	ses \
 	scsi_target \
 	sound \
-	sunrpc \
-	ypldap
-
+	sunrpc
 
 SE_DIRS+=	BSD_daemon
 SE_BSD_DAEMON= \
@@ -113,7 +111,7 @@ SE_KLD=	Makefile
 SE_DIRS+=	kld/cdev
 SE_KLD_CDEV= \
 	Makefile \
-	README \
+	README
 
 SE_DIRS+=	kld/cdev/module
 SE_KLD_CDEV_MODULE= \
@@ -188,7 +186,7 @@ SE_NETGRAPH= \
 	raw \
 	udp.tunnel \
 	virtual.chain \
-	virtual.lan \
+	virtual.lan
 
 SE_DIRS+=	oci
 SE_OCI= \
@@ -199,7 +197,7 @@ SE_DIRS+=	perfmon
 SE_PERFMON= \
 	Makefile \
 	README \
-	perfmon.c \
+	perfmon.c
 
 .if ${MK_PF} != "no"
 SE_DIRS+=	pf
@@ -331,10 +329,6 @@ SE_DIRS+=	uefisign
 SE_UEFISIGN=	uefikeys
 SE_UEFISIGNPACKAGE=efi-tools
 .endif
-
-SE_DIRS+=	ypldap
-SE_YPLDAP=	ypldap.conf
-SE_YPLDAPPACKAGE=yp
 
 .if ${MK_HAST} != "no"
 LDIRS+=		hast

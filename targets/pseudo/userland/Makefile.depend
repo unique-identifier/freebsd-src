@@ -374,9 +374,6 @@ DIRDEPS+= \
 	usr.bin/xzdec \
 	usr.bin/yacc \
 	usr.bin/yes \
-	usr.bin/ypcat \
-	usr.bin/ypmatch \
-	usr.bin/ypwhich \
 	usr.bin/zstd \
 	usr.sbin/IPXrouted \
 	usr.sbin/ac \
@@ -626,9 +623,6 @@ DIRDEPS+= \
 	usr.sbin/rpc.lockd \
 	usr.sbin/rpc.statd \
 	usr.sbin/rpc.umntall \
-	usr.sbin/rpc.yppasswdd \
-	usr.sbin/rpc.ypupdated \
-	usr.sbin/rpc.ypxfrd \
 	usr.sbin/rpcbind \
 	usr.sbin/rrenumd \
 	usr.sbin/rtadvctl \
@@ -681,13 +675,6 @@ DIRDEPS+= \
 	usr.sbin/wpa/wpa_cli \
 	usr.sbin/wpa/wpa_passphrase \
 	usr.sbin/wpa/wpa_supplicant \
-	usr.sbin/yp_mkdb \
-	usr.sbin/ypbind \
-	usr.sbin/ypldap \
-	usr.sbin/yppoll \
-	usr.sbin/yppush \
-	usr.sbin/ypserv \
-	usr.sbin/ypset \
 	usr.sbin/zic/zdump \
 	usr.sbin/zic/zic \
 	usr.sbin/zonectl \

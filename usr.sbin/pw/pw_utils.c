@@ -73,26 +73,6 @@ get_userconfig(const char *config)
 	return (read_userconfig(defaultcfg));
 }
 
-int
-nis_update(void) {
-	pid_t pid;
-	int i;
-
-	fflush(NULL);
-	if ((pid = fork()) == -1) {
-		warn("fork()");
-		return (1);
-	}
-	if (pid == 0) {
-		execlp("/usr/bin/make", "make", "-C", "/var/yp/", (char*) NULL);
-		_exit(1);
-	}
-	waitpid(pid, &i, 0);
-	if ((i = WEXITSTATUS(i)) != 0)
-		errx(i, "make exited with status %d", i);
-	return (i);
-}
-
 static void
 metalog_emit_record(const char *path, const char *target, mode_t mode,
     uid_t uid, gid_t gid, int flags)

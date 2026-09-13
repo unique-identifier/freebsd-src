@@ -55,7 +55,6 @@ struct userconf {
 	int		default_password;	/* Default password for new users? */
 	int		reuse_uids;		/* Reuse uids? */
 	int		reuse_gids;		/* Reuse gids? */
-	char		*nispasswd;		/* Path to NIS version of the passwd file */
 	char		*dotdir;		/* Where to obtain skeleton files */
 	char		*newmail;		/* Mail to send to new accounts */
 	char		*logfile;		/* Where to log changes */

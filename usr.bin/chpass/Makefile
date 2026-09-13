@@ -7,28 +7,17 @@ SRCS=	chpass.c edit.c field.c pw_scan.c table.c util.c
 BINOWN=	root
 BINMODE=4555
 PRECIOUSPROG=
-.if ${MK_NIS} != "no"
-CFLAGS+= -DYP
-.endif
 #Some people need this, uncomment to activate
 #CFLAGS+=-DRESTRICT_FULLNAME_CHANGE
 CFLAGS+=-I${SRCTOP}/lib/libc/gen -I.
 
 LIBADD=	crypt util
-.if ${MK_NIS} != "no"
-LIBADD+=	ypclnt
-.endif 
 
 SYMLINKS=	chpass ${BINDIR}/chfn
 SYMLINKS+=	chpass ${BINDIR}/chsh
-.if ${MK_NIS} != "no"
-SYMLINKS+=	chpass ${BINDIR}/ypchfn
-SYMLINKS+=	chpass ${BINDIR}/ypchpass
-SYMLINKS+=	chpass ${BINDIR}/ypchsh
-.endif
 
 beforeinstall:
-.for i in chpass chfn chsh ypchpass ypchfn ypchsh
+.for i in chpass chfn chsh
 .if exists(${DESTDIR}${BINDIR}/$i)
 	-chflags noschg ${DESTDIR}${BINDIR}/$i
 .endif

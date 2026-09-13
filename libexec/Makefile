@@ -10,11 +10,9 @@ SUBDIR=	${_atf} \
 	flua \
 	getty \
 	${_hyperv} \
-	${_mknetid} \
 	${_phttpget} \
 	${_pppoed} \
 	rc \
-	revnetgroup \
 	${_rlogind} \
 	rpc.rquotad \
 	rpc.rstatd \
@@ -26,8 +24,7 @@ SUBDIR=	${_atf} \
 	save-entropy \
 	${_nuageinit} \
 	${_tests} \
-	ulog-helper \
-	${_ypxfr}
+	ulog-helper
 
 .if ${MK_AT} != "no"
 _atrun=		atrun
@@ -55,11 +52,6 @@ _dma=		dma
 
 .if ${MK_HYPERV} != "no"
 _hyperv+=	hyperv
-.endif
-
-.if ${MK_NIS} != "no"
-_mknetid=	mknetid
-_ypxfr=		ypxfr
 .endif
 
 .if ${MK_NETGRAPH} != "no"

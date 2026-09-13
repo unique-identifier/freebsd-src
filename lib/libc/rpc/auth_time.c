@@ -7,7 +7,7 @@
  * possible without calling any functions that may invoke the name
  * service. (netdir_getbyxxx, getXbyY, etc). The function is used in the
  * synchronize call of the authdes code to synchronize clocks between
- * NIS+ clients and their servers.
+ * Secure RPC clients and their servers.
  *
  * Note to minimize the amount of duplicate code, portions of the
  * synchronize() function were folded into this code, and the synchronize
@@ -20,9 +20,9 @@
  *
  * Side effects :
  *	When called a client handle to a RPCBIND process is created
- *	and destroyed. Two strings "netid" and "uaddr" are malloc'd
- *	and returned. The SIGALRM processing is modified only if
- *	needed to deal with TCP connections.
+ *	and destroyed. The "uaddr" string is allocated and returned.
+ *	The SIGALRM processing is modified only if needed to deal with
+ *	TCP connections.
  */
 
 #include "namespace.h"
@@ -40,8 +40,6 @@
 #include <rpc/rpc.h>
 #include <rpc/rpc_com.h>
 #include <rpc/rpcb_prot.h>
-#undef NIS
-#include <rpcsvc/nis.h>
 #include "un-namespace.h"
 
 extern int _rpc_dtablesize( void );
@@ -52,6 +50,19 @@ extern int _rpc_dtablesize( void );
 #else
 #define	msg(x)
 #endif
+
+struct rpc_time_endpoint {
+	char *uaddr;
+	char *family;
+	char *proto;
+};
+
+struct rpc_time_server {
+	struct {
+		u_int ep_len;
+		struct rpc_time_endpoint *ep_val;
+	} ep;
+};
 
 static int saw_alarm = 0;
 
@@ -73,7 +84,7 @@ alarm_hndler(int s)
 
 
 /*
- * Stolen from rpc.nisd:
+ * Convert a universal address to a socket address:
  * Turn a 'universal address' into a struct sockaddr_in.
  * Bletch.
  */
@@ -107,7 +118,7 @@ static int uaddr_to_sockaddr(char *uaddr, struct sockaddr_in *sin)
  * Free the strings that were strduped into the eps structure.
  */
 static void
-free_eps(endpoint eps[], int num)
+free_eps(struct rpc_time_endpoint eps[], int num)
 {
 	int		i;
 
@@ -119,46 +130,21 @@ free_eps(endpoint eps[], int num)
 	return;
 }
 
-/*
- * get_server()
- *
- * This function constructs a nis_server structure description for the
- * indicated hostname.
- *
- * NOTE: There is a chance we may end up recursing here due to the
- * fact that gethostbyname() could do an NIS search. Ideally, the
- * NIS+ server will call __rpc_get_time_offset() with the nis_server
- * structure already populated.
- *
- * host  - name of the time host
- * srv   - nis_server struct to use.
- * eps[] - array of endpoints
- * maxep - max array size
- */
-static nis_server *
-get_server(struct sockaddr_in *sin, char *host, nis_server *srv,
-    endpoint eps[], int maxep)
+/* Resolve a time host into TCP and UDP transport endpoints. */
+static struct rpc_time_server *
+get_server(char *host, struct rpc_time_server *srv,
+    struct rpc_time_endpoint eps[], int maxep)
 {
 	char			hname[256];
 	int			num_ep = 0, i;
 	struct hostent		*he;
-	struct hostent		dummy;
-	char			*ptr[2];
-	endpoint		*ep;
+	struct rpc_time_endpoint		*ep;
 
-	if (host == NULL && sin == NULL)
+	if (host == NULL)
 		return (NULL);
-
-	if (sin == NULL) {
-		he = gethostbyname(host);
-		if (he == NULL)
-			return(NULL);
-	} else {
-		he = &dummy;
-		ptr[0] = (char *)&sin->sin_addr.s_addr;
-		ptr[1] = NULL;
-		dummy.h_addr_list = ptr;
-	}
+	he = gethostbyname(host);
+	if (he == NULL)
+		return (NULL);
 
 	/*
 	 * This is lame. We go around once for TCP, then again
@@ -194,20 +180,15 @@ get_server(struct sockaddr_in *sin, char *host, nis_server *srv,
 		}
 	}
 
-	srv->name = (nis_name) host;
 	srv->ep.ep_len = num_ep;
 	srv->ep.ep_val = eps;
-	srv->key_type = NIS_PK_NONE;
-	srv->pkey.n_bytes = NULL;
-	srv->pkey.n_len = 0;
 	return (srv);
 }
 
 /*
  * __rpc_get_time_offset()
  *
- * This function uses a nis_server structure to contact the a remote
- * machine (as named in that structure) and returns the offset in time
+ * This function contacts a remote time host and returns the offset in time
  * between that machine and this one. This offset is returned in seconds
  * and may be positive or negative.
  *
@@ -218,25 +199,21 @@ get_server(struct sockaddr_in *sin, char *host, nis_server *srv,
  * time service.
  *
  * Once through, *uaddr is set to the universal address of
- * the machine and *netid is set to the local netid for the transport
- * that uaddr goes with. On the second call, the netconfig stuff
- * is skipped and the uaddr/netid pair are used to fetch the netconfig
- * structure and to then contact the machine for the time.
+ * the machine. On subsequent calls, this address is reused to contact
+ * the machine for the time.
  *
  * td = "server" - "client"
  *
  * td    - Time difference
- * srv   - NIS Server description
- * thost - if no server, this is the timehost
+ * thost - time host
  * uaddr - known universal address
- * netid - known network identifier
  */
 int
-__rpc_get_time_offset(struct timeval *td, nis_server *srv, char *thost,
-    char **uaddr, struct sockaddr_in *netid)
+__rpc_get_time_offset(struct timeval *td, char *thost,
+    char **uaddr)
 {
 	CLIENT			*clnt; 		/* Client handle 	*/
-	endpoint		*ep,		/* useful endpoints	*/
+	struct rpc_time_endpoint		*ep,		/* useful endpoints	*/
 				*useep = NULL;	/* endpoint of xp	*/
 	char			*useua = NULL;	/* uaddr of selected xp	*/
 	int			epl, i;		/* counters		*/
@@ -248,8 +225,8 @@ __rpc_get_time_offset(struct timeval *td, nis_server *srv, char *thost,
 	int			udp_ep = -1, tcp_ep = -1;
 	int			a1, a2, a3, a4;
 	char			ut[64], ipuaddr[64];
-	endpoint		teps[32];
-	nis_server		tsrv;
+	struct rpc_time_endpoint		teps[32];
+	struct rpc_time_server		tsrv, *srv;
 	void			(*oldsig)(int) = NULL; /* old alarm handler */
 	struct sockaddr_in	sin;
 	socklen_t		len;
@@ -264,18 +241,12 @@ __rpc_get_time_offset(struct timeval *td, nis_server *srv, char *thost,
 	 * server.
 	 */
 	if (*uaddr == NULL) {
-		if ((srv != NULL) && (thost != NULL)) {
-			msg("both timehost and srv pointer used!");
+		srv = get_server(thost, &tsrv, teps, 32);
+		if (srv == NULL) {
+			msg("unable to construct server data.");
 			return (0);
 		}
-		if (! srv) {
-			srv = get_server(netid, thost, &tsrv, teps, 32);
-			if (srv == NULL) {
-				msg("unable to contruct server data.");
-				return (0);
-			}
-			needfree = 1;	/* need to free data in endpoints */
-		}
+		needfree = 1;
 
 		ep = srv->ep.ep_val;
 		epl = srv->ep.ep_len;
@@ -314,7 +285,7 @@ __rpc_get_time_offset(struct timeval *td, nis_server *srv, char *thost,
 	if (*uaddr != NULL)
 		useua = *uaddr;
 
-	/* Fixup test for NIS+ */
+	/* Use the rpcbind port for the time query. */
 	sscanf(useua, "%d.%d.%d.%d.", &a1, &a2, &a3, &a4);
 	sprintf(ipuaddr, "%d.%d.%d.%d.0.111", a1, a2, a3, a4);
 	useua = &ipuaddr[0];
@@ -424,7 +395,7 @@ __rpc_get_time_offset(struct timeval *td, nis_server *srv, char *thost,
 			alarm(20); /* only wait 20 seconds */
 			res = _connect(s, (struct sockaddr *)&sin, sizeof(sin));
 			if (res == -1) {
-				msg("failed to connect to tcp endpoint.");
+				msg("failed to connect to TCP endpoint.");
 				goto error;
 			}
 			if (saw_alarm) {

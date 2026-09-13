@@ -172,7 +172,6 @@ DIRDEPS = \
 	lib/libxo \
 	lib/liby \
 	lib/libyaml \
-	lib/libypclnt \
 	lib/libz \
 	lib/libzstd \
 	lib/msun \

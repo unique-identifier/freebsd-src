@@ -28,17 +28,6 @@
 . $STF_SUITE/tests/acl/acl_common.kshlib
 
 
-# check svc:/network/nis/client:default state
-# disable it if the state is ON
-# and the state will be restored during cleanup.ksh
-if [[ `$UNAME -s` != "FreeBSD" ]]; then
-	log_must $RM -f $NISSTAFILE
-	if [[ "ON" == $($SVCS -H -o sta svc:/network/nis/client:default) ]]; then
-	    log_must $SVCADM disable -t svc:/network/nis/client:default
-	    log_must $TOUCH $NISSTAFILE
-	fi
-fi
-
 cleanup_user_group
 
 # Add wheel group user

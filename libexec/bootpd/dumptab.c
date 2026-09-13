@@ -80,8 +80,6 @@ dumptab(char *filename)
 #\tto -- time offset (seconds)\n\
 #\tts -- time servers\n\
 #\tvm -- vendor magic number\n\
-#\tyd -- YP (NIS) domain\n\
-#\tys -- YP (NIS) servers\n\
 #\tTn -- generic option tag n\n\
 \n";
 
@@ -263,15 +261,6 @@ dump_host(FILE *fp, struct host *hp)
 						(int) ((hp->vm_cookie)[2]),
 						(int) ((hp->vm_cookie)[3]));
 			}
-		}
-		if (hp->flags.nis_domain) {
-			fprintf(fp, "\\\n\t:yd=%s:",
-					hp->nis_domain->string);
-		}
-		if (hp->flags.nis_server) {
-			fprintf(fp, "\\\n\t:ys=");
-			list_ipaddresses(fp, hp->nis_server);
-			fprintf(fp, ":");
 		}
 		/*
 		 * XXX - Add new tags here (or above,

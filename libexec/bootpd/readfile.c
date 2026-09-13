@@ -100,8 +100,6 @@ SOFTWARE.
 #define SYM_ROOT_PATH            27
 #define SYM_EXTEN_FILE           28
 #define SYM_REPLY_ADDR           29
-#define SYM_NIS_DOMAIN           30	/* RFC 1533 */
-#define SYM_NIS_SERVER           31	/* RFC 1533 */
 #define SYM_NTP_SERVER           32	/* RFC 1533 */
 #define SYM_EXEC_FILE		 33	/* YORK_EX_OPTION */
 #define SYM_MSG_SIZE 		 34
@@ -180,8 +178,6 @@ PRIVATE struct symbolmap symbol_list[] = {
 	{"to", SYM_TIME_OFFSET},
 	{"ts", SYM_TIME_SERVER},
 	{"vm", SYM_VENDOR_MAGIC},
-	{"yd", SYM_NIS_DOMAIN},
-	{"ys", SYM_NIS_SERVER},
 	/* XXX - Add new tags here */
 };
 
@@ -1076,14 +1072,6 @@ eval_symbol(char **symbol, struct host *hp)
 		PARSE_IA1(reply_addr);
 		break;
 
-	case SYM_NIS_DOMAIN:
-		PARSE_STR(nis_domain);
-		break;
-
-	case SYM_NIS_SERVER:
-		PARSE_IAL(nis_server);
-		break;
-
 	case SYM_NTP_SERVER:
 		PARSE_IAL(ntp_server);
 		break;
@@ -1462,8 +1450,6 @@ fill_defaults(struct host *hp, char **src)
 
 	DUP_COPY(reply_addr);
 
-	DUP_LINK(nis_domain);
-	DUP_LINK(nis_server);
 	DUP_LINK(ntp_server);
 
 #ifdef	YORK_EX_OPTION
@@ -1874,7 +1860,6 @@ free_host(hash_datum *hmp)
 	del_iplist(hostptr->name_server);
 	del_iplist(hostptr->rlp_server);
 	del_iplist(hostptr->time_server);
-	del_iplist(hostptr->nis_server);
 	del_iplist(hostptr->ntp_server);
 
 	/*
@@ -1890,7 +1875,6 @@ free_host(hash_datum *hmp)
 	del_string(hostptr->domain_name);
 	del_string(hostptr->dump_file);
 	del_string(hostptr->exten_file);
-	del_string(hostptr->nis_domain);
 
 #ifdef	YORK_EX_OPTION
 	del_string(hostptr->exec_file);

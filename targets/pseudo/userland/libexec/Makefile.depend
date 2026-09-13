@@ -14,10 +14,8 @@ DIRDEPS = \
 	libexec/ftpd \
 	libexec/getty \
 	libexec/hyperv \
-	libexec/mknetid \
 	libexec/pppoed \
 	libexec/rbootd \
-	libexec/revnetgroup \
 	libexec/rlogind \
 	libexec/rpc.rquotad \
 	libexec/rpc.rstatd \
@@ -29,7 +27,6 @@ DIRDEPS = \
 	libexec/save-entropy \
 	libexec/tcpd \
 	libexec/ulog-helper \
-	libexec/ypxfr \
 
 
 .if ${MK_BLOCKLIST_SUPPORT} != "no"

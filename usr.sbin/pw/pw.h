@@ -95,14 +95,8 @@ char *pw_checkname(char *name, int gecos);
 uintmax_t pw_checkid(char *nptr, uintmax_t maxval);
 int pw_checkfd(char *nptr);
 
-int addnispwent(const char *path, struct passwd *pwd);
-int delnispwent(const char *path, const char *login);
-int chgnispwent(const char *path, const char *login, struct passwd *pwd);
-
 int groupadd(struct userconf *, char *name, gid_t id, char *members, int fd,
     bool dryrun, bool pretty, bool precrypted);
-
-int nis_update(void);
 
 int boolean_val(char const * str, int dflt);
 int passwd_val(char const * str, int dflt);

@@ -42,8 +42,6 @@
 #include <pwd.h>
 #include <rpc/rpc.h>
 #include <rpc/key_prot.h>
-#include <rpcsvc/yp_prot.h>
-#include <rpcsvc/ypclnt.h>
 #include <string.h>
 
 extern int xdecrypt( char *, char * );

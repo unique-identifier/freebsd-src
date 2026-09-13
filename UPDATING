@@ -13,6 +13,18 @@ Items affecting the ports and packages system can be found in
 and/or ports.
 
 20260913:
+	NIS client and server support, NIS+ headers, and the NIS build option
+	have been removed.  libc no longer provides YP APIs or NIS name-service
+	backends.  Rebuild consumers of the removed interfaces.  New systems
+	use files for passwd, group, services, and netgroup lookups.  Existing
+	installations must migrate NIS accounts and maps to local files or
+	another supported name service and update /etc/nsswitch.conf, including
+	any *_compat entries.  Remove obsolete nis_* and rpc_ypupdated_* settings
+	from rc.conf.  NIS options in pw and passwd are no longer supported.
+	Upgrade cleanup removes installed NIS programs, headers, and libraries;
+	locally generated maps in /var/yp are not recursively deleted.
+
+20260913:
 	Manual-page upgrade cleanup now uses an explicit list of system
 	pages and aliases, including uncompressed, compressed, and formatted
 	copies and the former whatis/mandoc databases.  Run check-old before

@@ -372,7 +372,6 @@ pw_group_del(int argc, char **argv, char *arg1)
 	intmax_t id = -1;
 	int ch, rc;
 	bool quiet = false;
-	bool nis = false;
 
 	if (arg1 != NULL) {
 		if (arg1[strspn(arg1, "0123456789")] == '\0')
@@ -381,7 +380,7 @@ pw_group_del(int argc, char **argv, char *arg1)
 			name = arg1;
 	}
 
-	while ((ch = getopt(argc, argv, "C:qn:g:Y")) != -1) {
+	while ((ch = getopt(argc, argv, "C:qn:g:")) != -1) {
 		switch (ch) {
 		case 'C':
 			cfg = optarg;
@@ -394,9 +393,6 @@ pw_group_del(int argc, char **argv, char *arg1)
 			break;
 		case 'g':
 			id = pw_checkid(optarg, GID_MAX);
-			break;
-		case 'Y':
-			nis = true;
 			break;
 		default:
 			usage();
@@ -413,14 +409,11 @@ pw_group_del(int argc, char **argv, char *arg1)
 	cnf = get_userconfig(cfg);
 	rc = delgrent(grp);
 	if (rc == -1)
-		err(EX_IOERR, "group '%s' not available (NIS?)", name);
+		err(EX_IOERR, "group '%s' not available", name);
 	else if (rc != 0)
 		err(EX_IOERR, "group update");
 	pw_log(cnf, M_DELETE, W_GROUP, "%s(%ju) removed", name,
 	    (uintmax_t)id);
-
-	if (nis && nis_update() == 0)
-		pw_log(cnf, M_DELETE, W_GROUP, "NIS maps updated");
 
 	return (EXIT_SUCCESS);
 }
@@ -507,9 +500,9 @@ pw_group_add(int argc, char **argv, char *arg1)
 	const char *cfg = NULL;
 	intmax_t id = -1;
 	int ch, rc, fd = -1;
-	bool quiet, precrypted, dryrun, pretty, nis;
+	bool quiet, precrypted, dryrun, pretty;
 
-	quiet = precrypted = dryrun = pretty = nis = false;
+	quiet = precrypted = dryrun = pretty = false;
 
 	if (arg1 != NULL) {
 		if (arg1[strspn(arg1, "0123456789")] == '\0')
@@ -518,7 +511,7 @@ pw_group_add(int argc, char **argv, char *arg1)
 			name = arg1;
 	}
 
-	while ((ch = getopt(argc, argv, "C:qn:g:h:H:M:oNPY")) != -1) {
+	while ((ch = getopt(argc, argv, "C:qn:g:h:H:M:oNP")) != -1) {
 		switch (ch) {
 		case 'C':
 			cfg = optarg;
@@ -559,9 +552,6 @@ pw_group_add(int argc, char **argv, char *arg1)
 		case 'P':
 			pretty = true;
 			break;
-		case 'Y':
-			nis = true;
-			break;
 		default:
 			usage();
 		}
@@ -580,8 +570,6 @@ pw_group_add(int argc, char **argv, char *arg1)
 	cnf = get_userconfig(cfg);
 	rc = groupadd(cnf, name, gr_gidpolicy(cnf, id), members, fd, dryrun,
 	    pretty, precrypted);
-	if (nis && rc == EXIT_SUCCESS && nis_update() == 0)
-		pw_log(cnf, M_ADD, W_GROUP, "NIS maps updated");
 
 	return (rc);
 }
@@ -599,9 +587,9 @@ pw_group_mod(int argc, char **argv, char *arg1)
 	char *name = NULL;
 	intmax_t id = -1;
 	int ch, rc, fd = -1;
-	bool quiet, pretty, dryrun, nis, precrypted;
+	bool quiet, pretty, dryrun, precrypted;
 
-	quiet = pretty = dryrun = nis = precrypted = false;
+	quiet = pretty = dryrun = precrypted = false;
 
 	if (arg1 != NULL) {
 		if (arg1[strspn(arg1, "0123456789")] == '\0')
@@ -610,7 +598,7 @@ pw_group_mod(int argc, char **argv, char *arg1)
 			name = arg1;
 	}
 
-	while ((ch = getopt(argc, argv, "C:qn:d:g:l:h:H:M:m:NPY")) != -1) {
+	while ((ch = getopt(argc, argv, "C:qn:d:g:l:h:H:M:m:NP")) != -1) {
 		switch (ch) {
 		case 'C':
 			cfg = optarg;
@@ -657,9 +645,6 @@ pw_group_mod(int argc, char **argv, char *arg1)
 		case 'P':
 			pretty = true;
 			break;
-		case 'Y':
-			nis = true;
-			break;
 		default:
 			usage();
 		}
@@ -705,7 +690,7 @@ pw_group_mod(int argc, char **argv, char *arg1)
 
 	if ((rc = chggrent(name, grp)) != 0) {
 		if (rc == -1)
-			errx(EX_IOERR, "group '%s' not available (NIS?)",
+			errx(EX_IOERR, "group '%s' not available",
 			    grp->gr_name);
 		else
 			err(EX_IOERR, "group update");
@@ -720,9 +705,6 @@ pw_group_mod(int argc, char **argv, char *arg1)
 
 	pw_log(cnf, M_MODIFY, W_GROUP, "%s(%ju)", grp->gr_name,
 	    (uintmax_t)grp->gr_gid);
-
-	if (nis && nis_update() == 0)
-		pw_log(cnf, M_MODIFY, W_GROUP, "NIS maps updated");
 
 	return (EXIT_SUCCESS);
 }

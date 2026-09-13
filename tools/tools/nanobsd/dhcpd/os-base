@@ -87,15 +87,6 @@ if [ "$PACKAGE_PREP_BUILD" = 1 ]; then
 	do_image=false
 else
 
-hack_nsswitch_conf ( )
-{
-	# Remove all references to NIS in the nsswitch.conf file
-	# Not sure this is still needed, but FreeNAS has it...
-	sed -i.bak -es/nis/files/g ${NANO_WORLDDIR}/etc/nsswitch.conf
-	rm -f ${NANO_WORLDDIR}/etc/nsswitch.conf.bak
-}
-customize_cmd hack_nsswitch_conf
-
 save_build ( )
 {
 	VERSION_FILE=${NANO_WORLDDIR}/etc/version

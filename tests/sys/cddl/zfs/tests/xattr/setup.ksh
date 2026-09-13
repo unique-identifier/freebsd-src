@@ -25,15 +25,6 @@
 . ${STF_SUITE}/include/libtest.kshlib
 . ${STF_SUITE}/tests/xattr/xattr.cfg
 
-# if we're running NIS, turn it off until we clean up
-# (it can cause useradd to take a long time, hitting our TIMEOUT)
-$SVCS svc:/network/nis/client:default | $GREP online > /dev/null
-if [ $? -eq 0 ]
-then
-	$SVCADM disable -t svc:/network/nis/client:default
-	USES_NIS=true
-fi
-
 # Make sure we use a brand new user for this
 while [ -z "${FOUND}" ]
 do
@@ -51,7 +42,6 @@ done
 log_must add_user $ZFS_GROUP $ZFS_USER
 
 $ECHO $ZFS_USER > $TMPDIR/zfs-xattr-test-user.txt
-$ECHO $USES_NIS > $TMPDIR/zfs-xattr-test-nis.txt
 
 DISK=${DISKS%% *}
 default_setup $DISK

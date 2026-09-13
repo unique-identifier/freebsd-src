@@ -61,9 +61,6 @@ dialog_menu_main()
 		local_startup
 		named_enable
 		named_flags
-		nis_client_enable
-		nis_server_enable
-		nisdomainname
 		startup_dirs
 	" # END-QUOTE
 
@@ -86,9 +83,6 @@ dialog_menu_main()
 		export msg_startup_dirs   msg_startup_dirs_desc
 		export msg_named          msg_named_desc
 		export msg_named_flags    msg_named_flags_desc
-		export msg_nis_client     msg_nis_client_desc
-		export msg_nis_domainname msg_nis_domainname_desc
-		export msg_nis_server     msg_nis_server_desc
 		export msg_accounting     msg_accounting_desc
 		:| awk \
 			-v uname_p="$UNAME_P"            \
@@ -157,40 +151,6 @@ dialog_menu_main()
 			subtag = ENVIRON["msg_named_flags"]
 			tag = sprintf(mtag_fmt, char, mark, subtag)
 			mprint(tag, ENVIRON["msg_named_flags_desc"])
-			if (ditem == char) defaultitem = tag
-
-			#
-			# NIS client: This host wishes to be an NIS client.
-			#
-			char = substr(menu_tags, i++, 1)
-			mark = ( ENVIRON["nis_client_enable"] ~ \
-					/^[Yy][Ee][Ss]$/ ? "X" : " " )
-			subtag = ENVIRON["msg_nis_client"]
-			tag = sprintf(mtag_fmt, char, mark, subtag)
-			mprint(tag, ENVIRON["msg_nis_client_desc"])
-			if (ditem == char) defaultitem = tag
-
-			#
-			# NIS domainname: Set NIS domainname (if enabled)
-			#
-			char = substr(menu_tags, i++, 1)
-			mark = ( length(ENVIRON["nisdomainname"]) > 0 && \
-					ENVIRON["nisdomainname"] != "NO" \
-					? "X" : " " )
-			subtag = ENVIRON["msg_nis_domainname"]
-			tag = sprintf(mtag_fmt, char, mark, subtag)
-			mprint(tag, ENVIRON["msg_nis_domainname_desc"])
-			if (ditem == char) defaultitem = tag
-
-			#
-			# NIS server: This host wishes to be an NIS server.
-			#
-			char = substr(menu_tags, i++, 1)
-			mark = ( ENVIRON["nis_server_enable"] ~ \
-					/^[Yy][Ee][Ss]$/ ? "X" : " " )
-			subtag = ENVIRON["msg_nis_server"]
-			tag = sprintf(mtag_fmt, char, mark, subtag)
-			mprint(tag, ENVIRON["msg_nis_server_desc"])
 			if (ditem == char) defaultitem = tag
 
 			printf separator
@@ -309,27 +269,7 @@ while :; do
 	?" ["?"] $msg_accounting")
 		f_eval_catch -dk err "$0" f_sysrc_set \
 			'f_sysrc_set accounting_enable "%s"' "$reverse" ;;
-	# Multi-variable On/Off toggle bits
-	?" ["?"] $msg_nis_client")
-		if f_eval_catch -dk err "$0" f_sysrc_set \
-			'f_sysrc_set nis_client_enable "%s"' "$reverse"
-		then
-			[ "$reverse" = "NO" ] || f_eval_catch -dk err "$0" \
-				f_sysrc_set 'f_sysrc_set rpcbind_enable YES'
-		fi ;;
-	?" ["?"] $msg_nis_server")
-		if f_eval_catch -dk err "$0" f_sysrc_set \
-			'f_sysrc_set nis_server_enable "%s"' "$reverse"
-		then
-			[ "$reverse" = "NO" ] || f_eval_catch -dk err "$0" \
-				f_sysrc_set 'f_sysrc_set rpcbind_enable YES'
-		fi ;;
 	# Checkboxes for non-boolean options
-	?" ["?"] $msg_nis_domainname")
-		dialog_input_value "$msg_nis_domainname_desc" \
-		                   "$( f_sysrc_get nisdomainname )" || continue
-		f_eval_catch -dk err "$0" f_sysrc_set \
-			'f_sysrc_set nisdomainname "%s"' "$value" ;;
 	?" ["?"] $msg_startup_dirs")
 		dialog_input_value "$msg_startup_dirs_desc" \
 		                   "$( f_sysrc_get local_startup )" || continue

@@ -536,7 +536,6 @@ gethostbyname_internal(const char *name, int af, struct hostent *hp, char *buf,
 	static const ns_dtab dtab[] = {
 		NS_FILES_CB(_ht_gethostbyname, NULL)
 		{ NSSRC_DNS, _dns_gethostbyname, NULL },
-		NS_NIS_CB(_nis_gethostbyname, NULL) /* force -DHESIOD */
 #ifdef NS_CACHING
 		NS_CACHE_CB(&cache_info)
 #endif
@@ -598,7 +597,6 @@ gethostbyaddr_r(const void *addr, socklen_t len, int af, struct hostent *hp,
 	static const ns_dtab dtab[] = {
 		NS_FILES_CB(_ht_gethostbyaddr, NULL)
 		{ NSSRC_DNS, _dns_gethostbyaddr, NULL },
-		NS_NIS_CB(_nis_gethostbyaddr, NULL) /* force -DHESIOD */
 #ifdef NS_CACHING
 		NS_CACHE_CB(&cache_info)
 #endif

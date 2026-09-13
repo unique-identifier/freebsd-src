@@ -567,11 +567,6 @@ the hostname is generally already set and this variable may be absent.
 If this value remains unset when the system is done booting
 your console login will display the default hostname of
 .Dq Amnesiac .
-.It Va nisdomainname
-.Pq Vt str
-The NIS domain name of this host, or
-.Dq Li NO
-if NIS is not used.
 .It Va hostid_enable
 .Pq Vt bool
 If set to
@@ -2846,109 +2841,6 @@ This is a preferred alternative to using
 or specifying the
 .Va ntpdate_enable
 variable.
-.It Va nis_client_enable
-.Pq Vt bool
-If set to
-.Dq Li YES ,
-run the
-.Xr ypbind 8
-service at system boot time.
-.It Va nis_client_flags
-.Pq Vt str
-If
-.Va nis_client_enable
-is set to
-.Dq Li YES ,
-these are the flags to pass to the
-.Xr ypbind 8
-service.
-.It Va nis_ypldap_enable
-.Pq Vt bool
-If set to
-.Dq Li YES ,
-run the
-.Xr ypldap 8
-daemon at system boot time.
-.It Va nis_ypldap_flags
-.Pq Vt str
-If
-.Va nis.ypldap_enable
-is set to
-.Dq Li YES ,
-these are the flags to pass to the
-.Xr ypldap 8
-daemon.
-.It Va nis_ypset_enable
-.Pq Vt bool
-If set to
-.Dq Li YES ,
-run the
-.Xr ypset 8
-daemon at system boot time.
-.It Va nis_ypset_flags
-.Pq Vt str
-If
-.Va nis_ypset_enable
-is set to
-.Dq Li YES ,
-these are the flags to pass to the
-.Xr ypset 8
-daemon.
-.It Va nis_server_enable
-.Pq Vt bool
-If set to
-.Dq Li YES ,
-run the
-.Xr ypserv 8
-daemon at system boot time.
-.It Va nis_server_flags
-.Pq Vt str
-If
-.Va nis_server_enable
-is set to
-.Dq Li YES ,
-these are the flags to pass to the
-.Xr ypserv 8
-daemon.
-.It Va nis_ypxfrd_enable
-.Pq Vt bool
-If set to
-.Dq Li YES ,
-run the
-.Xr rpc.ypxfrd 8
-daemon at system boot time.
-.It Va nis_ypxfrd_flags
-.Pq Vt str
-If
-.Va nis_ypxfrd_enable
-is set to
-.Dq Li YES ,
-these are the flags to pass to the
-.Xr rpc.ypxfrd 8
-daemon.
-.It Va nis_yppasswdd_enable
-.Pq Vt bool
-If set to
-.Dq Li YES ,
-run the
-.Xr rpc.yppasswdd 8
-daemon at system boot time.
-.It Va nis_yppasswdd_flags
-.Pq Vt str
-If
-.Va nis_yppasswdd_enable
-is set to
-.Dq Li YES ,
-these are the flags to pass to the
-.Xr rpc.yppasswdd 8
-daemon.
-.It Va rpc_ypupdated_enable
-.Pq Vt bool
-If set to
-.Dq Li YES ,
-run the
-.Nm rpc.ypupdated
-daemon at system boot time.
 .It Va bsnmpd_enable
 .Pq Vt bool
 If set to

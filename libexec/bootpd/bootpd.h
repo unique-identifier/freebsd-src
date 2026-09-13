@@ -120,8 +120,6 @@ struct flag {
 		root_path	:1,
 		exten_file	:1,
 		reply_addr	:1,
-		nis_domain	:1,
-		nis_server	:1,
 		ntp_server	:1,
 		exec_file	:1,
 		msg_size	:1,
@@ -163,7 +161,6 @@ struct host {
 			    *name_server,
 			    *rlp_server,
 			    *time_server,
-			    *nis_server,
 			    *ntp_server;
     struct shared_string    *bootfile,
 			    *hostname,
@@ -173,7 +170,6 @@ struct host {
 			    *dump_file,
 			    *exten_file,
 			    *root_path,
-			    *nis_domain,
 			    *exec_file;
     struct shared_bindata   *generic;
     byte		    vm_cookie[4],

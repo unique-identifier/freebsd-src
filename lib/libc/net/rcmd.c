@@ -48,10 +48,6 @@
 #include <ctype.h>
 #include <string.h>
 #include <rpc/rpc.h>
-#ifdef YP
-#include <rpcsvc/yp_prot.h>
-#include <rpcsvc/ypclnt.h>
-#endif
 #include <arpa/nameser.h>
 #include "un-namespace.h"
 #include "libc_private.h"
@@ -566,14 +562,6 @@ __ivaliduser_sa(FILE *hostf, const struct sockaddr *raddr, socklen_t salen,
 	char hname[MAXHOSTNAMELEN];
 	/* Presumed guilty until proven innocent. */
 	int userok = 0, hostok = 0;
-#ifdef YP
-	char *ypdomain;
-
-	if (yp_get_default_domain(&ypdomain))
-		ypdomain = NULL;
-#else
-#define	ypdomain NULL
-#endif
 	/* We need to get the damn hostname back for netgroup matching. */
 	if (getnameinfo(raddr, salen, hname, sizeof(hname), NULL, 0,
 			NI_NAMEREQD) != 0)
@@ -617,7 +605,7 @@ __ivaliduser_sa(FILE *hostf, const struct sockaddr *raddr, socklen_t salen,
 			}
 			if (buf[1] == '@')  /* match a host by netgroup */
 				hostok = hname[0] != '\0' &&
-				    innetgr(&buf[2], hname, NULL, ypdomain);
+				    innetgr(&buf[2], hname, NULL, NULL);
 			else		/* match a host by addr */
 				hostok = __icheckhost(raddr, salen,
 						      (char *)&buf[1]);
@@ -625,7 +613,7 @@ __ivaliduser_sa(FILE *hostf, const struct sockaddr *raddr, socklen_t salen,
 		case '-':     /* reject '-' hosts and all their users */
 			if (buf[1] == '@') {
 				if (hname[0] == '\0' ||
-				    innetgr(&buf[2], hname, NULL, ypdomain))
+				    innetgr(&buf[2], hname, NULL, NULL))
 					return(-1);
 			} else {
 				if (__icheckhost(raddr, salen,
@@ -644,7 +632,7 @@ __ivaliduser_sa(FILE *hostf, const struct sockaddr *raddr, socklen_t salen,
 				break;
 			}
 			if (*(user+1) == '@')  /* match a user by netgroup */
-				userok = innetgr(user+2, NULL, ruser, ypdomain);
+				userok = innetgr(user+2, NULL, ruser, NULL);
 			else	   /* match a user by direct specification */
 				userok = !(strcmp(ruser, user+1));
 			break;
@@ -654,7 +642,7 @@ __ivaliduser_sa(FILE *hostf, const struct sockaddr *raddr, socklen_t salen,
 					return(-1);
 				if (*(user+1) == '@') {
 					if (innetgr(user+2, NULL,
-							ruser, ypdomain))
+							ruser, NULL))
 						return(-1);
 				} else {
 					if (!strcmp(ruser, user+1))

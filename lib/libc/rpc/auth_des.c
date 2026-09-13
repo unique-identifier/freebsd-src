@@ -49,8 +49,6 @@
 #include <rpc/clnt.h>
 #include <rpc/xdr.h>
 #include <sys/socket.h>
-#undef NIS
-#include <rpcsvc/nis.h>
 #include "un-namespace.h"
 #include "mt_misc.h"
 
@@ -66,8 +64,8 @@ extern bool_t xdr_authdes_cred( XDR *, struct authdes_cred *);
 extern bool_t xdr_authdes_verf( XDR *, struct authdes_verf *);
 extern int key_encryptsession_pk(char *, netobj *, des_block *);
 
-extern bool_t __rpc_get_time_offset(struct timeval *, nis_server *, char *,
-	char **, char **);
+extern bool_t __rpc_get_time_offset(struct timeval *, char *,
+	char **);
 
 /* 
  * DES authenticator operations vector
@@ -99,13 +97,11 @@ struct ad_private {
 	struct timeval ad_timestamp;	/* timestamp sent */
 	des_block ad_xkey;		/* encrypted conversation key */
 	u_char ad_pkey[1024];		/* Server's actual public key */
-	char *ad_netid;			/* Timehost netid */
 	char *ad_uaddr;			/* Timehost uaddr */
-	nis_server *ad_nis_srvr;	/* NIS+ server struct */
 };
 
-AUTH *authdes_pk_seccreate(const char *, netobj *, u_int, const char *,
-	const des_block *, nis_server *);
+static AUTH *authdes_pk_create(const char *, netobj *, u_int, const char *,
+	const des_block *);
 	
 /*
  * documented version of authdes_seccreate
@@ -134,8 +130,8 @@ authdes_seccreate(const char *servername, const u_int win,
 
 	pkey.n_bytes = (char *) pkey_data;
 	pkey.n_len = (u_int)strlen((char *)pkey_data) + 1;
-	dummy = authdes_pk_seccreate(servername, &pkey, win, timehost,
-	    ckey, NULL);
+	dummy = authdes_pk_create(servername, &pkey, win, timehost,
+	    ckey);
 	return (dummy);
 }
 
@@ -144,9 +140,9 @@ authdes_seccreate(const char *servername, const u_int win,
  * of the server principal as an argument. This spares us a call to
  * getpublickey() which in the nameserver context can cause a deadlock.
  */
-AUTH *
-authdes_pk_seccreate(const char *servername, netobj *pkey, u_int window,
-	const char *timehost, const des_block *ckey, nis_server *srvr)
+static AUTH *
+authdes_pk_create(const char *servername, netobj *pkey, u_int window,
+	const char *timehost, const des_block *ckey)
 {
 	AUTH *auth;
 	struct ad_private *ad;
@@ -157,19 +153,17 @@ authdes_pk_seccreate(const char *servername, netobj *pkey, u_int window,
 	 */
 	auth = ALLOC(AUTH);
 	if (auth == NULL) {
-		syslog(LOG_ERR, "authdes_pk_seccreate: out of memory");
+		syslog(LOG_ERR, "authdes_pk_create: out of memory");
 		return (NULL);
 	}
 	ad = ALLOC(struct ad_private);
 	if (ad == NULL) {
-		syslog(LOG_ERR, "authdes_pk_seccreate: out of memory");
+		syslog(LOG_ERR, "authdes_pk_create: out of memory");
 		goto failed;
 	}
 	ad->ad_fullname = ad->ad_servername = NULL; /* Sanity reasons */
 	ad->ad_timehost = NULL;
-	ad->ad_netid = NULL;
 	ad->ad_uaddr = NULL;
-	ad->ad_nis_srvr = NULL;
 	ad->ad_timediff.tv_sec = 0;
 	ad->ad_timediff.tv_usec = 0;
 	memcpy(ad->ad_pkey, pkey->n_bytes, pkey->n_len);
@@ -191,9 +185,6 @@ authdes_pk_seccreate(const char *servername, netobj *pkey, u_int window,
 			goto failed;
 		}
 		memcpy(ad->ad_timehost, timehost, strlen(timehost) + 1);
-		ad->ad_dosync = TRUE;
-	} else if (srvr != NULL) {
-		ad->ad_nis_srvr = srvr;	/* transient */
 		ad->ad_dosync = TRUE;
 	} else {
 		ad->ad_dosync = FALSE;
@@ -222,7 +213,6 @@ authdes_pk_seccreate(const char *servername, netobj *pkey, u_int window,
 	if (!authdes_refresh(auth, NULL)) {
 		goto failed;
 	}
-	ad->ad_nis_srvr = NULL; /* not needed any longer */
 	return (auth);
 
 failed:
@@ -235,8 +225,6 @@ failed:
 			FREE(ad->ad_servername, ad->ad_servernamelen + 1);
 		if (ad->ad_timehost)
 			FREE(ad->ad_timehost, strlen(ad->ad_timehost) + 1);
-		if (ad->ad_netid)
-			FREE(ad->ad_netid, strlen(ad->ad_netid) + 1);
 		if (ad->ad_uaddr)
 			FREE(ad->ad_uaddr, strlen(ad->ad_uaddr) + 1);
 		FREE(ad, sizeof (struct ad_private));
@@ -424,9 +412,8 @@ authdes_refresh(AUTH *auth, void *dummy __unused)
 	netobj		pkey;
 
 	if (ad->ad_dosync) {
-                ok = __rpc_get_time_offset(&ad->ad_timediff, ad->ad_nis_srvr,
-		    ad->ad_timehost, &(ad->ad_uaddr),
-		    &(ad->ad_netid));
+                ok = __rpc_get_time_offset(&ad->ad_timediff,
+		    ad->ad_timehost, &(ad->ad_uaddr));
 		if (! ok) {
 			/*
 			 * Hope the clocks are synced!
@@ -464,8 +451,6 @@ authdes_destroy(AUTH *auth)
 	FREE(ad->ad_servername, ad->ad_servernamelen + 1);
 	if (ad->ad_timehost)
 		FREE(ad->ad_timehost, strlen(ad->ad_timehost) + 1);
-	if (ad->ad_netid)
-		FREE(ad->ad_netid, strlen(ad->ad_netid) + 1);
 	if (ad->ad_uaddr)
 		FREE(ad->ad_uaddr, strlen(ad->ad_uaddr) + 1);
 	FREE(ad, sizeof (struct ad_private));

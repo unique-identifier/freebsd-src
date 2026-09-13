@@ -502,8 +502,7 @@ nss_load_module(const char *source, nss_module_register_fn reg_fn)
 	    strcmp(source, NSSRC_COMPAT) == 0 ||
 	    strcmp(source, NSSRC_DB) == 0 ||
 	    strcmp(source, NSSRC_DNS) == 0 ||
-	    strcmp(source, NSSRC_FILES) == 0 ||
-	    strcmp(source, NSSRC_NIS) == 0) {
+	    strcmp(source, NSSRC_FILES) == 0) {
 		/*
 		 * Avoid calling dlopen(3) for built-in modules.
 		 */

@@ -132,8 +132,6 @@
     ..
     proc            mode=0555 tags=package=runtime
     ..
-    rescue          tags=package=rescue
-    ..
     root            mode=0750 tags=package=runtime
     ..
     sbin            tags=package=runtime

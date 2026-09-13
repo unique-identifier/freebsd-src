@@ -236,7 +236,7 @@ disc1:
 	    MK_INSTALLLIB=no MK_MAIL=no \
 	    ${_ALL_LIBCOMPATS:@v@MK_LIB$v=no@} \
 	    MK_TOOLCHAIN=no \
-	    MK_RESCUE=no MK_DICT=no \
+	    MK_DICT=no \
 	    MK_KERNEL_SYMBOLS=no MK_TESTS=no MK_DEBUG_FILES=no)
 .if !defined(NOPKGBASE) || empty(NOPKGBASE)
 # Create offline pkgbase repo on release media
@@ -299,7 +299,7 @@ bootonly:
 	    MK_INSTALLLIB=no MK_MAIL=no \
 	    ${_ALL_LIBCOMPATS:@v@MK_LIB$v=no@} \
 	    MK_TOOLCHAIN=no \
-	    MK_RESCUE=no MK_DICT=no \
+	    MK_DICT=no \
 	    MK_KERNEL_SYMBOLS=no MK_TESTS=no MK_DEBUG_FILES=no)
 .if !defined(NODISTSETS) || empty(NODISTSETS)
 # Copy manifest only (no distfiles) to get checksums
@@ -336,7 +336,7 @@ dvd:
 # Install system
 	mkdir -p ${.TARGET}
 	( cd ${WORLDDIR} && ${IMAKE} installworld installkernel distribution \
-		DESTDIR=${.OBJDIR}/${.TARGET} MK_RESCUE=no MK_KERNEL_SYMBOLS=no \
+		DESTDIR=${.OBJDIR}/${.TARGET} MK_KERNEL_SYMBOLS=no \
 		MK_TESTS=no MK_DEBUG_FILES=no)
 .if !defined(NOPKGBASE) || empty(NOPKGBASE)
 # Create offline pkgbase repo on release media

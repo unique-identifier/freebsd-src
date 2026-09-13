@@ -408,15 +408,11 @@ bectl_jail_body()
 	mount=${cwd}/mnt
 	root=${mount}/root
 
-	if [ ! -f /rescue/rescue ]; then
-		atf_skip "This test requires a rescue binary"
-	fi
 	bectl_create_deep_setup ${zpool} ${disk} ${mount}
-	# Prepare our minimal BE... plop a rescue binary into it
+	# Prepare a minimal BE with a statically linked directory-listing helper.
 	atf_check mkdir -p ${root}
 	atf_check -o ignore bectl -r ${zpool}/ROOT mount default ${root}
-	atf_check mkdir -p ${root}/rescue
-	atf_check cp /rescue/rescue ${root}/rescue/rescue
+	atf_check cp "$(atf_get_srcdir)/bectl_jail_helper" ${root}/bectl_jail_helper
 	atf_check bectl -r ${zpool}/ROOT umount default
 
 	# Prepare some more boot environments
@@ -435,11 +431,11 @@ bectl_jail_body()
 	atf_check -o empty -s exit:0 bectl -r ${zpool}/ROOT unjail default
 
 	# Basic command-mode tests, with and without jail cleanup
-	atf_check -o inline:"rescue\nusr\n" bectl -r ${zpool}/ROOT \
-	    jail default /rescue/rescue ls -1
-	atf_check -o inline:"rescue\nusr\n" bectl -r ${zpool}/ROOT \
-	    jail -Uo path=${root} default /rescue/rescue ls -1
-	atf_check [ -f ${root}/rescue/rescue ]
+	atf_check -o inline:"bectl_jail_helper\nusr\n" bectl -r ${zpool}/ROOT \
+	    jail default /bectl_jail_helper
+	atf_check -o inline:"bectl_jail_helper\nusr\n" bectl -r ${zpool}/ROOT \
+	    jail -Uo path=${root} default /bectl_jail_helper
+	atf_check [ -f ${root}/bectl_jail_helper ]
 	atf_check bectl -r ${zpool}/ROOT ujail default
 
 	# Batch mode tests

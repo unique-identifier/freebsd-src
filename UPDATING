@@ -13,6 +13,10 @@ Items affecting the ports and packages system can be found in
 and/or ports.
 
 20260913:
+	The /rescue utilities and the RESCUE build option have been removed.
+	Use external boot media for system recovery.
+
+20260913:
 	The legacy syscons (sc) console, screen savers, fonts, and keymaps
 	and the libvgl graphics library have been removed.  Use vt and its
 	keymaps and fonts instead.

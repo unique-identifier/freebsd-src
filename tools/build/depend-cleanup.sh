@@ -382,13 +382,6 @@ if [ ${MACHINE} != i386 ]; then
 	ALL_libcompats="$libcompats" clean_dep   lib/libc    syscall S ".*/syscall\.S"
 fi
 
-# 20240416  2fda3ab0ac19    WITH_NVME: Remove from broken
-if [ -f "$OBJTOP"/rescue/rescue/rescue.mk ] && \
-    ! grep -q 'nvme_util.o' "$OBJTOP"/rescue/rescue/rescue.mk; then
-	echo "removing rescue.mk without nvme_util.o"
-	run rm -fv "$OBJTOP"/rescue/rescue/rescue.mk
-fi
-
 # 20240910  e2df9bb44109
 clean_dep   cddl/lib/libzpool abd_os c "linux/zfs/abd_os\.c"
 

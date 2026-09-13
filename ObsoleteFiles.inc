@@ -51,6 +51,18 @@
 #   xargs -n1 | sort | uniq -d;
 # done
 
+# 20260913: Remove the rescue system and its private ZFS library.
+.if exists(${DESTDIR}/rescue)
+_RESCUE_DIRS!=find ${DESTDIR}/rescue -depth -type d 2>/dev/null | sed -e 's,^${DESTDIR}/,,'; echo
+_RESCUE_FILES!=find ${DESTDIR}/rescue ! -type d 2>/dev/null | sed -e 's,^${DESTDIR}/,,'; echo
+OLD_DIRS+=${_RESCUE_DIRS}
+OLD_FILES+=${_RESCUE_FILES}
+.endif
+OLD_FILES+=usr/share/man/man8/rescue.8.gz
+OLD_FILES+=usr/lib/libicp_rescue.a
+OLD_FILES+=usr/lib/libicp_rescue.so
+OLD_LIBS+=usr/lib/libicp_rescue.so.3
+
 # 20260913: Remove the legacy syscons console.
 OLD_FILES+=usr/share/syscons/fonts/INDEX.fonts
 OLD_FILES+=usr/share/syscons/fonts/armscii8-8x14.fnt

@@ -31,7 +31,6 @@ Source Roadmap:
 | lib | System libraries. |
 | libexec | System commands intended to be executed by other commands or daemons. |
 | release | Makefiles and scripts used for building releases and VM images. |
-| rescue | Build system for statically linked /rescue commands. |
 | sbin | System commands. |
 | secure | Build system for cryptographic libraries and commands (excluding Kerberos). |
 | share | Shared resources. |

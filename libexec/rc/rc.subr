@@ -2845,7 +2845,7 @@ if [ -n "$boottrace_cmd" ] && [ "`${SYSCTL_N} -q kern.boottrace.enabled`" = "1" 
 	rc_boottrace=YES
 fi
 
-SED=${SED:-$(Exists -x /usr/bin/sed /rescue/sed)}
+SED=${SED:-/usr/bin/sed}
 
 # Allow for local additions and overrides.
 # Use vdot to ensure the file has not been tampered with.

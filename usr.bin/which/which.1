@@ -72,17 +72,6 @@ $ /usr/bin/which ls cp
 /bin/cp
 .Ed
 .Pp
-Same as above with a specific
-.Ev PATH
-and showing all occurrences:
-.Bd -literal -offset indent
-$ PATH=/bin:/rescue /usr/bin/which -a ls cp
-/bin/ls
-/rescue/ls
-/bin/cp
-/rescue/cp
-.Ed
-.Pp
 .Nm which
 will show duplicates if the same executable is found more than once:
 .Bd -literal -offset indent

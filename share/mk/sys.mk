@@ -78,7 +78,6 @@ META_MODE?= normal
 	${__MAKE_SHELL} \
 	/bin \
 	/lib \
-	/rescue \
 	/sbin \
 	/usr/bin \
 	/usr/lib \

@@ -17,8 +17,6 @@ _sys_boot_zfs= stand/zfs
 DIRDEPS = \
 	etc \
 	etc/newsyslog.conf.d \
-	rescue/librescue \
-	rescue/rescue \
 
 .if ${MK_BOOT} != "no"
 DIRDEPS+= stand/common

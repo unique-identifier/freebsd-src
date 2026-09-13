@@ -55,7 +55,7 @@ CRUNCH_SRCDIR_${P}?=	${.CURDIR}/../../${D}/${P}
 .endfor
 .endfor
 
-# Program names and their aliases contribute hardlinks to 'rescue' executable,
+# Program names and their aliases contribute hardlinks to the generated executable,
 # except for those that get suppressed.
 .for D in ${CRUNCH_SRCDIRS}
 .for P in ${CRUNCH_PROGS_${D}}

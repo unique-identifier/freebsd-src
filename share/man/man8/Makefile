@@ -9,7 +9,6 @@ MAN=	\
 	diskless.8 \
 	intro.8 \
 	nanobsd.8 \
-	rescue.8 \
 	${_uefi.8}
 
 MLINKS= \

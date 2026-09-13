@@ -37,6 +37,7 @@
 #include <stdlib.h>
 
 #include "hostres_snmp.h"
+#include "hostres_tree.h"
 
 /* No printer backend is currently available. */
 int

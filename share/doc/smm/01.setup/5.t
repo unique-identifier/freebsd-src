@@ -366,7 +366,6 @@ _
 /usr/libexec/rlogind	login server	inetd
 /usr/libexec/telnetd	TELNET server	inetd
 /usr/libexec/ftpd	FTP server	inetd
-/usr/libexec/fingerd	Finger server	inetd
 /usr/libexec/tftpd	TFTP server	inetd
 .TE
 Consult the manual pages and accompanying documentation (particularly

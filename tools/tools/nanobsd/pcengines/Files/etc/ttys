@@ -39,7 +39,7 @@ ttyv6	"/usr/libexec/getty Pc"		xterm	off  secure
 ttyv7	"/usr/libexec/getty Pc"		xterm	off  secure
 ttyv8	"/usr/local/bin/xdm -nodaemon"	xterm	off secure
 # Serial terminals
-# The 'dialup' keyword identifies dialin lines to login, fingerd etc.
+# The 'dialup' keyword identifies dialin lines to login and other programs.
 ttyu0	"/usr/libexec/getty std.9600"	xterm	on secure
 ttyd1	"/usr/libexec/getty std.9600"	dialup	off secure
 ttyd2	"/usr/libexec/getty std.9600"	dialup	off secure

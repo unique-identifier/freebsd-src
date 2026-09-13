@@ -60,8 +60,6 @@
     ..
     empty           mode=0555 flags=schg
     ..
-    games           gname=games mode=0775
-    ..
     log
     ..
     mail            gname=mail mode=0775

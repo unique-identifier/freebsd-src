@@ -96,12 +96,10 @@ __DEFAULT_YES_OPTIONS = \
     ELFTOOLCHAIN_BOOTSTRAP \
     EXAMPLES \
     FILE \
-    FINGER \
     FLOPPY \
     FORTH \
     FREEBSD_UPDATE \
     FTP \
-    GAMES \
     GNU_DIFF \
     GOOGLETEST \
     GPIO \

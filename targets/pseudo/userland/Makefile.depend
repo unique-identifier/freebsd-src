@@ -193,7 +193,6 @@ DIRDEPS+= \
 	usr.bin/file \
 	usr.bin/file2c \
 	usr.bin/find \
-	usr.bin/finger \
 	usr.bin/fmt \
 	usr.bin/fold \
 	usr.bin/from \

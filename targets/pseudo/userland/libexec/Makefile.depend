@@ -11,7 +11,6 @@ DIRDEPS = \
 	libexec/bootpd/tools/bootpef \
 	libexec/bootpd/tools/bootptest \
 	libexec/comsat \
-	libexec/fingerd \
 	libexec/ftpd \
 	libexec/getty \
 	libexec/hyperv \

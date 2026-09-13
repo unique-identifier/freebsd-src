@@ -375,10 +375,6 @@
         ..
         flua
         ..
-        games
-            fortune
-            ..
-        ..
         i18n
             csmapper
                 APPLE

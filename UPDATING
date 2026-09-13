@@ -13,6 +13,16 @@ Items affecting the ports and packages system can be found in
 and/or ports.
 
 20260913:
+	The finger client and fingerd server have been removed, along with
+	the FINGER build option and their inetd and TCP-wrapper examples.
+
+20260913:
+	The utilities previously selected by the GAMES build option have
+	been removed: caesar/rot13, factor, fortune (including strfile and
+	unstr), grdc, morse, number, pom, primes, and random.  The GAMES
+	build option and fortune login-profile invocation have been removed.
+
+20260913:
 	MIT Kerberos, its PAM modules, and kernel Kerberos/GSSAPI support
 	have been removed.  Kerberos authentication in SSH and NFS is no
 	longer available.  The KERBEROS, KERBEROS_SUPPORT, and MITKRB5 build

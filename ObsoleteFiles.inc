@@ -51,6 +51,65 @@
 #   xargs -n1 | sort | uniq -d;
 # done
 
+# 20260913: Remove finger and fingerd.
+OLD_FILES+=usr/bin/finger
+OLD_FILES+=usr/libexec/fingerd
+
+OLD_FILES+=usr/share/man/man1/finger.1.gz
+OLD_FILES+=usr/share/man/man5/finger.conf.5.gz
+OLD_FILES+=usr/share/man/man8/fingerd.8.gz
+
+# 20260913: Remove games and fortune data.
+OLD_FILES+=usr/bin/caesar
+OLD_FILES+=usr/bin/factor
+OLD_FILES+=usr/bin/fortune
+OLD_FILES+=usr/bin/grdc
+OLD_FILES+=usr/bin/morse
+OLD_FILES+=usr/bin/number
+OLD_FILES+=usr/bin/pom
+OLD_FILES+=usr/bin/primes
+OLD_FILES+=usr/bin/random
+OLD_FILES+=usr/bin/rot13
+OLD_FILES+=usr/bin/strfile
+OLD_FILES+=usr/bin/unstr
+OLD_FILES+=usr/share/games/fortune/fortunes
+OLD_FILES+=usr/share/games/fortune/fortunes.dat
+OLD_FILES+=usr/share/games/fortune/freebsd-tips
+OLD_FILES+=usr/share/games/fortune/freebsd-tips.dat
+OLD_FILES+=usr/share/games/fortune/gerrold.limerick
+OLD_FILES+=usr/share/games/fortune/gerrold.limerick.dat
+OLD_FILES+=usr/share/games/fortune/limerick
+OLD_FILES+=usr/share/games/fortune/limerick.dat
+OLD_FILES+=usr/share/games/fortune/murphy
+OLD_FILES+=usr/share/games/fortune/murphy-o
+OLD_FILES+=usr/share/games/fortune/murphy-o.dat
+OLD_FILES+=usr/share/games/fortune/murphy.dat
+OLD_FILES+=usr/share/games/fortune/startrek
+OLD_FILES+=usr/share/games/fortune/startrek.dat
+OLD_FILES+=usr/share/games/fortune/zippy
+OLD_FILES+=usr/share/games/fortune/zippy.dat
+OLD_DIRS+=usr/share/games/fortune
+OLD_DIRS+=usr/share/games
+OLD_FILES+=usr/tests/usr.bin/factor/factor_tests
+OLD_FILES+=usr/tests/usr.bin/factor/primes_tests
+OLD_FILES+=usr/tests/usr.bin/factor/Kyuafile
+OLD_DIRS+=usr/tests/usr.bin/factor
+OLD_DIRS+=usr/tests/games
+OLD_DIRS+=var/games
+
+OLD_FILES+=usr/share/man/man6/caesar.6.gz
+OLD_FILES+=usr/share/man/man6/factor.6.gz
+OLD_FILES+=usr/share/man/man6/fortune.6.gz
+OLD_FILES+=usr/share/man/man6/grdc.6.gz
+OLD_FILES+=usr/share/man/man6/morse.6.gz
+OLD_FILES+=usr/share/man/man6/number.6.gz
+OLD_FILES+=usr/share/man/man6/pom.6.gz
+OLD_FILES+=usr/share/man/man6/primes.6.gz
+OLD_FILES+=usr/share/man/man6/random.6.gz
+OLD_FILES+=usr/share/man/man6/rot13.6.gz
+OLD_FILES+=usr/share/man/man8/strfile.8.gz
+OLD_FILES+=usr/share/man/man8/unstr.8.gz
+
 # 20260913: Remove MIT Kerberos and kernel GSSAPI.
 OLD_FILES+=etc/rc.d/gssd
 OLD_FILES+=usr/sbin/gssd

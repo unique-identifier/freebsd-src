@@ -2536,10 +2536,6 @@ BOOTSTRAP_ALL_TOOLS:=	1
 BOOTSTRAPPING_OSRELDATE:=	0
 .endif
 
-.if ${MK_GAMES} != "no"
-_strfile=	usr.bin/fortune/strfile
-.endif
-
 # vtfontcvt is used to build font files for loader and to generate
 # C source for loader built in font (8x16.c).
 _vtfontcvt=	usr.bin/vtfontcvt
@@ -2846,7 +2842,6 @@ bootstrap-tools: ${_bt}-links .PHONY
 #	FreeBSD versions that need the tool built at this stage of the build.
 .for _tool in \
     ${_clang_tblgen} \
-    ${_strfile} \
     usr.bin/dtc \
     ${_cat} \
     ${_bootstrap_libcrypto} \

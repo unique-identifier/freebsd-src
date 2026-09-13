@@ -43,10 +43,6 @@ _blocklistd-helper+=	blocklistd-helper
 SUBDIR+=	bootpd
 .endif
 
-.if ${MK_FINGER} != "no"
-SUBDIR+=	fingerd
-.endif
-
 .if ${MK_FREEBSD_UPDATE} != "no"
 _phttpget=	phttpget
 .endif

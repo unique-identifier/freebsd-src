@@ -194,17 +194,7 @@ SUBDIR+=	clang
 SUBDIR.${MK_DIALOG}+=	dpv
 SUBDIR.${MK_EE}+=	ee
 SUBDIR.${MK_FILE}+=	file
-SUBDIR.${MK_FINGER}+=	finger
 SUBDIR.${MK_FTP}+=	ftp
-SUBDIR.${MK_GAMES}+=	caesar
-SUBDIR.${MK_GAMES}+=	factor
-SUBDIR.${MK_GAMES}+=	fortune
-SUBDIR.${MK_GAMES}+=	grdc
-SUBDIR.${MK_GAMES}+=	morse
-SUBDIR.${MK_GAMES}+=	number
-SUBDIR.${MK_GAMES}+=	pom
-SUBDIR.${MK_GAMES}+=	primes
-SUBDIR.${MK_GAMES}+=	random
 SUBDIR+=		gh-bc
 .if ${MK_GNU_DIFF} == "no"
 SUBDIR+=		diff3

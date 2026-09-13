@@ -22,7 +22,6 @@ auditdistd:	root
 bin:	root
 bind:	root
 daemon:	root
-games:	root
 hast:	root
 kmem:	root
 man:	root

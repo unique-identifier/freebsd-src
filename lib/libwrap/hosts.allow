@@ -78,13 +78,6 @@ ftpd : localhost : allow
 #ftpd : .evil.cracker.example.com : deny
 ftpd : ALL : allow
 
-# You need to be clever with finger; do _not_ backfinger!! You can easily
-# start a "finger war".
-fingerd : ALL \
-	: spawn (echo Finger. | \
-	 /usr/bin/mail -s "tcpd\: %u@%h[%a] fingered me!" root) & \
-	: deny
-
 # The rest of the daemons are protected.
 ALL : ALL \
 	: severity auth.info \

@@ -384,14 +384,12 @@ SUBDIR=	\
 	sound \
 	${_speaker} \
 	spi \
-	${_splash} \
 	ste \
 	stge \
 	${_sume} \
 	${_superio} \
 	${_p2sb} \
 	sym \
-	${_syscons} \
 	sysvipc \
 	tarfs \
 	tcp \
@@ -776,8 +774,6 @@ _qat_c2xxx=	qat_c2xxx
 _qat_c2xxxfw=	qat_c2xxxfw
 _safe=		safe
 _speaker=	speaker
-_splash=	splash
-_syscons=	syscons
 _wbwd=		wbwd
 _wdatwd=	wdatwd
 

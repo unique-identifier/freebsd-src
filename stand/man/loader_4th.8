@@ -481,14 +481,12 @@ Boot in single user mode:
 .Pp
 .Dl boot -s
 .Pp
-Load the kernel, a splash screen, and then autoboot in five seconds.
+Load the kernel, and then autoboot in five seconds.
 Notice that a kernel must be loaded before any other
 .Ic load
 command is attempted.
 .Bd -literal -offset indent
 load kernel
-load splash_bmp
-load -t splash_image_data /boot/chuckrulez.bmp
 autoboot 5
 .Ed
 .Pp

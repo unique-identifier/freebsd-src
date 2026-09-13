@@ -56,11 +56,7 @@ sc_init()
 
 	if [ -z "${_sc_initdone}" ]; then
 		if [ -z "${_sc_console}" ]; then
-			if [ x`sysctl -n kern.vty` = x"vt" ]; then
-				_sc_console="vt"
-			else
-				_sc_console="syscons"
-			fi
+			_sc_console="vt"
 			_sc_config="${_sc_console}"
 		fi
 		if [ -z "${_sc_bootmethod}" ]; then
@@ -292,17 +288,6 @@ syscons_bios_start()
 		;;
 	esac
 
-	# screen mapping
-	#
-	case ${scrnmap} in
-	[Nn][Oo] | '')
-		;;
-	*)
-		sc_init
-		echo -n ' scrnmap';	vidcontrol < ${viddev} -l ${scrnmap}
-		;;
-	esac
-
 	# blank time
 	#
 	case ${blanktime} in
@@ -314,20 +299,6 @@ syscons_bios_start()
 		;;
 	esac
 
-	# screen saver
-	#
-	case ${saver} in
-	[Nn][Oo] | '')
-		;;
-	*)
-		sc_init
-		echo -n ' screensaver'
-		for i in `kldstat | awk '$5 ~ "_saver\.ko$" { print $5 }'`; do
-			kldunload ${i}
-		done
-		load_kld -e _saver ${saver}_saver
-		;;
-	esac
 }
 
 syscons_start()

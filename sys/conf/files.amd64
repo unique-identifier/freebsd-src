@@ -377,7 +377,6 @@ dev/smartpqi/smartpqi_response.c	optional 	smartpqi
 dev/smartpqi/smartpqi_sis.c     optional 	smartpqi
 dev/smartpqi/smartpqi_tag.c     optional 	smartpqi
 dev/sume/if_sume.c		optional	sume
-dev/syscons/apm/apm_saver.c	optional	apm_saver apm
 dev/tpm/tpm_crb.c		optional	tpm acpi
 dev/p2sb/p2sb.c			optional	p2sb pci
 dev/p2sb/lewisburg_gpiocm.c	optional	lbggpiocm p2sb

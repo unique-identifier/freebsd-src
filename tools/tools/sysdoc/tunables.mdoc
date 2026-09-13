@@ -461,33 +461,6 @@ See
 for more information.
 
 ---
-hw.syscons.bell
-bool
-
-Allows you to control whether or not to use the 'bell'
-while using the console.  This is turned on by default.
-
----
-hw.syscons.saver.keybonly
-bool
-
-This variable tells the system that the screen saver
-may only wake up if the keyboard is used.  This means
-that log messages that are pushed to the console will
-not cause the screen saver to stop, and display the log
-message will not display.  This can be disabled to mimic
-the behavior of older syscons.
-
----
-hw.syscons.sc_no_suspend_vtswitch
-bool
-
-Disables switching between virtual terminals during suspend
-or resume.  See 
-.Xr syscons 4
-for more information.
-
----
 hw.wi.debug
 bool
 

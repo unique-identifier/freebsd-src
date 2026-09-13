@@ -1527,7 +1527,7 @@ makeoptions	KBDMUX_DFLT_KEYMAP=it.iso
 
 options 	FB_DEBUG		# Frame buffer debugging
 
-# Enable experimental features of the syscons terminal emulator (teken).
+# Terminal emulator (teken) options.
 options 	TEKEN_CONS25		# cons25-style terminal emulation
 options 	TEKEN_UTF8		# UTF-8 output handling
 
@@ -2758,8 +2758,6 @@ options 	MSGTQL=41	# Max number of messages in system
 
 options 	NBUF=512	# Number of buffer headers
 
-options 	SC_DEBUG_LEVEL=5	# Syscons debug level
-options 	SC_RENDER_DEBUG	# syscons rendering debugging
 
 options 	VFS_BIO_DEBUG	# VFS buffer I/O debugging
 

@@ -17,7 +17,6 @@ LDIRS=	BSD_daemon \
 	ipfw \
 	jails \
 	kld \
-	libvgl \
 	mdoc \
 	netgraph \
 	oci \
@@ -168,7 +167,6 @@ SE_KLD_SYSCALL_TEST= \
 	Makefile \
 	call.c
 
-SE_DIRS+=	libvgl
 SE_LIBVGL=	\
 	Makefile \
 	demo.c

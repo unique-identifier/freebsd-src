@@ -33,7 +33,7 @@
 /* US iso8859 */
 #define ISO_ACCENTCHARS
 /*
- * Automatically generated from /usr/share/syscons/keymaps/us.iso.kbd.
+ * Generated from the historical us.iso.kbd keyboard map.
  * DO NOT EDIT!
  */
 static keymap_t key_map = { 0x6d, {

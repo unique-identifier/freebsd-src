@@ -307,15 +307,6 @@ can always be used to override settings from files found in
 .Va loader_conf_files
 and
 .Va loader_conf_dirs .
-.It Va bitmap_load
-.Pq Dq NO
-If set to
-.Dq YES ,
-a bitmap will be loaded to be displayed on screen while booting.
-.It Va bitmap_name
-.Pq Dq Pa /boot/splash.bmp
-Name of the bitmap to be loaded.
-Any other name can be used.
 .It Va comconsole_speed
 .Dq ( 115200
 or the value of the
@@ -399,18 +390,6 @@ Space or comma separated list of kernels to present in the boot menu.
 .Pq Dq Pa /boot/loader.conf /boot/loader.conf.local
 .It Va loader_conf_dirs
 .Pq Dq Pa /boot/loader.conf.d
-.It Va splash_bmp_load
-.Pq Dq NO
-If set to
-.Dq YES ,
-will load the splash screen module, making it possible to display a bmp image
-on the screen while booting.
-.It Va splash_pcx_load
-.Pq Dq NO
-If set to
-.Dq YES ,
-will load the splash screen module, making it possible to display a pcx image
-on the screen while booting.
 .It Va vesa_load
 .Pq Dq NO
 If set to

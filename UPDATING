@@ -13,6 +13,13 @@ Items affecting the ports and packages system can be found in
 and/or ports.
 
 20260913:
+	The legacy syscons (sc) console, screen savers, fonts, and keymaps
+	and the libvgl graphics library have been removed.  Use vt and its
+	keymaps and fonts instead.
+	Remove device sc and syscons-only SC_* options from custom kernel
+	configurations.  The SYSCONS build option has been removed.
+
+20260913:
 	The finger client and fingerd server have been removed, along with
 	the FINGER build option and their inetd and TCP-wrapper examples.
 

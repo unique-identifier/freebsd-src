@@ -307,12 +307,7 @@ while :; do
 	uk_iso)                  keymap_to_set="uk.iso"                ;;
 	ukrainian_koi8_u)        keymap_to_set="ua.koi8-u"             ;;
 	ukrainian_koi8_u_koi8_r) keymap_to_set="ua.koi8-u.shift.alt"   ;;
-	usa_capslock_ctrl)
-		case "$( sysctl -n kern.vty )" in
-		vt)              keymap_to_set="us.ctrl"               ;;
-		*)               keymap_to_set="us.pc-ctrl"            ;;
-		esac
-		;;
+	usa_capslock_ctrl)        keymap_to_set="us.ctrl"               ;;
 	usa_dvorak)              keymap_to_set="us.dvorak"             ;;
 	usa_dvorak_left)         keymap_to_set="us.dvorakl"            ;;
 	usa_dvorak_right)        keymap_to_set="us.dvorakr"            ;;

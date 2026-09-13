@@ -88,7 +88,6 @@ dev/adb/adb_hb_if.m		optional	adb
 dev/adb/adb_if.m		optional	adb
 dev/adb/adb_buttons.c		optional	adb
 dev/agp/agp_apple.c		optional	agp powermac
-dev/fb/fb.c			optional	sc
 dev/gpio/qoriq_gpio.c		optional	mpc85xx gpio
 dev/hwpmc/hwpmc_e500.c		optional	hwpmc
 dev/hwpmc/hwpmc_mpc7xxx.c	optional	hwpmc
@@ -229,7 +228,6 @@ dev/sound/macio/i2s.c		optional	snd_ai2s powermac
 dev/sound/macio/onyx.c		optional	snd_ai2s iicbus powermac
 dev/sound/macio/snapper.c	optional	snd_ai2s iicbus powermac
 dev/sound/macio/tumbler.c	optional	snd_ai2s iicbus powermac
-dev/syscons/scgfbrndr.c		optional	sc
 dev/tsec/if_tsec.c		optional	tsec
 dev/tsec/if_tsec_fdt.c		optional	tsec 
 dev/uart/uart_cpu_powerpc.c	optional	uart
@@ -311,7 +309,6 @@ powerpc/ofw/ofw_machdep.c	standard
 powerpc/ofw/ofw_pcibus.c	optional	pci
 powerpc/ofw/ofw_pcib_pci.c	optional	pci
 powerpc/ofw/ofw_real.c		optional	aim
-powerpc/ofw/ofw_syscons.c	optional	sc aim
 powerpc/ofw/ofwcall32.S		optional	aim powerpc
 powerpc/ofw/ofwcall64.S		optional	aim powerpc64 | aim powerpc64le
 powerpc/ofw/openpic_ofw.c	standard
@@ -390,7 +387,6 @@ powerpc/powerpc/pmap_dispatch.c	standard
 powerpc/powerpc/platform.c	standard
 powerpc/powerpc/platform_if.m	standard
 powerpc/powerpc/ptrace_machdep.c	standard
-powerpc/powerpc/sc_machdep.c	optional	sc
 powerpc/powerpc/sdt_machdep.c	optional	kdtrace_hooks
 powerpc/powerpc/setjmp.S	standard
 powerpc/powerpc/sigcode32.S	optional	powerpc | powerpcspe | compat_freebsd32

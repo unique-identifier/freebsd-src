@@ -56,7 +56,6 @@ arm/arm/pmap-v6.c		standard
 arm/arm/pmu.c			optional	pmu | hwpmc
 arm/arm/pmu_fdt.c		optional	fdt pmu | fdt hwpmc
 arm/arm/ptrace_machdep.c	standard
-arm/arm/sc_machdep.c		optional	sc
 arm/arm/sdt_machdep.c		optional	kdtrace_hooks
 arm/arm/setcpsr.S		standard
 arm/arm/setstack.S		standard
@@ -85,7 +84,6 @@ contrib/openzfs/module/icp/asm-arm/sha2/sha512-armv7.S	optional zfs compile-with
 
 crypto/des/des_enc.c		optional	netsmb
 dev/cpufreq/cpufreq_dt.c	optional	cpufreq fdt
-dev/fb/fb.c			optional	sc
 dev/fdt/fdt_arm_platform.c	optional	platform fdt
 dev/video/crtc_if.m		optional	vt
 dev/hwpmc/hwpmc_arm.c		optional	hwpmc
@@ -96,7 +94,6 @@ dev/pci/pci_host_generic.c	optional	pci_host_generic pci
 dev/pci/pci_host_generic_fdt.c	optional	pci_host_generic pci fdt
 dev/psci/psci.c			optional	psci
 dev/psci/smccc_arm.S		optional	psci
-dev/syscons/scgfbrndr.c		optional	sc
 dev/uart/uart_cpu_fdt.c		optional	uart fdt
 
 dev/usb/controller/dwc3/dwc3.c		optional	fdt dwc3

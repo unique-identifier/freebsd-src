@@ -661,7 +661,6 @@ static struct witness_order_list_entry order_lists[] = {
 	{ "fast_taskqueue", &lock_class_mtx_spin },
 	{ "intr table", &lock_class_mtx_spin },
 	{ "process slock", &lock_class_mtx_spin },
-	{ "syscons video lock", &lock_class_mtx_spin },
 	{ "sleepq chain", &lock_class_mtx_spin },
 	{ "rm_spinlock", &lock_class_mtx_spin },
 	{ "turnstile chain", &lock_class_mtx_spin },

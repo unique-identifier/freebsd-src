@@ -58,7 +58,6 @@ static const char *menu = "";
 static const char *title = "Keyboard Menu";
 
 static int x11;
-static int using_vt;
 static int show;
 static int verbose;
 static int print;
@@ -148,21 +147,6 @@ add_keymap(const char *desc, int mark, const char *keym)
 	SLIST_INSERT_HEAD(&head, km_new, entries);
 }
 
-/*
- * Return 0 if syscons is in use (to select legacy defaults).
- */
-static int
-check_vt(void)
-{
-	size_t len;
-	char term[3];
-
-	len = 3;
-	if (sysctlbyname("kern.vty", &term, &len, NULL, 0) != 0 ||
-	    strcmp(term, "vt") != 0)
-		return 0;
-	return 1;
-}
 
 /*
  * Figure out the default language to use.
@@ -257,48 +241,13 @@ get_font(void)
 static void
 vidcontrol(const char *fnt)
 {
-	char *tmp, *p, *q, *cmd;
-	char ch;
-	int i;
+	char *cmd;
 
-	/* syscons test failed */
 	if (x11)
 		return;
-
-	if (using_vt) {
-		asprintf(&cmd, "vidcontrol -f %s", fnt);
-		system(cmd);
-		free(cmd);
-		return;
-	}
-
-	tmp = strdup(fnt);
-
-	/* Extract font size */
-	p = strrchr(tmp, '-');
-	if (p && p[1] != '\0') {
-		p++;
-		/* Remove any '.fnt' extension */
-		if ((q = strstr(p, ".fnt")))
-			*q = '\0';
-
-		/*
-		 * Check font size is valid, with no trailing characters
-		 *  ('&ch' should not be matched)
-		 */
-		if (sscanf(p, "%dx%d%c", &i, &i, &ch) != 2)
-			fprintf(stderr, "Which font size? %s\n", fnt);
-		else {
-			asprintf(&cmd, "vidcontrol -f %s %s", p, fnt);
-			if (verbose)
-				fprintf(stderr, "%s\n", cmd);
-			system(cmd);
-			free(cmd);
-		}
-	} else
-		fprintf(stderr, "Which font size? %s\n", fnt);
-
-	free(tmp);
+	asprintf(&cmd, "vidcontrol -f %s", fnt);
+	system(cmd);
+	free(cmd);
 }
 
 /*
@@ -828,12 +777,6 @@ main(int argc, char **argv)
 		sleep(2);
 	}
 
-	using_vt = check_vt();
-	if (using_vt == 0) {
-		keymapdir = DEFAULT_SC_KEYMAP_DIR;
-		fontdir = DEFAULT_SC_FONT_DIR;
-		font_default = DEFAULT_SC_FONT;
-	}
 
 	SLIST_INIT(&head);
 

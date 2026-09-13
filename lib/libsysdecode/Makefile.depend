@@ -99,7 +99,6 @@ DIRDEPS = \
 	lib/libusbhid \
 	lib/libutil \
 	lib/libveriexec \
-	lib/libvgl \
 	lib/libvmmapi \
 	lib/libwrap \
 	lib/libxo/libxo \

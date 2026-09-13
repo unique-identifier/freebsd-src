@@ -49,19 +49,7 @@
 #include <sys/stat.h>
 #include <sys/sysctl.h>
 #include "path.h"
-#include "decode.h"
 
-
-#define	DATASIZE(x)	((x).w * (x).h * 256 / 8)
-
-/* Screen dump modes */
-#define DUMP_FMT_RAW	1
-#define DUMP_FMT_TXT	2
-/* Screen dump options */
-#define DUMP_FBF	0
-#define DUMP_ALL	1
-/* Screen dump file format revision */
-#define DUMP_FMT_REV	1
 
 static const char *legal_colors[16] = {
 	"black", "blue", "green", "cyan",
@@ -73,7 +61,6 @@ static const char *legal_colors[16] = {
 static struct {
 	int			active_vty;
 	vid_info_t		console_info;
-	unsigned char		screen_map[256];
 	int			video_mode_number;
 	struct video_info	video_mode_info;
 } cur_info;
@@ -82,7 +69,6 @@ static int	hex = 0;
 static int	vesa_cols;
 static int	vesa_rows;
 static int	font_height;
-static int	vt4_mode = 0;
 static int	video_mode_changed;
 static struct	video_info new_mode_info;
 
@@ -110,11 +96,6 @@ init(void)
 	cur_info.console_info.size = sizeof(cur_info.console_info);
 	if (ioctl(0, CONS_GETINFO, &cur_info.console_info) == -1)
 		err(1, "getting console information");
-
-	/* vt(4) use unicode, so no screen mapping required. */
-	if (vt4_mode == 0 &&
-	    ioctl(0, GIO_SCRNMAP, &cur_info.screen_map) == -1)
-		err(1, "getting screen map");
 
 	if (ioctl(0, CONS_GET, &cur_info.video_mode_number) == -1)
 		err(1, "getting video mode number");
@@ -146,9 +127,6 @@ revert(void)
 	fprintf(stderr, "\033[=%dH", cur_info.console_info.mv_rev.fore);
 	fprintf(stderr, "\033[=%dI", cur_info.console_info.mv_rev.back);
 
-	if (vt4_mode == 0)
-		ioctl(0, PIO_SCRNMAP, &cur_info.screen_map);
-
 	if (video_mode_changed) {
 		if (cur_info.video_mode_number >= M_VESA_BASE)
 			ioctl(0,
@@ -179,36 +157,16 @@ revert(void)
 static void
 usage(void)
 {
-	if (vt4_mode)
-		fprintf(stderr, "%s\n%s\n%s\n%s\n%s\n%s\n",
+	fprintf(stderr, "%s\n%s\n%s\n%s\n%s\n%s\n",
 "usage: vidcontrol [-Cx] [-b color] [-c appearance] [-f [[size] file]]",
 "                  [-g geometry] [-h size] [-i active | adapter | mode]",
 "                  [-M char] [-m on | off]",
 "                  [-r foreground background] [-S on | off] [-s number]",
 "                  [-T xterm | cons25] [-t N | off] [mode]",
 "                  [foreground [background]] [show]");
-	else
-		fprintf(stderr, "%s\n%s\n%s\n%s\n%s\n%s\n",
-"usage: vidcontrol [-CdHLPpx] [-b color] [-c appearance] [-E emulator]",
-"                  [-f [[size] file]] [-g geometry] [-h size]",
-"                  [-i active | adapter | mode] [-l screen_map] [-M char]",
-"                  [-m on | off] [-r foreground background] [-S on | off]",
-"                  [-s number] [-T xterm | cons25] [-t N | off] [mode]",
-"                  [foreground [background]] [show]");
 	exit(1);
 }
 
-/* Detect presence of vt(4). */
-static int
-is_vt4(void)
-{
-	char vty_name[4] = "";
-	size_t len = sizeof(vty_name);
-
-	if (sysctlbyname("kern.vty", vty_name, &len, NULL, 0) != 0)
-		return (0);
-	return (strcmp(vty_name, "vt") == 0);
-}
 
 /*
  * Retrieve the next argument from the command line (for options that require
@@ -261,113 +219,6 @@ openguess(const char *a[], const char *b[], const char *c[], const char *d[], ch
 	return (NULL);
 }
 
-
-/*
- * Load a screenmap from a file and set it.
- */
-
-static void
-load_scrnmap(const char *filename)
-{
-	FILE *fd;
-	int size;
-	char *name;
-	scrmap_t scrnmap;
-	const char *a[] = {"", SCRNMAP_PATH, NULL};
-	const char *b[] = {filename, NULL};
-	const char *c[] = {"", ".scm", NULL};
-	const char *d[] = {"", NULL};
-
-	fd = openguess(a, b, c, d, &name);
-
-	if (fd == NULL) {
-		revert();
-		errx(1, "screenmap file not found");
-	}
-
-	size = sizeof(scrnmap);
-
-	if (decode(fd, (char *)&scrnmap, size) != size) {
-		rewind(fd);
-
-		if (fread(&scrnmap, 1, size, fd) != (size_t)size) {
-			fclose(fd);
-			revert();
-			errx(1, "bad screenmap file");
-		}
-	}
-
-	if (ioctl(0, PIO_SCRNMAP, &scrnmap) == -1) {
-		revert();
-		err(1, "loading screenmap");
-	}
-
-	fclose(fd);
-}
-
-
-/*
- * Set the default screenmap.
- */
-
-static void
-load_default_scrnmap(void)
-{
-	scrmap_t scrnmap;
-	int i;
-
-	for (i=0; i<256; i++)
-		*((char*)&scrnmap + i) = i;
-
-	if (ioctl(0, PIO_SCRNMAP, &scrnmap) == -1) {
-		revert();
-		err(1, "loading default screenmap");
-	}
-}
-
-
-/*
- * Print the current screenmap to stdout.
- */
-
-static void
-print_scrnmap(void)
-{
-	unsigned char map[256];
-	size_t i;
-
-	if (ioctl(0, GIO_SCRNMAP, &map) == -1) {
-		revert();
-		err(1, "getting screenmap");
-	}
-	for (i=0; i<sizeof(map); i++) {
-		if (i != 0 && i % 16 == 0)
-			fprintf(stdout, "\n");
-
-		if (hex != 0)
-			fprintf(stdout, " %02x", map[i]);
-		else
-			fprintf(stdout, " %03d", map[i]);
-	}
-	fprintf(stdout, "\n");
-
-}
-
-
-/*
- * Determine a file's size.
- */
-
-static int
-fsize(FILE *file)
-{
-	struct stat sb;
-
-	if (fstat(fileno(file), &sb) == 0)
-		return sb.st_size;
-	else
-		return -1;
-}
 
 static vfnt_map_t *
 load_vt4mappingtable(unsigned int nmappings, FILE *f)
@@ -463,122 +314,22 @@ load_vt4font(FILE *f)
  */
 
 static void
-load_font(const char *type, const char *filename)
+load_font(const char *type __unused, const char *filename)
 {
-	FILE	*fd;
-	int	h, i, size, w;
-	unsigned long io = 0;	/* silence stupid gcc(1) in the Wall mode */
-	char	*name, *fontmap, size_sufx[6];
-	const char	*a[] = {"", FONT_PATH, NULL};
-	const char	*vt4a[] = {"", VT_FONT_PATH, NULL};
-	const char	*b[] = {filename, NULL};
-	const char	*c[] = {"", size_sufx, NULL};
-	const char	*d[] = {"", ".fnt", NULL};
-	vid_info_t info;
+	FILE *fd;
+	char *name;
+	const char *a[] = {"", VT_FONT_PATH, NULL};
+	const char *b[] = {filename, NULL};
+	const char *c[] = {"", NULL};
+	const char *d[] = {"", ".fnt", NULL};
 
-	struct sizeinfo {
-		int w;
-		int h;
-		unsigned long io;
-	} sizes[] = {{8, 16, PIO_FONT8x16},
-		     {8, 14, PIO_FONT8x14},
-		     {8,  8,  PIO_FONT8x8},
-		     {0,  0,            0}};
-
-	if (vt4_mode) {
-		size_sufx[0] = '\0';
-	} else {
-		info.size = sizeof(info);
-		if (ioctl(0, CONS_GETINFO, &info) == -1) {
-			revert();
-			err(1, "getting console information");
-		}
-
-		snprintf(size_sufx, sizeof(size_sufx), "-8x%d", info.font_size);
-	}
-	fd = openguess((vt4_mode == 0) ? a : vt4a, b, c, d, &name);
-
+	fd = openguess(a, b, c, d, &name);
 	if (fd == NULL) {
 		revert();
 		errx(1, "%s: can't load font file", filename);
 	}
-
-	if (vt4_mode) {
-		load_vt4font(fd);
-		fclose(fd);
-		return;
-	}
-
-	if (type != NULL) {
-		size = 0;
-		if (sscanf(type, "%dx%d", &w, &h) == 2) {
-			for (i = 0; sizes[i].w != 0; i++) {
-				if (sizes[i].w == w && sizes[i].h == h) {
-					size = DATASIZE(sizes[i]);
-					io = sizes[i].io;
-					font_height = sizes[i].h;
-				}
-			}
-		}
-		if (size == 0) {
-			fclose(fd);
-			revert();
-			errx(1, "%s: bad font size specification", type);
-		}
-	} else {
-		/* Apply heuristics */
-
-		int j;
-		int dsize[2];
-
-		size = DATASIZE(sizes[0]);
-		fontmap = (char*) malloc(size);
-		dsize[0] = decode(fd, fontmap, size);
-		dsize[1] = fsize(fd);
-		free(fontmap);
-
-		size = 0;
-		for (j = 0; j < 2; j++) {
-			for (i = 0; sizes[i].w != 0; i++) {
-				if (DATASIZE(sizes[i]) == dsize[j]) {
-					size = dsize[j];
-					io = sizes[i].io;
-					font_height = sizes[i].h;
-					j = 2;	/* XXX */
-					break;
-				}
-			}
-		}
-
-		if (size == 0) {
-			fclose(fd);
-			revert();
-			errx(1, "%s: can't guess font size", filename);
-		}
-
-		rewind(fd);
-	}
-
-	fontmap = (char*) malloc(size);
-
-	if (decode(fd, fontmap, size) != size) {
-		rewind(fd);
-		if (fsize(fd) != size ||
-		    fread(fontmap, 1, size, fd) != (size_t)size) {
-			fclose(fd);
-			free(fontmap);
-			revert();
-			errx(1, "%s: bad font file", filename);
-		}
-	}
-
-	if (ioctl(0, io, fontmap) == -1) {
-		revert();
-		err(1, "loading font");
-	}
-
+	load_vt4font(fd);
 	fclose(fd);
-	free(fontmap);
 }
 
 
@@ -1253,87 +1004,6 @@ test_frame(void)
 
 
 /*
- * Snapshot the video memory of that terminal, using the CONS_SCRSHOT
- * ioctl, and writes the results to stdout either in the special
- * binary format (see manual page for details), or in the plain
- * text format.
- */
-
-static void
-dump_screen(int mode, int opt)
-{
-	scrshot_t shot;
-	vid_info_t info;
-
-	info.size = sizeof(info);
-	if (ioctl(0, CONS_GETINFO, &info) == -1) {
-		revert();
-		err(1, "getting console information");
-	}
-
-	shot.x = shot.y = 0;
-	shot.xsize = info.mv_csz;
-	shot.ysize = info.mv_rsz;
-	if (opt == DUMP_ALL)
-		shot.ysize += info.mv_hsz;
-
-	shot.buf = alloca(shot.xsize * shot.ysize * sizeof(u_int16_t));
-	if (shot.buf == NULL) {
-		revert();
-		errx(1, "failed to allocate memory for dump");
-	}
-
-	if (ioctl(0, CONS_SCRSHOT, &shot) == -1) {
-		revert();
-		err(1, "dumping screen");
-	}
-
-	if (mode == DUMP_FMT_RAW) {
-		printf("SCRSHOT_%c%c%c%c", DUMP_FMT_REV, 2,
-		       shot.xsize, shot.ysize);
-
-		fflush(stdout);
-
-		write(STDOUT_FILENO, shot.buf,
-		      shot.xsize * shot.ysize * sizeof(u_int16_t));
-	} else {
-		char *line;
-		int x, y;
-		u_int16_t ch;
-
-		line = alloca(shot.xsize + 1);
-
-		if (line == NULL) {
-			revert();
-			errx(1, "failed to allocate memory for line buffer");
-		}
-
-		for (y = 0; y < shot.ysize; y++) {
-			for (x = 0; x < shot.xsize; x++) {
-				ch = shot.buf[x + (y * shot.xsize)];
-				ch &= 0xff;
-
-				if (isprint(ch) == 0)
-					ch = ' ';
-
-				line[x] = (char)ch;
-			}
-
-			/* Trim trailing spaces */
-
-			do {
-				line[x--] = '\0';
-			} while (line[x] == ' ' && x != 0);
-
-			puts(line);
-		}
-
-		fflush(stdout);
-	}
-}
-
-
-/*
  * Set the console history buffer size.
  */
 
@@ -1369,45 +1039,6 @@ clear_history(void)
 	}
 }
 
-static int
-get_terminal_emulator(int i, struct term_info *tip)
-{
-	tip->ti_index = i;
-	if (ioctl(0, CONS_GETTERM, tip) == 0)
-		return (1);
-	strlcpy((char *)tip->ti_name, "unknown", sizeof(tip->ti_name));
-	strlcpy((char *)tip->ti_desc, "unknown", sizeof(tip->ti_desc));
-	return (0);
-}
-
-static void
-get_terminal_emulators(void)
-{
-	struct term_info ti;
-	int i;
-
-	for (i = 0; i < 10; i++) {
-		if (get_terminal_emulator(i, &ti) == 0)
-			break;
-		printf("%d: %s (%s)%s\n", i, ti.ti_name, ti.ti_desc,
-		    i == 0 ? " (active)" : "");
-	}
-}
-
-static void
-set_terminal_emulator(const char *name)
-{
-	struct term_info old_ti, ti;
-
-	get_terminal_emulator(0, &old_ti);
-	strlcpy((char *)ti.ti_name, name, sizeof(ti.ti_name));
-	if (ioctl(0, CONS_SETTERM, &ti) != 0)
-		warn("SETTERM '%s'", name);
-	get_terminal_emulator(0, &ti);
-	printf("%s (%s) -> %s (%s)\n", old_ti.ti_name, old_ti.ti_desc,
-	    ti.ti_name, ti.ti_desc);
-}
-
 static void
 set_terminal_mode(char *arg)
 {
@@ -1424,19 +1055,13 @@ main(int argc, char **argv)
 {
 	char    *font, *type, *termmode;
 	const char *opts;
-	int	dumpmod, dumpopt, opt;
+	int	opt;
 
-	vt4_mode = is_vt4();
 
 	init();
 
-	dumpmod = 0;
-	dumpopt = DUMP_FBF;
 	termmode = NULL;
-	if (vt4_mode)
-		opts = "b:Cc:fg:h:i:M:m:r:S:s:T:t:x";
-	else
-		opts = "b:Cc:deE:fg:h:Hi:l:LM:m:pPr:S:s:T:t:x";
+	opts = "b:Cc:fg:h:i:M:m:r:S:s:T:t:x";
 
 	while ((opt = getopt(argc, argv, opts)) != -1)
 		switch(opt) {
@@ -1448,21 +1073,6 @@ main(int argc, char **argv)
 			break;
 		case 'c':
 			set_cursor_type(optarg);
-			break;
-		case 'd':
-			if (vt4_mode)
-				break;
-			print_scrnmap();
-			break;
-		case 'E':
-			if (vt4_mode)
-				break;
-			set_terminal_emulator(optarg);
-			break;
-		case 'e':
-			if (vt4_mode)
-				break;
-			get_terminal_emulators();
 			break;
 		case 'f':
 			optarg = nextarg(argc, argv, &optind, 'f', 0);
@@ -1477,9 +1087,6 @@ main(int argc, char **argv)
 
 				load_font(type, font);
 			} else {
-				if (!vt4_mode)
-					usage(); /* Switch syscons to ROM? */
-
 				load_default_vt4font();
 			}
 			break;
@@ -1494,33 +1101,14 @@ main(int argc, char **argv)
 		case 'h':
 			set_history(optarg);
 			break;
-		case 'H':
-			dumpopt = DUMP_ALL;
-			break;
 		case 'i':
 			show_info(optarg);
-			break;
-		case 'l':
-			if (vt4_mode)
-				break;
-			load_scrnmap(optarg);
-			break;
-		case 'L':
-			if (vt4_mode)
-				break;
-			load_default_scrnmap();
 			break;
 		case 'M':
 			set_mouse_char(optarg);
 			break;
 		case 'm':
 			set_mouse(optarg);
-			break;
-		case 'p':
-			dumpmod = DUMP_FMT_RAW;
-			break;
-		case 'P':
-			dumpmod = DUMP_FMT_TXT;
 			break;
 		case 'r':
 			set_reverse_colors(argc, argv, &optind);
@@ -1547,8 +1135,6 @@ main(int argc, char **argv)
 			usage();
 		}
 
-	if (dumpmod != 0)
-		dump_screen(dumpmod, dumpopt);
 	video_mode(argc, argv, &optind);
 	set_normal_colors(argc, argv, &optind);
 

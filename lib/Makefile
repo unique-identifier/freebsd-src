@@ -106,7 +106,6 @@ SUBDIR=	${SUBDIR_BOOTSTRAP} \
 	libutil \
 	libutil++ \
 	libuvmem \
-	${_libvgl} \
 	libwrap \
 	libxo \
 	liby \
@@ -195,10 +194,6 @@ SUBDIR.${MK_EFI}+=	libefivar
 SUBDIR.${MK_GOOGLETEST}+=	googletest
 SUBDIR.${MK_NETGRAPH}+=	libnetgraph
 SUBDIR.${MK_NIS}+=	libypclnt
-
-.if ${MACHINE_CPUARCH} == "i386" || ${MACHINE_CPUARCH} == "amd64"
-_libvgl=	libvgl
-.endif
 
 .if ${MACHINE_CPUARCH} == "aarch64"
 SUBDIR.${MK_PMC}+=	libopencsd

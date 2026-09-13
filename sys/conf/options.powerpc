@@ -28,7 +28,6 @@ PSERIES			opt_platform.h
 PSIM
 QEMU			opt_platform.h
 
-SC_OFWFB		opt_ofwfb.h
 
 OFWCONS_POLL_HZ		opt_ofw.h
 

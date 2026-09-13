@@ -204,16 +204,6 @@ unload
 read-conf /boot/special.conf
 boot-conf
 .Ed
-.Pp
-Disable the loading of the splash screen module and bitmap and then
-proceed to boot:
-.Pp
-.Bd -literal -offset indent -compact
-unload
-disable-module splash_bmp
-disable-module bitmap
-boot-conf
-.Ed
 .Sh SEE ALSO
 .Xr loader.conf 5 ,
 .Xr loader 8

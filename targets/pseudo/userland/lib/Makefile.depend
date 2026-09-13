@@ -167,7 +167,6 @@ DIRDEPS = \
 	lib/libusb \
 	lib/libusbhid \
 	lib/libutil \
-	lib/libvgl \
 	lib/libvmmapi \
 	lib/libwrap \
 	lib/libxo \

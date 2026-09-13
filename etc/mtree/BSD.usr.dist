@@ -322,8 +322,6 @@
             ..
             libusb20
             ..
-            libvgl
-            ..
             mdoc
             ..
             netgraph
@@ -825,14 +823,6 @@
             defs
             ..
             mibs
-            ..
-        ..
-        syscons
-            fonts
-            ..
-            keymaps
-            ..
-            scrnmaps
             ..
         ..
         tabset

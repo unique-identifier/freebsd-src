@@ -735,44 +735,21 @@ sysbeep(int pitch __unused, sbintime_t duration __unused)
 
 #endif
 
-/*
- * Temporary support for sc(4) to vt(4) transition.
- */
-static char vty_name[16];
-SYSCTL_STRING(_kern, OID_AUTO, vty, CTLFLAG_RDTUN | CTLFLAG_NOFETCH, vty_name,
+/* Report the available virtual terminal driver. */
+#ifdef DEV_VT
+static char vty_name[] = "vt";
+#else
+static char vty_name[] = "";
+#endif
+SYSCTL_STRING(_kern, OID_AUTO, vty, CTLFLAG_RD, vty_name,
     0, "Console vty driver");
 
 int
 vty_enabled(unsigned vty)
 {
-	static unsigned vty_selected = 0;
-
-	if (vty_selected == 0) {
-		TUNABLE_STR_FETCH("kern.vty", vty_name, sizeof(vty_name));
-		do {
-#if defined(DEV_SC)
-			if (strcmp(vty_name, "sc") == 0) {
-				vty_selected = VTY_SC;
-				break;
-			}
+#ifdef DEV_VT
+	return ((vty & VTY_VT) != 0);
+#else
+	return (0);
 #endif
-#if defined(DEV_VT)
-			if (strcmp(vty_name, "vt") == 0) {
-				vty_selected = VTY_VT;
-				break;
-			}
-#endif
-#if defined(DEV_VT)
-			vty_selected = VTY_VT;
-#elif defined(DEV_SC)
-			vty_selected = VTY_SC;
-#endif
-		} while (0);
-
-		if (vty_selected == VTY_VT)
-			strcpy(vty_name, "vt");
-		else if (vty_selected == VTY_SC)
-			strcpy(vty_name, "sc");
-	}
-	return ((vty_selected & vty) != 0);
 }

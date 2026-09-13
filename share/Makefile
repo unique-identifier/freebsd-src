@@ -20,7 +20,7 @@ SUBDIR=	${_colldef} \
 	${_numericdef} \
 	skel \
 	${_snmp} \
-	${_syscons} \
+	\
 	tabset \
 	termcap \
 	${_timedef} \
@@ -71,10 +71,6 @@ _man=		man
 
 .if ${MK_SHAREDOCS} != "no"
 _doc=		doc
-.endif
-
-.if ${MK_SYSCONS} != "no"
-_syscons=	syscons
 .endif
 
 SUBDIR.${MK_TESTS}+= tests

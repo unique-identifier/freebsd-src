@@ -142,7 +142,6 @@ int	constty_set(struct tty *tp);
 int	constty_clear(struct tty *tp);
 
 /* sc(4) / vt(4) coexistence shim */
-#define	VTY_SC 0x01
 #define	VTY_VT 0x02
 int	vty_enabled(unsigned int);
 

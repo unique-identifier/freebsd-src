@@ -36,7 +36,6 @@
 #ifndef FB_DEBUG
 #define	FB_DEBUG	0
 #endif
-#include "opt_syscons.h"	/* should be removed in the future, XXX */
 
 #include <sys/param.h>
 #include <sys/systm.h>

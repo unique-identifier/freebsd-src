@@ -143,19 +143,6 @@ struct pathent {
 };
 static STAILQ_HEAD(, pathent) pathlist = STAILQ_HEAD_INITIALIZER(pathlist);
 
-#ifndef BOOTSTRAP_KBDCONTROL
-/* Detect presence of vt(4). */
-static int
-is_vt4(void)
-{
-	char vty_name[4] = "";
-	size_t len = sizeof(vty_name);
-
-	if (sysctlbyname("kern.vty", vty_name, &len, NULL, 0) != 0)
-		return (0);
-	return (strcmp(vty_name, "vt") == 0);
-}
-#endif
 
 static char *
 nextarg(int ac, char **av, int *indp, int oc)
@@ -841,7 +828,7 @@ load_keymap(char *opt, int dumponly)
 	FILE	*file;
 	int	j;
 	char	*name, *cp;
-	char	blank[] = "", keymap_path[] = KEYMAP_PATH;
+	char	blank[] = "";
 	char	vt_keymap_path[] = VT_KEYMAP_PATH, dotkbd[] = ".kbd";
 	char	*postfix[] = {blank, dotkbd, NULL};
 
@@ -851,10 +838,7 @@ load_keymap(char *opt, int dumponly)
 			add_keymap_path(cp);
 		add_keymap_path("");
 #ifndef BOOTSTRAP_KBDCONTROL
-		if (is_vt4())
-			add_keymap_path(vt_keymap_path);
-		else
-			add_keymap_path(keymap_path);
+		add_keymap_path(vt_keymap_path);
 #endif
 		paths_configured = 1;
 	}
@@ -1037,10 +1021,6 @@ set_bell_values(char *opt)
 badopt:
 			warnx("argument to -b must be duration.pitch or [quiet.]visual|normal|off");
 			return;
-		}
-		if (!is_vt4()) {
-			if (pitch != 0)
-				pitch = 1193182 / pitch;	/* in Hz */
 		}
 		duration /= 10;	/* in 10 m sec */
 	}

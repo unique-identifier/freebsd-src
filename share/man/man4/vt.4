@@ -46,7 +46,6 @@ In
 .Xr loader.conf 5 :
 .Cd hw.vga.textmode= Ns Ar 1
 .Cd hw.vga.acpi_ignore_no_vga= Ns Ar 1
-.Cd kern.vty= Ns Ar vt
 .Cd kern.vt.color. Ns Ao Ar colornum Ac Ns .rgb= Ns Ao Ar colorspec Ac
 .Cd kern.vt.fb.default_mode= Ns Ao Ar X Ac Ns x Ns Ao Ar Y Ac
 .Cd kern.vt.fb.modes. Ns Ao Ar connector Ac Ns = Ns Ao Ar X Ac Ns x Ns Ao Ar Y Ac
@@ -161,8 +160,7 @@ Set the maximum height to
 .El
 .Sh BACKWARDS COMPATIBILITY
 Several options are provided for compatibility with the previous
-console device,
-.Xr sc 4 .
+console device, syscons.
 These options will be removed in a future
 .Fx
 version.
@@ -219,21 +217,10 @@ Note no VGA support is only acknowledged when running virtualized.
 There is too many broken firmware that wrongly reports no VGA support on
 physical hardware.
 .It Va kern.vty
-Set this value to
+Reports the virtual terminal driver in use.
+This read-only value is
 .Ql vt
-or
-.Ql sc
-to choose a specific system console, overriding the default.
-The
-.Pa GENERIC
-kernel uses
-.Nm
-when this value is not set.
-Note that
-.Ql sc
-is not compatible with
-.Xr UEFI 8
-boot.
+when vt is compiled into the kernel.
 .It Va kern.vt.color . Ns Ar colornum . Ns Va rgb
 Set this value to override default palette entry for color
 .Ar colornum
@@ -417,7 +404,6 @@ at boot:
 .Xr keyboard 4 ,
 .Xr screen 4 ,
 .Xr splash 4 ,
-.Xr syscons 4 ,
 .Xr ukbd 4 ,
 .Xr kbdmap 5 ,
 .Xr loader.conf 5 ,

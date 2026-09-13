@@ -33,10 +33,6 @@ feeder_rate_gen.h		optional sound				   \
 	compile-with	"${AWK} -f $S/tools/sound/feeder_rate_mkfilter.awk -- ${FEEDER_RATE_PRESETS} > feeder_rate_gen.h" \
 	no-obj no-implicit-rule before-depend				   \
 	clean		"feeder_rate_gen.h"
-font.h				optional	sc_dflt_font		\
-	compile-with	"uudecode < ${SRCTOP}/share/syscons/fonts/${SC_DFLT_FONT}-8x16.fnt && file2c 'u_char dflt_font_16[16*256] = {' '};' < ${SC_DFLT_FONT}-8x16 > font.h && uudecode < ${SRCTOP}/share/syscons/fonts/${SC_DFLT_FONT}-8x14.fnt && file2c 'u_char dflt_font_14[14*256] = {' '};' < ${SC_DFLT_FONT}-8x14 >> font.h && uudecode < ${SRCTOP}/share/syscons/fonts/${SC_DFLT_FONT}-8x8.fnt && file2c 'u_char dflt_font_8[8*256] = {' '};' < ${SC_DFLT_FONT}-8x8 >> font.h"									\
-	no-obj no-implicit-rule before-depend				\
-	clean		"font.h ${SC_DFLT_FONT}-8x14 ${SC_DFLT_FONT}-8x16 ${SC_DFLT_FONT}-8x8"
 snd_fxdiv_gen.h			optional sound				   \
 	dependency	"$S/tools/sound/snd_fxdiv_gen.awk"		   \
 	compile-with	"${AWK} -f $S/tools/sound/snd_fxdiv_gen.awk -- > snd_fxdiv_gen.h" \
@@ -51,7 +47,7 @@ kbdmuxmap.h			optional	kbdmux_dflt_keymap 	   \
 	compile-with	"${KEYMAP} -L ${KBDMUX_DFLT_KEYMAP} | ${KEYMAP_FIX} > ${.TARGET}" \
 	no-obj no-implicit-rule before-depend				\
 	clean		"kbdmuxmap.h"
-teken_state.h		optional sc | vt				   \
+teken_state.h		optional vt				   \
 	dependency	"$S/teken/gensequences $S/teken/sequences" \
 	compile-with	"${AWK} -f $S/teken/gensequences $S/teken/sequences > teken_state.h" \
 	no-obj no-implicit-rule before-depend				   \
@@ -1697,7 +1693,6 @@ dev/evdev/uinput.c			optional evdev uinput
 dev/exca/exca.c			optional cbb
 dev/fb/fbd.c			optional fbd | vt
 dev/fb/fb_if.m			standard
-dev/fb/splash.c			optional sc splash
 dev/fdt/fdt_clock.c		optional fdt fdt_clock
 dev/fdt/fdt_clock_if.m		optional fdt fdt_clock
 dev/fdt/fdt_common.c		optional fdt
@@ -2328,7 +2323,7 @@ dev/ixgbe/ixgbe_dcb_82599.c	optional ix inet | ixv inet \
 	compile-with "${NORMAL_C} -I$S/dev/ixgbe"
 dev/jedec_dimm/jedec_dimm.c	optional jedec_dimm smbus
 dev/jme/if_jme.c		optional jme pci
-dev/kbd/kbd.c			optional atkbd | pckbd | sc | ukbd | vt | hkbd
+dev/kbd/kbd.c			optional atkbd | pckbd | ukbd | vt | hkbd
 dev/kbdmux/kbdmux.c		optional kbdmux
 dev/ksyms/ksyms.c		optional ksyms
 dev/le/am7990.c			optional le
@@ -3211,28 +3206,6 @@ dev/syscon/syscon.c		optional syscon
 dev/syscon/syscon_generic.c	optional syscon fdt
 dev/syscon/syscon_if.m		optional syscon
 dev/syscon/syscon_power.c	optional syscon syscon_power
-dev/syscons/blank/blank_saver.c	optional blank_saver
-dev/syscons/daemon/daemon_saver.c optional daemon_saver
-dev/syscons/dragon/dragon_saver.c optional dragon_saver
-dev/syscons/fade/fade_saver.c	optional fade_saver
-dev/syscons/fire/fire_saver.c	optional fire_saver
-dev/syscons/green/green_saver.c	optional green_saver
-dev/syscons/logo/logo.c		optional logo_saver
-dev/syscons/logo/logo_saver.c	optional logo_saver
-dev/syscons/rain/rain_saver.c	optional rain_saver
-dev/syscons/schistory.c		optional sc
-dev/syscons/scmouse.c		optional sc
-dev/syscons/scterm.c		optional sc
-dev/syscons/scterm-dumb.c	optional sc !SC_NO_TERM_DUMB
-dev/syscons/scterm-sc.c		optional sc !SC_NO_TERM_SC
-dev/syscons/scterm-teken.c	optional sc !SC_NO_TERM_TEKEN
-dev/syscons/scvidctl.c		optional sc
-dev/syscons/scvtb.c		optional sc
-dev/syscons/snake/snake_saver.c	optional snake_saver
-dev/syscons/star/star_saver.c	optional star_saver
-dev/syscons/syscons.c		optional sc
-dev/syscons/sysmouse.c		optional sc
-dev/syscons/warp/warp_saver.c	optional warp_saver
 dev/tcp_log/tcp_log_dev.c	optional tcp_blackbox inet | tcp_blackbox inet6
 dev/tdfx/tdfx_pci.c		optional tdfx pci
 dev/ti/if_ti.c			optional ti pci
@@ -5240,7 +5213,7 @@ security/mac_veriexec/mac_veriexec_sha1.c		optional mac_veriexec_sha1
 security/mac_veriexec/mac_veriexec_sha256.c		optional mac_veriexec_sha256
 security/mac_veriexec/mac_veriexec_sha384.c		optional mac_veriexec_sha384
 security/mac_veriexec/mac_veriexec_sha512.c		optional mac_veriexec_sha512
-teken/teken.c			optional sc !SC_NO_TERM_TEKEN | vt
+teken/teken.c			optional vt
 ufs/ffs/ffs_alloc.c		optional ffs
 ufs/ffs/ffs_balloc.c		optional ffs
 ufs/ffs/ffs_inode.c		optional ffs

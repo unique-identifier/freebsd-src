@@ -51,6 +51,12 @@
 #   xargs -n1 | sort | uniq -d;
 # done
 
+# 20260914: Remove bootpd
+OLD_FILES+=usr/libexec/bootpd
+OLD_FILES+=usr/libexec/bootpgw
+OLD_FILES+=usr/sbin/bootpef
+OLD_FILES+=usr/sbin/bootptest
+
 # 20260914: Remove bootparamd
 OLD_FILES+=etc/rc.d/bootparams
 OLD_FILES+=usr/sbin/bootparamd

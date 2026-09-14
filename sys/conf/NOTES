@@ -757,17 +757,7 @@ options 	SCTP_DEBUG
 # the logs, I will do that eventually .. before then
 # if you want them send me an email rrs@freebsd.org
 # You basically must have ktr(4) enabled for these
-# and you then set the sysctl to turn on/off various
-# logging bits. Use ktrdump(8) to pull the log and run
-# it through a display program.. and graphs and other
-# things too.
-#
-options 	SCTP_LOCK_LOGGING
-options 	SCTP_MBUF_LOGGING
-options 	SCTP_MBCNT_LOGGING
-options 	SCTP_PACKET_LOGGING
-options 	SCTP_LTRACE_CHUNKS
-options 	SCTP_LTRACE_ERRORS
+# corresponding man page, e.g., ng_bpf(4).
 
 # OpenFabrics Enterprise Distribution (Infiniband).
 options 	OFED

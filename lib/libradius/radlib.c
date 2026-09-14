@@ -44,8 +44,7 @@
 
 #define	MAX_FIELDS	7
 
-/* We need the MPPE_KEY_LEN define */
-#include <netgraph/ng_mppc.h>
+#define	RAD_MPPE_KEY_LEN	16
 
 #include <errno.h>
 #include <netdb.h>
@@ -1572,9 +1571,9 @@ rad_demangle_mppe_key(struct rad_handle *h, const void *mangled,
 		return NULL;
 	}
 
-	if (*len > MPPE_KEY_LEN * 2) {
+	if (*len > RAD_MPPE_KEY_LEN * 2) {
 		generr(h, "Key to long (%zu) for me max. %d",
-		    *len, MPPE_KEY_LEN * 2);
+		    *len, RAD_MPPE_KEY_LEN * 2);
 		return NULL;
 	}
 	demangled = malloc(*len);

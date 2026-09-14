@@ -374,14 +374,12 @@ MAN=	aac.4 \
 	${_nfe.4} \
 	nfslockd.4 \
 	${_nfsmb.4} \
-	ng_async.4 \
 	ng_bpf.4 \
 	ng_bridge.4 \
 	ng_btsocket.4 \
 	ng_car.4 \
 	ng_checksum.4 \
 	ng_cisco.4 \
-	ng_deflate.4 \
 	ng_device.4 \
 	nge.4 \
 	ng_echo.4 \
@@ -400,19 +398,13 @@ MAN=	aac.4 \
 	ng_ip_input.4 \
 	ng_ksocket.4 \
 	ng_l2cap.4 \
-	ng_l2tp.4 \
 	ng_lmi.4 \
 	ng_macfilter.4 \
-	ng_mppc.4 \
 	ng_nat.4 \
 	ng_netflow.4 \
 	ng_one2many.4 \
 	ng_patch.4 \
 	ng_pipe.4 \
-	ng_ppp.4 \
-	ng_pppoe.4 \
-	ng_pptpgre.4 \
-	ng_pred1.4 \
 	ng_rfc1490.4 \
 	ng_socket.4 \
 	ng_source.4 \
@@ -423,7 +415,6 @@ MAN=	aac.4 \
 	ng_tty.4 \
 	ng_ubt.4 \
 	ng_UI.4 \
-	ng_vjc.4 \
 	ng_vlan.4 \
 	ng_vlan_rotate.4 \
 	nlsysevent.4 \

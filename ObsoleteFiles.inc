@@ -51,6 +51,9 @@
 #   xargs -n1 | sort | uniq -d;
 # done
 
+# 20260914: Remove standalone dial-up chat utility
+OLD_FILES+=usr/bin/chat
+
 # 20260914: Remove nuageinit
 OLD_FILES+=etc/rc.d/nuageinit
 OLD_FILES+=etc/rc.d/nuageinit_post_net

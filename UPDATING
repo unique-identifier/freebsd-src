@@ -13,6 +13,14 @@ Items affecting the ports and packages system can be found in
 and/or ports.
 
 20260913:
+	freebsd-update and its phttpget download helper have been removed,
+	along with the FREEBSD_UPDATE source option and cloud-image update
+	jobs.  HalfBSD base-system updates are built and installed from
+	source.  Run delete-old after installing to remove the old updater
+	and configuration.  Cached files in /var/db/freebsd-update are not
+	removed automatically; remove them when no longer needed.
+
+20260913:
 	PF and IPFILTER, their kernel modules, userland tools, startup and
 	periodic scripts, and source options have been removed.  PF-dependent
 	ALTQ support is also removed; IPFW traffic shaping uses dummynet.

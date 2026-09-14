@@ -8,7 +8,6 @@ SUBDIR=	${_atf} \
 	flua \
 	getty \
 	${_hyperv} \
-	${_phttpget} \
 	${_pppoed} \
 	rc \
 	${_rlogind} \
@@ -34,10 +33,6 @@ _blocklistd-helper+=	blocklistd-helper
 
 .if ${MK_BOOTPD} != "no"
 SUBDIR+=	bootpd
-.endif
-
-.if ${MK_FREEBSD_UPDATE} != "no"
-_phttpget=	phttpget
 .endif
 
 .if ${MK_HYPERV} != "no"

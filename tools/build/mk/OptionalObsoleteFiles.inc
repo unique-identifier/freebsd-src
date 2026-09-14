@@ -1371,16 +1371,6 @@ OLD_DIRS+=usr/tests/share/examples
 OLD_FILES+=usr/sbin/ofwdump
 .endif
 
-.if ${MK_FREEBSD_UPDATE} == no
-OLD_FILES+=etc/freebsd-update.conf
-OLD_FILES+=usr/sbin/freebsd-update
-OLD_FILES+=usr/share/examples/etc/freebsd-update.conf
-.endif
-
-.if ${MK_FREEBSD_UPDATE} == no
-OLD_FILES+=usr/libexec/phttpget
-.endif
-
 .if ${MK_GOOGLETEST} == no
 OLD_FILES+=usr/include/private/gmock/gmock-actions.h
 OLD_FILES+=usr/include/private/gmock/gmock-cardinalities.h

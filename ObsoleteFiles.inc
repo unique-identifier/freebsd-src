@@ -51,6 +51,13 @@
 #   xargs -n1 | sort | uniq -d;
 # done
 
+# 20260913: Remove freebsd-update and its download helper
+OLD_FILES+=etc/freebsd-update.conf
+OLD_FILES+=usr/sbin/freebsd-update
+OLD_FILES+=usr/libexec/phttpget
+OLD_FILES+=usr/share/examples/etc/freebsd-update.conf
+OLD_DIRS+=var/db/freebsd-update
+
 # 20260913: Remove PF and IPFILTER
 OLD_DIRS+=etc/authpf
 OLD_DIRS+=usr/include/netpfil

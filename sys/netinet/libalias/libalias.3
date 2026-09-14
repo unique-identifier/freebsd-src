@@ -136,10 +136,8 @@ If the
 .Dv PKT_ALIAS_RESET_ON_ADDR_CHANGE
 mode bit is set (the default mode of operation), then the internal aliasing
 link tables will be reset any time the aliasing address changes.
-This is useful for interfaces such as
-.Xr ppp 8 ,
-where the IP
-address may or may not change on successive dial-up attempts.
+This is useful when an interface's IP address can change between successive
+connections.
 .Pp
 If the
 .Dv PKT_ALIAS_RESET_ON_ADDR_CHANGE
@@ -220,10 +218,8 @@ When this mode bit is set and
 .Fn LibAliasSetAddress
 is called to change the aliasing address, the internal link table of the
 packet aliasing engine will be cleared.
-This operating mode is useful for
-.Xr ppp 8
-links where the interface address can sometimes change or remain the same
-between dial-up attempts.
+This operating mode is useful for links where the interface address can
+sometimes change or remain the same between connection attempts.
 If this mode bit is not set, the link table will never be reset in the event
 of an address change.
 .It Dv PKT_ALIAS_PUNCH_FW

@@ -153,7 +153,6 @@ BADHDRS= \
 	net/iflib.h \
 	net/ifq.h \
 	net/mp_ring.h \
-	net/mppc.h \
 	net/netisr.h \
 	net/netisr_internal.h \
 	net/netmap.h \

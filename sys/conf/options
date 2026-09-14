@@ -458,7 +458,6 @@ ROUTE_MPATH		opt_route.h
 ROUTETABLES		opt_route.h
 FIB_ALGO		opt_route.h
 RSS			opt_rss.h
-SLIP_IFF_OPTS		opt_slip.h
 SIFTR
 TCP_BLACKBOX		opt_global.h
 TCP_HHOOK		opt_global.h

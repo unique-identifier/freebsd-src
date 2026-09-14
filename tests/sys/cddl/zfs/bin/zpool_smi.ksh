@@ -56,8 +56,11 @@ _EOF
 		 	print "q" >> $label_file
 		 	print "q" >> $label_file
 
-		 	fdisk -B /dev/${disk}p0 >/dev/null 2>&1
-		 	# wait a while for fdisk finishes
+			/usr/sbin/gpart create -s MBR /dev/${disk}p0 \
+			    >/dev/null 2>&1
+			/usr/sbin/gpart add -t freebsd /dev/${disk}p0 \
+			    >/dev/null 2>&1
+			# wait a while for gpart to finish
 			/usr/sbin/devfsadm > /dev/null 2>&1
 		elif [[ $arch == "sparc" ]]; then
 			print "label" > $label_file

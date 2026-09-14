@@ -402,8 +402,6 @@ DIRDEPS+= \
 	usr.sbin/bluetooth/rtlbtfw \
 	usr.sbin/bluetooth/sdpcontrol \
 	usr.sbin/bluetooth/sdpd \
-	usr.sbin/bootparamd/bootparamd \
-	usr.sbin/bootparamd/callbootd \
 	usr.sbin/bsdconfig \
 	usr.sbin/bsdconfig/console \
 	usr.sbin/bsdconfig/console/include \

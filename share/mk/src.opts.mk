@@ -68,7 +68,6 @@ __DEFAULT_YES_OPTIONS = \
     BLOCKLIST \
     BLUETOOTH \
     BOOT \
-    BOOTPARAMD \
     BOOTPD \
     BSD_CPIO \
     BSDINSTALL \

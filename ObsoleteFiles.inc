@@ -51,6 +51,11 @@
 #   xargs -n1 | sort | uniq -d;
 # done
 
+# 20260914: Remove bootparamd
+OLD_FILES+=etc/rc.d/bootparams
+OLD_FILES+=usr/sbin/bootparamd
+OLD_FILES+=usr/sbin/callbootd
+
 # 20260913: Remove userland PPP and its entry points
 OLD_DIRS+=etc/ppp
 OLD_DIRS+=usr/share/examples/ppp

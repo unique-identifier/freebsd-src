@@ -122,9 +122,6 @@ BLUETOOTH=	bluetooth \
 		sdpd \
 		ubthidhci
 
-CONFGROUPS.${MK_BOOTPARAMD}+=	BOOTPARAMD
-BOOTPARAMD=	bootparams
-
 CONFGROUPS.${MK_BSNMP}+=	BSNMP
 BSNMPPACKAGE=			bsnmp
 BSNMP=		bsnmpd

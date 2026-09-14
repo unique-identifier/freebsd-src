@@ -227,9 +227,8 @@ cons_set(struct env_var *ev, int flags, const void *value)
 
 	if ((value == NULL) || (cons_check(value) == 0)) {
 		/*
-		 * Return CMD_OK instead of CMD_ERROR to prevent forth syntax
-		 * error, which would prevent it processing any further
-		 * loader.conf entries.
+		 * Ignore invalid console selections so configuration processing
+		 * can continue.
 		 */
 		return (CMD_OK);
 	}

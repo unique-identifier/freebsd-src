@@ -8,7 +8,6 @@ FILESDIR=	${SHAREDIR}/examples
 
 LDIRS=	BSD_daemon \
 	FreeBSD_version \
-	bootforth \
 	etc \
 	find_interface \
 	flua \
@@ -52,17 +51,6 @@ SE_FREEBSD_VERSION= \
 	FreeBSD_version.c \
 	Makefile \
 	README
-
-SE_DIRS+=	bootforth
-SE_BOOTFORTH_PACKAGE=bootloader
-SE_BOOTFORTH= \
-	README \
-	boot.4th \
-	frames.4th \
-	loader.rc \
-	menu.4th \
-	menuconf.4th \
-	screen.4th
 
 SE_DIRS+=	etc
 SE_ETC= \

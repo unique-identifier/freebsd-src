@@ -85,11 +85,6 @@ SRCS+=	interp_lua.c
 LDR_INTERP=	${LIBLUA}
 LDR_INTERP32=	${LIBLUA32}
 CFLAGS.interp_lua.c= -DLUA_PATH=\"${LUAPATH}\" -I${FLUASRC}/lfs
-.elif ${LOADER_INTERP} == "4th"
-SRCS+=	interp_forth.c
-.include "${BOOTSRC}/ficl.mk"
-LDR_INTERP=	${LIBFICL}
-LDR_INTERP32=	${LIBFICL32}
 .elif ${LOADER_INTERP} == "simp"
 SRCS+=	interp_simple.c
 .else
@@ -148,13 +143,6 @@ CFLAGS+=	-I${ZFSSRC}
 CFLAGS+=	-I${SYSDIR}/cddl/boot/zfs
 CFLAGS+=	-I${SYSDIR}/cddl/contrib/opensolaris/uts/common
 SRCS+=		zfs_cmd.c
-.endif
-
-LIBFICL=	${BOOTOBJ}/ficl/libficl.a
-.if ${MACHINE} == "i386"
-LIBFICL32=	${LIBFICL}
-.else
-LIBFICL32=	${BOOTOBJ}/ficl32/libficl.a
 .endif
 
 LIBLUA=		${BOOTOBJ}/liblua/liblua.a

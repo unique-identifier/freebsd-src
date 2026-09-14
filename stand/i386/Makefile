@@ -11,7 +11,6 @@ SUBDIR.yes+=	.WAIT
 SUBDIR.yes+=	mbr pmbr boot0 boot0sio boot2 cdboot gptboot \
 		isoboot
 
-SUBDIR.${MK_FORTH}+= loader_4th
 SUBDIR.${MK_LOADER_LUA}+= loader_lua
 SUBDIR.yes+=	loader_simp
 

@@ -59,10 +59,7 @@ The main drive behind these commands is user-friendliness.
 The larger component is the scripting language built into
 the boot loader.
 .Fx
-provides three different interpreters: Forth, Lua and Simple.
-The Forth loader is based on an ANS Forth compatible
-Forth interpreter based on FICL, by
-.An John Sadler .
+provides two different interpreters: Lua and Simple.
 The Lua loader is a full Lua interpreter from
 .Pa https://www.lua.org/ .
 The Simple loader only interprets a list of builtin commands
@@ -91,9 +88,7 @@ The commands common to all interpreters are described in the
 section.
 .Pp
 The following commands are only available in
-.Xr loader_lua 8
-and
-.Xr loader_4th 8 :
+.Xr loader_lua 8 :
 .Pp
 .Bl -tag -width indent -compact
 .\" sort the following entries according to the second field
@@ -147,7 +142,6 @@ section.
 .Xr boot 8 ,
 .Xr btxld 8 ,
 .Xr loader.efi 8 ,
-.Xr loader_4th 8 ,
 .Xr loader_lua 8 ,
 .Xr loader_simp 8
 .Sh HISTORY
@@ -165,9 +159,6 @@ The
 .Nm
 was written by
 .An Michael Smith Aq Mt msmith@FreeBSD.org .
-.Pp
-FICL was written by
-.An John Sadler Aq Mt john_sadler@alum.mit.edu .
 .Pp
 .An Warner Losh Aq Mt imp@FreeBSD.org
 integrated Lua into the tree based on initial work done by Pedro Souza

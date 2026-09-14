@@ -5,9 +5,6 @@
 # included, need to be built 32-bit as well.
 .if ${MACHINE_ARCH} == "amd64"
 LIB32LIST=libsa
-.if ${MK_FORTH} != "no"
-LIB32LIST+=		ficl
-.endif
 .if ${MK_LOADER_LUA} != "no"
 LIB32LIST+=		liblua
 .endif
@@ -18,8 +15,6 @@ S.yes+=			libsa
 S.${MK_LOADER_OFW}+=	libofw
 S.${MK_FDT}+=		fdt
 
-S.${MK_FORTH}+=		ficl
-S.${MK_FORTH}+=		forth
 S.${MK_LOADER_LUA}+=	liblua
 S.${MK_LOADER_LUA}+=	lua
 S.yes+=			defaults
@@ -27,9 +22,6 @@ S.yes+=			fonts
 S.yes+=			images
 S.yes+=			man
 
-.if ${MK_FORTH} != "no"
-INTERP_DEPENDS+=	forth
-.endif
 .if ${MK_LOADER_LUA} != "no"
 INTERP_DEPENDS+=	lua
 .endif
@@ -73,7 +65,6 @@ SUBDIR_DEPEND_${_x}32+=	libsa32
 .endfor
 
 # Remaining dependencies
-SUBDIR_DEPEND_forth+=	ficl
 SUBDIR_DEPEND_lua+=	liblua
 
 SUBDIR_DEPEND_efi+=	${INTERP_DEPENDS}

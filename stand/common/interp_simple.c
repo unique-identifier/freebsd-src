@@ -71,7 +71,7 @@ interp_run(const char *input)
 /*
  * Header prepended to each line. The text immediately follows the header.
  * We try to make this short in order to save memory -- the loader has
- * limited memory available, and some of the forth files are very long.
+ * limited memory available, and some of the script files are very long.
  */
 struct includeline
 {

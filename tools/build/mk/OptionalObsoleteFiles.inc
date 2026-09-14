@@ -215,40 +215,24 @@ OLD_FILES+=usr/share/examples/etc/defaults/bluetooth.device.conf
 .endif
 
 .if ${MK_BOOT} == no
-OLD_FILES+=boot/beastie.4th
 OLD_FILES+=boot/boot
 OLD_FILES+=boot/boot0
 OLD_FILES+=boot/boot0sio
 OLD_FILES+=boot/boot1
 OLD_FILES+=boot/boot1.efi
 OLD_FILES+=boot/boot2
-OLD_FILES+=boot/brand.4th
 OLD_FILES+=boot/cdboot
-OLD_FILES+=boot/check-password.4th
-OLD_FILES+=boot/color.4th
 OLD_FILES+=boot/defaults/loader.conf
-OLD_FILES+=boot/delay.4th
 OLD_FILES+=boot/device.hints
-OLD_FILES+=boot/frames.4th
 OLD_FILES+=boot/gptboot
 OLD_FILES+=boot/gptzfsboot
 OLD_FILES+=boot/loader
-OLD_FILES+=boot/loader.4th
 OLD_FILES+=boot/loader.efi
 OLD_FILES+=boot/loader.help
 OLD_FILES+=boot/loader.rc
 OLD_FILES+=boot/mbr
-OLD_FILES+=boot/menu-commands.4th
-OLD_FILES+=boot/menu.4th
-OLD_FILES+=boot/menu.rc
-OLD_FILES+=boot/menusets.4th
-OLD_FILES+=boot/pcibios.4th
 OLD_FILES+=boot/pmbr
-OLD_FILES+=boot/screen.4th
-OLD_FILES+=boot/shortcuts.4th
-OLD_FILES+=boot/support.4th
 OLD_FILES+=boot/userboot.so
-OLD_FILES+=boot/version.4th
 OLD_FILES+=boot/zfsloader
 OLD_FILES+=usr/lib/kgzldr.o
 .endif
@@ -1130,13 +1114,6 @@ OLD_FILES+=usr/share/examples/FreeBSD_version/Makefile
 OLD_FILES+=usr/share/examples/FreeBSD_version/README
 OLD_FILES+=usr/share/examples/IPv6/USAGE
 OLD_FILES+=usr/share/examples/bhyve/vmrun.sh
-OLD_FILES+=usr/share/examples/bootforth/README
-OLD_FILES+=usr/share/examples/bootforth/boot.4th
-OLD_FILES+=usr/share/examples/bootforth/frames.4th
-OLD_FILES+=usr/share/examples/bootforth/loader.rc
-OLD_FILES+=usr/share/examples/bootforth/menu.4th
-OLD_FILES+=usr/share/examples/bootforth/menuconf.4th
-OLD_FILES+=usr/share/examples/bootforth/screen.4th
 OLD_FILES+=usr/share/examples/bsdconfig/add_some_packages.sh
 OLD_FILES+=usr/share/examples/bsdconfig/browse_packages_http.sh
 OLD_FILES+=usr/share/examples/bsdconfig/bsdconfigrc
@@ -1382,7 +1359,6 @@ OLD_DIRS+=usr/share/examples/BSD_daemon
 OLD_DIRS+=usr/share/examples/FreeBSD_version
 OLD_DIRS+=usr/share/examples/IPv6
 OLD_DIRS+=usr/share/examples/bhyve
-OLD_DIRS+=usr/share/examples/bootforth
 OLD_DIRS+=usr/share/examples/bsdconfig
 OLD_DIRS+=usr/share/examples/diskless
 OLD_DIRS+=usr/share/examples/dma
@@ -1445,36 +1421,6 @@ OLD_DIRS+=usr/tests/share/examples
 
 .if ${MK_FDT} == no
 OLD_FILES+=usr/sbin/ofwdump
-.endif
-
-
-.if ${MK_FORTH} == no
-OLD_FILES+=boot/beastie.4th
-OLD_FILES+=boot/brand-fbsd.4th
-OLD_FILES+=boot/brand.4th
-OLD_FILES+=boot/check-password.4th
-OLD_FILES+=boot/color.4th
-OLD_FILES+=boot/delay.4th
-OLD_FILES+=boot/efi.4th
-OLD_FILES+=boot/frames.4th
-OLD_FILES+=boot/loader_4th
-OLD_FILES+=boot/loader_4th.efi
-OLD_FILES+=boot/loader_4th.efi.old
-OLD_FILES+=boot/loader_4th.old
-OLD_FILES+=boot/loader.4th
-OLD_FILES+=boot/logo-beastie.4th
-OLD_FILES+=boot/logo-beastiebw.4th
-OLD_FILES+=boot/logo-fbsdbw.4th
-OLD_FILES+=boot/logo-orb.4th
-OLD_FILES+=boot/logo-orbbw.4th
-OLD_FILES+=boot/menu-commands.4th
-OLD_FILES+=boot/menu.4th
-OLD_FILES+=boot/menusets.4th
-OLD_FILES+=boot/screen.4th
-OLD_FILES+=boot/shortcuts.4th
-OLD_FILES+=boot/support.4th
-OLD_LIBS+=boot/userboot_4th.so
-OLD_FILES+=boot/version.4th
 .endif
 
 .if ${MK_FREEBSD_UPDATE} == no

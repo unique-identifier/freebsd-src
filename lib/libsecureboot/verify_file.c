@@ -289,8 +289,7 @@ severity_guess(const char *filename)
 		    strcmp(cp, ".order") == 0 ||
 		    strcmp(cp, ".tgz") == 0)
 			return (VE_TRY);
-		if (strcmp(cp, ".4th") == 0 ||
-		    strcmp(cp, ".lua") == 0 ||
+		if (strcmp(cp, ".lua") == 0 ||
 		    strcmp(cp, ".rc") == 0)
 			return (VE_MUST);
 	}

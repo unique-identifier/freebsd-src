@@ -126,24 +126,20 @@ check_interpreter(void)
 	marklen = strlen(INTERP_MARKER);
 	my_interp = bootprog_interp + marklen;
 
-	/*
-	 * Here we make the assumption that a loader binary without the
-	 * interpreter marker is a 4th one.  All loader binaries going forward
-	 * should have this properly specified, so our assumption should always
-	 * be a good one.
-	 */
+	/* Keep our interpreter unless the guest identifies a supported one. */
 	if ((guest_interp = memmem(buf, rdsize, INTERP_MARKER,
 	    marklen)) != NULL)
 		guest_interp += marklen;
 	else
-		guest_interp = "4th";
+		goto out;
 
-	/*
-	 * The guest interpreter may not have a version of loader that
-	 * specifies the interpreter installed.  If that's the case, we'll
-	 * assume it's legacy (4th) and request a swap to that if we're
-	 * a Lua-userboot.
-	 */
+	rdsize -= guest_interp - buf;
+	if (!((rdsize >= sizeof("lua") &&
+	    memcmp(guest_interp, "lua", sizeof("lua")) == 0) ||
+	    (rdsize >= sizeof("simp") &&
+	    memcmp(guest_interp, "simp", sizeof("simp")) == 0)))
+		goto out;
+
 	if (strcmp(my_interp, guest_interp) != 0)
 		CALLBACK(swap_interpreter, guest_interp);
 out:

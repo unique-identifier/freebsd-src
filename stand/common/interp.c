@@ -26,8 +26,6 @@
 
 /*
  * Simple commandline interpreter, toplevel and misc.
- *
- * XXX may be obsoleted by BootFORTH or some other, better, interpreter.
  */
 
 #include <stand.h>
@@ -56,7 +54,7 @@ interact(void)
 	 * Because interp_identifier is volatile, it cannot be optimized out by
 	 * the compiler as it's considered an externally observable event.  This
 	 * prevents the compiler from optimizing out our carefully placed
-	 * $Interpreter:4th string that userboot may use to determine that
+	 * $Interpreter marker that userboot may use to determine that
 	 * we need to switch interpreters.
 	 */
 	interp_identifier = bootprog_interp;

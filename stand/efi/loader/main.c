@@ -1288,7 +1288,7 @@ main(int argc, CHAR16 *argv[])
 	 * the 'simple' ones may be set so things like foo_load="YES" won't work
 	 * for two reasons.  First, the parser is simplistic and doesn't grok
 	 * quotes.  Second, because the variables that cause an action to happen
-	 * are parsed by the lua, 4th or whatever code that's not yet
+	 * are parsed by the interpreter code that's not yet
 	 * loaded. This is relative to the root directory when loader.efi is
 	 * loaded off the UFS root drive (when chain booted), or from the ESP
 	 * when directly loaded by the BIOS.

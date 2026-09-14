@@ -50,7 +50,6 @@ EFIINCMD=	${EFIINC}/i386
 EFIINCMD=	${EFIINC}/${MACHINE}
 .endif
 FDTSRC=		${BOOTSRC}/fdt
-FICLSRC=	${BOOTSRC}/ficl
 LDRSRC=		${BOOTSRC}/common
 LIBLUASRC=	${BOOTSRC}/liblua
 LIBOFWSRC=	${BOOTSRC}/libofw
@@ -185,8 +184,6 @@ DD=dd ${DD_NOSTATUS}
 #
 .if ${MK_LOADER_LUA} == "yes"
 LOADER_DEFAULT_INTERP?=lua
-.elif ${MK_FORTH} == "yes"
-LOADER_DEFAULT_INTERP?=4th
 .else
 LOADER_DEFAULT_INTERP?=simp
 .endif

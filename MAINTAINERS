@@ -90,7 +90,6 @@ sh(1)		jilles		Pre-commit review requested. This also applies
 share/mk	imp, bapt, bdrewery, emaste, sjg	Make is hard.
 share/mk/*.test.mk	imp,bapt,bdrewery,	Pre-commit review requested.
 			emaste,ngie,sjg,#test
-stand/forth		dteske	Pre-commit review requested.
 stand/lua		kevans	Pre-commit review requested
 stand			imp	Pre-commit review strongly requested.
 sys/compat/linuxkpi		pre-commit review requested via #linuxkpi phabricator group.

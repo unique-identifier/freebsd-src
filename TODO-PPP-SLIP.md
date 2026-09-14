@@ -103,10 +103,10 @@ and logs continue to be preserved.
 
 ## Step 6 — Validate the complete removal
 
-- [ ] Repeat source-option and protocol searches, categorizing all remaining
+- [x] Repeat source-option and protocol searches, categorizing all remaining
       references as active functionality, wire/ABI definitions, portable
       imported code, documentation/history, or installed-file cleanup.
-- [ ] Check deleted-header consumers, module source lists, dependency graphs,
+- [x] Check deleted-header consumers, module source lists, dependency graphs,
       makefile conditional nesting, edited shell syntax, mtree structure,
       and `git diff --check`.
 - [ ] On the dedicated FreeBSD amd64 development host, complete `buildworld`
@@ -115,6 +115,45 @@ and logs continue to be preserved.
       TUN/TAP users, relevant Netgraph consumers, and packet capture.
 - [ ] Record validation results and remaining intentional references here
       before marking the overall removal complete.
+
+The source audit found and removed stale kernel configuration entries for all
+deleted Netgraph nodes and the orphaned `SLIP_IFF_OPTS` option.  It also found
+that the MPPC implementation was still selected by the now-removed Netgraph
+options despite having no remaining consumer; those source-list entries and
+the private implementation were removed.  The audit additionally removed
+obsolete PPP/SLIP filtering and help text from bsdconfig and references to the
+removed `ppp(8)` manual from libalias documentation.
+
+The remaining matches fall into intentional categories:
+
+* Active functionality: the independent RFC 1490 Frame Relay node can carry
+  assigned PPP frame types, packet filters and network drivers recognize PPP
+  and PPPoE wire formats, and Bluetooth SDP retains standardized PPP service
+  identifiers.  Unrelated uses of `PPP` in drivers mean per-priority pause or
+  ping-pong push rather than Point-to-Point Protocol.
+* Wire and ABI definitions: `net/ppp_defs.h` remains for compiler-rt's FreeBSD
+  ABI assertions; ethertypes, interface types, tty line-discipline numbers,
+  and pcap DLT values remain stable; tcpdump and libpcap retain portable
+  capture decoding, including their private `slcompress.h`.
+* Portable imported code and data: upstream tcpdump/libpcap sources, compiler
+  runtime checks, test fixtures, hardware descriptions, dictionaries, and
+  vendor databases retain protocol names or historical data.
+* Documentation and history: retained references describe packet formats,
+  old behavior, generic examples, or the history of independent components;
+  they do not advertise a live HalfBSD PPP or SLIP implementation.
+* Installed-file cleanup: `ObsoleteFiles.inc`, `ObsoleteManFiles.inc`, and
+  `UPDATING` intentionally name removed programs, modules, headers, manuals,
+  and kernel options so upgrades remove old installed files and local kernel
+  configurations can be migrated.
+
+Local validation on the Linux workspace found no deleted-header consumers or
+removed node sources in build/module lists, and passed the configuration,
+makefile-nesting, shell-syntax, mtree-shape, and whitespace checks.  The
+dedicated FreeBSD amd64 development host and its HalfBSD `src.conf` are not
+available in this workspace, so `buildworld`, `buildkernel`, boot, and runtime
+network validation remain pending.  The overall removal must not be marked
+complete until those two host-validation items pass; this record item remains
+open so their results can be appended here.
 
 Useful starting searches (inspect matches rather than deleting by substring):
 

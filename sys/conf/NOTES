@@ -737,16 +737,6 @@ options 	SCTP_SUPPORT
 # this one turns on all sorts of
 # nastily printing that you can
 # do. It's all controlled by a
-# bit mask (settable by socket opt and
-# by sysctl). Including will not cause
-# logging until you set the bits.. but it
-# can be quite verbose.. so without this
-# option we don't do any of the tests for
-# bits and prints.. which makes the code run
-# faster.. if you are not debugging don't use.
-options 	SCTP_DEBUG
-
-#
 # corresponding man page, e.g., ng_bpf(4).
 
 # OpenFabrics Enterprise Distribution (Infiniband).

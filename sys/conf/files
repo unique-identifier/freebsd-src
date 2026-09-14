@@ -669,13 +669,11 @@ crypto/openssl/ossl_poly1305.c	optional ossl
 crypto/openssl/ossl_sha1.c	optional ossl
 crypto/openssl/ossl_sha256.c	optional ossl
 crypto/openssl/ossl_sha512.c	optional ossl
-crypto/rc4/rc4.c		optional netgraph_mppc_encryption
 crypto/rijndael/rijndael-alg-fst.c optional crypto | ekcd | \
 	!random_loadable | wlan_ccmp
 crypto/rijndael/rijndael-api-fst.c optional ekcd | !random_loadable
 crypto/rijndael/rijndael-api.c	optional crypto | wlan_ccmp
-crypto/sha1.c			optional carp | crypto | ether | \
-	netgraph_mppc_encryption | sctp
+crypto/sha1.c			optional carp | crypto | ether | sctp
 crypto/sha2/sha256c.c		optional crypto | ekcd | \
 	!random_loadable | sctp | zfs
 crypto/sha2/sha512c.c		optional crypto | zfs
@@ -4119,8 +4117,6 @@ net/if_vxlan.c			optional vxlan inet | vxlan inet6
 net/ifdi_if.m			optional ether pci iflib
 net/iflib.c			optional ether pci iflib
 net/mp_ring.c			optional ether iflib
-net/mppcc.c			optional netgraph_mppc_compression
-net/mppcd.c			optional netgraph_mppc_compression
 net/netisr.c			standard
 net/debugnet.c			optional inet debugnet
 net/debugnet_inet.c		optional inet debugnet

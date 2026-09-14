@@ -12,14 +12,28 @@ Items affecting the ports and packages system can be found in
 /usr/ports/UPDATING.  Please read that file before updating system packages
 and/or ports.
 
+20260914:
+	Kernel support for PPP, PPPoE, PPTP GRE, L2TP, asynchronous PPP
+	framing, and the associated Netgraph compression nodes has been
+	removed.  Remove NETGRAPH_ASYNC, NETGRAPH_DEFLATE, NETGRAPH_L2TP,
+	NETGRAPH_MPPC_COMPRESSION, NETGRAPH_MPPC_ENCRYPTION, NETGRAPH_PPP,
+	NETGRAPH_PPPOE, NETGRAPH_PPTPGRE, NETGRAPH_PRED1, and NETGRAPH_VJC
+	from custom kernel
+	configurations.  Remove references to the corresponding ng_* modules
+	from loader.conf and other local startup configuration.  The standalone
+	chat utility and getty's PPP auto-login capabilities have also been
+	removed.  Run delete-old after installing the new kernel and world to
+	remove obsolete modules and headers.  Local PPP profiles and logs are
+	not recursively deleted.
+
 20260913:
 	Userland ppp, pppctl, pppoed, and Bluetooth rfcomm_pppd have been
 	removed, together with their startup scripts and the PPP source
 	option.  Remove their settings from rc.conf.  Run delete-old after
 	installing to remove obsolete programs and shipped configuration.
 	Local PPP profiles and logs are not recursively deleted.
-	Kernel PPP/Netgraph support remains for a later removal phase;
-	see TODO-PPP-SLIP.md for the remaining work and validation plan.
+	Kernel removal and its configuration migration are described in the
+	20260914 entry above.
 
 20260913:
 	freebsd-update and its phttpget download helper have been removed,

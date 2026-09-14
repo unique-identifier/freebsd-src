@@ -81,13 +81,12 @@ struct gettyflags {
 #define WE	gettystrs[22].value
 #define LN	gettystrs[23].value
 #define Lo	gettystrs[24].value
-#define PP	gettystrs[25].value
-#define IF	gettystrs[26].value
-#define IC	gettystrs[27].value
-#define AC	gettystrs[28].value
-#define AL	gettystrs[29].value
-#define DF	gettystrs[30].value
-#define IMP	gettystrs[31].value
+#define IF	gettystrs[25].value
+#define IC	gettystrs[26].value
+#define AC	gettystrs[27].value
+#define AL	gettystrs[28].value
+#define DF	gettystrs[29].value
+#define IMP	gettystrs[30].value
 
 /*
  * Numeric definitions.
@@ -170,4 +169,3 @@ struct gettyflags {
 #define	MB	gettyflags[22].value
 #define	HW	gettyflags[23].value
 #define	NC	gettyflags[24].value
-#define	PL	gettyflags[25].value

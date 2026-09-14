@@ -73,7 +73,6 @@ struct	gettystrs gettystrs[] = {
 	{ "we", M(VWERASE), NULL },	/* word erase */
 	{ "ln", M(VLNEXT), NULL },	/* literal next */
 	{ "Lo", NULL, NULL },		/* locale for strftime() */
-	{ "pp", NULL, NULL },		/* ppp login program */
 	{ "if", NULL, NULL },		/* sysv-like 'issue' filename */
 	{ "ic", NULL, NULL },		/* modem init-chat */
 	{ "ac", NULL, NULL },		/* modem answer-chat */
@@ -143,6 +142,5 @@ struct	gettyflags gettyflags[] = {
 	{ "mb", 0, 0, 0, 0 },		/* do MDMBUF flow control */
 	{ "hw", 0, 0, 0, 0 },		/* do CTSRTS flow control */
 	{ "nc", 0, 0, 0, 0 },		/* set clocal (no carrier) */
-	{ "pl", 0, 0, 0, 0 },		/* use PPP instead of login(1) */
 	{ NULL, 0, 0, 0, 0 }
 };

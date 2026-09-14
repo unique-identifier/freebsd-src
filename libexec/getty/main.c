@@ -65,16 +65,6 @@
 #undef CTRL
 #define CTRL(x)  (x&037)
 
-/* defines for auto detection of incoming PPP calls (->PAP/CHAP) */
-
-#define PPP_FRAME           0x7e  /* PPP Framing character */
-#define PPP_STATION         0xff  /* "All Station" character */
-#define PPP_ESCAPE          0x7d  /* Escape Character */
-#define PPP_CONTROL         0x03  /* PPP Control Field */
-#define PPP_CONTROL_ESCAPED 0x23  /* PPP Control Field, escaped */
-#define PPP_LCP_HI          0xc0  /* LCP protocol - high byte */
-#define PPP_LCP_LOW         0x21  /* LCP protocol - low byte */
-
 /* original mode; flags've been reset using values from <sys/ttydefaults.h> */
 struct termios omode;
 /* current mode */
@@ -313,9 +303,9 @@ main(int argc, char *argv[])
 		}
 		first_time = 0;
 
-		if (IMP && *IMP && !(PL && PP))
+		if (IMP && *IMP)
 			system(IMP);
-		if (IM && *IM && !(PL && PP))
+		if (IM && *IM)
 			putf(IM);
 		if (setjmp(timeout)) {
 			cfsetispeed(&tmode, B0);
@@ -342,18 +332,9 @@ main(int argc, char *argv[])
 					digit = 1;
 				*q++ = *p++;
 			}
-		} else if (!(PL && PP))
+		} else
 			rval = getname();
-		if (rval == 2 || (PL && PP)) {
-			oflush();
-			alarm(0);
-			limit.rlim_max = RLIM_INFINITY;
-			limit.rlim_cur = RLIM_INFINITY;
-			(void)setrlimit(RLIMIT_CPU, &limit);
-			execle(PP, "ppplogin", ttyn, (char *) 0, env);
-			syslog(LOG_ERR, "%s: %m", PP);
-			exit(1);
-		} else if (rval || AL) {
+		if (rval || AL) {
 			int i;
 
 			oflush();
@@ -505,8 +486,6 @@ getname(void)
 	int c;
 	char *np;
 	unsigned char cs;
-	int ppp_state = 0;
-	int ppp_connection = 0;
 
 	/*
 	 * Interrupt may happen if we use CBREAK mode
@@ -535,33 +514,6 @@ getname(void)
 			exit(0);
 		if ((c = cs&0177) == 0)
 			return (0);
-
-		/* PPP detection state machine..
-		   Look for sequences:
-		   PPP_FRAME, PPP_STATION, PPP_ESCAPE, PPP_CONTROL_ESCAPED or
-		   PPP_FRAME, PPP_STATION, PPP_CONTROL (deviant from RFC)
-		   See RFC1662.
-		   Derived from code from Michael Hancock, <michaelh@cet.co.jp>
-		   and Erik 'PPP' Olson, <eriko@wrq.com>
-		*/
-
-		if (PP && (cs == PPP_FRAME)) {
-			ppp_state = 1;
-		} else if (ppp_state == 1 && cs == PPP_STATION) {
-			ppp_state = 2;
-		} else if (ppp_state == 2 && cs == PPP_ESCAPE) {
-			ppp_state = 3;
-		} else if ((ppp_state == 2 && cs == PPP_CONTROL)
-		    || (ppp_state == 3 && cs == PPP_CONTROL_ESCAPED)) {
-			ppp_state = 4;
-		} else if (ppp_state == 4 && cs == PPP_LCP_HI) {
-			ppp_state = 5;
-		} else if (ppp_state == 5 && cs == PPP_LCP_LOW) {
-			ppp_connection = 1;
-			break;
-		} else {
-			ppp_state = 0;
-		}
 
 		if (c == EOT || c == CTRL('d'))
 			exit(0);
@@ -608,7 +560,7 @@ getname(void)
 		for (np = name; *np; np++)
 			if (isupper(*np))
 				*np = tolower(*np);
-	return (1 + ppp_connection);
+	return (1);
 }
 
 static void

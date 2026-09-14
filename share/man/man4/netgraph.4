@@ -1257,11 +1257,6 @@ node.
 It has a programmable
 .Dq hotkey
 character.
-.It ASYNC
-This node encapsulates and de-encapsulates asynchronous frames
-according to RFC 1662.
-This is used in conjunction with the TTY node
-type for supporting PPP links over asynchronous serial lines.
 .It ETHERNET
 This node is attached to every Ethernet interface in the system.
 It allows capturing raw Ethernet frames from the network, as well as
@@ -1280,24 +1275,6 @@ This node implements a simple round-robin multiplexer.
 It can be used
 for example to make several LAN ports act together to get a higher speed
 link between two machines.
-.It Various PPP related nodes
-There is a full multilink PPP implementation that runs in
-.Nm .
-The
-.Pa net/mpd5
-port can use these modules to make a very low latency high
-capacity PPP system.
-It also supports
-.Tn PPTP
-VPNs using the PPTP node.
-.It PPPOE
-A server and client side implementation of PPPoE.
-Used in conjunction with
-either
-.Xr ppp 8
-or the
-.Pa net/mpd5
-port.
 .It BRIDGE
 This node, together with the Ethernet nodes, allows a very flexible
 bridging system to be implemented.
@@ -1415,7 +1392,6 @@ common networking problems, solved using
 .Sh SEE ALSO
 .Xr socket 2 ,
 .Xr netgraph 3 ,
-.Xr ng_async 4 ,
 .Xr ng_bluetooth 4 ,
 .Xr ng_bpf 4 ,
 .Xr ng_bridge 4 ,
@@ -1438,16 +1414,11 @@ common networking problems, solved using
 .Xr ng_ipfw 4 ,
 .Xr ng_ksocket 4 ,
 .Xr ng_l2cap 4 ,
-.Xr ng_l2tp 4 ,
 .Xr ng_lmi 4 ,
-.Xr ng_mppc 4 ,
 .Xr ng_nat 4 ,
 .Xr ng_netflow 4 ,
 .Xr ng_one2many 4 ,
 .Xr ng_patch 4 ,
-.Xr ng_ppp 4 ,
-.Xr ng_pppoe 4 ,
-.Xr ng_pptpgre 4 ,
 .Xr ng_rfc1490 4 ,
 .Xr ng_socket 4 ,
 .Xr ng_split 4 ,
@@ -1455,7 +1426,6 @@ common networking problems, solved using
 .Xr ng_tty 4 ,
 .Xr ng_ubt 4 ,
 .Xr ng_UI 4 ,
-.Xr ng_vjc 4 ,
 .Xr ng_vlan 4 ,
 .Xr ngctl 8 ,
 .Xr nghook 8

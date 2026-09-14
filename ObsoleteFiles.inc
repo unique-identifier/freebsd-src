@@ -51,8 +51,27 @@
 #   xargs -n1 | sort | uniq -d;
 # done
 
-# 20260914: Remove standalone dial-up chat utility
+# 20260914: Remove kernel PPP family and standalone dial-up support
+OLD_FILES+=boot/kernel/ng_async.ko
+OLD_FILES+=boot/kernel/ng_deflate.ko
+OLD_FILES+=boot/kernel/ng_l2tp.ko
+OLD_FILES+=boot/kernel/ng_mppc.ko
+OLD_FILES+=boot/kernel/ng_ppp.ko
+OLD_FILES+=boot/kernel/ng_pppoe.ko
+OLD_FILES+=boot/kernel/ng_pptpgre.ko
+OLD_FILES+=boot/kernel/ng_pred1.ko
+OLD_FILES+=boot/kernel/ng_vjc.ko
 OLD_FILES+=usr/bin/chat
+OLD_FILES+=usr/include/net/slcompress.h
+OLD_FILES+=usr/include/netgraph/ng_async.h
+OLD_FILES+=usr/include/netgraph/ng_deflate.h
+OLD_FILES+=usr/include/netgraph/ng_l2tp.h
+OLD_FILES+=usr/include/netgraph/ng_mppc.h
+OLD_FILES+=usr/include/netgraph/ng_ppp.h
+OLD_FILES+=usr/include/netgraph/ng_pppoe.h
+OLD_FILES+=usr/include/netgraph/ng_pptpgre.h
+OLD_FILES+=usr/include/netgraph/ng_pred1.h
+OLD_FILES+=usr/include/netgraph/ng_vjc.h
 
 # 20260914: Remove nuageinit
 OLD_FILES+=etc/rc.d/nuageinit

@@ -59,7 +59,6 @@ DIRDEPS = \
 	lib/libedit/readline \
 	lib/libefivar \
 	lib/libelf \
-	lib/libevent1 \
 	lib/libexecinfo \
 	lib/libexpat \
 	lib/libfetch \

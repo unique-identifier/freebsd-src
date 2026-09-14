@@ -68,15 +68,9 @@ basic_body()
 	atf_check -s exit:2 -o ignore jexec client2 ping -t 1 -c 1 198.51.100.2
 
 	firewall_config nat ${firewall} \
-		"pf" \
-			"nat pass on ${epair_host_nat}b inet from any to any -> (${epair_host_nat}b)" \
 		"ipfw" \
 			"ipfw -q nat 123 config if ${epair_host_nat}b" \
-			"ipfw -q add 1000 nat 123 all from any to any" \
-		"ipfnat" \
-			"map ${epair_host_nat}b 192.0.3.0/24 -> 0/32" \
-			"map ${epair_host_nat}b 192.0.2.0/24 -> 0/32" \
-
+			"ipfw -q add 1000 nat 123 all from any to any"
 
 	# ping is successful now
 	atf_check -s exit:0 -o ignore jexec client1 ping -t 1 -c 1 198.51.100.2
@@ -240,13 +234,7 @@ portalias_cleanup()
 }
 
 setup_tests \
-		basic \
-			pf \
-			ipfw \
-			ipfnat \
-		userspace_nat \
-			ipfw \
-		cgn \
-			ipfw \
-		portalias \
-			ipfw
+	basic ipfw \
+	userspace_nat ipfw \
+	cgn ipfw \
+	portalias ipfw

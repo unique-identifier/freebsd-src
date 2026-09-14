@@ -76,8 +76,6 @@
 #include <net/rss_config.h>
 #include <net/vnet.h>
 
-#include <netpfil/pf/pf_mtag.h>
-
 #if defined(INET) || defined(INET6)
 #include <netinet/in.h>
 #include <netinet/in_var.h>
@@ -283,7 +281,6 @@ ether_output(struct ifnet *ifp, struct mbuf *m,
 	int error = 0;
 	char linkhdr[ETHER_HDR_LEN], *phdr;
 	struct ether_header *eh;
-	struct pf_mtag *t;
 	bool loop_copy;
 	int hlen;	/* link layer header length */
 	uint32_t pflags;
@@ -381,8 +378,8 @@ ether_output(struct ifnet *ifp, struct mbuf *m,
 	 * on the wire). However, we don't do that here for security
 	 * reasons and compatibility with the original behavior.
 	 */
-	if ((m->m_flags & M_BCAST) && loop_copy && (ifp->if_flags & IFF_SIMPLEX) &&
-	    ((t = pf_find_mtag(m)) == NULL || !t->routed)) {
+	if ((m->m_flags & M_BCAST) && loop_copy &&
+	    (ifp->if_flags & IFF_SIMPLEX)) {
 		struct mbuf *n;
 
 		/*

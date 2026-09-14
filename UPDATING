@@ -13,6 +13,21 @@ Items affecting the ports and packages system can be found in
 and/or ports.
 
 20260913:
+	PF and IPFILTER, their kernel modules, userland tools, startup and
+	periodic scripts, and source options have been removed.  PF-dependent
+	ALTQ support is also removed; IPFW traffic shaping uses dummynet.
+	Remove pf/pflog/pfsync/pflow devices, IPFILTER and ALTQ options, and
+	their suboptions from custom kernel configurations.  Migrate firewall
+	rules to IPFW before upgrading systems that use PF or IPFILTER.
+	Remove obsolete firewall settings and module names from rc.conf.
+	IPFW, dummynet, divert, NAT, NAT64, NPTv6, and IPFW logging remain.
+	The PFLOG capture layout and minimal PFSYNC wire header remain for
+	IPFW logging and protocol inspection; they do not provide PF.
+	Blocklist helpers no longer select PF or IPFILTER.  Run delete-old
+	to remove installed firewall components; local rules and state data
+	are not recursively deleted.  Reserved user/group IDs are unchanged.
+
+20260913:
 	Base mail programs (mail, biff, from, msgs, comsat), DMA, and
 	mailwrapper have been removed, along with their source options.
 	Periodic output defaults to /var/log/daily.log, weekly.log, and

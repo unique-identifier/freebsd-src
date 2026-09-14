@@ -115,12 +115,6 @@ static struct protox {
 	  pim_stats,	NULL,		"pim",	1,	IPPROTO_PIM },
 	{ -1,		N_CARPSTATS,	1,	NULL,
 	  carp_stats,	NULL,		"carp",	1,	0 },
-#ifdef PF
-	{ -1,		N_PFSYNCSTATS,	1,	NULL,
-	  pfsync_stats,	NULL,		"pfsync", 1,	0 },
-	{ -1,		N_PFLOWSTATS,	1,	NULL,
-	  pflow_stats,	NULL,		"pflow", 1,	0 },
-#endif
 	{ -1,		N_ARPSTAT,	1,	NULL,
 	  arp_stats,	NULL,		"arp", 1,	0 },
 	{ -1,		-1,		0,	NULL,

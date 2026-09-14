@@ -74,13 +74,6 @@ DIRDEPS+= \
 	sbin/hastd \
 	sbin/ifconfig \
 	sbin/init \
-	sbin/ipf/ipf \
-	sbin/ipf/ipfs \
-	sbin/ipf/ipfstat \
-	sbin/ipf/ipmon \
-	sbin/ipf/ipnat \
-	sbin/ipf/ippool \
-	sbin/ipf/libipf \
 	sbin/ipfw \
 	sbin/kldconfig \
 	sbin/kldload \
@@ -105,8 +98,6 @@ DIRDEPS+= \
 	sbin/newfs_msdos \
 	sbin/nfsiod \
 	sbin/nos-tun \
-	sbin/pfctl \
-	sbin/pflogd \
 	sbin/ping \
 	sbin/ping6 \
 	sbin/quotacheck \
@@ -395,7 +386,6 @@ DIRDEPS+= \
 	usr.sbin/auditd \
 	usr.sbin/auditdistd \
 	usr.sbin/auditreduce \
-	usr.sbin/authpf \
 	usr.sbin/autofs \
 	usr.sbin/binmiscctl \
 	usr.sbin/bluetooth/ath3kfw \
@@ -467,7 +457,6 @@ DIRDEPS+= \
 	usr.sbin/bsnmpd/modules/snmp_lm75 \
 	usr.sbin/bsnmpd/modules/snmp_mibII \
 	usr.sbin/bsnmpd/modules/snmp_netgraph \
-	usr.sbin/bsnmpd/modules/snmp_pf \
 	usr.sbin/bsnmpd/modules/snmp_target \
 	usr.sbin/bsnmpd/modules/snmp_usm \
 	usr.sbin/bsnmpd/modules/snmp_vacm \
@@ -519,7 +508,6 @@ DIRDEPS+= \
 	usr.sbin/fmtree \
 	usr.sbin/freebsd-update \
 	usr.sbin/fstyp \
-	usr.sbin/ftp-proxy \
 	usr.sbin/fwcontrol \
 	usr.sbin/genrandom \
 	usr.sbin/getfmac \

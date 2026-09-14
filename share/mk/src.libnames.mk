@@ -19,7 +19,6 @@ _PRIVATELIBS=	\
 		bsdstat \
 		cbor \
 		devdctl \
-		event1 \
 		fido2 \
 		gmock \
 		gtest \
@@ -51,7 +50,6 @@ _INTERNALLIBS=	\
 		fdt \
 		fifolog \
 		ifconfig \
-		ipf \
 		iscsiutil \
 		lua \
 		lutok \
@@ -63,7 +61,6 @@ _INTERNALLIBS=	\
 		opts \
 		parse \
 		pe \
-		pfctl \
 		pkgecc \
 		pmcstat \
 		util++ \
@@ -397,7 +394,6 @@ _DP_panelw=	ncursesw
 _DP_smb=	kiconv
 _DP_ulog=	md
 _DP_fifolog=	z
-_DP_ipf=	kvm
 _DP_tpool=	spl
 _DP_uutil=	avl spl
 _DP_uvmem=	pthread
@@ -410,7 +406,6 @@ _DP_zutil=	avl geom m tpool
 _DP_be=		zfs spl nvpair zfsbootenv
 _DP_netmap=
 _DP_ifconfig=	m
-_DP_pfctl=	nv
 _DP_iscsiutil=	md
 
 # OFED support
@@ -550,9 +545,6 @@ LIBNETBSD?=	${LIBNETBSDDIR}/libnetbsd${PIE_SUFFIX}.a
 LIBIFCONFIGDIR=	${_LIB_OBJTOP}/lib/libifconfig
 LIBIFCONFIG?=	${LIBIFCONFIGDIR}/libifconfig${PIE_SUFFIX}.a
 
-LIBIPFDIR=	${_LIB_OBJTOP}/sbin/ipf/libipf
-LIBIPF?=	${LIBIPFDIR}/libipf${PIE_SUFFIX}.a
-
 LIBNVDIR=	${_LIB_OBJTOP}/lib/libnv
 LIBNV?=		${LIBNVDIR}/libnv${PIE_SUFFIX}.a
 
@@ -579,9 +571,6 @@ LIBOPTS?=	${LIBOPTSDIR}/libopts${PIE_SUFFIX}.a
 
 LIBPARSEDIR=	${_LIB_OBJTOP}/usr.sbin/ntp/libparse
 LIBPARSE?=	${LIBPARSEDIR}/libparse${PIE_SUFFIX}.a
-
-LIBPFCTLDIR=	${_LIB_OBJTOP}/lib/libpfctl
-LIBPFCTL?=	${LIBPFCTLDIR}/libpfctl${PIE_SUFFIX}.a
 
 LIBFIFOLOGDIR=	${_LIB_OBJTOP}/usr.sbin/fifolog/lib
 LIBFIFOLOG?=	${LIBFIFOLOGDIR}/libfifolog${PIE_SUFFIX}.a

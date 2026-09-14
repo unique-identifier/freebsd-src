@@ -50,12 +50,8 @@ fragments_body()
 	jexec iron ifconfig ${epair}a mtu 200
 
 	firewall_config "iron" ${firewall} \
-		"pf" \
-			"scrub all fragment reassemble" \
 		"ipfw" \
-			"ipfw -q add 100 reass all from any to any in" \
-		"ipf" \
-			"pass in all with frags"
+			"ipfw -q add 100 reass all from any to any in"
 
 	jexec iron sysctl net.inet.ip.maxfragsperpacket=1024
 
@@ -73,7 +69,4 @@ fragments_cleanup()
 }
 
 setup_tests \
-		"fragments" \
-			"pf" \
-			"ipfw" \
-			"ipf"
+	fragments ipfw

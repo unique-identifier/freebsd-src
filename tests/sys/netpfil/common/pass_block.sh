@@ -46,23 +46,15 @@ v4_body()
 	
 	# Block All
 	firewall_config "iron" ${firewall} \
-		"pf" \
-			"block in" \
 		"ipfw" \
-			"ipfw -q add 100 deny all from any to any" \
-		"ipf" \
-			"block in all"
+			"ipfw -q add 100 deny all from any to any"
 
 	atf_check -s exit:2 -o ignore ping -c 1 -t 1 192.0.2.2
 	
 	# Pass All
 	firewall_config "iron" ${firewall} \
-		"pf" \
-			"pass in" \
 		"ipfw" \
-			"ipfw -q add 100 allow all from any to any" \
-		"ipf" \
-			"pass in all"
+			"ipfw -q add 100 allow all from any to any"
 
 	atf_check -s exit:0 -o ignore ping -c 1 -t 1 192.0.2.2
 }
@@ -91,23 +83,15 @@ v6_body()
 	
 	# Block All
 	firewall_config "iron" ${firewall} \
-		"pf" \
-			"block in" \
 		"ipfw" \
-			"ipfw -q add 100 deny all from any to any" \
-		"ipf" \
-			"block in all"
+			"ipfw -q add 100 deny all from any to any"
 
 	atf_check -s exit:2 -o ignore ping -6 -c 1 -W 1 fd7a:803f:cc4b::2
 	
 	# Pass All
 	firewall_config "iron" ${firewall} \
-		"pf" \
-			"pass in" \
 		"ipfw" \
-			"ipfw -q add 100 allow all from any to any" \
-		"ipf" \
-			"pass in all"
+			"ipfw -q add 100 allow all from any to any"
 
 	atf_check -s exit:0 -o ignore ping -6 -c 1 -W 1 fd7a:803f:cc4b::2
 }
@@ -118,11 +102,4 @@ v6_cleanup()
 	firewall_cleanup $firewall
 }
 
-setup_tests "v4" \
-				"pf" \
-				"ipfw" \
-				"ipf" \
-			"v6" \
-				"pf" \
-				"ipfw" \
-				"ipf"
+setup_tests v4 ipfw v6 ipfw

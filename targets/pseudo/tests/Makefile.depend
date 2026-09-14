@@ -190,8 +190,6 @@ DIRDEPS= \
       sbin/growfs/tests \
       sbin/ifconfig/tests \
       sbin/mdconfig/tests \
-      sbin/pfctl/tests \
-      sbin/pfctl/tests/files \
       sbin/savecore/tests \
       sbin/tests \
       secure/lib/tests \
@@ -239,7 +237,6 @@ DIRDEPS= \
       tests/sys/mqueue \
       tests/sys/netinet \
       tests/sys/netpfil \
-      tests/sys/netpfil/pf \
       tests/sys/opencrypto \
       tests/sys/pjdfstest/tests \
       tests/sys/pjdfstest/tests/chflags \

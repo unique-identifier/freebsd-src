@@ -67,7 +67,6 @@
 #include <netinet6/ip6_var.h>
 #include <netinet6/ip_fw_nat64.h>
 
-#include <netpfil/pf/pf.h>
 #include <netpfil/ipfw/ip_fw_private.h>
 #include <machine/in_cksum.h>
 
@@ -149,7 +148,7 @@ static void
 nat64_log(struct pfloghdr *logdata, struct mbuf *m, sa_family_t family)
 {
 
-	logdata->dir = PF_OUT;
+	logdata->dir = PFLOG_OUT;
 	logdata->af = family;
 	ipfw_bpf_mtap2(logdata, PFLOG_HDRLEN, m);
 }

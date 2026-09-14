@@ -45,8 +45,6 @@
     etc                 tags=package=runtime
         X11             tags=package=runtime
         ..
-        authpf          tags=package=pf
-        ..
         autofs          tags=package=autofs
         ..
         bluetooth       tags=package=bluetooth

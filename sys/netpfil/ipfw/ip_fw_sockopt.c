@@ -1548,9 +1548,7 @@ ipfw_check_opcode(ipfw_insn **pcmd, int *plen, struct rule_check_info *ci)
 		break;
 
 	case O_ALTQ:
-		if (cmdlen != F_INSN_SIZE(ipfw_insn_altq))
-			return (BAD_SIZE);
-		break;
+		return (EOPNOTSUPP);
 
 	case O_PIPE:
 	case O_QUEUE:

@@ -52,9 +52,7 @@ interface_removal_body()
 
 	firewall_config alcatraz ${fw} \
 		"ipfw"	\
-			"ipfw add 1000 pipe 1 ip from any to any" \
-		"pf"	\
-			"pass on ${epair}b dnpipe 1"
+			"ipfw add 1000 pipe 1 ip from any to any"
 
 	# single ping succeeds just fine
 	atf_check -s exit:0 -o ignore ping -c 1 192.0.2.2
@@ -99,9 +97,7 @@ pipe_body()
 
 	firewall_config alcatraz ${fw} \
 		"ipfw"	\
-			"ipfw add 1000 pipe 1 ip from any to any" \
-		"pf"	\
-			"pass on ${epair}b dnpipe 1"
+			"ipfw add 1000 pipe 1 ip from any to any"
 
 	# single ping succeeds just fine
 	atf_check -s exit:0 -o ignore ping -c 1 192.0.2.2
@@ -143,9 +139,7 @@ pipe_v6_body()
 
 	firewall_config alcatraz ${fw} \
 		"ipfw"	\
-			"ipfw add 1000 pipe 1 ip6 from any to any" \
-		"pf"	\
-			"pass on ${epair}b dnpipe 1"
+			"ipfw add 1000 pipe 1 ip6 from any to any"
 
 	# Single ping succeeds
 	atf_check -s exit:0 -o ignore ping6 -c 1 2001:db8:42::2
@@ -189,9 +183,7 @@ codel_body()
 
 	firewall_config alcatraz ${fw} \
 		"ipfw"	\
-			"ipfw add 1000 queue 1 ip from any to any" \
-		"pf"	\
-			"pass dnqueue 1"
+			"ipfw add 1000 queue 1 ip from any to any"
 
 	# single ping succeeds just fine
 	atf_check -s exit:0 -o ignore ping -c 1 192.0.2.2
@@ -202,58 +194,8 @@ codel_cleanup()
 	firewall_cleanup $1
 }
 
-wf2q_heap_head()
-{
-	atf_set descr 'Test WF2Q+, attempting to provoke use-after-free'
-	atf_set require.user root
-}
 
-wf2q_heap_body()
-{
-	fw=$1
-	firewall_init $fw
-	dummynet_init $fw
 
-       j=dummynet_wf2q_heap_${fw}_
-
-       epair=$(vnet_mkepair)
-       epair_other=$(vnet_mkepair)
-       vnet_mkjail ${j}a ${epair}a
-       vnet_mkjail ${j}b ${epair}b ${epair_other}b
-
-       jexec ${j}a ifconfig ${epair}a up mtu 9000
-       va=$(jexec ${j}a ifconfig vlan create vlan 42 vlandev ${epair}a)
-       jexec ${j}a ifconfig ${va} 192.0.2.1/24 up #mtu 8000
-
-       jexec ${j}b ifconfig ${epair}b up mtu 9000
-       vb=$(jexec ${j}b ifconfig vlan create vlan 42 vlandev ${epair}b)
-       jexec ${j}b ifconfig ${vb} 192.0.2.2/24 up #mtu 8000
-       jexec ${j}b ifconfig ${epair_other}b up
-
-       # Sanity check
-       atf_check -s exit:0 -o ignore \
-           jexec ${j}b ping -c 1 192.0.2.1
-
-       jexec ${j}b dnctl pipe 1 config bw 10Mb queue 100 delay 500 droptail
-       jexec ${j}b dnctl sched 1 config pipe 1 type wf2q+
-       jexec ${j}b dnctl queue 1 config pipe 1 droptail
-
-       firewall_config ${j}b ${fw} \
-               "pf"    \
-                       "pass dnqueue 1"
-
-       jexec ${j}a ping -f 192.0.2.2 &
-       sleep 1
-
-       jexec ${j}b ifconfig ${vb} destroy
-
-       sleep 2
-}
-
-wf2q_heap_cleanup()
-{
-	firewall_cleanup $1
-}
 
 queue_head()
 {
@@ -274,7 +216,7 @@ queue_body()
 	ifconfig ${epair}a 192.0.2.1/24 up
 	jexec alcatraz ifconfig ${epair}b 192.0.2.2/24 up
 	jexec alcatraz /usr/sbin/inetd -p ${PWD}/inetd-alcatraz.pid \
-	    $(atf_get_srcdir)/../pf/echo_inetd.conf
+	    $(atf_get_srcdir)/echo_inetd.conf
 
 	# Sanity check
 	atf_check -s exit:0 -o ignore ping -i .1 -c 3 -s 1200 192.0.2.2
@@ -293,10 +235,7 @@ queue_body()
 		"ipfw"	\
 			"ipfw add 1000 queue 100 tcp from 192.0.2.2 to any out" \
 			"ipfw add 1001 queue 200 icmp from 192.0.2.2 to any out" \
-			"ipfw add 1002 allow ip from any to any" \
-		"pf"	\
-			"pass in proto tcp dnqueue (0, 100)" \
-			"pass in proto icmp dnqueue (0, 200)"
+			"ipfw add 1002 allow ip from any to any"
 
 	# Single ping succeeds
 	atf_check -s exit:0 -o ignore ping -c 1 192.0.2.2
@@ -335,10 +274,7 @@ queue_body()
 		"ipfw"	\
 			"ipfw add 1000 queue 200 tcp from 192.0.2.2 to any out" \
 			"ipfw add 1001 queue 100 icmp from 192.0.2.2 to any out" \
-			"ipfw add 1002 allow ip from any to any" \
-		"pf"	\
-			"pass in proto tcp dnqueue (0, 200)" \
-			"pass in proto icmp dnqueue (0, 100)"
+			"ipfw add 1002 allow ip from any to any"
 
 	jexec alcatraz ping -f -s 1300 192.0.2.1 &
 	sleep 1
@@ -382,7 +318,7 @@ queue_v6_body()
 	ifconfig ${epair}a inet6 2001:db8:42::1/64 no_dad up
 	jexec alcatraz ifconfig ${epair}b inet6 2001:db8:42::2 no_dad up
 	jexec alcatraz /usr/sbin/inetd -p ${PWD}/inetd-alcatraz.pid \
-	    $(atf_get_srcdir)/../pf/echo_inetd.conf
+	    $(atf_get_srcdir)/echo_inetd.conf
 	jexec alcatraz sysctl net.inet6.icmp6.errppslimit=0
 
 	# Sanity check
@@ -402,10 +338,7 @@ queue_v6_body()
 		"ipfw"	\
 			"ipfw add 1001 queue 100 tcp from 2001:db8:42::2 to any out" \
 			"ipfw add 1000 queue 200 ipv6-icmp from 2001:db8:42::2 to any out" \
-			"ipfw add 1002 allow ip6 from any to any" \
-		"pf" \
-			"pass in proto tcp dnqueue (0, 100)"	\
-			"pass in proto icmp6 dnqueue (0, 200)"
+			"ipfw add 1002 allow ip6 from any to any"
 
 	# Single ping succeeds
 	atf_check -s exit:0 -o ignore ping6 -c 1 2001:db8:42::2
@@ -444,10 +377,7 @@ queue_v6_body()
 		"ipfw"	\
 			"ipfw add 1001 queue 200 tcp from 2001:db8:42::2 to any out" \
 			"ipfw add 1000 queue 100 ipv6-icmp from 2001:db8:42::2 to any out" \
-			"ipfw add 1002 allow ip6 from any to any" \
-		"pf" \
-			"pass in proto tcp dnqueue (0, 200)"	\
-			"pass in proto icmp6 dnqueue (0, 100)"
+			"ipfw add 1002 allow ip6 from any to any"
 
 	fails=0
 	for i in `seq 1 5`
@@ -470,49 +400,8 @@ queue_v6_cleanup()
 	firewall_cleanup $1
 }
 
-nat_head()
-{
-	atf_set descr 'Basic dummynet + NAT test'
-	atf_set require.user root
-}
 
-nat_body()
-{
-	fw=$1
-	firewall_init $fw
-	dummynet_init $fw
-	nat_init $fw
 
-	epair=$(vnet_mkepair)
-	epair_two=$(vnet_mkepair)
-
-	ifconfig ${epair}a 192.0.2.2/24 up
-	route add -net 198.51.100.0/24 192.0.2.1
-
-	vnet_mkjail gw ${epair}b ${epair_two}a
-	jexec gw ifconfig ${epair}b 192.0.2.1/24 up
-	jexec gw ifconfig ${epair_two}a 198.51.100.1/24 up
-	jexec gw sysctl net.inet.ip.forwarding=1
-
-	vnet_mkjail srv ${epair_two}b
-	jexec srv ifconfig ${epair_two}b 198.51.100.2/24 up
-
-	jexec gw dnctl pipe 1 config bw 300Byte/s
-
-	firewall_config gw $fw \
-		"pf"	\
-			"nat on ${epair_two}a inet from 192.0.2.0/24 to any -> (${epair_two}a)" \
-			"pass dnpipe 1"
-
-	# We've deliberately not set a route to 192.0.2.0/24 on srv, so the
-	# only way it can respond to this is if NAT is applied correctly.
-	atf_check -s exit:0 -o ignore ping -c 1 198.51.100.2
-}
-
-nat_cleanup()
-{
-	firewall_cleanup $1
-}
 
 pls_basic_head()
 {
@@ -534,9 +423,7 @@ pls_basic_body()
 
 	firewall_config alcatraz ${fw} \
 		"ipfw"	\
-			"ipfw add 65432 ip from any to any" \
-		"pf"	\
-			"pass on ${epair}b"
+			"ipfw add 65432 ip from any to any"
 
 	# Sanity check
 	atf_check -s exit:0 -o match:'100 packets transmitted, 100 packets received' ping -i .1 -c 100 192.0.2.2
@@ -545,9 +432,7 @@ pls_basic_body()
 
 	firewall_config alcatraz ${fw} \
 		"ipfw"	\
-			"ipfw add 1000 pipe 1 ip from 192.0.2.1 to 192.0.2.2" \
-		"pf"	\
-			"pass on ${epair}b dnpipe 1"
+			"ipfw add 1000 pipe 1 ip from 192.0.2.1 to 192.0.2.2"
 
 	# check if the expected number of pings
 	# are dropped (84 - 96 responses).
@@ -581,9 +466,7 @@ pls_gilbert_body()
 
 	firewall_config alcatraz ${fw} \
 		"ipfw"	\
-			"ipfw add 65432 ip from any to any" \
-		"pf"	\
-			"pass on ${epair}b"
+			"ipfw add 65432 ip from any to any"
 
 	# Sanity check
 	atf_check -s exit:0 -o match:'100 packets transmitted, 100 packets received' ping -i .1 -c 100 192.0.2.2
@@ -592,9 +475,7 @@ pls_gilbert_body()
 
 	firewall_config alcatraz ${fw} \
 		"ipfw"	\
-			"ipfw add 1000 pipe 1 ip from 192.0.2.1 to 192.0.2.2" \
-		"pf"	\
-			"pass on ${epair}b dnpipe 1"
+			"ipfw add 1000 pipe 1 ip from 192.0.2.1 to 192.0.2.2"
 
 	# check if the expected number of pings
 	# are dropped (70 - 85 responses).
@@ -610,32 +491,12 @@ pls_gilbert_cleanup()
 
 
 
-setup_tests		\
-	interface_removal	\
-		ipfw	\
-		pf	\
-	pipe		\
-		ipfw	\
-		pf	\
-	pipe_v6		\
-		ipfw	\
-		pf	\
-	codel		\
-		ipfw	\
-		pf	\
-	wf2q_heap	\
-		pf	\
-	queue		\
-		ipfw	\
-		pf	\
-	queue_v6	\
-		ipfw	\
-		pf	\
-	nat		\
-		pf	\
-	pls_basic	\
-		ipfw	\
-		pf	\
-	pls_gilbert	\
-		ipfw	\
-		pf
+setup_tests \
+	interface_removal ipfw \
+	pipe ipfw \
+	pipe_v6 ipfw \
+	codel ipfw \
+	queue ipfw \
+	queue_v6 ipfw \
+	pls_basic ipfw \
+	pls_gilbert ipfw

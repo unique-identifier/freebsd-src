@@ -93,8 +93,6 @@
 /sys/fs/pseudofs/	@dag-erling
 /sys/kern/vfs_aio.c	@asomers
 /sys/netinet/ip_carp.c	@glebius
-/sys/netpfil/ipfilter	@cschuber
-/sys/netpfil/pf	@glebius
 /sys/opencrypto/	@jmgurney
 /sys/security/mac_veriexec/	@stephane-rochoy-stormshield
 /sys/security/mac_veriexec_parser/	@stephane-rochoy-stormshield

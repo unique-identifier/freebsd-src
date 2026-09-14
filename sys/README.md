@@ -48,7 +48,7 @@ Source Roadmap:
 | netinet | IPv4 protocol implementation - `inet(4)` |
 | netinet6 | IPv6 protocol implementation - `inet6(4)` |
 | netipsec | IPsec protocol implementation - `ipsec(4)` |
-| netpfil | packet filters - `ipfw(4)`, `pf(4)`, and `ipfilter(4)` |
+| netpfil | IPFW packet filtering and dummynet traffic shaping |
 | opencrypto | OpenCrypto framework - `crypto(7)` |
 | powerpc | PowerPC/POWER (32 and 64-bit) architecture support |
 | riscv | 64-bit RISC-V architecture support |

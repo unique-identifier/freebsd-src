@@ -46,10 +46,6 @@ CFLAGS+=-DINET6
 CFLAGS+=-DSDP
 .endif
 
-.if ${MK_PF} != "no"
-CFLAGS+=-DPF
-.endif
-
 LIBADD=	kvm memstat xo util
 
 .if ${MK_NETGRAPH_SUPPORT} != "no"

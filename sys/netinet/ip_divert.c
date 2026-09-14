@@ -181,9 +181,6 @@ divert_packet(struct mbuf *m, bool incoming)
 		cookie = ((struct ipfw_rule_ref *)(mtag+1))->rulenum;
 		nport = htons((uint16_t)
 		    (((struct ipfw_rule_ref *)(mtag+1))->info));
-	} else if ((mtag = m_tag_locate(m, MTAG_PF_DIVERT, 0, NULL)) != NULL) {
-		cookie = ((struct pf_divert_mtag *)(mtag+1))->idir;
-		nport = htons(((struct pf_divert_mtag *)(mtag+1))->port);
 	} else {
 		m_freem(m);
 		return;
@@ -312,7 +309,6 @@ div_send(struct socket *so, int flags, struct mbuf *m, struct sockaddr *nam,
 	const struct ip *ip;
 	struct m_tag *mtag;
 	struct ipfw_rule_ref *dt;
-	struct pf_divert_mtag *pfdt;
 	int error, family;
 
 	if (control)
@@ -399,30 +395,13 @@ div_send(struct socket *so, int flags, struct mbuf *m, struct sockaddr *nam,
 		return (EAFNOSUPPORT);
 	}
 
-	mtag = m_tag_locate(m, MTAG_PF_DIVERT, 0, NULL);
-	if (mtag == NULL) {
-		/* this should be normal */
-		mtag = m_tag_alloc(MTAG_PF_DIVERT, 0,
-		    sizeof(struct pf_divert_mtag), M_NOWAIT | M_ZERO);
-		if (mtag == NULL) {
-			m_freem(m);
-			return (ENOBUFS);
-		}
-		m_tag_prepend(m, mtag);
-	}
-	pfdt = (struct pf_divert_mtag *)(mtag+1);
-	if (sin)
-		pfdt->idir = sin->sin_port;
-
 	/* Reinject packet into the system as incoming or outgoing */
 	NET_EPOCH_ENTER(et);
 	if (!sin || sin->sin_addr.s_addr == 0) {
 		dt->info |= IPFW_IS_DIVERT | IPFW_INFO_OUT;
-		pfdt->ndir = PF_DIVERT_MTAG_DIR_OUT;
 		error = div_output_outbound(family, so, m);
 	} else {
 		dt->info |= IPFW_IS_DIVERT | IPFW_INFO_IN;
-		pfdt->ndir = PF_DIVERT_MTAG_DIR_IN;
 		error = div_output_inbound(family, so, m, sin);
 	}
 	NET_EPOCH_EXIT(et);

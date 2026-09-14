@@ -510,8 +510,6 @@ noafif()
 	_if=$1
 
 	case $_if in
-	pflog[0-9]*|\
-	pfsync[0-9]*|\
 	usbus[0-9]*|\
 	an[0-9]*|\
 	ath[0-9]*|\

@@ -61,26 +61,16 @@ v4_body()
 		--recvif ${epair_recv}a
 
 	firewall_config "iron" ${firewall} \
-		"pf" \
-			"block in" \
 		"ipfw" \
-			"ipfw -q add 100 deny all from any to any in" \
-		"ipf" \
-			"block in all" \
-
+			"ipfw -q add 100 deny all from any to any in"
 	atf_check -s exit:1 $(atf_get_srcdir)/pft_ping.py \
 		--sendif ${epair_send}a \
 		--to 198.51.100.3 \
 		--recvif ${epair_recv}a
 
 	firewall_config "iron" ${firewall} \
-		"pf" \
-			"block out" \
 		"ipfw" \
-			"ipfw -q add 100 deny all from any to any out" \
-		"ipf" \
-			"block out all" \
-
+			"ipfw -q add 100 deny all from any to any out"
 	atf_check -s exit:1 $(atf_get_srcdir)/pft_ping.py \
 		--sendif ${epair_send}a \
 		--to 198.51.100.3 \
@@ -94,7 +84,4 @@ v4_cleanup()
 }
 
 setup_tests \
-		v4 \
-			pf \
-			ipfw \
-			ipf
+	v4 ipfw

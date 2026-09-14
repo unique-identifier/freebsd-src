@@ -78,11 +78,6 @@ MANGROUPS+=				PERIODIC
 PERIODICPACKAGE=			periodic
 PERIODIC=	periodic.conf.5
 
-MANGROUPS.${MK_PF}+=			PF
-PFPACKAGE=				pf
-PF=		pf.conf.5 \
-		pf.os.5
-
 MANGROUPS+=				RC
 RCPACKAGE=				rc
 RC=		rc.conf.5

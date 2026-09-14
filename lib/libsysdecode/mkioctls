@@ -22,10 +22,7 @@ ioctl_includes=$(
 		set -o pipefail
 	fi
 
-	filter='tee'
-	if [ "${MK_PF}" = "no" ]; then
-		filter='egrep -v (net/pfvar|net/if_pfsync)\.h'
-	fi
+	filter='egrep -v (net/pfvar|net/if_pfsync)\.h'
 	# find -s would avoid the need to invoke sort but it is non-portable
 	find -L ./* -type f -name '*.h' | \
 		LC_ALL=C sort | \
@@ -57,10 +54,6 @@ BEGIN {
 	print "#include <bsm/audit.h>"
 	print "#include <net/ethernet.h>"
 	print "#include <net/if.h>"
-	print "#ifdef PF"
-	print "#include <net/pfvar.h>"
-	print "#include <net/if_pfsync.h>"
-	print "#endif"
 	print "#include <net/route.h>"
 	print "#include <netinet/in.h>"
 	print "#include <netinet/ip_mroute.h>"

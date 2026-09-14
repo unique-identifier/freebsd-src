@@ -12,8 +12,6 @@
             ..
             bsdstat           tags=package=libbsdstat-dev
             ..
-            event1            tags=package=libevent1-dev
-            ..
             gmock             tags=package=utilities-dev
                 internal      tags=package=utilities-dev
                     custom    tags=package=utilities-dev
@@ -278,8 +276,6 @@
             ..
             inotify
             ..
-            ipfilter
-            ..
             ipfw
             ..
             jails
@@ -317,8 +313,6 @@
             netgraph
             ..
             perfmon
-            ..
-            pf
             ..
             ppi
             ..

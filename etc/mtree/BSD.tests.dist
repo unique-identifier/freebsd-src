@@ -503,10 +503,6 @@
         ..
         nvmecontrol
         ..
-        pfctl
-            files
-            ..
-        ..
         ping
         ..
         route
@@ -921,10 +917,6 @@
             common
             ..
             ipfw
-            ..
-            pf
-                ioctl
-                ..
             ..
         ..
         opencrypto

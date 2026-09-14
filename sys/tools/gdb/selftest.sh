@@ -14,7 +14,6 @@ fi
 
 # Set up some things expected by selftest.py.
 kldload -n pf siftr
-pfctl -e || true
 jail -c name=gdbselftest vnet persist
 
 echo "I'm about to panic your system, ctrl-C now if that's not what you want."

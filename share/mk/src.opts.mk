@@ -62,7 +62,6 @@ __DEFAULT_YES_OPTIONS = \
     APM \
     AT \
     AUDIT \
-    AUTHPF \
     AUTOFS \
     BHYVE \
     BLACKLIST \
@@ -103,7 +102,6 @@ __DEFAULT_YES_OPTIONS = \
     INET \
     INET6 \
     INETD \
-    IPFILTER \
     IPFW \
     ISCSI \
     JAIL \
@@ -143,7 +141,6 @@ __DEFAULT_YES_OPTIONS = \
     OFED \
     OPENSSL \
     PAM \
-    PF \
     PKGBOOTSTRAP \
     PMC \
     PPP \
@@ -188,7 +185,6 @@ __DEFAULT_NO_OPTIONS = \
     DTRACE_TESTS \
     EXPERIMENTAL \
     HESIOD \
-    IPFILTER_IPFS \
     LOADER_VERBOSE \
     LOADER_VERIEXEC_PASS_MANIFEST \
     LLVM_ASSERTIONS \
@@ -430,10 +426,6 @@ MK_ZFS:=	no
 .if ${MK_LDNS} == "no"
 MK_LDNS_UTILS:=	no
 MK_UNBOUND:= no
-.endif
-
-.if ${MK_PF} == "no"
-MK_AUTHPF:=	no
 .endif
 
 .if ${MK_OFED} == "no"

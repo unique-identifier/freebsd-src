@@ -94,14 +94,12 @@ stand/lua		kevans	Pre-commit review requested
 stand			imp	Pre-commit review strongly requested.
 sys/compat/linuxkpi		pre-commit review requested via #linuxkpi phabricator group.
 sys/contrib/dev/ice	erj	Pre-commit phabricator review requested.
-sys/netpfil/ipfilter	cy	Pre-commit review requested.
 sys/dev/e1000	erj	Pre-commit phabricator review requested.
 sys/dev/ixgbe	erj	Pre-commit phabricator review requested.
 sys/dev/ixl	erj	Pre-commit phabricator review requested.
 sys/dev/ice	erj	Pre-commit phabricator review requested.
 sys/dev/xen	royger		Pre-commit review recommended.
 sys/netinet/ip_carp.c	glebius	Pre-commit review recommended.
-sys/netpfil/pf	kp,glebius	Pre-commit review recommended.
 sys/x86/xen	royger		Pre-commit review recommended.
 sys/xen		royger		Pre-commit review recommended.
 tests			ngie,#test		Pre-commit review requested.

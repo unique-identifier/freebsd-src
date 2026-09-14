@@ -19,24 +19,11 @@ DATAPACKAGE=	periodic
 
 # NB: keep these sorted by MK_* knobs
 
-.if ${MK_IPFILTER} != "no"
-CONFGROUPS+=		IPFILTER
-IPFILTER+=		510.ipfdenied
-IPFILTER+=		610.ipf6denied
-IPFILTERPACKAGE=	ipf
-.endif
-
 .if ${MK_IPFW} != "no"
 CONFGROUPS+=	IPFW
 IPFW+=		500.ipfwdenied \
 		550.ipfwlimit
 IPFWPACKAGE=	ipfw
-.endif
-
-.if ${MK_PF} != "no"
-CONFGROUPS+=	PF
-PF+=		520.pfdenied
-PFPACKAGE=	pf
 .endif
 
 .if ${MK_INETD} != "no" && ${MK_TCP_WRAPPERS} != "no"

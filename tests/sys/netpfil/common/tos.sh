@@ -56,8 +56,6 @@ tos_body()
 
 	# Check if the firewall is able to set the ToS bits
 	firewall_config "iron" ${firewall} \
-		"pf" \
-			"scrub out proto icmp set-tos 36" \
 		"ipfw" \
 			"ipfw -q add 100 setdscp 9 ip from any to any"
 		# dscp is set to 9 because last two bits are for
@@ -72,8 +70,6 @@ tos_body()
 	# Check if the firewall is able to set the ToS bits
 	# and persists the EN bits (if already set)
 	firewall_config "iron" ${firewall} \
-		"pf" \
-			"scrub out proto icmp set-tos 36" \
 		"ipfw" \
 			"ipfw -q add 100 setdscp 9 ip from any to any"
 
@@ -87,8 +83,6 @@ tos_body()
 	# Check if the firewall is able to filter the
 	# packets based on the ToS value
 	firewall_config "iron" ${firewall} \
-		"pf" \
-			"block all tos 36" \
 		"ipfw" \
 			"ipfw -q add 100 deny all from any to any dscp 9"
 
@@ -112,6 +106,4 @@ tos_cleanup()
 }
 
 setup_tests \
-		"tos" \
-			"pf" \
-			"ipfw"
+	tos ipfw

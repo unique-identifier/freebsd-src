@@ -70,8 +70,6 @@
 #include <net/if_gif.h>
 #include <net/if_pfsync.h>
 
-#include <netpfil/pf/pf_mtag.h>
-
 #include <netinet/in.h>
 #include <netinet/in_var.h>
 #include <netinet/in_pcb.h>
@@ -2647,37 +2645,6 @@ do {								\
 				    (tcp_get_flags(TCP(ulp)) &
 				     (TH_RST | TH_ACK | TH_SYN)) != TH_SYN);
 				break;
-
-			case O_ALTQ: {
-				struct pf_mtag *at;
-				struct m_tag *mtag;
-				ipfw_insn_altq *altq = (ipfw_insn_altq *)cmd;
-
-				/*
-				 * ALTQ uses mbuf tags from another
-				 * packet filtering system - pf(4).
-				 * We allocate a tag in its format
-				 * and fill it in, pretending to be pf(4).
-				 */
-				match = 1;
-				at = pf_find_mtag(m);
-				if (at != NULL && at->qid != 0)
-					break;
-				mtag = m_tag_get(PACKET_TAG_PF,
-				    sizeof(struct pf_mtag), M_NOWAIT | M_ZERO);
-				if (mtag == NULL) {
-					/*
-					 * Let the packet fall back to the
-					 * default ALTQ.
-					 */
-					break;
-				}
-				m_tag_prepend(m, mtag);
-				at = (struct pf_mtag *)(mtag + 1);
-				at->qid = altq->qid;
-				at->hdr = ip;
-				break;
-			}
 
 			case O_LOG:
 				ipfw_log(chain, f, hlen, args,

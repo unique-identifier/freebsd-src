@@ -173,14 +173,6 @@ CONFGROUPS.${MK_INETD}+=	INETD
 INETDPACKAGE=			inetd
 INETD=		inetd
 
-CONFGROUPS.${MK_IPFILTER}+=	IPF
-IPFPACKAGE=			ipf
-IPF=		ipfilter \
-		ipfs \
-		ipmon \
-		ipnat \
-		ippool
-
 CONFGROUPS.${MK_IPFW}+=		IPFW
 IPFWPACKAGE=			ipfw
 IPFW=		ipfw \
@@ -233,13 +225,6 @@ NUAGEINIT=	nuageinit \
 
 CONFGROUPS.${MK_OFED_EXTRA}+=	OPENSM
 OPENSM=	opensm
-
-CONFGROUPS.${MK_PF}+=		PF
-PFPACKAGE=			pf
-PF=		pf \
-		pflog \
-		pfsync \
-		ftp-proxy
 
 CONFGROUPS+=			POWERD
 POWERDPACKAGE=			powerd

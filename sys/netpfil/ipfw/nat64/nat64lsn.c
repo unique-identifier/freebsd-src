@@ -63,7 +63,6 @@
 #include <netinet6/ip_fw_nat64.h>
 
 #include <netpfil/ipfw/ip_fw_private.h>
-#include <netpfil/pf/pf.h>
 
 #include "nat64lsn.h"
 
@@ -180,8 +179,8 @@ nat64lsn_log(struct pfloghdr *plog, struct mbuf *m, sa_family_t family,
 	memset(plog, 0, sizeof(*plog));
 	plog->length = PFLOG_REAL_HDRLEN;
 	plog->af = family;
-	plog->action = PF_NAT;
-	plog->dir = PF_IN;
+	plog->action = PFLOG_NAT;
+	plog->dir = PFLOG_IN;
 	plog->rulenr = htonl(state->ip_src);
 	plog->subrulenr = htonl((uint32_t)(state->aport << 16) |
 	    (state->proto << 8) | (state->ip_dst & 0xff));

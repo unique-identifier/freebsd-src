@@ -135,9 +135,6 @@ Do not build
 and related utilities.
 .It Va WITHOUT_AUDIT
 Do not build audit support into system programs.
-.It Va WITHOUT_AUTHPF
-Do not build
-.Xr authpf 8 .
 .It Va WITHOUT_AUTOFS
 Do not build
 .Xr autofs 4
@@ -828,12 +825,6 @@ command.
 The user still must set the
 .Va DESTDIR
 variable to point to a directory where the user has write permissions.
-.It Va WITHOUT_IPFILTER
-Do not build IP Filter package.
-.It Va WITH_IPFILTER_IPFS
-Enable building the
-.Xr ipfs 8
-tool to save and restore IPFilter state tables.
 .It Va WITHOUT_IPFW
 Do not build IPFW tools.
 .It Va WITHOUT_IPSEC_SUPPORT
@@ -1457,14 +1448,6 @@ is set explicitly)
 Build
 .Xr ppp 8
 without PAM support.
-.It Va WITHOUT_PF
-Do not build PF firewall package.
-When set, it enforces these options:
-.Pp
-.Bl -item -compact
-.It
-.Va WITHOUT_AUTHPF
-.El
 .It Va WITHOUT_PIE
 Do not build dynamically linked binaries as
 Position-Independent Executable (PIE).

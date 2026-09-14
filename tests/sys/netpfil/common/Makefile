@@ -3,12 +3,10 @@ PACKAGE=	tests
 TESTSDIR=	${TESTSBASE}/sys/netpfil/common
 BINDIR=		${TESTSDIR}
 
-
 ATF_TESTS_SH+=	\
 		dummynet \
 		pass_block \
 		nat \
-		rdr \
 		tos \
 		fragments \
 		forward
@@ -21,6 +19,7 @@ PROGS=		divapp
 
 ${PACKAGE}FILES+=	\
 		utils.subr \
+		echo_inetd.conf \
 		runner.subr \
 		pft_icmp_check.py \
 		pft_ping.py \

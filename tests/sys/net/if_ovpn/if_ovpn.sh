@@ -25,7 +25,6 @@
 # SUCH DAMAGE.
 
 . $(atf_get_srcdir)/utils.subr
-. $(atf_get_srcdir)/../../netpfil/pf/utils.subr
 
 atf_test_case "4in4" "cleanup"
 4in4_head()
@@ -894,97 +893,6 @@ multi_client_cleanup()
 	ovpn_cleanup
 }
 
-atf_test_case "route_to" "cleanup"
-route_to_head()
-{
-	atf_set descr "Test pf's route-to with OpenVPN tunnels"
-	atf_set require.user root
-	atf_set require.progs openvpn
-}
-
-route_to_body()
-{
-	pft_init
-	ovpn_init
-
-	l=$(vnet_mkepair)
-	n=$(vnet_mkepair)
-
-	vnet_mkjail a ${l}a
-	jexec a ifconfig ${l}a 192.0.2.1/24 up
-	vnet_mkjail b ${l}b ${n}a
-	jexec b ifconfig ${l}b 192.0.2.2/24 up
-	jexec b ifconfig ${n}a up
-
-	# Sanity check
-	atf_check -s exit:0 -o ignore jexec a ping -c 1 192.0.2.2
-
-	ovpn_start a "
-		dev ovpn0
-		dev-type tun
-		proto udp4
-
-		cipher AES-256-GCM
-		auth SHA256
-
-		local 192.0.2.1
-		server 198.51.100.0 255.255.255.0
-		ca $(atf_get_srcdir)/ca.crt
-		cert $(atf_get_srcdir)/server.crt
-		key $(atf_get_srcdir)/server.key
-		dh $(atf_get_srcdir)/dh.pem
-
-		mode server
-		script-security 2
-		auth-user-pass-verify /usr/bin/true via-env
-		topology subnet
-
-		keepalive 100 600
-	"
-	ovpn_start b "
-		dev tun0
-		dev-type tun
-
-		client
-
-		remote 192.0.2.1
-		auth-user-pass $(atf_get_srcdir)/user.pass
-
-		ca $(atf_get_srcdir)/ca.crt
-		cert $(atf_get_srcdir)/client.crt
-		key $(atf_get_srcdir)/client.key
-		dh $(atf_get_srcdir)/dh.pem
-
-		keepalive 100 600
-	"
-
-	# Give the tunnel time to come up
-	sleep 10
-	jexec a ifconfig ovpn0 inet alias 198.51.100.254/24
-
-	# Check the tunnel
-	atf_check -s exit:0 -o ignore jexec b ping -c 1 -S 198.51.100.2 198.51.100.1
-	atf_check -s exit:0 -o ignore jexec b ping -c 1 -S 198.51.100.2 198.51.100.254
-
-	# Break our route to .254 so that we need a route-to to make things work.
-	jexec b ifconfig ${n}a 203.0.113.1/24 up
-	jexec b route add 198.51.100.254 -interface ${n}a
-
-	# Make sure it's broken.
-	atf_check -s exit:2 -o ignore jexec b ping -c 1 -S 198.51.100.2 198.51.100.254
-
-	jexec b pfctl -e
-	pft_set_rules b \
-		"pass out route-to (tun0 198.51.100.1) proto icmp from 198.51.100.2 "
-	atf_check -s exit:0 -o ignore jexec b ping -c 3 -S 198.51.100.2 198.51.100.254
-}
-
-route_to_cleanup()
-{
-	ovpn_cleanup
-	pft_cleanup
-}
-
 atf_test_case "ra" "cleanup"
 ra_head()
 {
@@ -1250,171 +1158,6 @@ destroy_unused_cleanup()
 	ovpn_cleanup
 }
 
-atf_test_case "multihome4" "cleanup"
-multihome4_head()
-{
-	atf_set descr 'Test multihome IPv4 with OpenVPN'
-	atf_set require.user root
-	atf_set require.progs openvpn
-}
-
-multihome4_body()
-{
-	pft_init
-	ovpn_init
-
-	l=$(vnet_mkepair)
-
-	vnet_mkjail a ${l}a
-	atf_check jexec a ifconfig ${l}a inet 192.0.2.1/24
-	atf_check jexec a ifconfig ${l}a alias 192.0.2.2/24
-	vnet_mkjail b ${l}b
-	atf_check jexec b ifconfig ${l}b inet 192.0.2.3/24
-
-	# Sanity check
-	atf_check -s exit:0 -o ignore jexec b ping -c 1 192.0.2.1
-	atf_check -s exit:0 -o ignore jexec b ping -c 1 192.0.2.2
-
-	ovpn_start a "
-		dev ovpn0
-		dev-type tun
-		proto udp4
-
-		cipher AES-256-GCM
-		auth SHA256
-
-		multihome
-		server 198.51.100.0 255.255.255.0
-		ca $(atf_get_srcdir)/ca.crt
-		cert $(atf_get_srcdir)/server.crt
-		key $(atf_get_srcdir)/server.key
-		dh $(atf_get_srcdir)/dh.pem
-
-		mode server
-		script-security 2
-		auth-user-pass-verify /usr/bin/true via-env
-		topology subnet
-
-		keepalive 100 600
-	"
-	ovpn_start b "
-		dev tun0
-		dev-type tun
-
-		client
-
-		remote 192.0.2.2
-		auth-user-pass $(atf_get_srcdir)/user.pass
-
-		ca $(atf_get_srcdir)/ca.crt
-		cert $(atf_get_srcdir)/client.crt
-		key $(atf_get_srcdir)/client.key
-		dh $(atf_get_srcdir)/dh.pem
-
-		keepalive 100 600
-	"
-
-	# Block packets from the primary address, openvpn should only use the
-	# configured remote address.
-	jexec b pfctl -e
-	pft_set_rules b \
-		"block in quick from 192.0.2.1 to any" \
-		"pass all"
-
-	# Give the tunnel time to come up
-	sleep 10
-
-	atf_check -s exit:0 -o ignore jexec b ping -c 3 198.51.100.1
-}
-
-multihome4_cleanup()
-{
-	ovpn_cleanup
-	pft_cleanup
-}
-
-multihome6_head()
-{
-	atf_set descr 'Test multihome IPv6 with OpenVPN'
-	atf_set require.user root
-	atf_set require.progs openvpn
-}
-
-multihome6_body()
-{
-	ovpn_init
-
-	l=$(vnet_mkepair)
-
-	vnet_mkjail a ${l}a
-	atf_check jexec a ifconfig ${l}a inet6 2001:db8::1/64 no_dad
-	atf_check jexec a ifconfig ${l}a inet6 alias 2001:db8::2/64 no_dad
-	vnet_mkjail b ${l}b
-	atf_check jexec b ifconfig ${l}b inet6 2001:db8::3/64 no_dad
-
-	# Sanity check
-	atf_check -s exit:0 -o ignore jexec b ping6 -c 1 2001:db8::1
-	atf_check -s exit:0 -o ignore jexec b ping6 -c 1 2001:db8::2
-
-	ovpn_start a "
-		dev ovpn0
-		dev-type tun
-		proto udp6
-
-		cipher AES-256-GCM
-		auth SHA256
-
-		multihome
-		server-ipv6 2001:db8:1::/64
-
-		ca $(atf_get_srcdir)/ca.crt
-		cert $(atf_get_srcdir)/server.crt
-		key $(atf_get_srcdir)/server.key
-		dh $(atf_get_srcdir)/dh.pem
-
-		mode server
-		script-security 2
-		auth-user-pass-verify /usr/bin/true via-env
-		topology subnet
-
-		keepalive 100 600
-	"
-	ovpn_start b "
-		dev tun0
-		dev-type tun
-
-		client
-
-		remote 2001:db8::2
-		auth-user-pass $(atf_get_srcdir)/user.pass
-
-		ca $(atf_get_srcdir)/ca.crt
-		cert $(atf_get_srcdir)/client.crt
-		key $(atf_get_srcdir)/client.key
-		dh $(atf_get_srcdir)/dh.pem
-
-		keepalive 100 600
-	"
-
-	# Block packets from the primary address, openvpn should only use the
-	# configured remote address.
-	jexec b pfctl -e
-	pft_set_rules b \
-		"block in quick from 2001:db8::1 to any" \
-		"pass all"
-
-	# Give the tunnel time to come up
-	sleep 10
-
-	atf_check -s exit:0 -o ignore jexec b ping6 -c 3 2001:db8:1::1
-	atf_check -s exit:0 -o ignore jexec b ping6 -c 3 -z 16 2001:db8:1::1
-}
-
-multihome6_cleanup()
-{
-	ovpn_cleanup
-}
-
 atf_test_case "float" "cleanup"
 float_head()
 {
@@ -1518,12 +1261,9 @@ atf_init_test_cases()
 	atf_add_test_case "timeout_client"
 	atf_add_test_case "explicit_exit"
 	atf_add_test_case "multi_client"
-	atf_add_test_case "route_to"
 	atf_add_test_case "ra"
 	atf_add_test_case "chacha"
 	atf_add_test_case "gcm_128"
 	atf_add_test_case "destroy_unused"
-	atf_add_test_case "multihome4"
-	atf_add_test_case "multihome6"
 	atf_add_test_case "float"
 }

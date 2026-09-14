@@ -178,7 +178,6 @@ SUBDIR=	\
 	${_ioat} \
         ${_ipoib} \
 	ipdivert \
-	${_ipfilter} \
 	${_ipfw} \
 	ipfw_nat \
 	${_ipfw_nat64} \
@@ -311,10 +310,6 @@ SUBDIR=	\
 	${_padlock_rng} \
 	${_pchtherm} \
 	${_pcfclock} \
-	${_pf} \
-	${_pflog} \
-	${_pflow} \
-	${_pfsync} \
 	plip \
 	${_pms} \
 	ppbus \
@@ -507,10 +502,6 @@ _ipfw_nat64=	ipfw_nat64
 _ipfw_nptv6=	ipfw_nptv6
 .endif
 
-.if ${MK_IPFILTER} != "no" || defined(ALL_MODULES)
-_ipfilter=	ipfilter
-.endif
-
 .if ${MK_INET_SUPPORT} != "no" && ${KERN_OPTS:MFIB_ALGO} && ${KERN_OPTS:MINET}
 _dpdk_lpm4=	dpdk_lpm4
 _fib_dxr=	fib_dxr
@@ -627,16 +618,6 @@ _mac_veriexec_sha512= mac_veriexec_sha512
 
 .if ${MK_NETGRAPH} != "no" || defined(ALL_MODULES)
 _netgraph=	netgraph
-.endif
-
-.if (${MK_PF} != "no" && (${MK_INET_SUPPORT} != "no" || \
-	${MK_INET6_SUPPORT} != "no")) || defined(ALL_MODULES)
-_pf=		pf
-_pflog=		pflog
-_pflow=		pflow
-.if ${MK_INET_SUPPORT} != "no"
-_pfsync=	pfsync
-.endif
 .endif
 
 .if ${MK_SOURCELESS_UCODE} != "no"

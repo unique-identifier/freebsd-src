@@ -14,7 +14,6 @@ rcvar="ppp_enable"
 command="/usr/sbin/${name}"
 start_cmd="ppp_start"
 stop_cmd="ppp_stop"
-start_postcmd="ppp_poststart"
 
 ppp_start_profile()
 {
@@ -89,18 +88,6 @@ ppp_start()
 	done
 
 	startmsg "."
-}
-
-ppp_poststart()
-{
-	# Re-Sync ipfilter and pf so they pick up any new network interfaces
-	#
-	if [ -f /etc/rc.d/ipfilter ]; then
-		/etc/rc.d/ipfilter quietresync
-	fi
-	if [ -f /etc/rc.d/pf ]; then
-		/etc/rc.d/pf quietresync
-	fi
 }
 
 ppp_stop_profile() {

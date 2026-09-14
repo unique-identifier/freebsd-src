@@ -74,10 +74,6 @@ SE_DIRS+=	inotify
 SE_INOTIFY=	inotify.c \
 		Makefile
 
-.if ${MK_IPFILTER} != "no"
-SUBDIR+=	ipfilter
-.endif
-
 SE_DIRS+=	ipfw
 SE_IPFWPACKAGE=	ipfw
 SE_IPFW=	change_rules.sh
@@ -186,24 +182,6 @@ SE_PERFMON= \
 	Makefile \
 	README \
 	perfmon.c
-
-.if ${MK_PF} != "no"
-SE_DIRS+=	pf
-.if ${MK_STAGING} == "no"
-SE_PFPACKAGE=	pf
-SE_PF= \
-	ackpri \
-	faq-example1 \
-	faq-example2 \
-	faq-example3 \
-	pf.conf \
-	queue1 \
-	queue2 \
-	queue3 \
-	queue4 \
-	spamd
-.endif
-.endif
 
 SE_DIRS+=	ppi
 SE_PPI= \

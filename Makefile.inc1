@@ -1343,8 +1343,6 @@ CHECK_UIDS=	auditdistd
 CHECK_GIDS=	audit
 CHECK_UIDS+=	ntpd
 CHECK_GIDS+=	ntpd
-CHECK_UIDS+=	proxy
-CHECK_GIDS+=	proxy authpf
 CHECK_UIDS+=	unbound
 CHECK_GIDS+=	unbound
 _installcheck_world: __installcheck_UGID
@@ -3321,9 +3319,6 @@ lib/libzstd__L: lib/libthr__L
 lib/librt__L: lib/libthr__L
 
 _generic_libs=	${_cddl_lib} gnu/lib lib ${_secure_lib}
-.if ${MK_IPFILTER} != "no"
-_generic_libs+=	sbin/ipf/libipf
-.endif
 .for _DIR in ${LOCAL_LIB_DIRS}
 .if ${_DIR} == ".WAIT"  || (empty(_generic_libs:M${_DIR}) && exists(${.CURDIR}/${_DIR}/Makefile))
 _generic_libs+= ${_DIR}

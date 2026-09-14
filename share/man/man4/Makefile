@@ -44,7 +44,6 @@ MAN=	aac.4 \
 	alc.4 \
 	ale.4 \
 	alpm.4 \
-	altq.4 \
 	amdpm.4 \
 	${_amdsbwd.4} \
 	${_amdsmb.4} \
@@ -468,10 +467,6 @@ MAN=	aac.4 \
 	pci.4 \
 	pcib.4 \
 	pcm.4 \
-	${_pf.4} \
-	${_pflog.4} \
-	${_pflow.4} \
-	${_pfsync.4} \
 	pim.4 \
 	pms.4 \
 	polling.4 \
@@ -1048,13 +1043,6 @@ ATFTOP=		${SRCTOP}/contrib/atf
 .PATH:          ${ATFTOP}/doc
 ATF=		atf-test-case.4
 ATFPACKAGE=	atf
-.endif
-
-.if ${MK_PF} != "no"
-_pf.4=		pf.4
-_pflog.4=	pflog.4
-_pflow.4=	pflow.4
-_pfsync.4=	pfsync.4
 .endif
 
 .if ${MK_USB} != "no"

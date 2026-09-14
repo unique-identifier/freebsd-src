@@ -1,0 +1,94 @@
+# PPP and SLIP removal
+
+HalfBSD is removing legacy PPP/SLIP networking in stages. This file records
+where to resume after the userland removal. Do not treat phase 1 as removal
+of kernel PPP support.
+
+## Step 1 — Userland removal completed
+
+Removed `ppp`, `pppctl`, `pppoed`, and Bluetooth `rfcomm_pppd`, their source,
+startup scripts, configuration, logging rules, examples, package dependencies,
+and the `PPP` source option. Removed userland build-option documentation.
+Updated startup ordering to preserve dependencies on `netif` without the
+removed `ppp` service. Added unconditional installed-file cleanup and an
+UPDATING entry. Other Bluetooth services remain.
+
+Shell syntax, whitespace, makefile nesting, mtree structure, and build-reference
+checks are performed locally on Linux. FreeBSD build and runtime validation
+is still pending. No kernel sources or shared libraries are removed in step 1.
+
+## Step 2 — Remove the kernel PPP family
+
+- [ ] Remove Netgraph PPP, PPPoE, PPTP GRE, L2TP, asynchronous PPP framing,
+      and PPP compression/encryption nodes: `ppp`, `pppoe`, `pptpgre`, `l2tp`,
+      `async`, `vjc`, `deflate`, `pred1`, and `mppc`.
+- [ ] Remove their sources, exported headers, module directories, kernel
+      options, NOTES entries, documentation, and examples.
+- [ ] Update `sys/conf/files`, `sys/conf/options`, `sys/modules/netgraph`,
+      and `lib/libnetgraph/debug.c` registrations/includes together.
+- [ ] Audit consumers before removing `sys/net/ppp_defs.h` or other headers.
+
+## Step 3 — Finish the SLIP and dial-up audit
+
+- [ ] Confirm absence of standalone SLIP, `slattach`, and `sppp` implementations
+      beyond the initial filename inventory. Remove obsolete remnants,
+      including the surviving `NETGRAPH_SPPP` option where unused.
+- [ ] Remove `sys/net/slcompress.c` with `ng_vjc`; resolve header consumers first.
+- [ ] Examine standalone `usr.bin/chat` and serial-network examples for removal.
+      Preserve serial consoles, getty, and general terminal utilities.
+- [ ] Treat Frame Relay and Cisco HDLC as an explicit scope decision before
+      deleting those independent protocols.
+
+## Step 4 — Untangle shared dependencies
+
+- [ ] Decouple `lib/libradius/radlib.c` from `netgraph/ng_mppc.h`; it uses
+      `MPPE_KEY_LEN`. Preserve RADIUS functionality and public APIs.
+- [ ] Audit `contrib/tcpdump/print-ppp.c` and other capture consumers before
+      deleting `net/slcompress.h`. Preserve capture decoding using appropriate
+      wire-format definitions; do not remove unrelated libpcap functionality.
+- [ ] Audit `PAM_SUPPORT`: PPP was its only direct MK_PAM_SUPPORT consumer in
+      the initial search, but `share/mk/local.dirdeps-options.mk` also refers
+      to it. Resolve the option machinery separately; preserve PAM itself.
+- [ ] Preserve TUN/TAP, general Netgraph infrastructure, IPFW, NAT, general
+      tunneling, Bluetooth outside PPP, and shared crypto/compression libraries.
+- [ ] Preserve assigned protocol numbers and ABI constants where appropriate;
+      document why remaining PPP/SLIP names are needed.
+
+## Step 5 — Finish integration and upgrade cleanup
+
+- [ ] Audit remaining startup, install, package, dependency, test, and example
+      integration for kernel/protocol components being removed.
+- [ ] Recheck networking/IPFW startup ordering. Step 1 already removed `ppp`
+      from NETWORKING, routing, bridge, and netstart, and changed IPFW's
+      prerequisite to `netif` (the old PPP service prerequisite).
+- [ ] Remove stale userland PPP references in retained device/protocol manuals,
+      including `bridge.4`, `tun.4`, `u3g.4`, `ucom.4`, and Netgraph manuals.
+- [ ] Add unconditional obsolete entries for removed modules and headers;
+      move applicable entries from OptionalObsoleteFiles.inc rather than
+      retaining obsolete option checks. Existing ObsoleteManFiles.inc covers
+      old installed system manuals.
+- [ ] Extend UPDATING with kernel configuration migration instructions.
+      Preserve local profiles/logs; do not recursively delete user data.
+
+## Step 6 — Validate the complete removal
+
+- [ ] Repeat source-option and protocol searches, categorizing all remaining
+      references as active functionality, wire/ABI definitions, portable
+      imported code, documentation/history, or installed-file cleanup.
+- [ ] Check deleted-header consumers, module source lists, dependency graphs,
+      makefile conditional nesting, edited shell syntax, mtree structure,
+      and `git diff --check`.
+- [ ] On the dedicated FreeBSD amd64 development host, complete `buildworld`
+      and `buildkernel` with the existing HalfBSD src.conf.
+- [ ] Boot the resulting system and validate networking startup, IPFW,
+      TUN/TAP users, relevant Netgraph consumers, and packet capture.
+- [ ] Record validation results and remaining intentional references here
+      before marking the overall removal complete.
+
+Useful starting searches (inspect matches rather than deleting by substring):
+
+```sh
+git grep -n -E 'MK_PPP|WITHOUT_PPP|WITH_PPP|PPP_NO_'
+git grep -n -i -E '\b(ppp|slip|sppp|pppoe|pppoed|slattach|pppctl|rfcomm_pppd)\b'
+git grep -n -E 'ng_(async|deflate|l2tp|mppc|ppp|pppoe|pptpgre|pred1|vjc)|slcompress|ppp_defs'
+```

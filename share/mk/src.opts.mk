@@ -142,7 +142,6 @@ __DEFAULT_YES_OPTIONS = \
     PAM \
     PKGBOOTSTRAP \
     PMC \
-    PPP \
     QUOTAS \
     RADIUS_SUPPORT \
     RBOOTD \

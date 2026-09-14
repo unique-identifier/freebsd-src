@@ -316,8 +316,6 @@
             ..
             ppi
             ..
-            ppp
-            ..
             printing		tags=package=lp
             ..
             scsi_target

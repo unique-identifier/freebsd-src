@@ -399,7 +399,6 @@ DIRDEPS+= \
 	usr.sbin/bluetooth/iwmbtfw \
 	usr.sbin/bluetooth/l2control \
 	usr.sbin/bluetooth/l2ping \
-	usr.sbin/bluetooth/rfcomm_pppd \
 	usr.sbin/bluetooth/rtlbtfw \
 	usr.sbin/bluetooth/sdpcontrol \
 	usr.sbin/bluetooth/sdpd \
@@ -586,8 +585,6 @@ DIRDEPS+= \
 	usr.sbin/pmcstat \
 	usr.sbin/pmcstudy \
 	usr.sbin/powerd \
-	usr.sbin/ppp \
-	usr.sbin/pppctl \
 	usr.sbin/praudit \
 	usr.sbin/prometheus_sysctl_exporter \
 	usr.sbin/pstat \

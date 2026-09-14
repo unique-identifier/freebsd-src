@@ -1442,9 +1442,7 @@ When set, these options are also in effect:
 is set explicitly)
 .El
 .It Va WITHOUT_PAM_SUPPORT
-Build
-.Xr ppp 8
-without PAM support.
+Do not build optional PAM support into applications.
 .It Va WITHOUT_PIE
 Do not build dynamically linked binaries as
 Position-Independent Executable (PIE).
@@ -1465,10 +1463,6 @@ bootstrap tool.
 Do not build
 .Xr pmccontrol 8
 and related programs.
-.It Va WITHOUT_PPP
-Do not build
-.Xr ppp 8
-and related programs.
 .It Va WITH_PTHREADS_ASSERTIONS
 Enable debugging assertions in pthreads library.
 .It Va WITHOUT_QUOTAS
@@ -1476,10 +1470,8 @@ Do not build
 .Xr quota 1
 and related programs.
 .It Va WITHOUT_RADIUS_SUPPORT
-Do not build radius support into various applications, like
-.Xr pam_radius 8
-and
-.Xr ppp 8 .
+Do not build RADIUS support, including
+.Xr pam_radius 8 .
 .It Va WITH_RATELIMIT
 Build the system with rate limit support.
 .Pp

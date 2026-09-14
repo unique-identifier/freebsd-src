@@ -310,7 +310,5 @@ exit 0
 #   not succeed, leave some clues for debugging (i.e. if the node responds
 #   to pings, maybe switch keyboard on/off, etc)
 # * Same if device is a mouse, i.e. hexdump /dev/sysmouse.
-# * If device offers DUN profiles, ask the user if an entry in
-#   /etc/ppp/ppp.conf should be created
 # * If OPUSH or SPP is offered, refer to the respective man pages to give
 #   some clues how to continue

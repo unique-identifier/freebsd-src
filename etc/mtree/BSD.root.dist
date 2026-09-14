@@ -81,8 +81,6 @@
         ..
         pkg             tags=package=pkg-bootstrap
         ..
-        ppp             tags=package=ppp
-        ..
         profile.d       tags=package=runtime
         ..
         rc.conf.d       tags=package=rc

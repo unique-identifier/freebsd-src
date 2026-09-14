@@ -51,6 +51,35 @@
 #   xargs -n1 | sort | uniq -d;
 # done
 
+# 20260913: Remove userland PPP and its entry points
+OLD_DIRS+=etc/ppp
+OLD_DIRS+=usr/share/examples/ppp
+OLD_DIRS+=var/run/ppp
+OLD_FILES+=etc/newsyslog.conf.d/ppp.conf
+OLD_FILES+=etc/ppp/ppp.conf
+OLD_FILES+=etc/rc.d/ppp
+OLD_FILES+=etc/rc.d/pppoed
+OLD_FILES+=etc/rc.d/rfcomm_pppd_server
+OLD_FILES+=etc/syslog.d/ppp.conf
+OLD_FILES+=usr/libexec/pppoed
+OLD_FILES+=usr/sbin/ppp
+OLD_FILES+=usr/sbin/pppctl
+OLD_FILES+=usr/sbin/rfcomm_pppd
+OLD_FILES+=usr/share/examples/ppp/chap-auth
+OLD_FILES+=usr/share/examples/ppp/login-auth
+OLD_FILES+=usr/share/examples/ppp/ppp.conf.sample
+OLD_FILES+=usr/share/examples/ppp/ppp.conf.span-isp
+OLD_FILES+=usr/share/examples/ppp/ppp.conf.span-isp.working
+OLD_FILES+=usr/share/examples/ppp/ppp.linkdown.sample
+OLD_FILES+=usr/share/examples/ppp/ppp.linkdown.span-isp
+OLD_FILES+=usr/share/examples/ppp/ppp.linkdown.span-isp.working
+OLD_FILES+=usr/share/examples/ppp/ppp.linkup.sample
+OLD_FILES+=usr/share/examples/ppp/ppp.linkup.span-isp
+OLD_FILES+=usr/share/examples/ppp/ppp.linkup.span-isp.working
+OLD_FILES+=usr/share/examples/ppp/ppp.secret.sample
+OLD_FILES+=usr/share/examples/ppp/ppp.secret.span-isp
+OLD_FILES+=usr/share/examples/ppp/ppp.secret.span-isp.working
+
 # 20260913: Remove freebsd-update and its download helper
 OLD_FILES+=etc/freebsd-update.conf
 OLD_FILES+=usr/sbin/freebsd-update

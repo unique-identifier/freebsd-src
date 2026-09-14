@@ -8,7 +8,6 @@ SUBDIR=	${_atf} \
 	flua \
 	getty \
 	${_hyperv} \
-	${_pppoed} \
 	rc \
 	${_rlogind} \
 	rpc.rquotad \
@@ -37,10 +36,6 @@ SUBDIR+=	bootpd
 
 .if ${MK_HYPERV} != "no"
 _hyperv+=	hyperv
-.endif
-
-.if ${MK_NETGRAPH} != "no"
-_pppoed=	pppoed
 .endif
 
 .if !defined(NO_PIC) && !defined(NO_RTLD)

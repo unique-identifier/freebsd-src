@@ -3,7 +3,7 @@
 #
 
 # PROVIDE: ipfw
-# REQUIRE: ppp
+# REQUIRE: netif
 # KEYWORD: nojailvnet
 
 . /etc/rc.subr

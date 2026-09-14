@@ -13,6 +13,15 @@ Items affecting the ports and packages system can be found in
 and/or ports.
 
 20260913:
+	Userland ppp, pppctl, pppoed, and Bluetooth rfcomm_pppd have been
+	removed, together with their startup scripts and the PPP source
+	option.  Remove their settings from rc.conf.  Run delete-old after
+	installing to remove obsolete programs and shipped configuration.
+	Local PPP profiles and logs are not recursively deleted.
+	Kernel PPP/Netgraph support remains for a later removal phase;
+	see TODO-PPP-SLIP.md for the remaining work and validation plan.
+
+20260913:
 	freebsd-update and its phttpget download helper have been removed,
 	along with the FREEBSD_UPDATE source option and cloud-image update
 	jobs.  HalfBSD base-system updates are built and installed from

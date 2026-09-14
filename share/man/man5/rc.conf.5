@@ -1654,79 +1654,6 @@ ifconfig_gif0="inet 10.0.0.1/30 10.0.0.2"
 gifconfig_gif1="inet6 2a00::1 2a01::1"
 ifconfig_gif1="inet 10.1.0.1/30 10.1.0.2"
 .Ed
-.It Va ppp_enable
-.Pq Vt bool
-If set to
-.Dq Li YES ,
-run the
-.Xr ppp 8
-daemon.
-.It Va ppp_profile
-.Pq Vt str
-The name of the profile to use from
-.Pa /etc/ppp/ppp.conf .
-Also used for per-profile overrides of
-.Va ppp_mode
-and
-.Va ppp_nat ,
-and
-.Va ppp_ Ns Ao Ar profile Ac Ns _unit .
-When the profile name contains any of the characters
-.Dq Li .-/+
-they are translated to
-.Dq Li _
-for the proposes of the override variable names.
-.It Va ppp_mode
-.Pq Vt str
-Mode in which to run the
-.Xr ppp 8
-daemon.
-.It Va ppp_ Ns Ao Ar profile Ac Ns _mode
-.Pq Vt str
-Overrides the global
-.Va ppp_mode
-for
-.Ar profile .
-Accepted modes are
-.Dq Li auto ,
-.Dq Li ddial ,
-.Dq Li direct
-and
-.Dq Li dedicated .
-See the manual for a full description.
-.It Va ppp_nat
-.Pq Vt bool
-If set to
-.Dq Li YES ,
-enables network address translation.
-Used in conjunction with
-.Va gateway_enable
-allows hosts on private network addresses access to the Internet using
-this host as a network address translating router.
-Default is
-.Dq Li YES .
-.It Va ppp_ Ns Ao Ar profile Ac Ns _nat
-.Pq Vt str
-Overrides the global
-.Va ppp_nat
-for
-.Ar profile .
-.It Va ppp_ Ns Ao Ar profile Ac Ns _unit
-.Pq Vt int
-Set the unit number to be used for this profile.
-See the manual description of
-.Fl unit Ns Ar N
-for details.
-.It Va ppp_user
-.Pq Vt str
-The name of the user under which
-.Xr ppp 8
-should be started.
-By
-default,
-.Xr ppp 8
-is started as
-.Dq Li root .
 .It Va rc_conf_files
 .Pq Vt str
 This option is used to specify a list of files that will override
@@ -2273,36 +2200,6 @@ is set to
 these are the flags to pass to the
 .Xr rpcbind 8
 daemon.
-.It Va pppoed_enable
-.Pq Vt bool
-If set to
-.Dq Li YES ,
-run the
-.Xr pppoed 8
-daemon at boot time to provide PPP over Ethernet services.
-.It Va pppoed_ Ns Aq Ar provider
-.Pq Vt str
-.Xr pppoed 8
-listens to requests to this
-.Ar provider
-and ultimately runs
-.Xr ppp 8
-with a
-.Ar system
-argument of the same name.
-.It Va pppoed_flags
-.Pq Vt str
-Additional flags to pass to
-.Xr pppoed 8 .
-.It Va pppoed_interface
-.Pq Vt str
-The network interface to run
-.Xr pppoed 8
-on.
-This is mandatory when
-.Va pppoed_enable
-is set to
-.Dq Li YES .
 .It Va ntpdate_enable
 .Pq Vt bool
 If set to
@@ -3867,53 +3764,6 @@ Path to a file, where
 will store information about known HID devices.
 Default
 .Pa /var/db/bthidd.hids .
-.It Va rfcomm_pppd_server_enable
-.Pq Vt bool
-If set to
-.Dq Li YES ,
-enable Bluetooth RFCOMM PPP wrapper daemon.
-.It Va rfcomm_pppd_server_profile
-.Pq Vt str
-The name of the profile to use from
-.Pa /etc/ppp/ppp.conf .
-Multiple profiles can be specified here.
-Also used to specify per-profile overrides.
-When the profile name contains any of the characters
-.Dq Li .-/+
-they are translated to
-.Dq Li _
-for the proposes of the override variable names.
-.It Va rfcomm_pppd_server_ Ns Ao Ar profile Ac Ns _bdaddr
-.Pq Vt str
-Overrides local address to listen on.
-By default
-.Xr rfcomm_pppd 8
-will listen on
-.Dq Li ANY
-address.
-The address can be specified as BD_ADDR or name.
-.It Va rfcomm_pppd_server_ Ns Ao Ar profile Ac Ns _channel
-.Pq Vt str
-Overrides local RFCOMM channel to listen on.
-By default
-.Xr rfcomm_pppd 8
-will listen on RFCOMM channel 1.
-Must set properly if multiple profiles used in the same time.
-.It Va rfcomm_pppd_server_ Ns Ao Ar profile Ac Ns _register_sp
-.Pq Vt bool
-Tells
-.Xr rfcomm_pppd 8
-if it should register Serial Port service on the specified RFCOMM channel.
-Default
-.Dq Li NO .
-.It Va rfcomm_pppd_server_ Ns Ao Ar profile Ac Ns _register_dun
-.Pq Vt bool
-Tells
-.Xr rfcomm_pppd 8
-if it should register Dial-Up Networking service on the specified
-RFCOMM channel.
-Default
-.Dq Li NO .
 .It Va ubthidhci_enable
 .Pq Vt bool
 If set to
@@ -4411,7 +4261,6 @@ to
 .Xr rc 8 ,
 .Xr rc.subr 8 ,
 .Xr rcorder 8 ,
-.Xr rfcomm_pppd 8 ,
 .Xr route 8 ,
 .Xr route6d 8 ,
 .Xr routed 8 ,

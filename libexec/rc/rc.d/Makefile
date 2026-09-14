@@ -119,7 +119,6 @@ BLUETOOTHPACKAGE=		bluetooth
 BLUETOOTH=	bluetooth \
 		bthidd \
 		hcsecd \
-		rfcomm_pppd_server \
 		sdpd \
 		ubthidhci
 
@@ -229,14 +228,6 @@ OPENSM=	opensm
 CONFGROUPS+=			POWERD
 POWERDPACKAGE=			powerd
 POWERD=		powerd
-
-CONFGROUPS.${MK_PPP}+=		PPP
-PPPPACKAGE=			ppp
-PPP=		ppp
-
-CONFGROUPS+=			PPPOED
-PPPOEDPACKAGE=			ppp
-PPPOED=		pppoed
 
 CONFGROUPS+=			SYSLOGD
 SYSLOGDPACKAGE=			syslogd

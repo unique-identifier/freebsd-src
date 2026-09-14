@@ -63,8 +63,6 @@
         ..
         dhclient tags=package=dhclient
         ..
-        ppp             gname=network mode=0770 tags=package=ppp
-        ..
         wpa_supplicant tags=package=wpa
         ..
     ..

@@ -9,7 +9,6 @@ SUBDIR= \
 	hcsecd \
 	l2control \
 	l2ping \
-	rfcomm_pppd \
 	sdpcontrol \
 	sdpd
 

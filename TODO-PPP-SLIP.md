@@ -32,14 +32,23 @@ is still pending. No kernel sources or shared libraries are removed in step 1.
 
 ## Step 3 — Finish the SLIP and dial-up audit
 
-- [ ] Confirm absence of standalone SLIP, `slattach`, and `sppp` implementations
+- [x] Confirm absence of standalone SLIP, `slattach`, and `sppp` implementations
       beyond the initial filename inventory. Remove obsolete remnants,
       including the surviving `NETGRAPH_SPPP` option where unused.
-- [ ] Remove `sys/net/slcompress.c` with `ng_vjc`; resolve header consumers first.
-- [ ] Examine standalone `usr.bin/chat` and serial-network examples for removal.
+- [x] Remove `sys/net/slcompress.c` with `ng_vjc`; resolve header consumers first.
+      The wire-format header remains temporarily for the tcpdump audit in step 4.
+- [x] Examine standalone `usr.bin/chat` and serial-network examples for removal.
       Preserve serial consoles, getty, and general terminal utilities.
-- [ ] Treat Frame Relay and Cisco HDLC as an explicit scope decision before
+- [x] Treat Frame Relay and Cisco HDLC as an explicit scope decision before
       deleting those independent protocols.
+
+The audit found no standalone SLIP, slattach, or sppp implementation.  It
+removed the orphaned `NETGRAPH_SPPP` option, VJ compression implementation,
+standalone dial-up `chat` program, and obsolete bsdconfig serial-network text.
+The `stty` SLIP line-discipline name is retained as a terminal ABI name, while
+portable capture/file-identification definitions remain for decoding existing
+traffic and files.  Netgraph Frame Relay (RFC 1490/2427) and Cisco HDLC are
+independent link protocols and remain in scope as supported Netgraph nodes.
 
 ## Step 4 — Untangle shared dependencies
 

@@ -213,12 +213,6 @@ NTPPACKAGE=			ntp
 NTP=		ntpd \
 		ntpdate
 
-CONFGROUPS.${MK_NUAGEINIT}+=	NUAGEINIT
-NUAGEINITPACKAGE=		nuageinit
-NUAGEINIT=	nuageinit \
-		nuageinit_post_net \
-		nuageinit_user_data_script
-
 CONFGROUPS.${MK_OFED_EXTRA}+=	OPENSM
 OPENSM=	opensm
 

@@ -54,16 +54,27 @@ independent link protocols and remain in scope as supported Netgraph nodes.
 
 - [x] Decouple `lib/libradius/radlib.c` from `netgraph/ng_mppc.h`; it used
       `MPPE_KEY_LEN`. RADIUS functionality and public APIs remain intact.
-- [ ] Audit `contrib/tcpdump/print-ppp.c` and other capture consumers before
+- [x] Audit `contrib/tcpdump/print-ppp.c` and other capture consumers before
       deleting `net/slcompress.h`. Preserve capture decoding using appropriate
       wire-format definitions; do not remove unrelated libpcap functionality.
-- [ ] Audit `PAM_SUPPORT`: PPP was its only direct MK_PAM_SUPPORT consumer in
+- [x] Audit `PAM_SUPPORT`: PPP was its only direct MK_PAM_SUPPORT consumer in
       the initial search, but `share/mk/local.dirdeps-options.mk` also refers
       to it. Resolve the option machinery separately; preserve PAM itself.
-- [ ] Preserve TUN/TAP, general Netgraph infrastructure, IPFW, NAT, general
+- [x] Preserve TUN/TAP, general Netgraph infrastructure, IPFW, NAT, general
       tunneling, Bluetooth outside PPP, and shared crypto/compression libraries.
-- [ ] Preserve assigned protocol numbers and ABI constants where appropriate;
+- [x] Preserve assigned protocol numbers and ABI constants where appropriate;
       document why remaining PPP/SLIP names are needed.
+
+Tcpdump now uses its own portable RFC 1144 wire-format definitions for PPP and
+SLIP capture decoding, so the kernel implementation header is removed without
+reducing libpcap or tcpdump file-format support.  The unused `PAM_SUPPORT`
+application option and its stale dirdeps mapping are removed; the independent
+`PAM` option, library, and modules remain.  TUN/TAP, IPFW/NAT, Bluetooth,
+general tunneling and Netgraph, and shared crypto/compression code are outside
+the removed protocol implementation and remain unchanged.  Remaining PPP/SLIP
+names identify assigned wire protocols and ethertypes, pcap DLT values and
+decoders, compatibility ABI values, historical text, or upgrade cleanup—not
+live PPP/SLIP interfaces.
 
 ## Step 5 — Finish integration and upgrade cleanup
 

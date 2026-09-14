@@ -230,12 +230,6 @@ OLD_FILES+=boot/zfsloader
 OLD_FILES+=usr/lib/kgzldr.o
 .endif
 
-.if ${MK_BOOTPARAMD} == no
-OLD_FILES+=etc/rc.d/bootparams
-OLD_FILES+=usr/sbin/bootparamd
-OLD_FILES+=usr/sbin/callbootd
-.endif
-
 .if ${MK_BOOTPD} == no
 OLD_FILES+=usr/libexec/bootpd
 OLD_FILES+=usr/libexec/bootpgw

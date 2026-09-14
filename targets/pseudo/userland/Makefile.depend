@@ -673,7 +673,6 @@ DIRDEPS+=	usr.sbin/efidp
 
 DIRDEPS.amd64= \
 	sbin/bsdlabel \
-	sbin/fdisk \
 	sbin/nvmecontrol \
 	usr.sbin/acpi/acpiconf \
 	usr.sbin/acpi/acpidb \
@@ -698,12 +697,10 @@ DIRDEPS.amd64= \
 
 DIRDEPS.arm= \
 	sbin/bsdlabel \
-	sbin/fdisk \
 	usr.sbin/ofwdump
 
 DIRDEPS.i386= \
 	sbin/bsdlabel \
-	sbin/fdisk \
 	sbin/nvmecontrol \
 	usr.sbin/apm \
 	usr.sbin/apmd \

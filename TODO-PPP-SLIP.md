@@ -19,14 +19,16 @@ is still pending. No kernel sources or shared libraries are removed in step 1.
 
 ## Step 2 — Remove the kernel PPP family
 
-- [ ] Remove Netgraph PPP, PPPoE, PPTP GRE, L2TP, asynchronous PPP framing,
+- [x] Remove Netgraph PPP, PPPoE, PPTP GRE, L2TP, asynchronous PPP framing,
       and PPP compression/encryption nodes: `ppp`, `pppoe`, `pptpgre`, `l2tp`,
       `async`, `vjc`, `deflate`, `pred1`, and `mppc`.
-- [ ] Remove their sources, exported headers, module directories, kernel
+- [x] Remove their sources, exported headers, module directories, kernel
       options, NOTES entries, documentation, and examples.
-- [ ] Update `sys/conf/files`, `sys/conf/options`, `sys/modules/netgraph`,
+- [x] Update `sys/conf/files`, `sys/conf/options`, `sys/modules/netgraph`,
       and `lib/libnetgraph/debug.c` registrations/includes together.
-- [ ] Audit consumers before removing `sys/net/ppp_defs.h` or other headers.
+- [x] Audit consumers before removing `sys/net/ppp_defs.h` or other headers.
+      `ppp_defs.h` remains for compiler-rt ABI checks. RADIUS now keeps its
+      MPPE key-size limit locally instead of including the removed `ng_mppc.h`.
 
 ## Step 3 — Finish the SLIP and dial-up audit
 
@@ -41,8 +43,8 @@ is still pending. No kernel sources or shared libraries are removed in step 1.
 
 ## Step 4 — Untangle shared dependencies
 
-- [ ] Decouple `lib/libradius/radlib.c` from `netgraph/ng_mppc.h`; it uses
-      `MPPE_KEY_LEN`. Preserve RADIUS functionality and public APIs.
+- [x] Decouple `lib/libradius/radlib.c` from `netgraph/ng_mppc.h`; it used
+      `MPPE_KEY_LEN`. RADIUS functionality and public APIs remain intact.
 - [ ] Audit `contrib/tcpdump/print-ppp.c` and other capture consumers before
       deleting `net/slcompress.h`. Preserve capture decoding using appropriate
       wire-format definitions; do not remove unrelated libpcap functionality.

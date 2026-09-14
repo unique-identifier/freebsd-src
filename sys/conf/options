@@ -494,10 +494,9 @@ SCTP_DETAILED_STR_STATS	opt_sctp.h # Use per PR-SCTP policy stream stats
 # Netgraph(4). Use option NETGRAPH to enable the base netgraph code.
 # Each netgraph node type can be either be compiled into the kernel
 # or loaded dynamically. To get the former, include the corresponding
-# option below. Each type has its own man page, e.g. ng_async(4).
+# option below. Each type has its own man page, e.g. ng_bpf(4).
 NETGRAPH
 NETGRAPH_DEBUG		opt_netgraph.h
-NETGRAPH_ASYNC		opt_netgraph.h
 NETGRAPH_BLUETOOTH	opt_netgraph.h
 NETGRAPH_BLUETOOTH_BT3C	opt_netgraph.h
 NETGRAPH_BLUETOOTH_H4	opt_netgraph.h
@@ -511,7 +510,6 @@ NETGRAPH_BRIDGE		opt_netgraph.h
 NETGRAPH_CAR		opt_netgraph.h
 NETGRAPH_CHECKSUM	opt_netgraph.h
 NETGRAPH_CISCO		opt_netgraph.h
-NETGRAPH_DEFLATE	opt_netgraph.h
 NETGRAPH_DEVICE		opt_netgraph.h
 NETGRAPH_ECHO		opt_netgraph.h
 NETGRAPH_EIFACE		opt_netgraph.h
@@ -526,19 +524,12 @@ NETGRAPH_IFACE		opt_netgraph.h
 NETGRAPH_IP_INPUT	opt_netgraph.h
 NETGRAPH_IPFW		opt_netgraph.h
 NETGRAPH_KSOCKET	opt_netgraph.h
-NETGRAPH_L2TP		opt_netgraph.h
 NETGRAPH_LMI		opt_netgraph.h
-NETGRAPH_MPPC_COMPRESSION	opt_netgraph.h
-NETGRAPH_MPPC_ENCRYPTION	opt_netgraph.h
 NETGRAPH_NAT		opt_netgraph.h
 NETGRAPH_NETFLOW	opt_netgraph.h
 NETGRAPH_ONE2MANY	opt_netgraph.h
 NETGRAPH_PATCH		opt_netgraph.h
 NETGRAPH_PIPE		opt_netgraph.h
-NETGRAPH_PPP		opt_netgraph.h
-NETGRAPH_PPPOE		opt_netgraph.h
-NETGRAPH_PPTPGRE	opt_netgraph.h
-NETGRAPH_PRED1		opt_netgraph.h
 NETGRAPH_RFC1490	opt_netgraph.h
 NETGRAPH_SOCKET		opt_netgraph.h
 NETGRAPH_SPLIT		opt_netgraph.h
@@ -548,7 +539,6 @@ NETGRAPH_TCPMSS		opt_netgraph.h
 NETGRAPH_TEE		opt_netgraph.h
 NETGRAPH_TTY		opt_netgraph.h
 NETGRAPH_UI		opt_netgraph.h
-NETGRAPH_VJC		opt_netgraph.h
 NETGRAPH_VLAN		opt_netgraph.h
 
 # DRM options

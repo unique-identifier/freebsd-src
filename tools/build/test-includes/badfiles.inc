@@ -197,30 +197,22 @@ BADHDRS= \
 	net80211/ieee80211_vht.h \
 	net80211/ieee80211_wds.h \
 	netgraph/netgraph.h \
-	netgraph/ng_async.h \
 	netgraph/ng_bpf.h \
 	netgraph/ng_bridge.h \
 	netgraph/ng_car.h \
 	netgraph/ng_checksum.h \
 	netgraph/ng_cisco.h \
-	netgraph/ng_deflate.h \
 	netgraph/ng_etf.h \
 	netgraph/ng_hole.h \
 	netgraph/ng_ksocket.h \
-	netgraph/ng_l2tp.h \
 	netgraph/ng_lmi.h \
 	netgraph/ng_macfilter.h \
 	netgraph/ng_message.h \
-	netgraph/ng_mppc.h \
 	netgraph/ng_nat.h \
 	netgraph/ng_one2many.h \
 	netgraph/ng_parse.h \
 	netgraph/ng_patch.h \
 	netgraph/ng_pipe.h \
-	netgraph/ng_ppp.h \
-	netgraph/ng_pppoe.h \
-	netgraph/ng_pptpgre.h \
-	netgraph/ng_pred1.h \
 	netgraph/ng_sample.h \
 	netgraph/ng_socket.h \
 	netgraph/ng_socketvar.h \
@@ -228,7 +220,6 @@ BADHDRS= \
 	netgraph/ng_tag.h \
 	netgraph/ng_tcpmss.h \
 	netgraph/ng_tee.h \
-	netgraph/ng_vjc.h \
 	netgraph/ng_vlan.h \
 	netgraph/ng_vlan_rotate.h \
 	netgraph/qos.h \

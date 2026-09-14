@@ -130,7 +130,7 @@ static const struct ng_parse_type ng_cisco_ipaddr_type = {
 	&ng_cisco_ipaddr_type_fields
 };
 
-/* Parse type for struct ng_async_stat */
+/* Parse type for struct ng_cisco_stats */
 static const struct ng_parse_struct_field ng_cisco_stats_type_fields[]
 	= NG_CISCO_STATS_TYPE_INFO;
 static const struct ng_parse_type ng_cisco_stats_type = {

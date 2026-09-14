@@ -93,10 +93,5 @@ options         NETGRAPH
 options         NETGRAPH_BPF                                                    
 options         NETGRAPH_ETHER                                                  
 options         NETGRAPH_IFACE                                                  
-options         NETGRAPH_PPP                                                    
-options         NETGRAPH_PPPOE                                                  
-options         NETGRAPH_PPTPGRE                                                
-options         NETGRAPH_MPPC_ENCRYPTION                                        
 options         NETGRAPH_SOCKET                                                 
 options         NETGRAPH_KSOCKET                                                
-options         NETGRAPH_VJC

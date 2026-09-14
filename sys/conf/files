@@ -669,13 +669,11 @@ crypto/openssl/ossl_poly1305.c	optional ossl
 crypto/openssl/ossl_sha1.c	optional ossl
 crypto/openssl/ossl_sha256.c	optional ossl
 crypto/openssl/ossl_sha512.c	optional ossl
-crypto/rc4/rc4.c		optional netgraph_mppc_encryption
 crypto/rijndael/rijndael-alg-fst.c optional crypto | ekcd | \
 	!random_loadable | wlan_ccmp
 crypto/rijndael/rijndael-api-fst.c optional ekcd | !random_loadable
 crypto/rijndael/rijndael-api.c	optional crypto | wlan_ccmp
-crypto/sha1.c			optional carp | crypto | ether | \
-	netgraph_mppc_encryption | sctp
+crypto/sha1.c			optional carp | crypto | ether | sctp
 crypto/sha2/sha256c.c		optional crypto | ekcd | \
 	!random_loadable | sctp | zfs
 crypto/sha2/sha512c.c		optional crypto | zfs
@@ -4119,8 +4117,6 @@ net/if_vxlan.c			optional vxlan inet | vxlan inet6
 net/ifdi_if.m			optional ether pci iflib
 net/iflib.c			optional ether pci iflib
 net/mp_ring.c			optional ether iflib
-net/mppcc.c			optional netgraph_mppc_compression
-net/mppcd.c			optional netgraph_mppc_compression
 net/netisr.c			standard
 net/debugnet.c			optional inet debugnet
 net/debugnet_inet.c		optional inet debugnet
@@ -4143,7 +4139,6 @@ net/route/route_tables.c	standard
 net/route/route_temporal.c	standard
 net/rss_config.c		optional inet rss | inet6 rss
 net/rtsock.c			standard
-net/slcompress.c		optional netgraph_vjc
 net/toeplitz.c			optional inet rss | inet6 rss | route_mpath
 net/vnet.c			optional vimage
 net80211/ieee80211.c		optional wlan
@@ -4220,14 +4215,12 @@ netgraph/netflow/netflow.c	optional netgraph_netflow
 netgraph/netflow/netflow_v9.c	optional netgraph_netflow
 netgraph/netflow/ng_netflow.c	optional netgraph_netflow
 netgraph/ng_UI.c		optional netgraph_UI
-netgraph/ng_async.c		optional netgraph_async
 netgraph/ng_base.c		optional netgraph
 netgraph/ng_bpf.c		optional netgraph_bpf
 netgraph/ng_bridge.c		optional netgraph_bridge
 netgraph/ng_car.c		optional netgraph_car
 netgraph/ng_checksum.c		optional netgraph_checksum
 netgraph/ng_cisco.c		optional netgraph_cisco
-netgraph/ng_deflate.c		optional netgraph_deflate
 netgraph/ng_device.c		optional netgraph_device
 netgraph/ng_echo.c		optional netgraph_echo
 netgraph/ng_eiface.c		optional netgraph_eiface
@@ -4241,20 +4234,13 @@ netgraph/ng_iface.c		optional netgraph_iface
 netgraph/ng_ip_input.c		optional netgraph_ip_input
 netgraph/ng_ipfw.c		optional netgraph_ipfw inet ipfirewall
 netgraph/ng_ksocket.c		optional netgraph_ksocket
-netgraph/ng_l2tp.c		optional netgraph_l2tp
 netgraph/ng_lmi.c		optional netgraph_lmi
 netgraph/ng_macfilter.c		optional netgraph_macfilter
-netgraph/ng_mppc.c		optional netgraph_mppc_compression | \
-					 netgraph_mppc_encryption
 netgraph/ng_nat.c		optional netgraph_nat inet libalias
 netgraph/ng_one2many.c		optional netgraph_one2many
 netgraph/ng_parse.c		optional netgraph
 netgraph/ng_patch.c		optional netgraph_patch
 netgraph/ng_pipe.c		optional netgraph_pipe
-netgraph/ng_ppp.c		optional netgraph_ppp
-netgraph/ng_pppoe.c		optional netgraph_pppoe
-netgraph/ng_pptpgre.c		optional netgraph_pptpgre
-netgraph/ng_pred1.c		optional netgraph_pred1
 netgraph/ng_rfc1490.c		optional netgraph_rfc1490
 netgraph/ng_socket.c		optional netgraph_socket
 netgraph/ng_split.c		optional netgraph_split
@@ -4262,7 +4248,6 @@ netgraph/ng_tag.c		optional netgraph_tag
 netgraph/ng_tcpmss.c		optional netgraph_tcpmss
 netgraph/ng_tee.c		optional netgraph_tee
 netgraph/ng_tty.c		optional netgraph_tty
-netgraph/ng_vjc.c		optional netgraph_vjc
 netgraph/ng_vlan.c		optional netgraph_vlan
 netgraph/ng_vlan_rotate.c	optional netgraph_vlan_rotate
 netinet/accf_data.c		optional accept_filter_data inet

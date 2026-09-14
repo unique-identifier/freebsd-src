@@ -3,14 +3,12 @@
 SYSDIR?=${SRCTOP}/sys
 .include "${SYSDIR}/conf/kern.opts.mk"
 
-SUBDIR=	async \
-	${_bluetooth} \
+SUBDIR=	${_bluetooth} \
 	bpf \
 	bridge \
 	car \
 	checksum \
 	cisco \
-	deflate \
 	device \
 	echo \
 	eiface \
@@ -26,20 +24,14 @@ SUBDIR=	async \
 	ip_input \
 	ipfw \
 	ksocket \
-	l2tp \
 	lmi \
 	macfilter \
-	${_mppc} \
 	nat \
 	netflow \
 	netgraph \
 	one2many \
 	patch \
 	pipe \
-	ppp \
-	pppoe \
-	pptpgre \
-	pred1 \
 	rfc1490 \
 	socket \
 	source \
@@ -49,16 +41,11 @@ SUBDIR=	async \
 	tee \
 	tty \
 	UI \
-	vjc \
 	vlan \
 	vlan_rotate
 
 .if ${MK_BLUETOOTH} != "no" || defined(ALL_MODULES)
 _bluetooth=	bluetooth
-.endif
-
-.if ${MK_CRYPT} != "no" && exists(${SYSDIR}/crypto/rc4/rc4.c)
-_mppc=		mppc
 .endif
 
 .include <bsd.subdir.mk>

@@ -737,37 +737,7 @@ options 	SCTP_SUPPORT
 # this one turns on all sorts of
 # nastily printing that you can
 # do. It's all controlled by a
-# bit mask (settable by socket opt and
-# by sysctl). Including will not cause
-# logging until you set the bits.. but it
-# can be quite verbose.. so without this
-# option we don't do any of the tests for
-# bits and prints.. which makes the code run
-# faster.. if you are not debugging don't use.
-options 	SCTP_DEBUG
-
-#
-# All that options after that turn on specific types of
-# logging. You can monitor CWND growth, flight size
-# and all sorts of things. Go look at the code and
-# see. I have used this to produce interesting
-# charts and graphs as well :->
-#
-# I have not yet committed the tools to get and print
-# the logs, I will do that eventually .. before then
-# if you want them send me an email rrs@freebsd.org
-# You basically must have ktr(4) enabled for these
-# and you then set the sysctl to turn on/off various
-# logging bits. Use ktrdump(8) to pull the log and run
-# it through a display program.. and graphs and other
-# things too.
-#
-options 	SCTP_LOCK_LOGGING
-options 	SCTP_MBUF_LOGGING
-options 	SCTP_MBCNT_LOGGING
-options 	SCTP_PACKET_LOGGING
-options 	SCTP_LTRACE_CHUNKS
-options 	SCTP_LTRACE_ERRORS
+# corresponding man page, e.g., ng_bpf(4).
 
 # OpenFabrics Enterprise Distribution (Infiniband).
 options 	OFED
@@ -885,8 +855,8 @@ device		wlan_gcmp
 device		wlan_xauth
 
 #  The `wlan_acl' device provides a MAC-based access control mechanism
-#  for use with 802.11 drivers operating in ap mode and using the
-#  `wlan' module.
+#  The `tuntap' device implements nos-tun(8) and a pty-like virtual Ethernet
+#  interface.
 #  The 'wlan_amrr' device provides AMRR transmit rate control algorithm
 device		wlan_acl
 device		wlan_amrr

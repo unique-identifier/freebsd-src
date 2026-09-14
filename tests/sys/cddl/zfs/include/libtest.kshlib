@@ -2773,8 +2773,9 @@ function labelvtoc
 		 $ECHO "q" >> $label_file
 		 $ECHO "q" >> $label_file
 
-		 $FDISK -B $disk >/dev/null 2>&1
-		 # wait a while for fdisk finishes
+		 $GPART create -s MBR $disk >/dev/null 2>&1
+		 $GPART add -t freebsd $disk >/dev/null 2>&1
+		 # wait a while for gpart to finish
 		 $SLEEP 60
 	elif [[ $arch == "sparc" ]]; then
 	     	 $ECHO "label" > $label_file

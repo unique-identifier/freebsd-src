@@ -294,8 +294,9 @@ migrate_disklabel_head() {
 
 migrate_disklabel_body() {
 	prepare
-	silence fdisk -fi "$disk"
-	silence fdisk -fu0s "169/63/$((size / 10))" "$disk"
+	atf_check -s exit:0 -o ignore -e empty gpart create -s MBR "$disk"
+	atf_check -s exit:0 -o ignore -e empty gpart add -t freebsd -b 63 \
+	    -s "$((size / 10))" "$disk"
 	silence disklabel -R "$disk" "$src/gpt.disklabel"
 	matcherr "$(migratemsg 5)" gpt migrate "$disk"
 	file "$src/gpt.disklabel.show.normal" gpt show "$disk"

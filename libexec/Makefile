@@ -18,7 +18,6 @@ SUBDIR=	${_atf} \
 	${_rshd} \
 	${_rtld-elf} \
 	save-entropy \
-	${_nuageinit} \
 	${_tests} \
 	ulog-helper
 
@@ -28,10 +27,6 @@ _atrun=		atrun
 
 .if ${MK_BLOCKLIST} != "no"
 _blocklistd-helper+=	blocklistd-helper
-.endif
-
-.if ${MK_BOOTPD} != "no"
-SUBDIR+=	bootpd
 .endif
 
 .if ${MK_HYPERV} != "no"
@@ -45,10 +40,6 @@ SUBDIR.${MK_LIB${LIBCOMPAT}}+=	rtld-elf${libcompat}
 .endfor
 .endif
 
-.if ${MK_RBOOTD} != "no"
-SUBDIR+=	rbootd
-.endif
-
 .if ${MK_TCP_WRAPPERS} != "no"
 SUBDIR+=	tcpd
 .endif
@@ -59,10 +50,6 @@ _tests=		tests
 
 .if ${MK_TESTS_SUPPORT} != "no"
 _atf=		atf
-.endif
-
-.if ${MK_NUAGEINIT} != "no"
-_nuageinit=	nuageinit
 .endif
 
 .include <bsd.arch.inc.mk>

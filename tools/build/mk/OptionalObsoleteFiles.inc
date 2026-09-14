@@ -230,19 +230,6 @@ OLD_FILES+=boot/zfsloader
 OLD_FILES+=usr/lib/kgzldr.o
 .endif
 
-.if ${MK_BOOTPARAMD} == no
-OLD_FILES+=etc/rc.d/bootparams
-OLD_FILES+=usr/sbin/bootparamd
-OLD_FILES+=usr/sbin/callbootd
-.endif
-
-.if ${MK_BOOTPD} == no
-OLD_FILES+=usr/libexec/bootpd
-OLD_FILES+=usr/libexec/bootpgw
-OLD_FILES+=usr/sbin/bootpef
-OLD_FILES+=usr/sbin/bootptest
-.endif
-
 .if ${MK_BSDINSTALL} == no
 OLD_FILES+=usr/libexec/bsdinstall/adduser
 OLD_FILES+=usr/libexec/bsdinstall/auto
@@ -4400,10 +4387,6 @@ OLD_FILES+=usr/include/radlib.h
 OLD_FILES+=usr/include/radlib_vs.h
 .endif
 
-.if ${MK_RBOOTD} == no
-OLD_FILES+=usr/libexec/rbootd
-.endif
-
 .if ${MK_ROUTED} == no
 OLD_FILES+=etc/rc.d/routed
 OLD_FILES+=sbin/routed
@@ -4426,27 +4409,6 @@ OLD_DIRS+=usr.sbin/virtual_oss
 OLD_FILES+=libexec/rc/rc.d/mixer
 OLD_FILES+=libexec/rc/rc.d/virtual_oss
 OLD_FILES+=sbin/devd/snd.conf
-.endif
-
-.if ${MK_NUAGEINIT} == no
-OLD_FILES+=etc/rc.d/nuageinit
-OLD_FILES+=usr/libexec/nuageinit
-OLD_FILES+=usr/share/flua/nuage.lua
-OLD_FILES+=usr/share/flua/yaml.lua
-OLD_FILES+=usr/tests
-OLD_FILES+=usr/tests/libexec/nuageinit/utils
-OLD_FILES+=usr/tests/libexec/nuageinit/nuage
-OLD_FILES+=usr/tests/libexec/nuageinit/warn.lua
-OLD_FILES+=usr/tests/libexec/nuageinit/dirname.lua
-OLD_FILES+=usr/tests/libexec/nuageinit/err.lua
-OLD_FILES+=usr/tests/libexec/nuageinit/adduser.lua
-OLD_FILES+=usr/tests/libexec/nuageinit/addsshkeys.lua
-OLD_FILES+=usr/tests/libexec/nuageinit/Kyuafile
-OLD_FILES+=usr/tests/libexec/nuageinit/ktrace.out
-OLD_FILES+=usr/tests/libexec/nuageinit/addgroup.lua
-OLD_FILES+=usr/tests/libexec/nuageinit/sethostname.lua
-OLD_FILES+=usr/tests/libexec/nuageinit/nuageinit
-OLD_FILES+=usr/tests/libexec/nuageinit/addsshkey.lua
 .endif
 
 .if ${MK_SHAREDOCS} == no

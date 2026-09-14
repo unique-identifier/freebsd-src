@@ -68,8 +68,6 @@ __DEFAULT_YES_OPTIONS = \
     BLOCKLIST \
     BLUETOOTH \
     BOOT \
-    BOOTPARAMD \
-    BOOTPD \
     BSD_CPIO \
     BSDINSTALL \
     BSNMP \
@@ -136,7 +134,6 @@ __DEFAULT_YES_OPTIONS = \
     NLS_CATALOGS \
     NS_CACHING \
     NTP \
-    NUAGEINIT \
     OFED \
     OPENSSL \
     PAM \
@@ -144,7 +141,6 @@ __DEFAULT_YES_OPTIONS = \
     PMC \
     QUOTAS \
     RADIUS_SUPPORT \
-    RBOOTD \
     ROUTED \
     SERVICESDB \
     SETUID_LOGIN \

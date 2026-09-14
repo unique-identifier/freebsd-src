@@ -473,8 +473,6 @@
             atf-sh
             ..
         ..
-        nuageinit
-        ..
         rc
         ..
         rtld-elf

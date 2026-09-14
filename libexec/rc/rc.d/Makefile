@@ -122,9 +122,6 @@ BLUETOOTH=	bluetooth \
 		sdpd \
 		ubthidhci
 
-CONFGROUPS.${MK_BOOTPARAMD}+=	BOOTPARAMD
-BOOTPARAMD=	bootparams
-
 CONFGROUPS.${MK_BSNMP}+=	BSNMP
 BSNMPPACKAGE=			bsnmp
 BSNMP=		bsnmpd
@@ -215,12 +212,6 @@ CONFGROUPS.${MK_NTP}+=		NTP
 NTPPACKAGE=			ntp
 NTP=		ntpd \
 		ntpdate
-
-CONFGROUPS.${MK_NUAGEINIT}+=	NUAGEINIT
-NUAGEINITPACKAGE=		nuageinit
-NUAGEINIT=	nuageinit \
-		nuageinit_post_net \
-		nuageinit_user_data_script
 
 CONFGROUPS.${MK_OFED_EXTRA}+=	OPENSM
 OPENSM=	opensm

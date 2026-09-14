@@ -70,11 +70,7 @@ If set to non-zero and bypass mode is unavailable, incoming
 data from the tty device is queued until this character is seen.
 This avoids sending lots of mbufs containing a small number of bytes,
 but introduces potentially infinite latency.
-The default hot character is 0x7e, consistent with
-.Dv hook
-being connected to a
-.Xr ng_async 4
-type node.
+The default hot character is 0x7e.
 The hot character has no effect on the transmission of data.
 .Sh HOOKS
 This node type supports the following hooks:
@@ -105,7 +101,6 @@ This node shuts down when the corresponding device is closed.
 .Sh SEE ALSO
 .Xr ioctl 2 ,
 .Xr netgraph 4 ,
-.Xr ng_async 4 ,
 .Xr tty 4 ,
 .Xr ngctl 8
 .Sh HISTORY

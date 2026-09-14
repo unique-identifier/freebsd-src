@@ -78,19 +78,28 @@ live PPP/SLIP interfaces.
 
 ## Step 5 — Finish integration and upgrade cleanup
 
-- [ ] Audit remaining startup, install, package, dependency, test, and example
+- [x] Audit remaining startup, install, package, dependency, test, and example
       integration for kernel/protocol components being removed.
-- [ ] Recheck networking/IPFW startup ordering. Step 1 already removed `ppp`
+- [x] Recheck networking/IPFW startup ordering. Step 1 already removed `ppp`
       from NETWORKING, routing, bridge, and netstart, and changed IPFW's
       prerequisite to `netif` (the old PPP service prerequisite).
-- [ ] Remove stale userland PPP references in retained device/protocol manuals,
+- [x] Remove stale userland PPP references in retained device/protocol manuals,
       including `bridge.4`, `tun.4`, `u3g.4`, `ucom.4`, and Netgraph manuals.
-- [ ] Add unconditional obsolete entries for removed modules and headers;
+- [x] Add unconditional obsolete entries for removed modules and headers;
       move applicable entries from OptionalObsoleteFiles.inc rather than
       retaining obsolete option checks. Existing ObsoleteManFiles.inc covers
       old installed system manuals.
-- [ ] Extend UPDATING with kernel configuration migration instructions.
+- [x] Extend UPDATING with kernel configuration migration instructions.
       Preserve local profiles/logs; do not recursively delete user data.
+
+The integration audit found no remaining startup-order dependency on PPP;
+IPFW and the NETWORKING milestone continue to depend on `netif`.  Obsolete
+kernel modules and exported headers are now removed unconditionally, and the
+upgrade notes list every deleted kernel option and call out local loader
+configuration.  Retained device and Netgraph manuals no longer direct users to
+removed PPP programs or nodes.  Getty's PPP-specific auto-login path was also
+removed while ordinary serial login support remains intact.  Local profiles
+and logs continue to be preserved.
 
 ## Step 6 — Validate the complete removal
 

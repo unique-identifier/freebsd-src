@@ -134,7 +134,6 @@ __DEFAULT_YES_OPTIONS = \
     NLS_CATALOGS \
     NS_CACHING \
     NTP \
-    NUAGEINIT \
     OFED \
     OPENSSL \
     PAM \

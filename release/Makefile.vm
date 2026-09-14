@@ -21,7 +21,6 @@ RAW_DESC=	Unformatted raw disk image
 
 CLOUDWARE_TYPES?= AZURE \
 		BASIC-CI \
-		BASIC-CLOUDINIT \
 		EC2 \
 		GCE \
 		VAGRANT
@@ -31,9 +30,6 @@ AZURE_DESC=	Microsoft Azure platform image
 BASIC-CI_FORMAT=	raw
 BASIC-CI_FSLIST?=	ufs
 BASIC-CI_DESC=		Image for CI
-BASIC-CLOUDINIT_FORMAT=	raw qcow2
-BASIC-CLOUDINIT_FSLIST?=	ufs zfs
-BASIC-CLOUDINIT_DESC?=	Images for VM with cloudinit disk config support
 EC2_FORMAT=	raw
 EC2_FSLIST?=	ufs zfs
 EC2_FLAVOURS?=	BASE BUILDER CLOUD-INIT SMALL
@@ -270,20 +266,6 @@ cloud-install-BASIC-CI:
 		${DESTDIR}/ciimages/CHECKSUM.SHA512
 	cd ${DESTDIR}/ciimages && sha256 ${OSRELEASE}* > \
 		${DESTDIR}/ciimages/CHECKSUM.SHA256
-
-cloud-install-BASIC-CLOUDINIT:
-	mkdir -p ${DESTDIR}/vmimages
-.for _FS in ${BASIC-CLOUDINIT_FSLIST}
-. for _FMT in ${BASIC-CLOUDINIT_FORMAT}
-	cp -p ${.OBJDIR}/${BASIC-CLOUDINIT${_FS:tu}${_FMT:tu}IMAGE} \
-		${DESTDIR}/vmimages/${OSRELEASE}-BASIC-CLOUDINIT-${_FS}.${_FMT}
-	${XZ_CMD} -f ${DESTDIR}/vmimages/${OSRELEASE}-BASIC-CLOUDINIT-${_FS}.${_FMT}
-. endfor
-.endfor
-	cd ${DESTDIR}/vmimages && sha512 ${OSRELEASE}* > \
-		${DESTDIR}/vmimages/CHECKSUM.SHA512
-	cd ${DESTDIR}/vmimages && sha256 ${OSRELEASE}* > \
-		${DESTDIR}/vmimages/CHECKSUM.SHA256
 
 CLOUD_INSTALL_TGTS=
 .if defined(WITH_CLOUDWARE) && !empty(WITH_CLOUDWARE)

@@ -51,6 +51,29 @@
 #   xargs -n1 | sort | uniq -d;
 # done
 
+# 20260914: Remove nuageinit
+OLD_FILES+=etc/rc.d/nuageinit
+OLD_FILES+=etc/rc.d/nuageinit_post_net
+OLD_FILES+=etc/rc.d/nuageinit_user_data_script
+OLD_FILES+=usr/libexec/nuageinit
+OLD_FILES+=usr/share/flua/nuage.lua
+OLD_FILES+=usr/tests/libexec/nuageinit/Kyuafile
+OLD_FILES+=usr/tests/libexec/nuageinit/addfile.lua
+OLD_FILES+=usr/tests/libexec/nuageinit/addgroup.lua
+OLD_FILES+=usr/tests/libexec/nuageinit/addsshkey.lua
+OLD_FILES+=usr/tests/libexec/nuageinit/adduser.lua
+OLD_FILES+=usr/tests/libexec/nuageinit/adduser_passwd.lua
+OLD_FILES+=usr/tests/libexec/nuageinit/crypt
+OLD_FILES+=usr/tests/libexec/nuageinit/dirname.lua
+OLD_FILES+=usr/tests/libexec/nuageinit/err.lua
+OLD_FILES+=usr/tests/libexec/nuageinit/nuage
+OLD_FILES+=usr/tests/libexec/nuageinit/nuageinit
+OLD_FILES+=usr/tests/libexec/nuageinit/sethostname.lua
+OLD_FILES+=usr/tests/libexec/nuageinit/settimezone.lua
+OLD_FILES+=usr/tests/libexec/nuageinit/utils
+OLD_FILES+=usr/tests/libexec/nuageinit/warn.lua
+OLD_DIRS+=usr/tests/libexec/nuageinit
+
 # 20260914: Remove bootpd
 OLD_FILES+=usr/libexec/bootpd
 OLD_FILES+=usr/libexec/bootpgw

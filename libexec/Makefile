@@ -18,7 +18,6 @@ SUBDIR=	${_atf} \
 	${_rshd} \
 	${_rtld-elf} \
 	save-entropy \
-	${_nuageinit} \
 	${_tests} \
 	ulog-helper
 
@@ -55,10 +54,6 @@ _tests=		tests
 
 .if ${MK_TESTS_SUPPORT} != "no"
 _atf=		atf
-.endif
-
-.if ${MK_NUAGEINIT} != "no"
-_nuageinit=	nuageinit
 .endif
 
 .include <bsd.arch.inc.mk>

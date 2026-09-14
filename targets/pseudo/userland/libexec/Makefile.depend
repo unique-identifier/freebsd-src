@@ -9,7 +9,6 @@ DIRDEPS = \
 	libexec/ftpd \
 	libexec/getty \
 	libexec/hyperv \
-	libexec/rbootd \
 	libexec/rlogind \
 	libexec/rpc.rquotad \
 	libexec/rpc.rstatd \

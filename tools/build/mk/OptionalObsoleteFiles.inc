@@ -4387,10 +4387,6 @@ OLD_FILES+=usr/include/radlib.h
 OLD_FILES+=usr/include/radlib_vs.h
 .endif
 
-.if ${MK_RBOOTD} == no
-OLD_FILES+=usr/libexec/rbootd
-.endif
-
 .if ${MK_ROUTED} == no
 OLD_FILES+=etc/rc.d/routed
 OLD_FILES+=sbin/routed

@@ -40,10 +40,6 @@ SUBDIR.${MK_LIB${LIBCOMPAT}}+=	rtld-elf${libcompat}
 .endfor
 .endif
 
-.if ${MK_RBOOTD} != "no"
-SUBDIR+=	rbootd
-.endif
-
 .if ${MK_TCP_WRAPPERS} != "no"
 SUBDIR+=	tcpd
 .endif

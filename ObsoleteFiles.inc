@@ -73,6 +73,8 @@ OLD_FILES+=usr/tests/libexec/nuageinit/settimezone.lua
 OLD_FILES+=usr/tests/libexec/nuageinit/utils
 OLD_FILES+=usr/tests/libexec/nuageinit/warn.lua
 OLD_DIRS+=usr/tests/libexec/nuageinit
+# 20260914: Remove rbootd
+OLD_FILES+=usr/libexec/rbootd
 
 # 20260914: Remove bootpd
 OLD_FILES+=usr/libexec/bootpd

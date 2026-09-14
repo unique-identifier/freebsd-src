@@ -51,6 +51,9 @@
 #   xargs -n1 | sort | uniq -d;
 # done
 
+# 20260914: Remove rbootd
+OLD_FILES+=usr/libexec/rbootd
+
 # 20260914: Remove bootpd
 OLD_FILES+=usr/libexec/bootpd
 OLD_FILES+=usr/libexec/bootpgw

@@ -215,9 +215,6 @@ configuration for
 the device state change daemon
 .It Pa devfs.conf
 boot time device configuration
-.It Pa dma/
-configuration for
-.Xr dma 8
 .It Pa freebsd-update.conf
 configuration for the base system updater; see
 .Xr freebsd-update 8
@@ -242,18 +239,6 @@ login class capability database; see
 .Xr login.conf 5
 .It Pa machine-id
 defines the UUID for the local system, required for dbus
-.It Pa mail/
-.Xr sendmail 8
-control files
-.Pp
-.Bl -tag -width "mailer.conf" -compact
-.It Pa aliases
-addresses to deliver system mail
-.It Pa mailer.conf
-.Xr mailwrapper 8
-configuration
-.El
-.Pp
 .It Pa motd.template
 message displayed upon tty login; see
 .Xr motd 5
@@ -869,11 +854,6 @@ login/logout log; see
 .Xr getutxent 3
 .El
 .Pp
-.It Pa mail/
-user mailbox files
-.It Pa msgs/
-system messages database; see
-.Xr msgs 1
 .It Pa preserve/
 unused, present for historical reasons
 .It Pa quotas/
@@ -914,11 +894,6 @@ undelivered submission mail queue; see
 .It Pa cups/
 print jobs and temporary files for
 .Xr cups 1
-.It Pa dma/
-undelivered mail queue for
-.Dx
-Mail Agent; see
-.Xr dma 8
 .It Pa lock/
 serial device locks; see
 .Xr uucplock 3

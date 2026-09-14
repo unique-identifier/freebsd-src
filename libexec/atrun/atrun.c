@@ -378,6 +378,11 @@ run_file(const char *filename, uid_t uid, gid_t gid)
 		chdir("/");
 
 #ifdef __FreeBSD__
+	if (access(_PATH_SENDMAIL, X_OK) != 0) {
+	    execl("/usr/bin/logger", "logger", "-p", "cron.info", "-t",
+		    "atrun", (char *) NULL);
+	    perr("exec failed for logger");
+	}
 	execl(_PATH_SENDMAIL, "sendmail", "-F", "Atrun Service",
 			"-odi", "-oem",
 			mailname, (char *) NULL);

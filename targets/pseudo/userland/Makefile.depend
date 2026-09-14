@@ -140,7 +140,6 @@ DIRDEPS+= \
 	usr.bin/banner \
 	usr.bin/basename \
 	usr.bin/bc \
-	usr.bin/biff \
 	usr.bin/bintrans \
 	usr.bin/bluetooth/bthost \
 	usr.bin/bluetooth/btsockstat \
@@ -194,7 +193,6 @@ DIRDEPS+= \
 	usr.bin/find \
 	usr.bin/fmt \
 	usr.bin/fold \
-	usr.bin/from \
 	usr.bin/fstat \
 	usr.bin/fsync \
 	usr.bin/gcore \
@@ -251,7 +249,6 @@ DIRDEPS+= \
 	usr.bin/lsvfs \
 	usr.bin/lzmainfo \
 	usr.bin/m4 \
-	usr.bin/mail \
 	usr.bin/mesg \
 	usr.bin/minigzip \
 	usr.bin/ministat \
@@ -264,7 +261,6 @@ DIRDEPS+= \
 	usr.bin/mkstr \
 	usr.bin/mktemp \
 	usr.bin/mkuzip \
-	usr.bin/msgs \
 	usr.bin/mt \
 	usr.bin/nc \
 	usr.bin/ncal \
@@ -548,7 +544,6 @@ DIRDEPS+= \
 	usr.sbin/kldxref \
 	usr.sbin/lastlogin \
 	usr.sbin/lmcconfig \
-	usr.sbin/mailwrapper \
 	usr.sbin/makefs \
 	usr.sbin/memcontrol \
 	usr.sbin/mfiutil \

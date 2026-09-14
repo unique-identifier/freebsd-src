@@ -149,6 +149,6 @@ The new rules are now installed. The previous rules have been preserved in
 the file ${edit_file}.$DATE
 !
 diff -u ${edit_file}.$DATE ${edit_file} \
-    | mail -s "`hostname` Firewall rule change" root
+    | logger -p authpriv.notice -t ipfw
 rm ${TMPFILE}
 exit 0

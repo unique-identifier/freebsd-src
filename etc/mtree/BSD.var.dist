@@ -62,10 +62,6 @@
     ..
     log
     ..
-    mail            gname=mail mode=0775
-    ..
-    msgs            uname=daemon
-    ..
     preserve
     ..
     run
@@ -81,8 +77,6 @@
     rwho            gname=daemon mode=0775
     ..
     spool
-        dma             uname=root gname=mail mode=0770 tags=package=dma
-        ..
         lock            uname=uucp gname=dialer mode=0775
         ..
     ..

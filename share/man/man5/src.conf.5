@@ -494,8 +494,6 @@ When set, it enforces these options:
 .Pp
 .Bl -item -compact
 .It
-.Va WITHOUT_DMAGENT
-.It
 .Va WITHOUT_KERBEROS
 .It
 .Va WITHOUT_LDNS
@@ -667,8 +665,6 @@ Build
 and
 .Xr mkimg 1
 as bootstrap tools.
-.It Va WITHOUT_DMAGENT
-Do not build dma Mail Transport Agent.
 .It Va WITHOUT_DOCCOMPRESS
 Do not install compressed system documentation.
 Only the uncompressed version will be installed.
@@ -1182,20 +1178,6 @@ Build
 without support for colors to distinguish file types.
 .It Va WITHOUT_MACHDEP_OPTIMIZATIONS
 Prefer machine-independent non-assembler code in libc and libm.
-.It Va WITHOUT_MAIL
-Do not build any mail support (MUA or MTA).
-When set, it enforces these options:
-.Pp
-.Bl -item -compact
-.It
-.Va WITHOUT_DMAGENT
-.It
-.Va WITHOUT_MAILWRAPPER
-.El
-.It Va WITHOUT_MAILWRAPPER
-Do not build the
-.Xr mailwrapper 8
-MTA selector.
 .It Va WITHOUT_MAKE
 Do not install
 .Xr make 1
@@ -1416,8 +1398,6 @@ Do not build OpenSSL.
 When set, it enforces these options:
 .Pp
 .Bl -item -compact
-.It
-.Va WITHOUT_DMAGENT
 .It
 .Va WITHOUT_KERBEROS
 .It

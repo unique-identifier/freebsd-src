@@ -10,7 +10,6 @@ DIRDEPS = \
 	libexec/bootpd/bootpgw \
 	libexec/bootpd/tools/bootpef \
 	libexec/bootpd/tools/bootptest \
-	libexec/comsat \
 	libexec/ftpd \
 	libexec/getty \
 	libexec/hyperv \
@@ -31,11 +30,6 @@ DIRDEPS = \
 
 .if ${MK_BLOCKLIST_SUPPORT} != "no"
 DIRDEPS+=	libexec/blocklistd-helper
-.endif
-
-.if ${MK_DMAGENT} != "no"
-DIRDEPS+=	libexec/dma/dma-mbox-create
-DIRDEPS+=	libexec/dma/dmagent
 .endif
 
 .include <dirdeps.mk>

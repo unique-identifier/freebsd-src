@@ -61,28 +61,28 @@ and is only used when an argument to
 .Xr periodic 8
 is not an absolute directory name.
 .It Ao Ar dir Ac Ns Va _output
-.Pq Vt path No or Vt list
+.Pq Vt path
 What to do with the output of the scripts executed from
 the directory
 .Ar dir .
 If this variable is set to an absolute path name, output is logged to
-that file, otherwise it is taken as one or more space separated email
-addresses and mailed to those users.
+that file.
+Other nonempty values produce a warning and send output to standard output.
 If this variable is not set or is empty, output is sent to standard output.
 .Pp
-For an unattended machine, suitable values for
+The default values for
 .Va daily_output ,
 .Va weekly_output ,
 and
 .Va monthly_output
-might be
+are
 .Dq Li /var/log/daily.log ,
 .Dq Li /var/log/weekly.log ,
 and
 .Dq Li /var/log/monthly.log
 respectively, as
 .Xr newsyslog 8
-will rotate these files (if they exists) at the appropriate times.
+creates and rotates these files at the appropriate times.
 .It Ao Ar dir Ac Ns Va _show_success
 .It Ao Ar dir Ac Ns Va _show_info
 .It Ao Ar dir Ac Ns Va _show_badconfig
@@ -208,18 +208,6 @@ they are deleted.
 Set to
 .Dq Li YES
 if you want the removed files to be reported in your daily output.
-.It Va daily_clean_msgs_enable
-.Pq Vt bool
-Set to
-.Dq Li YES
-if you wish old system messages to be purged.
-.It Va daily_clean_msgs_days
-.Pq Vt num
-Set to the number of days that files must not have been modified before
-they are deleted.
-If this variable is left blank, the
-.Xr msgs 1
-default is used.
 .It Va daily_clean_rwho_enable
 .Pq Vt bool
 Set to
@@ -280,13 +268,6 @@ Reporting consists of checking both files for modifications and running
 on the
 .Pa group
 file.
-.It Va daily_backup_aliases_enable
-.Pq Vt bool
-Set to
-.Dq Li YES
-if you want the
-.Pa /etc/mail/aliases
-file backed up and modifications to be displayed in your daily output.
 .It Va daily_backup_zfs_enable
 .Pq Vt bool
 Set to
@@ -519,7 +500,7 @@ manual page for more information.
 Set to
 .Dq Li YES
 if you want the security check output inline.
-The default is to either mail or log the output according to the value of
+The default is to log the output according to the value of
 .Va daily_status_security_output .
 .It Va daily_status_security_output
 .Pq Vt str
@@ -529,8 +510,9 @@ is set to
 .Dq Li NO .
 This variable behaves in the same way as the
 .Va *_output
-variables above, namely it can be set either to one or more email addresses
-or to an absolute file name.
+variables above.
+The default is
+.Pa /var/log/security.log .
 .It Va daily_status_ntpd_enable
 .Pq Vt bool
 Set to

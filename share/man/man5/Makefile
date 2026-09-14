@@ -19,7 +19,6 @@ MAN=	a.out.5 \
 	intro.5 \
 	libmap.conf.5 \
 	link.5 \
-	mailer.conf.5 \
 	make.conf.5 \
 	motd.5 \
 	mount.conf.5 \

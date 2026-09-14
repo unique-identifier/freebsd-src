@@ -940,16 +940,6 @@ OLD_FILES+=usr/share/dict/words
 OLD_DIRS+=usr/share/dict
 .endif
 
-.if ${MK_DMAGENT} == no
-OLD_FILES+=etc/dma/auth.conf
-OLD_FILES+=etc/dma/dma.conf
-OLD_DIRS+=etc/dma
-OLD_FILES+=usr/libexec/dma
-OLD_FILES+=usr/libexec/dma-mbox-create
-OLD_FILES+=usr/share/examples/dma/mailer.conf
-OLD_DIRS+=usr/share/examples/dma
-.endif
-
 .if ${MK_DTRACE} == no
 OLD_LIBS+=lib/libctf.so.2
 OLD_LIBS+=lib/libdtrace.so.2
@@ -3306,32 +3296,6 @@ OLD_FILES+=usr/libexec/locate.code
 OLD_FILES+=usr/libexec/locate.concatdb
 OLD_FILES+=usr/libexec/locate.mklocatedb
 OLD_FILES+=usr/libexec/locate.updatedb
-.endif
-
-.if ${MK_MAIL} == no
-OLD_FILES+=etc/aliases
-OLD_FILES+=etc/mail.rc
-OLD_FILES+=etc/mail/aliases
-OLD_FILES+=etc/mail/mailer.conf
-OLD_FILES+=etc/periodic/daily/130.clean-msgs
-OLD_FILES+=usr/bin/Mail
-OLD_FILES+=usr/bin/biff
-OLD_FILES+=usr/bin/from
-OLD_FILES+=usr/bin/mail
-OLD_FILES+=usr/bin/mailx
-OLD_FILES+=usr/bin/msgs
-OLD_FILES+=usr/libexec/comsat
-OLD_FILES+=usr/share/examples/etc/mail.rc
-OLD_FILES+=usr/share/misc/mail.help
-OLD_FILES+=usr/share/misc/mail.tildehelp
-.endif
-
-.if ${MK_MAILWRAPPER} == no
-OLD_FILES+=etc/mail/mailer.conf
-# Don't remove, for no mailwrapper case:
-# /usr/sbin/sendmail -> /usr/sbin/mailwrapper
-# /usr/sbin/mailwrapper -> /usr/libexec/dma
-#OLD_FILES+=usr/sbin/mailwrapper
 .endif
 
 .if ${MK_MAKE} == no
@@ -6306,8 +6270,4 @@ OLD_FILES+=usr/share/zoneinfo/UTC
 OLD_FILES+=usr/share/zoneinfo/WET
 OLD_FILES+=usr/share/zoneinfo/posixrules
 OLD_FILES+=usr/share/zoneinfo/zone.tab
-.endif
-
-.if ${MK_MAILWRAPPER} == no
-OLD_FILES+=bin/rmail
 .endif

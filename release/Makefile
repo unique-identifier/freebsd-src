@@ -233,7 +233,7 @@ disc1:
 	mkdir -p ${.TARGET}
 	( cd ${WORLDDIR} && ${IMAKE} installworld installkernel distribution \
 	    DESTDIR=${.OBJDIR}/${.TARGET} MK_AT=no \
-	    MK_INSTALLLIB=no MK_MAIL=no \
+	    MK_INSTALLLIB=no \
 	    ${_ALL_LIBCOMPATS:@v@MK_LIB$v=no@} \
 	    MK_TOOLCHAIN=no \
 	    MK_DICT=no \
@@ -296,7 +296,7 @@ bootonly:
 	mkdir -p ${.TARGET}
 	( cd ${WORLDDIR} && ${IMAKE} installworld installkernel distribution \
 	    DESTDIR=${.OBJDIR}/${.TARGET} MK_AT=no \
-	    MK_INSTALLLIB=no MK_MAIL=no \
+	    MK_INSTALLLIB=no \
 	    ${_ALL_LIBCOMPATS:@v@MK_LIB$v=no@} \
 	    MK_TOOLCHAIN=no \
 	    MK_DICT=no \

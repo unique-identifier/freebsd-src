@@ -31,6 +31,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <syslog.h>
 #include <time.h>
 #include <unistd.h>
 
@@ -824,6 +825,13 @@ static void
 rcv_email(SCR *sp, char *fname)
 {
 	char *buf;
+
+	if (access(_PATH_SENDMAIL, X_OK) != 0) {
+		syslog(LOG_USER | LOG_NOTICE,
+		    "vi recovery available for uid %lu: %s",
+		    (unsigned long)getuid(), fname);
+		return;
+	}
 
 	if (asprintf(&buf, _PATH_SENDMAIL " -odb -t < %s", fname) == -1) {
 		msgq_str(sp, M_ERR, strerror(errno),

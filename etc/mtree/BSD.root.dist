@@ -57,15 +57,11 @@
         ..
         devd            tags=package=devd
         ..
-        dma             tags=package=dma
-        ..
         gss             tags=package=runtime
         ..
         jail.conf.d     tags=package=jail
         ..
         kyua            tags=package=kyua
-        ..
-        mail            tags=package=runtime
         ..
         mtree           tags=package=mtree
         ..

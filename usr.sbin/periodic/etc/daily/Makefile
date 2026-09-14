@@ -8,7 +8,6 @@ CONFS=	100.clean-disks \
 	110.clean-tmps \
 	120.clean-preserve \
 	200.backup-passwd \
-	210.backup-aliases \
 	400.status-disks \
 	410.status-mfi \
 	420.status-network \
@@ -38,10 +37,6 @@ CONFGROUPS+=	ACCT
 ACCT+=		310.accounting
 ACCTMODE=	${BINMODE}
 ACCTPACKAGE=	acct
-.endif
-
-.if ${MK_MAIL} != "no"
-CONFS+=	130.clean-msgs
 .endif
 
 .if ${MK_NTP} != "no"

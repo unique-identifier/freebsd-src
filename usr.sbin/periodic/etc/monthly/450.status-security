@@ -37,7 +37,7 @@ case "$monthly_status_security_enable" in
 		echo "    (output logged separately)"
 		periodic security || rc=3;;
 	    *)
-		echo "    (output mailed separately)"
+		echo "    (invalid output destination; using stdout)"
 		periodic security || rc=3;;
 	esac;;
     *)  rc=0;;

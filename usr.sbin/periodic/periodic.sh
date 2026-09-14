@@ -18,11 +18,11 @@ output_pipe()
     # Where's our output going ?
     eval output=\$${1##*/}_output
     case "$output" in
-    /*) pipe="cat >>$output";;
-    "") pipe=cat;;
-    *)  pipe="mail -E -s '$host ${2}${2:+ }${1##*/} run output' $output";;
+    /*) (umask 077; cat >> "$output");;
+    "") cat;;
+    *)  echo "periodic: ${1##*/}_output must be an absolute path; using stdout" >&2
+        cat;;
     esac
-    eval $pipe
 }
 
 if [ $# -lt 1 ] ; then

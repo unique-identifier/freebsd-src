@@ -14,8 +14,6 @@ SUBDIR+=termcap
 
 # NB: keep these sorted by MK_* knobs
 
-ETCMAIL=aliases
-
 # Special top level files for FreeBSD
 FREEBSD=COPYRIGHT
 
@@ -55,19 +53,6 @@ distribution:
 			${DESTDIR}/etc/unbound; \
 	fi
 .endif
-
-.if ${MK_MAIL} != "no"
-	cd ${.CURDIR}/mail; ${INSTALL} -o ${BINOWN} -g ${BINGRP} -m 644 \
-	    -T "package=runtime,config" ${ETCMAIL} ${DESTDIR}/etc/mail
-# If NO_ROOT is defined, we are doing a stage install and always need to
-# install the /etc/aliases symlink, otherwise, don't overwrite the user's
-# existing symlink.
-	if [ "${NO_ROOT:Dtrue}" = true -o \( -f ${DESTDIR}/etc/mail/aliases -a \
-	   ! -f ${DESTDIR}/etc/aliases \) ]; then \
-		${INSTALL_SYMLINK} -Tpackage=runtime mail/aliases \
-			${DESTDIR}/etc/aliases; \
-	fi
-.endif	# ${MK_MAIL} != "no"
 
 	cd ${.CURDIR}/..; ${INSTALL} -o ${BINOWN} -g ${BINGRP} -m 444 \
 		-T "package=runtime" ${FREEBSD} ${DESTDIR}/

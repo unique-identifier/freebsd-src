@@ -51,6 +51,41 @@
 #   xargs -n1 | sort | uniq -d;
 # done
 
+# 20260913: Remove base mail programs and DMA
+OLD_FILES+=usr/tests/usr.bin/mail/Kyuafile
+OLD_FILES+=usr/tests/usr.bin/mail/mailx_signal_test
+OLD_DIRS+=usr/tests/usr.bin/mail
+OLD_DIRS+=etc/dma
+OLD_DIRS+=usr/share/examples/dma
+OLD_FILES+=bin/rmail
+OLD_FILES+=etc/aliases
+OLD_FILES+=etc/dma/auth.conf
+OLD_FILES+=etc/dma/dma.conf
+OLD_FILES+=etc/mail.rc
+OLD_FILES+=etc/mail/aliases
+OLD_FILES+=etc/mail/mailer.conf
+OLD_FILES+=etc/periodic/daily/130.clean-msgs
+OLD_FILES+=etc/periodic/daily/210.backup-aliases
+OLD_FILES+=etc/rc.d/msgs
+OLD_FILES+=usr/bin/Mail
+OLD_FILES+=usr/bin/biff
+OLD_FILES+=usr/bin/from
+OLD_FILES+=usr/bin/mail
+OLD_FILES+=usr/bin/mailq
+OLD_FILES+=usr/bin/mailx
+OLD_FILES+=usr/bin/msgs
+OLD_FILES+=usr/bin/newaliases
+OLD_FILES+=usr/libexec/comsat
+OLD_FILES+=usr/libexec/dma
+OLD_FILES+=usr/libexec/dma-mbox-create
+OLD_FILES+=usr/sbin/mailwrapper
+OLD_FILES+=usr/sbin/sendmail
+OLD_FILES+=usr/share/examples/dma/mailer.conf
+OLD_FILES+=usr/share/examples/etc/mail.rc
+OLD_FILES+=usr/share/man/man5/mailer.conf.5.gz
+OLD_FILES+=usr/share/misc/mail.help
+OLD_FILES+=usr/share/misc/mail.tildehelp
+
 # 20260913: Remove NIS support and programs.
 OLD_FILES+=etc/autofs/include_nis
 OLD_FILES+=etc/autofs/include_nis_nullfs

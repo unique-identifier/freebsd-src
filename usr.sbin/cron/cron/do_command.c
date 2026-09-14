@@ -644,6 +644,18 @@ child_process(entry *e, user *u)
 			if (mailto && *mailto == '\0')
 				mailto = NULL;
 
+			/* A base system without a mailer logs job output instead. */
+			if (mailto && access(_PATH_SENDMAIL, X_OK) != 0) {
+				char output[MAX_TEMPSTR];
+
+				ungetc(ch, in);
+				while (fgets(output, sizeof(output), in) != NULL) {
+					output[strcspn(output, "\n")] = '\0';
+					log_it(usernm, getpid(), "OUTPUT", output);
+				}
+				mailto = NULL;
+			}
+
 			/* if we are supposed to be mailing, MAILTO will
 			 * be non-NULL.  only in this case should we set
 			 * up the mail command and subjects and stuff...

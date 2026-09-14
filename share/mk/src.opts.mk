@@ -87,7 +87,6 @@ __DEFAULT_YES_OPTIONS = \
     CXGBETOOL \
     DEPEND_CLEANUP \
     DICT \
-    DMAGENT \
     DTRACE \
     DYNAMICROOT \
     EFI \
@@ -130,8 +129,6 @@ __DEFAULT_YES_OPTIONS = \
     LOCATE \
     LS_COLORS \
     MACHDEP_OPTIMIZATIONS \
-    MAIL \
-    MAILWRAPPER \
     MAKE \
     MALLOC_PRODUCTION \
     MLX5TOOL \
@@ -413,11 +410,6 @@ MK_OPENSSH:=	no
 MK_CTF:=	no
 .endif
 
-.if ${MK_MAIL} == "no"
-MK_MAILWRAPPER:= no
-MK_DMAGENT:=	no
-.endif
-
 .if ${MK_NETGRAPH} == "no"
 MK_BLUETOOTH:=	no
 .endif
@@ -427,7 +419,6 @@ MK_NLS_CATALOGS:= no
 .endif
 
 .if ${MK_OPENSSL} == "no"
-MK_DMAGENT:=	no
 MK_OPENSSH:=	no
 MK_OPENSSL_KTLS:=	no
 MK_LDNS:=	no

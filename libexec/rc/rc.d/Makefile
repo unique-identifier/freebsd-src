@@ -42,7 +42,6 @@ CONFS=	DAEMON \
 	mountlate \
 	mdconfig \
 	mdconfig2 \
-	msgs \
 	netif \
 	netoptions \
 	netwait \

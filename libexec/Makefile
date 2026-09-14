@@ -5,8 +5,6 @@
 SUBDIR=	${_atf} \
 	${_atrun} \
 	${_blocklistd-helper} \
-	${_comsat} \
-	${_dma} \
 	flua \
 	getty \
 	${_hyperv} \
@@ -40,14 +38,6 @@ SUBDIR+=	bootpd
 
 .if ${MK_FREEBSD_UPDATE} != "no"
 _phttpget=	phttpget
-.endif
-
-.if ${MK_MAIL} != "no"
-_comsat=	comsat
-.endif
-
-.if ${MK_DMAGENT} != "no"
-_dma=		dma
 .endif
 
 .if ${MK_HYPERV} != "no"

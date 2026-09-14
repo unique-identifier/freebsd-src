@@ -260,8 +260,6 @@
             ..
             diskless
             ..
-            dma
-            ..
             dwatch
             ..
             etc

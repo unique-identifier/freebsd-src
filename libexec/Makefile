@@ -30,10 +30,6 @@ _atrun=		atrun
 _blocklistd-helper+=	blocklistd-helper
 .endif
 
-.if ${MK_BOOTPD} != "no"
-SUBDIR+=	bootpd
-.endif
-
 .if ${MK_HYPERV} != "no"
 _hyperv+=	hyperv
 .endif

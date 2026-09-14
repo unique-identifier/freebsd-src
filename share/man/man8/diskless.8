@@ -27,7 +27,7 @@
 .\" (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 .\" THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 .\"
-.Dd September 13, 2026
+.Dd September 14, 2026
 .Dt DISKLESS 8
 .Os
 .Sh NAME
@@ -104,37 +104,9 @@ but in many cases you may decide to export
 (again as read-only) the root directory used by
 the server itself.
 .It
-A
-.Tn BOOTP
-or
+A properly configured
 .Tn DHCP
 server.
-.Xr bootpd 8
-can be enabled by
-uncommenting the
-.Dq Li bootps
-line in
-.Pa /etc/inetd.conf .
-A sample
-.Pa /etc/bootptab
-can be the following:
-.Bd -literal -offset indent
- .default:\\
-    hn:ht=1:vm=rfc1048:\\
-    :sm=255.255.255.0:\\
-    :sa=<SERVER>:\\
-    :gw=<GATEWAY>:\\
-    :rp="<SERVER>:<ROOT>":
-
-<CLIENT>:ha=0123456789ab:tc=.default
-.Ed
-.Pp
-where
-.Aq SERVER ,
-.Aq GATEWAY
-and
-.Aq ROOT
-have the obvious meanings.
 .It
 A properly initialized root partition.
 The script
@@ -369,7 +341,6 @@ encryption keys.
 .Xr ethers 5 ,
 .Xr exports 5 ,
 .Xr make.conf 5 ,
-.Xr bootpd 8 ,
 .Xr mountd 8 ,
 .Xr nfsd 8 ,
 .Xr reboot 8

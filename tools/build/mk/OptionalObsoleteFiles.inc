@@ -230,13 +230,6 @@ OLD_FILES+=boot/zfsloader
 OLD_FILES+=usr/lib/kgzldr.o
 .endif
 
-.if ${MK_BOOTPD} == no
-OLD_FILES+=usr/libexec/bootpd
-OLD_FILES+=usr/libexec/bootpgw
-OLD_FILES+=usr/sbin/bootpef
-OLD_FILES+=usr/sbin/bootptest
-.endif
-
 .if ${MK_BSDINSTALL} == no
 OLD_FILES+=usr/libexec/bsdinstall/adduser
 OLD_FILES+=usr/libexec/bsdinstall/auto

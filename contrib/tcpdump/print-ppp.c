@@ -38,7 +38,6 @@
 #include <stdlib.h>
 
 #ifdef __bsdi__
-#include <net/slcompress.h>
 #include <net/if_ppp.h>
 #endif
 
@@ -48,6 +47,7 @@
 #include "ppp.h"
 #include "chdlc.h"
 #include "ethertype.h"
+#include "slcompress.h"
 #include "oui.h"
 #include "netdissect-alloc.h"
 

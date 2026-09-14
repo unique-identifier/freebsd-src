@@ -165,7 +165,6 @@ BADHDRS= \
 	net/rndis.h \
 	net/route.h \
 	net/rss_config.h \
-	net/slcompress.h \
 	net/toeplitz.h \
 	net80211/ieee80211.h \
 	net80211/ieee80211_action.h \
@@ -292,4 +291,3 @@ BADHDRS= \
 	netsmb/smb_rq.h \
 	netsmb/smb_subr.h \
 	netsmb/smb_tran.h \
-
